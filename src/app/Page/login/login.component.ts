@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../Service/Auth/Login/login.service';
 import { FormsModule } from '@angular/forms';
+import { ErrorsCodeEnum } from '../../Shared/Value/Enums/errorsCodeEnums';
 
 @Component({
   standalone: true, // Nếu bạn muốn component này là standalone
@@ -13,20 +14,24 @@ import { FormsModule } from '@angular/forms';
 export class LoginComponent {
   username = '';
   password = '';
+  deviceUuid = '';
   errorMessage = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {
+    this.deviceUuid = this.authService.getDeviceUuid();
+  }
 
   onLogin() {
-    this.authService.login(this.username, this.password).subscribe({
-      next: () => {
-        this.router.navigate(['/home']);
-      },
-      error: (err) => {
-        this.errorMessage =
-          'Đăng nhập thất bại. Vui lòng kiểm tra thông tin đăng nhập.';
-        console.error(err);
-      },
-    });
+    this.authService
+      .login(this.username, this.password, this.deviceUuid)
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/home']);
+        },
+        error: (err) => {
+          this.errorMessage = ErrorsCodeEnum.AUTH_LOGIN_INVALID_CREDENTIAL;
+          console.error(err);
+        },
+      });
   }
 }

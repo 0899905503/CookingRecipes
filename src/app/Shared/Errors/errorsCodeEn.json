@@ -1,0 +1,5 @@
+{
+  "ERRORS": {
+   "AUTH_LOGIN_INVALID_CREDENTIAL": "Username or Password is incorrect"
+  }
+}

@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { LoginComponent } from './Page/login/login.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { LoginComponent } from './Page/login/login.component';
     BrowserModule, // Đảm bảo BrowserModule là đầu tiên
     AppRoutingModule,
     RouterModule,
+    CommonModule,
     FormsModule, // Nhập khẩu FormsModule để sử dụng ngModel
     HttpClientModule,
   ],

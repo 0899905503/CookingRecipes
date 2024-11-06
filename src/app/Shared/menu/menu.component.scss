@@ -1,0 +1,30 @@
+/* src/app/shared/menu/menu.component.scss */
+.menu {
+  background-color: #F0EBE1;
+  padding: 20px;
+  border-radius: 32px;
+  border-width: 1px;
+  border-color:rgb(142, 139, 139) ;
+  border-style: solid;
+}
+
+.menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.menu li {
+  margin-right: 20px;
+}
+
+.menu a {
+  color: rgb(142, 139, 139);
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.menu a.active {
+  color: black;
+}
