@@ -1,0 +1,99 @@
+.bottom-menu {
+  display: flex;
+  flex-direction: column;
+  background-color: #40403f;
+  padding: 25px 20px;
+  border-radius: 32px;
+  border-width: 1px;
+  border-color: #616161;
+  border-style: solid;
+
+  .top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+
+    img {
+      height: 35px;
+      width: auto;
+      margin-right: 10px;
+    }
+
+    span {
+      font-size: 20px;
+      color: #F0EBE1;
+    }
+  }
+
+  ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+      margin: 0 15px;
+      color: #616161;
+
+      a {
+        text-decoration: none;
+        font-size: 18px;
+        color: #616161;
+        transition: color 0.3s;
+
+        &.active {
+          color: #F0EBE1;
+          font-weight: bold;
+          border-bottom: 2px solid #F0EBE1;
+          padding-bottom: 5px;
+        }
+
+        &:hover {
+          color: #F0EBE1;
+        }
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-inline: 15px;
+    margin-right: 15px;
+    justify-content: flex-end;
+
+    button {
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+
+      img {
+        width: 15.68px;
+        height: 18px;
+      }
+    }
+  }
+
+  .signature-line {
+    width: 100%;
+    height: 2px;
+    background-color: #616161;
+    margin-top: 20px;
+  }
+
+  .assign-name{
+    width: 100%;
+    height: 2px;
+    color: #F0EBE1;
+    margin-top: 20px;
+    text-align: center;
+  }
+}
