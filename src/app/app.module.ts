@@ -9,10 +9,7 @@ import { LoginComponent } from './Page/login/login.component';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent, // Khai báo LoginComponent ở đây
-  ],
+  declarations: [AppComponent, LoginComponent],
   imports: [
     BrowserModule, // Đảm bảo BrowserModule là đầu tiên
     AppRoutingModule,

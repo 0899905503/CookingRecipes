@@ -16,6 +16,7 @@ export class LoginComponent {
   password = '';
   deviceUuid = '';
   errorMessage = '';
+  private loggedIn = false;
 
   constructor(private authService: AuthService, private router: Router) {
     this.deviceUuid = this.authService.getDeviceUuid();
@@ -27,11 +28,16 @@ export class LoginComponent {
       .subscribe({
         next: () => {
           this.router.navigate(['/home']);
+          this.loggedIn = true;
         },
         error: (err) => {
           this.errorMessage = ErrorsCodeEnum.AUTH_LOGIN_INVALID_CREDENTIAL;
           console.error(err);
         },
       });
+  }
+
+  isLoggedIn(): boolean {
+    return this.loggedIn;
   }
 }

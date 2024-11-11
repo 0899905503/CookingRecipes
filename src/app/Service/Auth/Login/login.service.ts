@@ -52,6 +52,10 @@ export class AuthService {
     return '';
   }
 
+  isLoggedIn(): boolean {
+    return this.isAuthenticated$.value;
+  }
+
   // Đăng xuất và xóa token
   logout(): void {
     this.removeToken();

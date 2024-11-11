@@ -1,14 +1,14 @@
 <nav class="menu">
   <div class="logo">
     <!-- <img src="Assets/Logo.png" alt="Cooks Delight Logo" /> -->
-    <img src="assets/images/Logo.png">
+    <img [src]="logo" alt="Logo" />
     <span>Cooking Recipes</span>
   </div>
   <ul>
     <li><a routerLink="/home" routerLinkActive="active">HOME</a></li>
     <li><a routerLink="/recipe" routerLinkActive="active">RECIPES</a></li>
-    <li><a routerLink="/cooking-tips" routerLinkActive="active">N/A</a></li>
-    <li><a routerLink="/about-us" routerLinkActive="active">N/A</a></li>
+    <li><a routerLink="/tip" routerLinkActive="active">COOKING TIPS</a></li>
+    <li><a routerLink="/about" routerLinkActive="active">ABOUT US</a></li>
   </ul>
   <div class="actions">
     <button class="search-button">🔍</button>
