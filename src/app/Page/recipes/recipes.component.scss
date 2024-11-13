@@ -1,7 +1,32 @@
-:host {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-color: #F0EBE1;
+/* Container to position the image and button */
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Style for the image */
+.image-container img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Style for the button */
+.overlay-button {
+  position: absolute;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Center both axes */
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  color: #333; /* Text color */
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Optional: Add hover effect */
+.overlay-button:hover {
+  background-color: rgba(255, 255, 255, 1); /* Fully opaque on hover */
 }

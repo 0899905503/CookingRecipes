@@ -5,4 +5,7 @@ export const ImagePaths = {
   ins: 'assets/images/ins.png',
   youtube: 'assets/images/youtube.png',
   logo_button: 'assets/images/Logo_bottom.png',
+
+  //Home page
+  title_image: 'assets/images/HeroSection.png',
 };

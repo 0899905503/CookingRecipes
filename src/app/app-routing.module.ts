@@ -8,6 +8,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { MenuComponent } from './Shared/menu/menu.component';
 import { RecipesComponent } from './Page/recipes/recipes.component';
 import { AboutUsComponent } from './Page/about-us/about-us.component';
+import { SelectOptionsComponent } from './Shared/Component/select-options/select-options.component';
+import { RecipeComponent } from './Shared/Component/recipe/recipe.component';
 
 export const routes: Routes = [
   {
@@ -21,11 +23,18 @@ export const routes: Routes = [
   { path: 'recipe', component: RecipesComponent },
   { path: 'tip', component: TipsComponent },
   { path: 'about', component: AboutUsComponent },
+  { path: 'recipes', component: RecipeComponent },
 ];
 
 @NgModule({
   declarations: [HomepageComponent],
-  imports: [RouterModule.forRoot(routes), BrowserModule, MenuComponent],
+  imports: [
+    RouterModule.forRoot(routes),
+    BrowserModule,
+    MenuComponent,
+    SelectOptionsComponent,
+    RecipeComponent,
+  ],
   exports: [RouterModule],
   providers: [],
   bootstrap: [],

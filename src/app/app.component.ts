@@ -6,6 +6,7 @@ import { BottomMenuComponent } from './Shared/bottom-menu/bottom-menu.component'
   standalone: true,
   selector: 'app-root',
   templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
   imports: [RouterModule, MenuComponent, BottomMenuComponent],
 })
 export class AppComponent {

@@ -7,9 +7,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { LoginComponent } from './Page/login/login.component';
 import { CommonModule } from '@angular/common';
+import { SelectOptionsComponent } from './Shared/Component/select-options/select-options.component';
+import { RecipeComponent } from './Shared/Component/recipe/recipe.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    SelectOptionsComponent,
+    RecipeComponent,
+  ],
   imports: [
     BrowserModule, // Đảm bảo BrowserModule là đầu tiên
     AppRoutingModule,

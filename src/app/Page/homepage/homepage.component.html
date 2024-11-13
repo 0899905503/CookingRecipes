@@ -1,8 +1,30 @@
 <div class="HomePage">
-  <div class="titlePage">
-    <img src="assets/images/titleImg.png" alt="Example Image" />
+  <div class="HomePageMain">
+    <div class="image-container">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@800&display=swap" rel="stylesheet">
+      <img src="assets/images/HeroSection.png" alt="Background Image" />
+      <h1>UNLEASH CULINARY <br> EXCELLENCE</h1>
+      <p>Explore a world of flavors, discover <br> handcrafted recipes, and let the aroma of <br> our passion for
+        cooking fill your kitchen</p>
+      <button class="overlay-button">EXPLORE RECIPES</button>
+    </div>
   </div>
-  <div class="mainpage">
-    <img src="assets/images/ExploreSection.png" alt="Recipe image">
+  <div class="View">
+    <div class="see-more">
+      <h4>EXPLORE</h4>
+      <h1>OUR DIVERSE <br> PALETTE</h1>
+      <p>If you are a breakfast enthusiast, a connoisseur of savory delights, or on the lookout for irresistible
+        desserts, our curated selection has something to satisfy every palate.</p>
+      <button class="seemore-button">SEE MORE</button>
+    </div>
+    <div class="select">
+      <app-select-options [imageUrl]="'assets/images/breakfasticon.png'"
+        [description]="'BREAKFAST'"></app-select-options>
+      <app-select-options [imageUrl]="'assets/images/lunchicon.png'" [description]="'LUNCH'"></app-select-options>
+      <app-select-options [imageUrl]="'assets/images/dinnericon.png'" [description]="'DINNER'"></app-select-options>
+      <app-select-options [imageUrl]="'assets/images/desserticon.png'" [description]="'DESSERT'"></app-select-options>
+      <app-select-options [imageUrl]="'assets/images/quickbiteicon.png'"
+        [description]="'QUICK BITE!'"></app-select-options>
+    </div>
   </div>
 </div>

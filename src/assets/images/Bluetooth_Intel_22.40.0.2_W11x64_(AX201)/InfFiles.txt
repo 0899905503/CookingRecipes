@@ -1,1 +1,0 @@
-INF_INSTALL\Win10_UWD\x64\ibtusb\HRP\ibtusb.inf
