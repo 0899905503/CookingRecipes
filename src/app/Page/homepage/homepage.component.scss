@@ -4,7 +4,7 @@
   align-items: center; // Center-aligns the content inside .HomePage
 }
 
-.HomePageMain, .View {
+.HomePageMain, .View ,.carousel{
   width: 90%; // Set the width of both sections to be the same
   max-width: 1500px; // Optional: Set a max-width for larger screens
   margin: 0 auto; // Center-aligns the sections within the parent container
@@ -136,5 +136,127 @@
       border-bottom: 1px solid #000;
 
     }
+  }
+}
+
+.carousel {
+  background-color: #f4f2ec;
+  border-radius: 23px;
+  margin: 20px;
+  border: 0.1vw solid rgb(124, 124, 124);
+  overflow: hidden; /* Ẩn các phần tử thừa */
+  position: relative;
+}
+
+.carousel h2 {
+  font-size: 2em;
+  font-weight: bold;
+  margin-left: 20px;
+}
+
+.recipe-cards {
+  margin: 30px;
+  display: flex;
+  gap: 20px;
+  //grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+}
+
+
+// .nav-button {
+//   position: absolute;
+//   top: 10%;
+//   transform: translateY(-50%);
+//   background-color: #fff;
+//   border: none;
+//   cursor: pointer;
+//   padding: 10px;
+//   font-size: 20px;
+//   z-index: 10;
+
+// }
+
+// .nav-button.prev {
+//   right: 4%;
+//   top:15%;
+//   border: 0.1vw solid rgb(0, 0, 0);
+//   border-radius: 100%;
+// }
+
+// .nav-button.next {
+//   right: 1%;
+//   border: 0.1vw solid rgb(0, 0, 0);
+//   border-radius: 100%;
+//   top:15%;
+// }
+// .nav-button:hover {
+//   background-color: #EE6352;
+//   color: #F0EBE1;
+// }
+
+.select-food {
+  display: flex;
+  flex-direction: column; /* Sắp xếp các phần tử theo chiều dọc */
+  gap: 10px; /* Khoảng cách giữa các phần tử */
+
+  .content {
+    text-align: center; /* Căn giữa cho nội dung */
+    p{
+      color: #5b5b5b
+    }
+    h2 {
+      font-size: 3em;
+      font-weight: bold;
+    }
+    h4 {
+      background-color: #EE6352;
+      border-radius: 25px;
+      color: #F0EBE1;
+      font-size: 14px;
+      font-weight: bold;
+      padding: 5px 10px;
+      text-align: center;
+      display: inline-block;
+    }
+  }
+
+  .menu {
+    ul {
+      display: flex;
+      justify-content: space-between; /* Sắp xếp các item menu nằm ngang */
+      padding: 0;
+      list-style: none;
+      gap: 20px;
+
+      li {
+        padding: 10px;
+        cursor: pointer;
+        border: 1px solid #727272; /* Tạo viền xung quanh các phần tử li */
+        border-radius: 25px; /* Bo tròn góc viền */
+        transition: border-color 0.3s ease;
+        background-color: transparent;
+        a {
+          text-decoration: none;
+          color: #727272;
+          font-size: 1em;
+          padding: 5px 10px;
+          transition: background-color 0.3s, color 0.3s;
+          &:hover {
+            color: black;
+          }
+        }
+        &:hover {
+          border-color: black; /* Thay đổi màu viền khi hover */
+          background-color: #9FDC26;
+        }
+      }
+    }
+  }
+
+
+  .grid-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 2fr)); /* Tự động chia các cột với chiều rộng tối thiểu 300px */
+    gap: 20px; /* Khoảng cách giữa các phần tử */
   }
 }

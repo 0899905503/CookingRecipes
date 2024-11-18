@@ -8,14 +8,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { LoginComponent } from './Page/login/login.component';
 import { CommonModule } from '@angular/common';
 import { SelectOptionsComponent } from './Shared/Component/select-options/select-options.component';
-import { RecipeComponent } from './Shared/Component/recipe/recipe.component';
+import { RecipeCardComponent } from './Shared/Component/recipe-card/recipe-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SelectOptionsComponent,
-    RecipeComponent,
+    RecipeCardComponent,
   ],
   imports: [
     BrowserModule, // Đảm bảo BrowserModule là đầu tiên

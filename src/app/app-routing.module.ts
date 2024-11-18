@@ -9,7 +9,7 @@ import { MenuComponent } from './Shared/menu/menu.component';
 import { RecipesComponent } from './Page/recipes/recipes.component';
 import { AboutUsComponent } from './Page/about-us/about-us.component';
 import { SelectOptionsComponent } from './Shared/Component/select-options/select-options.component';
-import { RecipeComponent } from './Shared/Component/recipe/recipe.component';
+import { RecipeCardComponent } from './Shared/Component/recipe-card/recipe-card.component';
 
 export const routes: Routes = [
   {
@@ -23,7 +23,6 @@ export const routes: Routes = [
   { path: 'recipe', component: RecipesComponent },
   { path: 'tip', component: TipsComponent },
   { path: 'about', component: AboutUsComponent },
-  { path: 'recipes', component: RecipeComponent },
 ];
 
 @NgModule({
@@ -33,7 +32,7 @@ export const routes: Routes = [
     BrowserModule,
     MenuComponent,
     SelectOptionsComponent,
-    RecipeComponent,
+    RecipeCardComponent,
   ],
   exports: [RouterModule],
   providers: [],

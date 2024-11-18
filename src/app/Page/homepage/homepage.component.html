@@ -27,4 +27,59 @@
         [description]="'QUICK BITE!'"></app-select-options>
     </div>
   </div>
+  <div class="carousel">
+    <h2>FEATURED RECIPES</h2>
+    <div class="recipe-cards">
+      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Savory Herb-Infused Chicken'"
+        [description]="'Indulge in the rich and savory symphony of flavors with our Savory Herb-Infused Chicken'"
+        [prepTime]="'40 MIN'" [level]="'Easy prep'" [serves]="'3 SERVES'">
+      </app-recipe-card>
+
+      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Decadent Chocolate Mousse'"
+        [description]="'Dive into the velvety indulgence of our Decadent Chocolate Mousse. A dessert that transcends sweetness!'"
+        [prepTime]="'30 MIN'" [level]="'Easy prep'" [serves]="'4 SERVES'">
+      </app-recipe-card>
+
+    </div>
+  </div>
+
+  <div class="select-food">
+    <div class="content">
+      <h4>RECIPES</h4>
+      <h2>EMBARK ON A JOURNEY</h2>
+      <p>With our diverse collection of recipes we have something to <br> satisfy every palate.</p>
+    </div>
+    <div class="menu">
+      <ul>
+        <li><a routerLink="/home" routerLinkActive="active">ALL</a></li>
+        <li><a routerLink="/recipe" routerLinkActive="active">VEGAN</a></li>
+        <li><a routerLink="/cooking-tips" routerLinkActive="active">BREAKFAST</a></li>
+        <li><a routerLink="/recipes" routerLinkActive="active">LUNCH</a></li>
+        <li><a routerLink="/recipes" routerLinkActive="active">DINNER</a></li>
+        <li><a routerLink="/recipes" routerLinkActive="active">DESSERT</a></li>
+        <li><a routerLink="/recipes" routerLinkActive="active">QUICK BITE!</a></li>
+      </ul>
+    </div>
+    <div class="grid-content">
+      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Savory Herb-Infused Chicken'"
+        [description]="'Indulge in the rich and savory symphony of flavors with our Savory Herb-Infused Chicken'"
+        [prepTime]="'40 MIN'" [level]="'Easy prep'" [serves]="'3 SERVES'"></app-recipe-card>
+      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Decadent Chocolate Mousse'"
+        [description]="'Dive into the velvety indulgence of our Decadent Chocolate Mousse. A dessert that transcends sweetness!'"
+        [prepTime]="'30 MIN'" [level]="'Easy prep'" [serves]="'4 SERVES'"></app-recipe-card>
+      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Savory Herb-Infused Chicken'"
+        [description]="'Indulge in the rich and savory symphony of flavors with our Savory Herb-Infused Chicken'"
+        [prepTime]="'40 MIN'" [level]="'Easy prep'" [serves]="'3 SERVES'"></app-recipe-card>
+      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Decadent Chocolate Mousse'"
+        [description]="'Dive into the velvety indulgence of our Decadent Chocolate Mousse. A dessert that transcends sweetness!'"
+        [prepTime]="'30 MIN'" [level]="'Easy prep'" [serves]="'4 SERVES'"></app-recipe-card>
+      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Savory Herb-Infused Chicken'"
+        [description]="'Indulge in the rich and savory symphony of flavors with our Savory Herb-Infused Chicken'"
+        [prepTime]="'40 MIN'" [level]="'Easy prep'" [serves]="'3 SERVES'"></app-recipe-card>
+      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Decadent Chocolate Mousse'"
+        [description]="'Dive into the velvety indulgence of our Decadent Chocolate Mousse. A dessert that transcends sweetness!'"
+        [prepTime]="'30 MIN'" [level]="'Easy prep'" [serves]="'4 SERVES'"></app-recipe-card>
+    </div>
+  </div>
+
 </div>
