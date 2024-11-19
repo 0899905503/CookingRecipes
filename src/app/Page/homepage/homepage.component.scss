@@ -223,13 +223,11 @@
   .menu {
     ul {
       display: flex;
-      justify-content: space-between; /* Sắp xếp các item menu nằm ngang */
-      padding: 0;
       list-style: none;
-      gap: 20px;
+      gap: 40px;
+      margin: 20px;
 
       li {
-        padding: 10px;
         cursor: pointer;
         border: 1px solid #727272; /* Tạo viền xung quanh các phần tử li */
         border-radius: 25px; /* Bo tròn góc viền */
@@ -253,10 +251,25 @@
     }
   }
 
-
   .grid-content {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 2fr)); /* Tự động chia các cột với chiều rộng tối thiểu 300px */
-    gap: 20px; /* Khoảng cách giữa các phần tử */
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Tạo grid với các cột động */
+    gap: 20px;
+    margin-left: 10%;
+    max-height: 500px; /* Giới hạn chiều cao tối đa cho grid */
+    overflow: hidden; /* Ẩn thanh cuộn mặc định */
+    position: relative;
+
+    /* Cho phép cuộn nhưng ẩn thanh cuộn */
+    ::-webkit-scrollbar {
+      display: none; /* Ẩn thanh cuộn trên trình duyệt Webkit (Chrome, Safari, Edge) */
+    }
+    -ms-overflow-style: none;  /* Ẩn thanh cuộn trên Internet Explorer */
+    scrollbar-width: none; /* Ẩn thanh cuộn trên Firefox */
+
+    /* Cuộn mà không hiển thị thanh cuộn */
+    &:hover {
+      overflow: scroll; /* Cho phép cuộn khi hover mà không hiển thị thanh cuộn */
+    }
   }
 }
