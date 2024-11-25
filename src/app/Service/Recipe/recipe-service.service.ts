@@ -6,11 +6,10 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class RecipeService {
-  private apiUrl = 'http://localhost:5099/api/v1/Recipe/Get-all'; // Đường dẫn đến API
-
+  private baseUrl = 'http://localhost:5099/api/v1/Recipe/Get-all'; // Đường dẫn đến API
   constructor(private http: HttpClient) {}
 
   getAllRecipes(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl); // Đảm bảo trả về kiểu mảng
+    return this.http.get<any[]>(`${this.baseUrl}`);
   }
 }

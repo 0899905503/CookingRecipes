@@ -10,6 +10,8 @@ import { RecipesComponent } from './Page/recipes/recipes.component';
 import { AboutUsComponent } from './Page/about-us/about-us.component';
 import { SelectOptionsComponent } from './Shared/Component/select-options/select-options.component';
 import { RecipeCardComponent } from './Shared/Component/recipe-card/recipe-card.component';
+import { CommonModule } from '@angular/common';
+import { RecipeMainComponent } from './Shared/Component/recipe-main/recipe-main.component';
 
 export const routes: Routes = [
   {
@@ -33,6 +35,8 @@ export const routes: Routes = [
     MenuComponent,
     SelectOptionsComponent,
     RecipeCardComponent,
+    CommonModule,
+    RecipeMainComponent,
   ],
   exports: [RouterModule],
   providers: [],

@@ -9,6 +9,8 @@ import { LoginComponent } from './Page/login/login.component';
 import { CommonModule } from '@angular/common';
 import { SelectOptionsComponent } from './Shared/Component/select-options/select-options.component';
 import { RecipeCardComponent } from './Shared/Component/recipe-card/recipe-card.component';
+import { RecipesComponent } from './Page/recipes/recipes.component';
+import { RecipeMainComponent } from './Shared/Component/recipe-main/recipe-main.component';
 
 @NgModule({
   declarations: [
@@ -16,15 +18,19 @@ import { RecipeCardComponent } from './Shared/Component/recipe-card/recipe-card.
     LoginComponent,
     SelectOptionsComponent,
     RecipeCardComponent,
+    RecipesComponent,
+    RecipeMainComponent,
   ],
   imports: [
-    BrowserModule, // Đảm bảo BrowserModule là đầu tiên
+    BrowserModule,
     AppRoutingModule,
     RouterModule,
     CommonModule,
-    FormsModule, // Nhập khẩu FormsModule để sử dụng ngModel
+    FormsModule,
     HttpClientModule,
+    RecipeMainComponent,
   ],
+  exports: [RecipeMainComponent],
   providers: [],
   bootstrap: [AppComponent],
 })

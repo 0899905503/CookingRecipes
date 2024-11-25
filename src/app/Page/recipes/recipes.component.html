@@ -1,12 +1,28 @@
-<div class="Recipe">
+<!-- <div class="Recipe">
   <h1>Recipes</h1>
-  <div *ngIf="recipes.length > 0; else noRecipes">
-    <div *ngFor="let recipe of recipes">
+
+  <div *ngIf="Recipes && Recipes.length; else noRecipes">
+    <div *ngFor="let recipe of Recipes" class="recipe-card">
       <h2>{{ recipe.title }}</h2>
       <p>{{ recipe.description }}</p>
+      <img [src]="getImagePath(recipe.imagePath)" alt="{{ recipe.title }}" />
+
+      <span> {{recipe.cookTime}} HOUR {{ recipe.servings }} {{ recipe.prepTime }} SERVES</span>
     </div>
   </div>
   <ng-template #noRecipes>
-    <p>No recipes available or loading...</p>
+    <p>No Recipes available or loading...</p>
   </ng-template>
+</div> -->
+<div class="Recipe">
+
+  <div class="Recipe-info">
+    <!-- <app-recipe-main [title]="recipe.title" [description]=" recipe.description" [cookTime]="recipe.cookTime"
+      [prepTime]="recipe.prepTime" [servings]="recipe.servings" [imagePath]="recipe.imagePath"> </app-recipe-main> -->
+
+    <h1>adada</h1>
+    <app-recipe-main [title]="'dad'" [description]="'dasdas'" [cookTime]="'fdad'" [prepTime]="'2'" [serves]="'4'"
+      [imageUrl]="'assets/images/dinnericon.png'"> </app-recipe-main>
+
+  </div>
 </div>
