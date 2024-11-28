@@ -8,4 +8,14 @@ export const ImagePaths = {
 
   //Home page
   title_image: 'assets/images/HeroSection.png',
+
+  //Recipe page
+
+  main_recipe: 'assets/images/MainRecipe.png',
+
+  //Recipe page icon
+
+  icCookTime: 'assets/images/icCookTime.png',
+  icPrepTime: 'assets/images/icPrepTime.png',
+  icServes: 'assets/images/icServes.png',
 };

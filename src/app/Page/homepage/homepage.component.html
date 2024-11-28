@@ -28,17 +28,20 @@
     </div>
   </div>
   <div class="carousel">
+
     <h2>FEATURED RECIPES</h2>
-    <div class="recipe-cards">
-      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Decadent Chocolate Mousse'"
-        [description]="'Dive into the velvety indulgence of our Decadent Chocolate Mousse. A dessert that transcends sweetness!'"
-        [prepTime]="'30 MIN'" [level]="'Easy prep'" [serves]="'4 SERVES'"></app-recipe-card>
 
-      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Decadent Chocolate Mousse'"
-        [description]="'Dive into the velvety indulgence of our Decadent Chocolate Mousse. A dessert that transcends sweetness!'"
-        [prepTime]="'30 MIN'" [level]="'Easy prep'" [serves]="'4 SERVES'">
-      </app-recipe-card>
+    <div class="recipe-cards" *ngIf="RecipesTopView.length > 0">
 
+      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="RecipesTopView[0].title"
+        [description]="RecipesTopView[0].description " [prepTime]="RecipesTopView[0].prepTime"
+        [cookTime]="RecipesTopView[0].cookTime" [serves]="RecipesTopView[0].servings"
+        [totalView]="RecipesTopView[0].totalView"> </app-recipe-card>
+
+      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="RecipesTopView[1].title"
+        [description]="RecipesTopView[1].description " [prepTime]="RecipesTopView[1].prepTime"
+        [cookTime]="RecipesTopView[1].cookTime" [serves]="RecipesTopView[1].servings"
+        [totalView]="RecipesTopView[1].totalView"> </app-recipe-card>
 
     </div>
   </div>
@@ -46,91 +49,48 @@
   <div class="select-food">
     <div class="content">
       <h4>RECIPES</h4>
-      <h2>EMBARK ON A <br>JOURNEY</h2>
-      <p>With our diverse collection of recipes we have something to <br> satisfy every palate.</p>
+      <h2>EMBARK ON A <br />JOURNEY</h2>
+      <p>
+        With our diverse collection of recipes we have something to <br />
+        satisfy every palate.
+      </p>
     </div>
     <div class="menu">
       <ul>
-        <li><a (click)="selectedMenu = 'ALL'" [class.active]="selectedMenu === 'ALL'">ALL</a></li>
-        <li><a (click)="selectedMenu = 'VEGAN'" [class.active]="selectedMenu === 'VEGAN'">VEGAN</a></li>
-        <li><a (click)="selectedMenu = 'BREAKFAST'" [class.active]="selectedMenu === 'BREAKFAST'">BREAKFAST</a></li>
-        <li><a (click)="selectedMenu = 'LUNCH'" [class.active]="selectedMenu === 'LUNCH'">LUNCH</a></li>
-        <li><a (click)="selectedMenu = 'DINNER'" [class.active]="selectedMenu === 'DINNER'">DINNER</a></li>
-        <li><a (click)="selectedMenu = 'DESSERT'" [class.active]="selectedMenu === 'DESSERT'">DESSERT</a></li>
-        <li><a (click)="selectedMenu = 'QUICK BITE'" [class.active]="selectedMenu === 'QUICK BITE'">QUICK BITE!</a></li>
+        <li>
+          <a (click)="selectedMenu = 'ALL'" [class.active]="selectedMenu === 'ALL'">ALL</a>
+        </li>
+        <li>
+          <a (click)="selectedMenu = 'Vegan'" [class.active]="selectedMenu === 'VEGAN'">VEGAN</a>
+        </li>
+        <li>
+          <a (click)="selectedMenu = 'Breakfast'" [class.active]="selectedMenu === 'BREAKFAST'">BREAKFAST</a>
+        </li>
+        <li>
+          <a (click)="selectedMenu = 'Lunch'" [class.active]="selectedMenu === 'LUNCH'">LUNCH</a>
+        </li>
+        <li>
+          <a (click)="selectedMenu = 'Dinner'" [class.active]="selectedMenu === 'DINNER'">DINNER</a>
+        </li>
+        <li>
+          <a (click)="selectedMenu = 'Dessert'" [class.active]="selectedMenu === 'DESSERT'">DESSERT</a>
+        </li>
+        <li>
+          <a (click)="selectedMenu = 'QuickBite'" [class.active]="selectedMenu === 'QUICK BITE'">QUICK BITE!</a>
+        </li>
       </ul>
     </div>
-    <div class="grid-content" *ngIf="selectedMenu === 'ALL'">
-      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Savory Herb-Infused Chicken'"
-        [description]="'Indulge in the rich and savory symphony of flavors with our Savory Herb-Infused Chicken'"
-        [prepTime]="'40 MIN'" [level]="'Easy prep'" [serves]="'3 SERVES'"></app-recipe-card>
-      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Decadent Chocolate Mousse'"
-        [description]="'Dive into the velvety indulgence of our Decadent Chocolate Mousse. A dessert that transcends sweetness!'"
-        [prepTime]="'30 MIN'" [level]="'Easy prep'" [serves]="'4 SERVES'"></app-recipe-card>
-      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Savory Herb-Infused Chicken'"
-        [description]="'Indulge in the rich and savory symphony of flavors with our Savory Herb-Infused Chicken'"
-        [prepTime]="'40 MIN'" [level]="'Easy prep'" [serves]="'3 SERVES'"></app-recipe-card>
-      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Decadent Chocolate Mousse'"
-        [description]="'Dive into the velvety indulgence of our Decadent Chocolate Mousse. A dessert that transcends sweetness!'"
-        [prepTime]="'30 MIN'" [level]="'Easy prep'" [serves]="'4 SERVES'"></app-recipe-card>
-      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Savory Herb-Infused Chicken'"
-        [description]="'Indulge in the rich and savory symphony of flavors with our Savory Herb-Infused Chicken'"
-        [prepTime]="'40 MIN'" [level]="'Easy prep'" [serves]="'3 SERVES'"></app-recipe-card>
-      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Decadent Chocolate Mousse'"
-        [description]="'Dive into the velvety indulgence of our Decadent Chocolate Mousse. A dessert that transcends sweetness!'"
-        [prepTime]="'30 MIN'" [level]="'Easy prep'" [serves]="'4 SERVES'"></app-recipe-card>
-    </div>
-    <div class="grid-content" *ngIf="selectedMenu === 'VEGAN'">
-      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Decadent Chocolate Mousse'"
-        [description]="'Dive into the velvety indulgence of our Decadent Chocolate Mousse. A dessert that transcends sweetness!'"
-        [prepTime]="'30 MIN'" [level]="'Easy prep'" [serves]="'4 SERVES'"></app-recipe-card>
 
-      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Decadent Chocolate Mousse'"
-        [description]="'Dive into the velvety indulgence of our Decadent Chocolate Mousse. A dessert that transcends sweetness!'"
-        [prepTime]="'30 MIN'" [level]="'Easy prep'" [serves]="'4 SERVES'"></app-recipe-card>
+    <div class="grid-content" *ngIf="Recipe?.length">
+      <div *ngFor="let item of filteredRecipes()">
+        <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="item.title"
+          [description]="item.description" [cookTime]="item.cookTime" [prepTime]="item.prepTime"
+          [serves]="item.servings">
+        </app-recipe-card>
+      </div>
     </div>
 
-    <div class="grid-content" *ngIf="selectedMenu === 'BREAKFAST'">
-
-      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Decadent Chocolate Mousse'"
-        [description]="'Dive into the velvety indulgence of our Decadent Chocolate Mousse. A dessert that transcends sweetness!'"
-        [prepTime]="'30 MIN'" [level]="'Easy prep'" [serves]="'4 SERVES'"></app-recipe-card>
-
-    </div>
-
-
-    <div class="grid-content" *ngIf="selectedMenu === 'LUNCH'">
-      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Decadent Chocolate Mousse'"
-        [description]="'Dive into the velvety indulgence of our Decadent Chocolate Mousse. A dessert that transcends sweetness!'"
-        [prepTime]="'30 MIN'" [level]="'Easy prep'" [serves]="'4 SERVES'"></app-recipe-card>
-      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Decadent Chocolate Mousse'"
-        [description]="'Dive into the velvety indulgence of our Decadent Chocolate Mousse. A dessert that transcends sweetness!'"
-        [prepTime]="'30 MIN'" [level]="'Easy prep'" [serves]="'4 SERVES'"></app-recipe-card>
-    </div>
-    <div class="grid-content" *ngIf="selectedMenu === 'DINNER'">
-      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Decadent Chocolate Mousse'"
-        [description]="'Dive into the velvety indulgence of our Decadent Chocolate Mousse. A dessert that transcends sweetness!'"
-        [prepTime]="'30 MIN'" [level]="'Easy prep'" [serves]="'4 SERVES'"></app-recipe-card>
-      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Decadent Chocolate Mousse'"
-        [description]="'Dive into the velvety indulgence of our Decadent Chocolate Mousse. A dessert that transcends sweetness!'"
-        [prepTime]="'30 MIN'" [level]="'Easy prep'" [serves]="'4 SERVES'"></app-recipe-card>
-      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Decadent Chocolate Mousse'"
-        [description]="'Dive into the velvety indulgence of our Decadent Chocolate Mousse. A dessert that transcends sweetness!'"
-        [prepTime]="'30 MIN'" [level]="'Easy prep'" [serves]="'4 SERVES'"></app-recipe-card>
-    </div>
-    <div class="grid-content" *ngIf="selectedMenu === 'DESSERT'"> <app-recipe-card
-        [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Decadent Chocolate Mousse'"
-        [description]="'Dive into the velvety indulgence of our Decadent Chocolate Mousse. A dessert that transcends sweetness!'"
-        [prepTime]="'30 MIN'" [level]="'Easy prep'" [serves]="'4 SERVES'"></app-recipe-card> </div>
-    <div class="grid-content" *ngIf="selectedMenu === 'QUICK BITE'">
-      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Decadent Chocolate Mousse'"
-        [description]="'Dive into the velvety indulgence of our Decadent Chocolate Mousse. A dessert that transcends sweetness!'"
-        [prepTime]="'30 MIN'" [level]="'Easy prep'" [serves]="'4 SERVES'"></app-recipe-card>
-      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Decadent Chocolate Mousse'"
-        [description]="'Dive into the velvety indulgence of our Decadent Chocolate Mousse. A dessert that transcends sweetness!'"
-        [prepTime]="'30 MIN'" [level]="'Easy prep'" [serves]="'4 SERVES'"></app-recipe-card>
-
-    </div>
   </div>
+
 
 </div>

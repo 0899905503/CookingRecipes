@@ -1,0 +1,38 @@
+.Recipe {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.Recipe-info {
+  margin: 10px;
+  text-align: center;
+  border: 0.1vw solid rgb(124, 124, 124);
+  border-radius: 32px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.Recipe-detail {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.Recipe-detail p {
+  flex-basis: 60%; /* 3/5 chiều rộng */
+  text-align: left;
+  margin: 10px;
+  color: #333333;
+  opacity: 0.8;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+.Recipe-detail .ingredients {
+  margin-top: 5%;
+  flex-basis: 40%; /* 2/5 chiều rộng */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

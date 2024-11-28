@@ -11,9 +11,10 @@ export class RecipeCardComponent {
   @Input() imageUrl!: string;
   @Input() description!: string;
   @Input() prepTime!: string;
-  @Input() level!: string;
+  @Input() cookTime!: string;
   @Input() serves!: string;
   @Input() title!: string;
+  @Input() totalView!: string;
 }
 // export interface Recipe {
 //   imageUrl: string;

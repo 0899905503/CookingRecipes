@@ -11,6 +11,7 @@ import { SelectOptionsComponent } from './Shared/Component/select-options/select
 import { RecipeCardComponent } from './Shared/Component/recipe-card/recipe-card.component';
 import { RecipesComponent } from './Page/recipes/recipes.component';
 import { RecipeMainComponent } from './Shared/Component/recipe-main/recipe-main.component';
+import { RecipeIngredientComponent } from './Shared/Component/recipe-ingredient/recipe-ingredient.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { RecipeMainComponent } from './Shared/Component/recipe-main/recipe-main.
     RecipeCardComponent,
     RecipesComponent,
     RecipeMainComponent,
+    RecipeIngredientComponent,
   ],
   imports: [
     BrowserModule,

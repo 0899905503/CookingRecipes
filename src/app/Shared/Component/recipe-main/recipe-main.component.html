@@ -1,10 +1,27 @@
 <div class="recipe-main">
   <div class="recipe-info">
+    <h4>RECIPES</h4>
     <h3>{{ title }}</h3>
+    <p class="additional-text">{{ additionalText }}</p>
     <p>{{ description }}</p>
     <div class="recipe-details">
-      <span>{{ cookTime }} - {{ prepTime }} - {{ serves }}</span>
+      <span class="detail-item">
+        <img [src]="icCookTime" alt="Cook Time"> {{ cookTime }} MIN
+      </span>
+      <div>
+        <p>•</p>
+      </div>
+      <span class="detail-item">
+        <img [src]="icPrepTime" alt="Prep Time"> {{ prepTime }}
+      </span>
+      <div>
+        <p>•</p>
+      </div>
+      <span class="detail-item">
+        <img [src]="icServes" alt="Serves"> {{ serves }} SERVES
+      </span>
     </div>
-    <img [src]=imageUrl alt="{{title}}" class="recipe-image">
+    <img [src]="imageUrl" alt="{{ title }}" class="recipe-image">
   </div>
+
 </div>

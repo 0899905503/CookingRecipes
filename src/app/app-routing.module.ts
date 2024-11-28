@@ -12,6 +12,7 @@ import { SelectOptionsComponent } from './Shared/Component/select-options/select
 import { RecipeCardComponent } from './Shared/Component/recipe-card/recipe-card.component';
 import { CommonModule } from '@angular/common';
 import { RecipeMainComponent } from './Shared/Component/recipe-main/recipe-main.component';
+import { RecipeIngredientComponent } from './Shared/Component/recipe-ingredient/recipe-ingredient.component';
 
 export const routes: Routes = [
   {
@@ -37,6 +38,7 @@ export const routes: Routes = [
     RecipeCardComponent,
     CommonModule,
     RecipeMainComponent,
+    RecipeIngredientComponent,
   ],
   exports: [RouterModule],
   providers: [],

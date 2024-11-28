@@ -1,28 +1,37 @@
-<!-- <div class="Recipe">
-  <h1>Recipes</h1>
-
-  <div *ngIf="Recipes && Recipes.length; else noRecipes">
-    <div *ngFor="let recipe of Recipes" class="recipe-card">
-      <h2>{{ recipe.title }}</h2>
-      <p>{{ recipe.description }}</p>
-      <img [src]="getImagePath(recipe.imagePath)" alt="{{ recipe.title }}" />
-
-      <span> {{recipe.cookTime}} HOUR {{ recipe.servings }} {{ recipe.prepTime }} SERVES</span>
-    </div>
-  </div>
-  <ng-template #noRecipes>
-    <p>No Recipes available or loading...</p>
-  </ng-template>
-</div> -->
 <div class="Recipe">
+  <div class="Recipe-info" *ngIf="RecipesById">
+    <app-recipe-main [title]="RecipesById.title"
+      [additionalText]="'Welcome to Cooks Delight, where culinary dreams come alive! \nToday, we embark on a journey of flavors with a dish that promises \n to elevate your dining experience – our Recipes:\n'"
+      [description]="RecipesById.description" [cookTime]="RecipesById.cookTime" [prepTime]="RecipesById.prepTime"
+      [serves]="RecipesById.servings" [imageUrl]="'assets/images/MainRecipe.png'">
+    </app-recipe-main>
+    <div class="Recipe-detail">
+      <p>Picture succulent chicken infused with the bright notes of lemon and the <br>aromatic richness of garlic. It's
+        a
+        symphony of flavors that will have your taste<br> buds dancing. Join us as we delve into the art of roasting and
+        uncover the <br>secrets behind creating a masterpiece that's not just a meal but a celebration<br> of culinary
+        craftsmanship.<br>
 
-  <div class="Recipe-info">
-    <!-- <app-recipe-main [title]="recipe.title" [description]=" recipe.description" [cookTime]="recipe.cookTime"
-      [prepTime]="recipe.prepTime" [servings]="recipe.servings" [imagePath]="recipe.imagePath"> </app-recipe-main> -->
-
-    <h1>adada</h1>
-    <app-recipe-main [title]="'dad'" [description]="'dasdas'" [cookTime]="'fdad'" [prepTime]="'2'" [serves]="'4'"
-      [imageUrl]="'assets/images/dinnericon.png'"> </app-recipe-main>
-
+        As you preheat your oven, envision the kitchen filling with the tantalizing <br>aroma of herbs and citrus,
+        setting
+        the stage for a delightful meal that<br> transcends the ordinary. The anticipation builds as the chicken roasts
+        to<br>
+        golden perfection, promising a dining experience that marries simplicity with <br>sophistication. Whether you're
+        a
+        seasoned chef or a kitchen novice, this recipe<br> invites you to become a culinary artist, creating a
+        masterpiece
+        that will leave a<br> lasting impression on your guests and loved ones.</p>
+      <div class="ingredients">
+        <app-recipe-ingredient [title]="'INGREDIENT'"
+          [ingredientName]="getIngredientDetails(RecipesById.recipeIngredients)">
+        </app-recipe-ingredient>
+        <app-recipe-ingredient [title]="'EQUIPMENT NEEDED FOR PREPATATION'"
+          [ingredientName]="getIngredientDetails(RecipesById.recipeIngredients)">
+        </app-recipe-ingredient>
+        <app-recipe-ingredient [title]="'NUTRIENT TYPES'"
+          [ingredientName]="getIngredientDetails(RecipesById.recipeIngredients)">
+        </app-recipe-ingredient>
+      </div>
+    </div>
   </div>
 </div>
