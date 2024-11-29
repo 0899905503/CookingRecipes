@@ -1,36 +1,39 @@
-.select-option {
+.select-options {
   display: flex;
+  width: 100%;
   flex-direction: column;
   background-color: #C4E5FC;
-  padding: 10px; /* Adds padding inside the container */
-  border-radius: 8px; /* Rounds the corners of .select-option */
-  margin-bottom: 10px; /* Adds spacing between .select-option elements */
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
 
-  .image-container {
-    display: flex;
-    flex-direction: row; /* Aligns img and p horizontally */
-    align-items: center; /* Centers items vertically */
-    width: 100%;
-  }
+.image-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
 
-  img {
-    width: 1vh;
-    height: 1vh;
-    margin-right: 10px; /* Adds spacing between the image and the description */
-  }
+img {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
 
-  p {
-    margin: 0; /* Removes default margin */
-    color: black;
-    font-size: 18px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: bold;
-  }
+p {
+  margin: 0;
+  color: black;
+  font-size: 18px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+}
 
-  .signature-line {
-    width: 100%;
-    height: 0.2vh;
-    background-color: red;
-    margin-top: 2vh;
-  }
+.signature-line {
+  width: 100%;
+  height: 1px;
+  background-color: #262522;
+  opacity: 0.6;
+  margin-top: 30px;
 }

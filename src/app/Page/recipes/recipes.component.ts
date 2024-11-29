@@ -65,7 +65,27 @@ export class RecipesComponent {
   getIngredientDetails(recipeIngredients: any[]): string[] {
     return recipeIngredients.map(
       (ingredient) =>
-        `${ingredient.ingredient.ingredientName} ${ingredient.quantity} (${ingredient.ingredient.unit})`
+        `${ingredient.ingredient.ingredientName}: ${ingredient.quantity} (${ingredient.ingredient.unit})`
+    );
+  }
+
+  getCookingToolDetails(cookingTools: any[]): string[] {
+    return cookingTools.map(
+      (cookingtool) => cookingtool.cookingTool.cookingToolName
+    );
+  }
+
+  getNutrientDetails(recipeNutrient: any[]): string[] {
+    return recipeNutrient.map(
+      (nutrientType) =>
+        `${nutrientType.nutrientType.nutrientTypeName}: ~ ${nutrientType.quantity} (${nutrientType.nutrientType.unit})`
+    );
+  }
+
+  getInstructionDetails(instructions: any[]): string[] {
+    return instructions.map(
+      (instruction) =>
+        ` ${instruction.stepNumber} ${instruction.instructionText}`
     );
   }
 }

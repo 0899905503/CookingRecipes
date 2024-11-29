@@ -25,11 +25,18 @@
         <app-recipe-ingredient [title]="'INGREDIENT'"
           [ingredientName]="getIngredientDetails(RecipesById.recipeIngredients)">
         </app-recipe-ingredient>
-        <app-recipe-ingredient [title]="'EQUIPMENT NEEDED FOR PREPATATION'"
-          [ingredientName]="getIngredientDetails(RecipesById.recipeIngredients)">
+        <app-recipe-ingredient [title]="'EQUIPMENT NEEDED FOR \n PREPARATION'"
+          [ingredientName]="getCookingToolDetails(RecipesById.recipeTools)">
         </app-recipe-ingredient>
+
         <app-recipe-ingredient [title]="'NUTRIENT TYPES'"
-          [ingredientName]="getIngredientDetails(RecipesById.recipeIngredients)">
+          [ingredientName]="getNutrientDetails(RecipesById.recipeNutrient)">
+        </app-recipe-ingredient>
+
+        <p>Note: Nutritional values are approximate and may vary based on <br> specific ingredients and portion sizes.
+        </p>
+        <app-recipe-ingredient [title]="'INSTRUCTIONS'"
+          [ingredientName]="getInstructionDetails(RecipesById.instructions)">
         </app-recipe-ingredient>
       </div>
     </div>

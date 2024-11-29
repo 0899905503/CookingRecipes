@@ -20,7 +20,7 @@
 }
 
 .Recipe-detail p {
-  flex-basis: 60%; /* 3/5 chiều rộng */
+  flex-basis: 60%;
   text-align: left;
   margin: 10px;
   color: #333333;
@@ -31,7 +31,7 @@
 
 .Recipe-detail .ingredients {
   margin-top: 5%;
-  flex-basis: 40%; /* 2/5 chiều rộng */
+  flex-basis: 40%;
   display: flex;
   flex-direction: column;
   gap: 20px;
