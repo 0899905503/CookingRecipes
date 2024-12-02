@@ -1,0 +1,25 @@
+<div class="recipe-tip">
+  <h3>
+    Things to do and not to do
+  </h3>
+
+  <div class="do-tips">
+    <h4>{{ actionType }}</h4>
+    <ul>
+      <li *ngFor="let doTip of description; let i = index">
+        <strong>{{ title[i] }}</strong>
+        <div>{{ doTip }}</div>
+      </li>
+    </ul>
+  </div>
+
+  <div class="dont-tips">
+    <h4>{{ actionType1 }}</h4>
+    <ul>
+      <li *ngFor="let dontTip of description1; let i = index">
+        <strong>{{ title1[i] }}</strong>
+        <div>{{ dontTip }}</div>
+      </li>
+    </ul>
+  </div>
+</div>

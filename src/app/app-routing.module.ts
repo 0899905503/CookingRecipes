@@ -13,6 +13,9 @@ import { RecipeCardComponent } from './Shared/Component/recipe-card/recipe-card.
 import { CommonModule } from '@angular/common';
 import { RecipeMainComponent } from './Shared/Component/recipe-main/recipe-main.component';
 import { RecipeIngredientComponent } from './Shared/Component/recipe-ingredient/recipe-ingredient.component';
+import { RecipeTipComponent } from './Shared/Component/recipe-tip/recipe-tip.component';
+import { BottomMenuComponent } from './Shared/bottom-menu/bottom-menu.component';
+import { RecipeInstructionComponent } from './Shared/Component/recipe-instruction/recipe-instruction.component';
 
 export const routes: Routes = [
   {
@@ -39,6 +42,9 @@ export const routes: Routes = [
     CommonModule,
     RecipeMainComponent,
     RecipeIngredientComponent,
+    RecipeTipComponent,
+    BottomMenuComponent,
+    RecipeInstructionComponent,
   ],
   exports: [RouterModule],
   providers: [],
