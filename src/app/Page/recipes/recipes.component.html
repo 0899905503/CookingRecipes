@@ -13,7 +13,7 @@
           symphony of flavors that will have your taste<br> buds dancing. Join us as we delve into the art of roasting
           and
           uncover the <br>secrets behind creating a masterpiece that's not just a meal but a celebration<br> of culinary
-          craftsmanship.<br>
+          craftsmanship.<br> <br>
 
           As you preheat your oven, envision the kitchen filling with the tantalizing <br>aroma of herbs and citrus,
           setting
@@ -32,8 +32,11 @@
         <!-- <app-recipe-ingredient [title]="'INSTRUCTIONS'"
           [ingredientName]="getInstructionDetails(RecipesById.instructions)">
         </app-recipe-ingredient> -->
-        <app-recipe-instruction [title]="'INSTRUCTION'" [steps]="steps">
+        <app-recipe-instruction [title]="'INSTRUCTION'" [steps]="steps" [stepTitle]="stepTitle">
         </app-recipe-instruction>
+
+      </div>
+      <div class="center">
 
       </div>
       <div class="ingredients">
@@ -52,6 +55,27 @@
         </p>
 
       </div>
+    </div>
+  </div>
+
+  <div class="carousel">
+
+    <h2>SIMILAR RECIPES</h2>
+
+    <div class="recipe-cards" *ngIf="SimilarRecipes.length > 0">
+
+      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="SimilarRecipes[0].recipeDetails.title"
+        [description]="SimilarRecipes[0].recipeDetails.description "
+        [prepTime]="SimilarRecipes[0].recipeDetails.prepTime" [cookTime]="SimilarRecipes[0].recipeDetails.cookTime"
+        [serves]="SimilarRecipes[0].recipeDetails.servings" [totalView]="SimilarRecipes[0].recipeDetails.totalView">
+      </app-recipe-card>
+
+      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="SimilarRecipes[1].recipeDetails.title"
+        [description]="SimilarRecipes[1].recipeDetails.description "
+        [prepTime]="SimilarRecipes[1].recipeDetails.prepTime" [cookTime]="SimilarRecipes[1].recipeDetails.cookTime"
+        [serves]="SimilarRecipes[1].recipeDetails.servings" [totalView]="SimilarRecipes[1].recipeDetails.totalView">
+      </app-recipe-card>
+
     </div>
   </div>
 </div>

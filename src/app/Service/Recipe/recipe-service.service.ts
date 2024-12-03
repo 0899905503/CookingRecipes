@@ -7,9 +7,11 @@ import { ApiPaths } from '../../Shared/Value/Constant/apiConstant';
   providedIn: 'root',
 })
 export class RecipeService {
-  private baseUrl = ApiPaths.baseUrl; // Đường dẫn đến API
+  private baseUrl = ApiPaths.baseUrl;
   private getAllRecipe = ApiPaths.GetAllRecipe;
   private getById = ApiPaths.GetByIdRecipe;
+  private getSimilar = ApiPaths.GetSimilar;
+
   constructor(private http: HttpClient) {}
 
   getAllRecipes(): Observable<any[]> {
@@ -18,5 +20,9 @@ export class RecipeService {
 
   getByIdRecipes(id: number): Observable<any> {
     return this.http.get<any>(`${this.baseUrl + this.getById + id}`);
+  }
+
+  getSimilarRecipes(id: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl + this.getSimilar + id}`);
   }
 }

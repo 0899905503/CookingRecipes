@@ -1,7 +1,7 @@
-.Recipe {
+.Recipe, .carousel {
   width: 100%;
-  max-width: 1500px;
-  margin: 0 auto;
+  max-width: 1800px;
+  margin: 20px auto;
 }
 
 .Recipe-info {
@@ -15,18 +15,19 @@
 
 .Recipe-detail {
   display: flex;
+  margin-left: 10%;
   justify-content: space-between;
-  width: 100%;
+  width: flex;
 }
 
 .Recipe-detail p {
-  flex-basis: 60%;
   text-align: left;
   margin: 10px;
   color: #333333;
   opacity: 0.8;
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
+  line-height: 1.6;
 }
 
 .Recipe-detail .ingredients {
@@ -35,4 +36,31 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.carousel {
+  background-color: #F0EBE1;
+  border-radius: 32px;
+  border: 0.1vw solid rgb(124, 124, 124);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.carousel h2 {
+  color: #262522;
+  font-size: 40px;
+  font-weight: bold;
+  margin-left: 30px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.recipe-cards {
+  margin: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 100%;
+}
+.center {
+  width:5%;
 }

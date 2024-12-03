@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { RecipeIngredientComponent } from '../../Shared/Component/recipe-ingredient/recipe-ingredient.component';
 import { RecipeTipComponent } from '../../Shared/Component/recipe-tip/recipe-tip.component';
 import { RecipeInstructionComponent } from '../../Shared/Component/recipe-instruction/recipe-instruction.component';
+import { RecipeCardComponent } from '../../Shared/Component/recipe-card/recipe-card.component';
 
 @Component({
   standalone: true,
@@ -17,20 +18,24 @@ import { RecipeInstructionComponent } from '../../Shared/Component/recipe-instru
     RecipeIngredientComponent,
     RecipeTipComponent,
     RecipeInstructionComponent,
+    RecipeCardComponent,
   ],
 })
 export class RecipesComponent {
   RecipesById: any = {};
   doTips: string[] = [];
   dontTips: string[] = [];
+  stepTitle: string[] = [];
   steps: string[] = [];
   titleTipDo: string[] = [];
   titleTipDont: string[] = [];
+  SimilarRecipes: any[] = []; // Changed to any[] to accommodate objects in the array
 
   constructor(private recipeService: RecipeService) {}
 
   ngOnInit(): void {
     this.onGetId(456);
+    this.onGetSimilar(456);
     this.steps = this.getInstructionDetails(this.RecipesById.instructions);
   }
 
@@ -56,11 +61,38 @@ export class RecipesComponent {
         } else {
           console.warn('No recipe tips available.');
         }
+
+        const instructions = this.RecipesById.instructions || [];
+        if (instructions.length > 0) {
+          this.stepTitle = instructions.map(
+            (instruction: any) =>
+              `Step ${instruction.stepNumber}:  ${instruction.title}`
+          );
+        }
       },
       (error) => {
         console.error('Error fetching recipes:', error);
       }
     );
+  }
+  async onGetSimilar(id: number) {
+    try {
+      const data = await this.recipeService.getSimilarRecipes(id).toPromise();
+      if (data) {
+        this.SimilarRecipes = data.map((recipeData: any) => {
+          return {
+            recipeId: recipeData.recipeId,
+            sharedIngredientsCount: recipeData.sharedIngredientsCount,
+            recipeDetails: recipeData.recipe[0],
+          };
+        });
+        console.log('Similar recipes fetched successfully');
+      } else {
+        console.warn('No similar recipes found');
+      }
+    } catch (error) {
+      console.error('Error fetching similar recipes:', error);
+    }
   }
 
   getIngredientDetails(recipeIngredients: any[]): string[] {
@@ -94,9 +126,6 @@ export class RecipesComponent {
     if (!instructions || instructions.length === 0) {
       return ['No instructions available.'];
     }
-    return instructions.map(
-      (instruction) =>
-        `Step ${instruction.stepNumber}: ${instruction.instructionText}`
-    );
+    return instructions.map((instruction) => instruction.instructionText);
   }
 }

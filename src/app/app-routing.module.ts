@@ -45,6 +45,7 @@ export const routes: Routes = [
     RecipeTipComponent,
     BottomMenuComponent,
     RecipeInstructionComponent,
+    RecipeCardComponent,
   ],
   exports: [RouterModule],
   providers: [],

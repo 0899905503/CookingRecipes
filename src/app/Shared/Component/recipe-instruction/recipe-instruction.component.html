@@ -1,7 +1,19 @@
 <div class="recipe-instruction">
   <h2>{{ title }}</h2>
+  <p>
+    A recipe is a detailed guide for creating a complete dish, from preparing <br>
+    the ingredients to the cooking
+    process.
+    Each recipe typically includes a list of ingredients,<br>
+    precise measurements, and step-by-step instructions in a
+    specific order. <br><br> A recipe is not just a way to cook a dish but also an art of combining ingredients <br>
+    and cooking techniques to create delightful flavors. It reflects the creativity and passion <br>
+    of the cook, turning simple ingredients into a masterpiece that pleases both
+    the palate and <br>
+    the soul. Cooking, through recipes, becomes a journey of exploration and expression.</p>
   <ul>
-    <li *ngFor="let step of steps">
+    <li *ngFor="let step of steps; let i = index">
+      <strong> {{stepTitle[i]}}</strong>
       {{ step }}
     </li>
   </ul>

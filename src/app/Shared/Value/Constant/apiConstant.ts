@@ -4,4 +4,7 @@ export const ApiPaths = {
   GetAllRecipe: 'Recipe/Get-all',
   GetByIdRecipe: 'Recipe/Get-by-id/',
   GetTopView: 'Recipe/Get-top-view',
+
+  //Recipe Ingredient
+  GetSimilar: 'RecipeIngredient/Get-similar-recipe/',
 };

@@ -11,4 +11,5 @@ import { Component, Input } from '@angular/core';
 export class RecipeInstructionComponent {
   @Input() title!: string;
   @Input() steps!: string[];
+  @Input() stepTitle!: string[];
 }

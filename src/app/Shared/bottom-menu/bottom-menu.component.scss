@@ -1,9 +1,11 @@
 .bottom-menu {
   display: flex;
   flex-direction: column;
-  background-color: #40403f;
+  background-color: #262522;
   padding: 2.5vh 2vw;
   border: 0.1vw solid #616161;
+  margin: 20px;
+  border-radius: 32px;
 
   .top-row {
     display: flex;
@@ -73,8 +75,8 @@
       cursor: pointer;
 
       img {
-        width: 1vw;
-        height: 2vh;
+        width: 24px;
+        height: 24px;
       }
     }
   }

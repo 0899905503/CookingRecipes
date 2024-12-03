@@ -22,13 +22,13 @@ import { RecipeInstructionComponent } from './Shared/Component/recipe-instructio
     AppComponent,
     LoginComponent,
     SelectOptionsComponent,
-    RecipeCardComponent,
     RecipesComponent,
     RecipeMainComponent,
     RecipeIngredientComponent,
     RecipeTipComponent,
     BottomMenuComponent,
     MenuComponent,
+    RecipeCardComponent
     RecipeInstructionComponent,
   ],
   imports: [
@@ -44,6 +44,7 @@ import { RecipeInstructionComponent } from './Shared/Component/recipe-instructio
     BottomMenuComponent,
     MenuComponent,
     RecipeInstructionComponent,
+    RecipeCardComponent
   ],
   exports: [RecipeMainComponent],
   providers: [],
