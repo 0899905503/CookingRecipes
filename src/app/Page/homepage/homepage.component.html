@@ -1,4 +1,5 @@
 <div class="HomePage">
+  <!-- Hero Section -->
   <div class="HomePageMain">
     <div class="image-container">
       <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@800&display=swap" rel="stylesheet">
@@ -9,6 +10,8 @@
       <button class="overlay-button">EXPLORE RECIPES</button>
     </div>
   </div>
+
+  <!-- Explore Section -->
   <div class="View">
     <div class="see-more">
       <h4>EXPLORE</h4>
@@ -27,70 +30,44 @@
         [description]="'QUICK BITE!'"></app-select-options>
     </div>
   </div>
+
+  <!-- Recipe Carousel -->
   <div class="carousel">
-
     <h2>FEATURED RECIPES</h2>
-
     <div class="recipe-cards" *ngIf="RecipesTopView.length > 0">
-
-      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="RecipesTopView[0].title"
-        [description]="RecipesTopView[0].description " [prepTime]="RecipesTopView[0].prepTime"
-        [cookTime]="RecipesTopView[0].cookTime" [serves]="RecipesTopView[0].servings"
-        [totalView]="RecipesTopView[0].totalView"> </app-recipe-card>
-
-      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="RecipesTopView[1].title"
-        [description]="RecipesTopView[1].description " [prepTime]="RecipesTopView[1].prepTime"
-        [cookTime]="RecipesTopView[1].cookTime" [serves]="RecipesTopView[1].servings"
-        [totalView]="RecipesTopView[1].totalView"> </app-recipe-card>
-
+      <app-recipe-card *ngFor="let recipe of RecipesTopView" [imageUrl]="recipe.imagePath" [title]="recipe.title"
+        [description]="recipe.description" [prepTime]="recipe.prepTime" [cookTime]="recipe.cookTime"
+        [serves]="recipe.servings" [totalView]="recipe.totalView" [unit1]="'MIN'" [unit2]="'SERVES'"> </app-recipe-card>
     </div>
   </div>
 
+  <!-- Recipe Categories -->
   <div class="select-food">
     <div class="content">
       <h4>RECIPES</h4>
       <h2>EMBARK ON A <br />JOURNEY</h2>
-      <p>
-        With our diverse collection of recipes we have something to <br />
-        satisfy every palate.
-      </p>
+      <p>With our diverse collection of recipes we have something to <br />satisfy every palate.</p>
     </div>
     <div class="menu">
       <ul>
-        <li>
-          <a (click)="selectedMenu = 'ALL'" [class.active]="selectedMenu === 'ALL'">ALL</a>
-        </li>
-        <li>
-          <a (click)="selectedMenu = 'Vegan'" [class.active]="selectedMenu === 'VEGAN'">VEGAN</a>
-        </li>
-        <li>
-          <a (click)="selectedMenu = 'Breakfast'" [class.active]="selectedMenu === 'BREAKFAST'">BREAKFAST</a>
-        </li>
-        <li>
-          <a (click)="selectedMenu = 'Lunch'" [class.active]="selectedMenu === 'LUNCH'">LUNCH</a>
-        </li>
-        <li>
-          <a (click)="selectedMenu = 'Dinner'" [class.active]="selectedMenu === 'DINNER'">DINNER</a>
-        </li>
-        <li>
-          <a (click)="selectedMenu = 'Dessert'" [class.active]="selectedMenu === 'DESSERT'">DESSERT</a>
-        </li>
-        <li>
-          <a (click)="selectedMenu = 'QuickBite'" [class.active]="selectedMenu === 'QUICK BITE'">QUICK BITE!</a>
-        </li>
+        <li><a (click)="selectedMenu = 'ALL'" [class.active]="selectedMenu === 'ALL'">ALL</a></li>
+        <li><a (click)="selectedMenu = 'Vegan'" [class.active]="selectedMenu === 'Vegan'">VEGAN</a></li>
+        <li><a (click)="selectedMenu = 'Breakfast'" [class.active]="selectedMenu === 'Breakfast'">BREAKFAST</a></li>
+        <li><a (click)="selectedMenu = 'Lunch'" [class.active]="selectedMenu === 'Lunch'">LUNCH</a></li>
+        <li><a (click)="selectedMenu = 'Dinner'" [class.active]="selectedMenu === 'Dinner'">DINNER</a></li>
+        <li><a (click)="selectedMenu = 'Dessert'" [class.active]="selectedMenu === 'Dessert'">DESSERT</a></li>
+        <li><a (click)="selectedMenu = 'QuickBite'" [class.active]="selectedMenu === 'QuickBite'">QUICK BITE!</a></li>
       </ul>
     </div>
 
+    <!-- Recipe Grid -->
     <div class="grid-content" *ngIf="Recipe?.length">
       <div *ngFor="let item of filteredRecipes()">
-        <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="item.title"
-          [description]="item.description" [cookTime]="item.cookTime" [prepTime]="item.prepTime"
-          [serves]="item.servings">
+        <app-recipe-card [imageUrl]="item.imagePath" [title]="item.title" [description]="item.description"
+          [cookTime]="item.cookTime" [prepTime]="item.prepTime" [serves]="item.servings" [isVegan]="item.vegan"
+          [unit1]="'MIN'" [unit2]="'SERVES'">
         </app-recipe-card>
       </div>
     </div>
-
   </div>
-
-
 </div>

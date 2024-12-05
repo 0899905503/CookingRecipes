@@ -1,1 +1,92 @@
-<p>tips works!</p>
+<div class="Tip">
+  <div class="title">
+    <h1>OUR ESSENTIAL <br>COOKING TIPS</h1>
+    <p>Welcome to Cooks Delight's treasure trove of cooking<br> wisdom! Whether you're a seasoned chef or just
+      starting<br> your
+      culinary journey, our cooking tips are designed to<br> elevate your skills, enhance your kitchen experience, and
+      <br>bring
+      joy to your cooking adventures.
+    </p>
+  </div>
+  <div class="main-content">
+    <app-recipe-title></app-recipe-title>
+  </div>
+  <div class="newest-recipes">
+    <h2>NEWEST RECIPES</h2>
+    <div class="recipe-cards">
+      <app-recipe-card [title]="'Savory Herb-Infused Chicken'" [description]="'Rich and flavorful chicken with herbs.'"
+        [cookTime]="'40'" [prepTime]="'MEDIUM PREP'" [serves]="'6'" [unit1]="'MIN'" [unit2]="'SERVES'"
+        [imageUrl]="'assets/images/demoRecipe.png'"></app-recipe-card>
+      <app-recipe-card [title]="'Spicy Garlic Shrimp'" [description]="'Delicious shrimp with a spicy kick.'"
+        [cookTime]="'30'" [prepTime]="'EASY PREP'" [serves]="'4'" [unit1]="'MIN'" [unit2]="'SERVES'"
+        [imageUrl]="'assets/images/demoRecipe.png'"></app-recipe-card>
+    </div>
+  </div>
+
+
+  <div class="master">
+    <div class="content">
+      <h2>
+        MASTERING THE BASICS
+      </h2>
+    </div>
+    <!-- <div class="grid-content" *ngIf="Recipe?.length">
+      <div *ngFor="let item of filteredRecipes()"> -->
+    <div>
+      <div class="grid-content">
+        <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Savory Herb-Infused Chicken'"
+          [description]="'Indulge in the rich and savory symphony of flavors with our Savory Herb-Infused Chicken'"
+          [cookTime]="'45'" [prepTime]="'MEDIUM PREP'" [serves]="'6'" [unit1]="'MIN'" [unit2]="'SERVES'">
+        </app-recipe-card>
+        <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Savory Herb-Infused Chicken'"
+          [description]="'Indulge in the rich and savory symphony of flavors with our Savory Herb-Infused Chicken'"
+          [cookTime]="'45'" [prepTime]="'MEDIUM PREP'" [serves]="'6'" [unit1]="'MIN'" [unit2]="'SERVES'">
+        </app-recipe-card>
+        <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Savory Herb-Infused Chicken'"
+          [description]="'Indulge in the rich and savory symphony of flavors with our Savory Herb-Infused Chicken'"
+          [cookTime]="'45'" [prepTime]="'MEDIUM PREP'" [serves]="'6'" [unit1]="'MIN'" [unit2]="'SERVES'">
+        </app-recipe-card>
+        <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Savory Herb-Infused Chicken'"
+          [description]="'Indulge in the rich and savory symphony of flavors with our Savory Herb-Infused Chicken'"
+          [cookTime]="'45'" [prepTime]="'MEDIUM PREP'" [serves]="'6'" [unit1]="'MIN'" [unit2]="'SERVES'">
+        </app-recipe-card>
+        <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Savory Herb-Infused Chicken'"
+          [description]="'Indulge in the rich and savory symphony of flavors with our Savory Herb-Infused Chicken'"
+          [cookTime]="'45'" [prepTime]="'MEDIUM PREP'" [serves]="'6'" [unit1]="'MIN'" [unit2]="'SERVES'">
+        </app-recipe-card>
+        <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Savory Herb-Infused Chicken'"
+          [description]="'Indulge in the rich and savory symphony of flavors with our Savory Herb-Infused Chicken'"
+          [cookTime]="'45'" [prepTime]="'MEDIUM PREP'" [serves]="'6'" [unit1]="'MIN'" [unit2]="'SERVES'">
+        </app-recipe-card>
+        <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Savory Herb-Infused Chicken'"
+          [description]="'Indulge in the rich and savory symphony of flavors with our Savory Herb-Infused Chicken'"
+          [cookTime]="'45'" [prepTime]="'MEDIUM PREP'" [serves]="'6'" [unit1]="'MIN'" [unit2]="'SERVES'">
+        </app-recipe-card>
+        <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Savory Herb-Infused Chicken'"
+          [description]="'Indulge in the rich and savory symphony of flavors with our Savory Herb-Infused Chicken'"
+          [cookTime]="'45'" [prepTime]="'MEDIUM PREP'" [serves]="'6'" [unit1]="'MIN'" [unit2]="'SERVES'">
+        </app-recipe-card>
+        <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Savory Herb-Infused Chicken'"
+          [description]="'Indulge in the rich and savory symphony of flavors with our Savory Herb-Infused Chicken'"
+          [cookTime]="'45'" [prepTime]="'MEDIUM PREP'" [serves]="'6'" [unit1]="'MIN'" [unit2]="'SERVES'">
+        </app-recipe-card>
+        <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Savory Herb-Infused Chicken'"
+          [description]="'Indulge in the rich and savory symphony of flavors with our Savory Herb-Infused Chicken'"
+          [cookTime]="'45'" [prepTime]="'MEDIUM PREP'" [serves]="'6'" [unit1]="'MIN'" [unit2]="'SERVES'">
+        </app-recipe-card>
+        <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Savory Herb-Infused Chicken'"
+          [description]="'Indulge in the rich and savory symphony of flavors with our Savory Herb-Infused Chicken'"
+          [cookTime]="'45'" [prepTime]="'MEDIUM PREP'" [serves]="'6'" [unit1]="'MIN'" [unit2]="'SERVES'">
+        </app-recipe-card>
+        <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Savory Herb-Infused Chicken'"
+          [description]="'Indulge in the rich and savory symphony of flavors with our Savory Herb-Infused Chicken'"
+          [cookTime]="'45'" [prepTime]="'MEDIUM PREP'" [serves]="'6'" [unit1]="'MIN'" [unit2]="'SERVES'">
+        </app-recipe-card>
+        <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Savory Herb-Infused Chicken'"
+          [description]="'Indulge in the rich and savory symphony of flavors with our Savory Herb-Infused Chicken'"
+          [cookTime]="'45'" [prepTime]="'MEDIUM PREP'" [serves]="'6'" [unit1]="'MIN'" [unit2]="'SERVES'">
+        </app-recipe-card>
+      </div>
+    </div>
+  </div>
+</div>

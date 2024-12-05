@@ -16,6 +16,7 @@ import { RecipeTipComponent } from './Shared/Component/recipe-tip/recipe-tip.com
 import { BottomMenuComponent } from './Shared/bottom-menu/bottom-menu.component';
 import { MenuComponent } from './Shared/menu/menu.component';
 import { RecipeInstructionComponent } from './Shared/Component/recipe-instruction/recipe-instruction.component';
+import { RecipeTitleComponent } from './Shared/Component/recipe-title/recipe-title.component';
 
 @NgModule({
   declarations: [
@@ -28,8 +29,9 @@ import { RecipeInstructionComponent } from './Shared/Component/recipe-instructio
     RecipeTipComponent,
     BottomMenuComponent,
     MenuComponent,
-    RecipeCardComponent
+    RecipeCardComponent,
     RecipeInstructionComponent,
+    RecipeTitleComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,8 @@ import { RecipeInstructionComponent } from './Shared/Component/recipe-instructio
     BottomMenuComponent,
     MenuComponent,
     RecipeInstructionComponent,
-    RecipeCardComponent
+    RecipeCardComponent,
+    RecipeTitleComponent,
   ],
   exports: [RecipeMainComponent],
   providers: [],

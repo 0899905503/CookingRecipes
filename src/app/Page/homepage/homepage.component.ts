@@ -35,9 +35,18 @@ export class HomepageComponent {
 
   filteredRecipes(): any[] {
     if (!this.Recipe) return [];
+
     if (this.selectedMenu === 'ALL') return this.Recipe;
+
+    if (this.selectedMenu === 'Vegan') {
+      return this.Recipe.filter((item) => item.vegan === true);
+    }
+
     return this.Recipe.filter(
-      (item) => item.category.categoryName === this.selectedMenu
+      (item) =>
+        item.category.categoryName === this.selectedMenu ||
+        (item.vegan === true &&
+          item.category.categoryName !== this.selectedMenu)
     );
   }
 

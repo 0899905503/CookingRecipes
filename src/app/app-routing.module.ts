@@ -16,6 +16,7 @@ import { RecipeIngredientComponent } from './Shared/Component/recipe-ingredient/
 import { RecipeTipComponent } from './Shared/Component/recipe-tip/recipe-tip.component';
 import { BottomMenuComponent } from './Shared/bottom-menu/bottom-menu.component';
 import { RecipeInstructionComponent } from './Shared/Component/recipe-instruction/recipe-instruction.component';
+import { RecipeTitleComponent } from './Shared/Component/recipe-title/recipe-title.component';
 
 export const routes: Routes = [
   {
@@ -46,6 +47,7 @@ export const routes: Routes = [
     BottomMenuComponent,
     RecipeInstructionComponent,
     RecipeCardComponent,
+    RecipeTitleComponent,
   ],
   exports: [RouterModule],
   providers: [],

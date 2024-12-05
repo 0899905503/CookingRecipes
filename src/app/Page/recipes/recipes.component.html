@@ -3,7 +3,7 @@
     <app-recipe-main [title]="RecipesById.title"
       [additionalText]="'Welcome to Cooks Delight, where culinary dreams come alive! \nToday, we embark on a journey of flavors with a dish that promises \n to elevate your dining experience – our Recipes:\n'"
       [description]="RecipesById.description" [cookTime]="RecipesById.cookTime" [prepTime]="RecipesById.prepTime"
-      [serves]="RecipesById.servings" [imageUrl]="'assets/images/MainRecipe.png'">
+      [serves]="RecipesById.servings" [imageUrl]="RecipesById.imagePath">
     </app-recipe-main>
     <div class="Recipe-detail">
       <div class="note">
@@ -64,16 +64,18 @@
 
     <div class="recipe-cards" *ngIf="SimilarRecipes.length > 0">
 
-      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="SimilarRecipes[0].recipeDetails.title"
-        [description]="SimilarRecipes[0].recipeDetails.description "
+      <app-recipe-card [imageUrl]="SimilarRecipes[0].recipeDetails.imagePath"
+        [title]="SimilarRecipes[0].recipeDetails.title" [description]="SimilarRecipes[0].recipeDetails.description "
         [prepTime]="SimilarRecipes[0].recipeDetails.prepTime" [cookTime]="SimilarRecipes[0].recipeDetails.cookTime"
-        [serves]="SimilarRecipes[0].recipeDetails.servings" [totalView]="SimilarRecipes[0].recipeDetails.totalView">
+        [serves]="SimilarRecipes[0].recipeDetails.servings" [totalView]="SimilarRecipes[0].recipeDetails.totalView"
+        [isVegan]="SimilarRecipes[0].recipeDetails.vegan" [unit1]="'MIN'" [unit2]="'SERVES'">
       </app-recipe-card>
 
-      <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="SimilarRecipes[1].recipeDetails.title"
-        [description]="SimilarRecipes[1].recipeDetails.description "
+      <app-recipe-card [imageUrl]="SimilarRecipes[1].recipeDetails.imagePath"
+        [title]="SimilarRecipes[1].recipeDetails.title" [description]="SimilarRecipes[1].recipeDetails.description "
         [prepTime]="SimilarRecipes[1].recipeDetails.prepTime" [cookTime]="SimilarRecipes[1].recipeDetails.cookTime"
-        [serves]="SimilarRecipes[1].recipeDetails.servings" [totalView]="SimilarRecipes[1].recipeDetails.totalView">
+        [serves]="SimilarRecipes[1].recipeDetails.servings" [totalView]="SimilarRecipes[1].recipeDetails.totalView"
+        [isVegan]="SimilarRecipes[1].recipeDetails.vegan" [unit1]="'MIN'" [unit2]="'SERVES'">
       </app-recipe-card>
 
     </div>

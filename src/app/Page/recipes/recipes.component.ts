@@ -29,13 +29,13 @@ export class RecipesComponent {
   steps: string[] = [];
   titleTipDo: string[] = [];
   titleTipDont: string[] = [];
-  SimilarRecipes: any[] = []; // Changed to any[] to accommodate objects in the array
+  SimilarRecipes: any[] = [];
 
   constructor(private recipeService: RecipeService) {}
 
   ngOnInit(): void {
-    this.onGetId(456);
-    this.onGetSimilar(456);
+    this.onGetId(457);
+    this.onGetSimilar(457);
     this.steps = this.getInstructionDetails(this.RecipesById.instructions);
   }
 
@@ -84,6 +84,7 @@ export class RecipesComponent {
             recipeId: recipeData.recipeId,
             sharedIngredientsCount: recipeData.sharedIngredientsCount,
             recipeDetails: recipeData.recipe[0],
+            isVegan: recipeData.recipe[0].vegan,
           };
         });
         console.log('Similar recipes fetched successfully');

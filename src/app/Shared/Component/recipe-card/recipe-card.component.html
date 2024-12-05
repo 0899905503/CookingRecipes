@@ -1,10 +1,13 @@
 <div class="recipe-card">
   <img [src]="imageUrl" alt="{{ title }}" class="recipe-image">
+  <div *ngIf="isVegan" class="vegan-badge">
+    <img src="assets/images/icVegan1.png" alt="Vegan Symbol">
+  </div>
   <div class="recipe-info">
     <h3>{{ title }}</h3>
     <p>{{ description }}</p>
     <div class="recipe-details">
-      <span>{{ cookTime }} MIN - {{ prepTime }} - {{ serves }} SERVES </span>
+      <span>{{ cookTime }} {{unit1}} - {{ prepTime }} - {{ serves }} {{unit2}} </span>
       <button class="view-recipe-button">VIEW RECIPE</button>
     </div>
   </div>
