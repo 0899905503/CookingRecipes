@@ -1,18 +1,20 @@
 <div class="login-container">
+  <!-- Phần bên trái -->
   <div class="login-left">
-    <div class="overlay">
-      <div class="content">
-        <h2>COOKING RECIPES</h2>
-        <p>Formulated with the Best Selected Spices</p>
-      </div>
-    </div>
     <img src="assets/images/BackgroundLogin.png" alt="Recipe Image">
+    <div class="overlay"></div>
+    <div class="content">
+      <h2>COOKING RECIPES</h2>
+      <p>Formulated with the Best Selected Spices</p>
+    </div>
   </div>
 
+
+  <!-- Phần bên phải -->
   <div class="login-right">
     <div class="header">
-      <h1 class="top-right">COOKING <span class="highlight">RECIPES</span></h1>
-      <h4>Welcome to <span class="highlight">COOKING RECIPES</span></h4>
+      <h1>COOKING <span class="highlight">RECIPES</span></h1>
+      <h4>Welcome to COOKING<span class="highlight"> RECIPES</span></h4>
       <div class="button-container">
         <button class="button" [ngClass]="{ 'active': activeButton === 'login' }"
           (click)="toggleActive('login')">Login</button>
@@ -44,5 +46,4 @@
       <button class="login-btn" type="submit">Login</button>
     </form>
   </div>
-
 </div>

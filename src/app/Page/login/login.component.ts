@@ -1,15 +1,17 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../Service/Auth/Login/login.service';
 import { FormsModule } from '@angular/forms';
 import { ErrorsCodeEnum } from '../../Shared/Value/Enums/errorsCodeEnums';
+import { LoginComponents } from '../../Shared/login/login.component';
 
 @Component({
-  standalone: true, // Nếu bạn muốn component này là standalone
+  standalone: true,
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  imports: [FormsModule],
+  imports: [FormsModule, LoginComponents, CommonModule],
 })
 export class LoginComponent {
   username = '';
@@ -39,5 +41,11 @@ export class LoginComponent {
 
   isLoggedIn(): boolean {
     return this.loggedIn;
+  }
+
+  activeButton: string = 'login';
+
+  toggleActive(button: string) {
+    this.activeButton = button;
   }
 }
