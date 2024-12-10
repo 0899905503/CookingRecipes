@@ -13,25 +13,22 @@
   </div>
   <div class="newest-recipes">
     <h2>NEWEST RECIPES</h2>
-    <div class="recipe-cards">
-      <app-recipe-card [title]="'Savory Herb-Infused Chicken'" [description]="'Rich and flavorful chicken with herbs.'"
-        [cookTime]="'40'" [prepTime]="'MEDIUM PREP'" [serves]="'6'" [unit1]="'MIN'" [unit2]="'SERVES'"
-        [imageUrl]="'assets/images/demoRecipe.png'"></app-recipe-card>
-      <app-recipe-card [title]="'Spicy Garlic Shrimp'" [description]="'Delicious shrimp with a spicy kick.'"
-        [cookTime]="'30'" [prepTime]="'EASY PREP'" [serves]="'4'" [unit1]="'MIN'" [unit2]="'SERVES'"
-        [imageUrl]="'assets/images/demoRecipe.png'"></app-recipe-card>
+    <div class="recipe-cards" *ngIf="NewRecipe.length > 0">
+      <app-recipe-card *ngFor="let new of NewRecipe" [imageUrl]="new.imagePath" [title]="new.title"
+        [description]="new.description" [prepTime]="new.prepTime" [cookTime]="new.cookTime" [serves]="new.servings"
+        [totalView]="new.totalView" [unit1]="'MIN'" [unit2]="'SERVES'"> </app-recipe-card>
     </div>
   </div>
 
 
-  <div class="master">
+  <!-- <div class="master">
     <div class="content">
       <h2>
         MASTERING THE BASICS
       </h2>
     </div>
     <!-- <div class="grid-content" *ngIf="Recipe?.length">
-      <div *ngFor="let item of filteredRecipes()"> -->
+      <div *ngFor="let item of filteredRecipes()">
     <div>
       <div class="grid-content">
         <app-recipe-card [imageUrl]="'assets/images/demoRecipe.png'" [title]="'Savory Herb-Infused Chicken'"
@@ -86,6 +83,22 @@
           [description]="'Indulge in the rich and savory symphony of flavors with our Savory Herb-Infused Chicken'"
           [cookTime]="'45'" [prepTime]="'MEDIUM PREP'" [serves]="'6'" [unit1]="'MIN'" [unit2]="'SERVES'">
         </app-recipe-card>
+      </div>
+    </div>
+  </div> -->
+  <div class="tips">
+    <div class="content">
+      <h2>
+        TIPS & TRICKS
+      </h2>
+    </div>
+    <div class="grid-content" *ngIf="Tip?.length">
+      <div *ngFor="let item of Tip">
+        <!-- <app-recipe-card [imageUrl]="item.imagePath" [title]="item.title" [description]="item.description"
+          [prepTime]="item.dateCreated">
+        </app-recipe-card> -->
+        <app-recipe-tips [imageUrl]="item.imagePath" [title]="item.title" [description]="item.description"
+          [time]="item.time" [unit]="'MIN'" [date]="item.dateCreated"></app-recipe-tips>
       </div>
     </div>
   </div>

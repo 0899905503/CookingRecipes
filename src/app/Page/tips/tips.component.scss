@@ -1,4 +1,4 @@
-.Recipe, .newest-recipes,.title ,.content, .master,.main-content {
+.Recipe, .newest-recipes,.title ,.content, .master,.main-content, .tips {
   width: 100%;
   max-width: 1800px;
   margin: 20px auto;
@@ -69,8 +69,8 @@
   font-weight: bold;
   margin-left: 40px;
   font-family: 'Montserrat', sans-serif;
-  width: 95%; /* This ensures scaling like main-content */
-  max-width: 1800px; /* Keep the same max-width as other elements */
+  width: 95%;
+  max-width: 1800px;
 }
 
 .master {
@@ -94,5 +94,32 @@
     &:hover {
       overflow: scroll;
     }
+  }
+}
+
+.tips {
+  flex-direction: column;
+
+  .grid-content {
+    display: grid;
+    height: 700px;
+    grid-template-columns: repeat(4, minmax(300px, 1fr));
+    grid-auto-flow: dense;
+    gap: 20px;
+    margin: 20px;
+    overflow: hidden;
+    position: relative;
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &:hover {
+      overflow: scroll;
+    }
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
