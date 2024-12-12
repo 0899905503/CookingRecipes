@@ -9,9 +9,9 @@ import { Component } from '@angular/core';
   styleUrl: './login.component.scss',
 })
 export class LoginComponents {
-  activeButton: string = 'login'; // Default active button
+  activeButton: string = 'login';
 
   toggleActive(button: string) {
-    this.activeButton = button; // Toggle between 'login' and 'register'
+    this.activeButton = button;
   }
 }

@@ -11,7 +11,7 @@ import { LoginComponents } from '../../Shared/login/login.component';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  imports: [FormsModule, LoginComponents, CommonModule],
+  imports: [FormsModule, CommonModule],
 })
 export class LoginComponent {
   username = '';
@@ -47,5 +47,12 @@ export class LoginComponent {
 
   toggleActive(button: string) {
     this.activeButton = button;
+  }
+
+  isLoginChecked: boolean = false;
+
+  onCheckboxChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.isLoginChecked = input.checked;
   }
 }

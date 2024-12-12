@@ -1,4 +1,9 @@
-<!-- <app-menu></app-menu>
+<ng-container *ngIf="isLoggedIn$ | async">
+  <app-menu></app-menu>
+</ng-container>
+
 <router-outlet></router-outlet>
-<app-bottom-menu></app-bottom-menu> -->
-<router-outlet></router-outlet>
+
+<ng-container *ngIf="isLoggedIn$ | async">
+  <app-bottom-menu></app-bottom-menu>
+</ng-container>

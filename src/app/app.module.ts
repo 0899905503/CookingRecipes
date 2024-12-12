@@ -19,11 +19,11 @@ import { RecipeInstructionComponent } from './Shared/Component/recipe-instructio
 import { RecipeTitleComponent } from './Shared/Component/recipe-title/recipe-title.component';
 import { RecipeTipsComponent } from './Shared/Component/recipe-tips/recipe-tips.component';
 import { LoginComponents } from './Shared/login/login.component';
+import { RegisterComponent } from './Shared/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     SelectOptionsComponent,
     RecipesComponent,
     RecipeMainComponent,
@@ -35,7 +35,8 @@ import { LoginComponents } from './Shared/login/login.component';
     RecipeInstructionComponent,
     RecipeTitleComponent,
     RecipeTipsComponent,
-    LoginComponents,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,8 +55,9 @@ import { LoginComponents } from './Shared/login/login.component';
     RecipeTitleComponent,
     RecipeTipsComponent,
     LoginComponents,
+    RegisterComponent,
   ],
-  exports: [RecipeMainComponent],
+  exports: [RecipeMainComponent, RegisterComponent],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -20,7 +20,6 @@ export class AuthService {
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
-  // Gửi yêu cầu đăng nhập tới API
   login(
     username: string,
     passwordHash: string,
@@ -34,12 +33,15 @@ export class AuthService {
           if (response && response.token) {
             this.storeToken(response.token);
             this.isAuthenticated$.next(true);
+            console.log(
+              'Login successful, isAuthenticated:',
+              this.isAuthenticated$.value
+            );
           }
         })
       );
   }
 
-  // Lấy hoặc tạo `deviceUuid` nếu chưa tồn tại
   public getDeviceUuid(): string {
     if (isPlatformBrowser(this.platformId)) {
       let deviceUuid = localStorage.getItem(this.deviceUuidKey);
@@ -53,29 +55,33 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return this.isAuthenticated$.value;
+    const token = this.getToken();
+    console.log('Token retrieved:', token);
+    return this.isAuthenticated$.value && token !== null;
   }
 
-  // Đăng xuất và xóa token
   logout(): void {
     this.removeToken();
     this.isAuthenticated$.next(false);
   }
 
-  // Kiểm tra token tồn tại trong localStorage
-  private hasToken(): boolean {
-    return this.getToken() !== null;
+  hasToken(): boolean {
+    const token = this.getToken();
+    return token !== null;
   }
 
   private storeToken(token: string): void {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem(this.tokenKey, token);
+      console.log('Token stored:', token);
     }
   }
 
   private getToken(): string | null {
     if (isPlatformBrowser(this.platformId)) {
-      return localStorage.getItem(this.tokenKey);
+      const token = localStorage.getItem(this.tokenKey);
+      console.log('Token from localStorage:', token);
+      return token;
     }
     return null;
   }

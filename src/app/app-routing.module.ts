@@ -19,14 +19,22 @@ import { RecipeInstructionComponent } from './Shared/Component/recipe-instructio
 import { RecipeTitleComponent } from './Shared/Component/recipe-title/recipe-title.component';
 import { RecipeTipsComponent } from './Shared/Component/recipe-tips/recipe-tips.component';
 import { LoginComponents } from './Shared/login/login.component';
+import { authGuard } from './guards/auth.guard';
+import { RegisterComponent } from './Shared/register/register.component';
 
 export const routes: Routes = [
+  // {
+  //   path: '',
+  //   redirectTo: 'login',
+  //   pathMatch: 'full',
+  // },
   {
     path: '',
-    redirectTo: '/login',
+    redirectTo: 'register',
     pathMatch: 'full',
   },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   { path: '', component: AppComponent },
   { path: 'home', component: HomepageComponent },
   { path: 'recipe', component: RecipesComponent },
@@ -52,6 +60,7 @@ export const routes: Routes = [
     RecipeTitleComponent,
     RecipeTipsComponent,
     LoginComponents,
+    RegisterComponent,
   ],
   exports: [RouterModule],
   providers: [],

@@ -12,4 +12,7 @@ export const ApiPaths = {
   //Tip
   GetAllTip: 'CookingTip/Get-all',
   GetByIdTip: 'CookingTip/Get-by-id/',
+
+  //User
+  CreateUser: 'User/Create-user',
 };
