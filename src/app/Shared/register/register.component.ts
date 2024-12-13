@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RegisterService } from '../../Service/Auth/register.service';
 import * as bcrypt from 'bcryptjs'; // Đảm bảo bạn đã cài bcryptjs
 import { CommonModule } from '@angular/common';
@@ -12,18 +12,26 @@ import { FormsModule } from '@angular/forms';
   imports: [FormsModule, CommonModule],
 })
 export class RegisterComponent {
-  activeButton: string = 'register';
   email = '';
   username = '';
   password = '';
   role = 'user';
   isLoginChecked: boolean = false;
+  passwordVisible = false;
 
-  constructor(private registerService: RegisterService) {}
+  @Input() activeButton: string = ''; // Nhận trạng thái từ AuthComponent
+  @Output() toggle = new EventEmitter<string>(); // Gửi sự kiện lên AuthComponent
 
   toggleActive(button: string) {
     this.activeButton = button;
+    this.toggle.emit(button); // Kích hoạt sự kiện khi nút được nhấn
   }
+
+  togglePasswordVisibility(): void {
+    this.passwordVisible = !this.passwordVisible;
+  }
+
+  constructor(private registerService: RegisterService) {}
 
   ngOnInit(): void {
     // Tùy chọn, bạn có thể thêm logic khác nếu cần

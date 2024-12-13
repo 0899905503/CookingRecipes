@@ -1,0 +1,11 @@
+<div class="auth-container">
+  <!-- Hiển thị Login Component -->
+  <div *ngIf="activeButton === 'login'">
+    <app-login [activeButton]="activeButton" (toggle)="toggleActive($event)"></app-login>
+  </div>
+
+  <!-- Hiển thị Register Component -->
+  <div *ngIf="activeButton === 'register'">
+    <app-register [activeButton]="activeButton" (toggle)="toggleActive($event)"></app-register>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+.auth-container {
+  .login-container, .register-container {
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .inactive-login, .inactive-register {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .active-login, .active-register {
+    opacity: 1;
+  }
+}

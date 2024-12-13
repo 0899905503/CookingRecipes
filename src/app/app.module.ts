@@ -20,6 +20,7 @@ import { RecipeTitleComponent } from './Shared/Component/recipe-title/recipe-tit
 import { RecipeTipsComponent } from './Shared/Component/recipe-tips/recipe-tips.component';
 import { LoginComponents } from './Shared/login/login.component';
 import { RegisterComponent } from './Shared/register/register.component';
+import { AuthComponent } from './Page/auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,8 @@ import { RegisterComponent } from './Shared/register/register.component';
     RecipeTipsComponent,
     LoginComponent,
     RegisterComponent,
+    AuthComponent,
+    NgModule,
   ],
   imports: [
     BrowserModule,
@@ -56,8 +59,10 @@ import { RegisterComponent } from './Shared/register/register.component';
     RecipeTipsComponent,
     LoginComponents,
     RegisterComponent,
+    AuthComponent,
+    NgModule,
   ],
-  exports: [RecipeMainComponent, RegisterComponent],
+  exports: [RecipeMainComponent, RegisterComponent, AuthComponent],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -15,9 +15,9 @@
       <h4>Welcome to <span class="highlight">COOKING RECIPES</span></h4>
       <div class="button-container">
         <button class="button"
-          [ngClass]="{ 'active-register': activeButton === 'register', 'inactive-register': activeButton !== 'register' }"
-          (click)="toggleActive('register')">
-          register
+          [ngClass]="{ 'active-login': activeButton === 'login', 'inactive-login': activeButton !== 'login' }"
+          (click)="toggleActive('login')">
+          Login
         </button>
         <button class="button"
           [ngClass]="{ 'active-register': activeButton === 'register', 'inactive-register': activeButton !== 'register' }"
@@ -47,9 +47,14 @@
 
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Enter your Password" [(ngModel)]="password"
-          required />
+        <div class="password-container">
+          <input type="password" id="password" name="password" placeholder="Enter your Password" [(ngModel)]="password"
+            [type]="passwordVisible ? 'text' : 'password'" required />
+          <i class="fa" [ngClass]="passwordVisible ? 'fa-eye-slash' : 'fa-eye'" (click)="togglePasswordVisibility()">
+          </i>
+        </div>
       </div>
+
 
       <div class="options">
         <label><input type="checkbox" (change)="onCheckboxChange($event)" /> Remember me</label>

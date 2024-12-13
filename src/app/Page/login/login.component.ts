@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../Service/Auth/Login/login.service';
 import { FormsModule } from '@angular/forms';
@@ -19,7 +19,13 @@ export class LoginComponent {
   deviceUuid = '';
   errorMessage = '';
   private loggedIn = false;
+  @Input() activeButton: string = ''; // Nhận trạng thái từ AuthComponent
+  @Output() toggle = new EventEmitter<string>(); // Gửi sự kiện lên AuthComponent
 
+  toggleActive(button: string) {
+    this.activeButton = button;
+    this.toggle.emit(button); // Kích hoạt sự kiện khi nút được nhấn
+  }
   constructor(private authService: AuthService, private router: Router) {
     this.deviceUuid = this.authService.getDeviceUuid();
   }
@@ -41,12 +47,6 @@ export class LoginComponent {
 
   isLoggedIn(): boolean {
     return this.loggedIn;
-  }
-
-  activeButton: string = 'login';
-
-  toggleActive(button: string) {
-    this.activeButton = button;
   }
 
   isLoginChecked: boolean = false;

@@ -122,7 +122,7 @@
   width: 100%;
   padding: 15px 20px;
   background-color: #F0EBE1;
-  color: yellow;
+  color: #820000;
   border: none;
   border-radius: 50px;
   cursor: pointer;
@@ -240,6 +240,7 @@ input[type="checkbox"] {
     transform: rotate(45deg);
   }
 }
+
 .button {
   padding: 10px 20px;
   border: none;
@@ -247,22 +248,40 @@ input[type="checkbox"] {
   transition: background-color 0.3s ease;
 }
 
-.active-register {
+.active-login {
+  background-color: #820000;
+  color: #F0EBE1;
+}
+
+.inactive-login {
   background-color: #F0EBE1;
   color: #820000;
+}
+
+.active-register {
+  background-color: #820000;
+  color: yellow;
 }
 
 .inactive-register {
-  background-color: #F0EBE1;
-  color: #820000;
+  background-color: #820000;
+  color: yellow;
+}
+.password-wrapper {
+  position: relative;
 }
 
-.active-register {
-  background-color: #F0EBE1;
-  color: #820000;
+.password-wrapper input {
+  width: 100%;
+  padding-right: 40px; /* Add space for the icon */
 }
 
-.inactive-register {
-  background-color: #F0EBE1;
-  color: #820000;
+.password-wrapper .toggle-password-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 1.2em; /* Adjust the size of the icon */
+  color: #888; /* Optional, customize color */
 }

@@ -21,6 +21,7 @@ import { RecipeTipsComponent } from './Shared/Component/recipe-tips/recipe-tips.
 import { LoginComponents } from './Shared/login/login.component';
 import { authGuard } from './guards/auth.guard';
 import { RegisterComponent } from './Shared/register/register.component';
+import { AuthComponent } from './Page/auth/auth.component';
 
 export const routes: Routes = [
   // {
@@ -30,9 +31,10 @@ export const routes: Routes = [
   // },
   {
     path: '',
-    redirectTo: 'register',
+    redirectTo: 'auth',
     pathMatch: 'full',
   },
+  { path: 'auth', component: AuthComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: '', component: AppComponent },
