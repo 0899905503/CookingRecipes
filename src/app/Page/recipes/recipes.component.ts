@@ -1,3 +1,4 @@
+// RecipesComponent
 import { Component } from '@angular/core';
 import { RecipeService } from '../../Service/Recipe/recipe-service.service';
 import { RecipeMainComponent } from '../../Shared/Component/recipe-main/recipe-main.component';
@@ -30,12 +31,27 @@ export class RecipesComponent {
   titleTipDo: string[] = [];
   titleTipDont: string[] = [];
   SimilarRecipes: any[] = [];
+  recipeId!: number;
 
   constructor(private recipeService: RecipeService) {}
 
   ngOnInit(): void {
-    this.onGetId(457);
-    this.onGetSimilar(457);
+    if (this.recipeId) {
+      this.onGetId(this.recipeId);
+      this.onGetSimilar(this.recipeId);
+      this.steps = this.getInstructionDetails(this.RecipesById.instructions);
+    } else {
+      console.log('recipeId null');
+    }
+
+    this.onRecipeSelected(this.recipeId);
+  }
+
+  // Nhận giá trị recipeId từ RecipeCardComponent
+  onRecipeSelected(id: number): void {
+    this.recipeId = id;
+    this.onGetId(this.recipeId);
+    this.onGetSimilar(this.recipeId);
     this.steps = this.getInstructionDetails(this.RecipesById.instructions);
   }
 
@@ -75,6 +91,7 @@ export class RecipesComponent {
       }
     );
   }
+
   async onGetSimilar(id: number) {
     try {
       const data = await this.recipeService.getSimilarRecipes(id).toPromise();

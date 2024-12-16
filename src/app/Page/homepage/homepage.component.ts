@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { HomepageService } from '../../Service/Homepage/homepage.service';
 @Component({
   selector: 'app-homepage',
@@ -13,6 +13,7 @@ export class HomepageComponent {
   @Input() serves!: string;
   @Input() imageUrl!: string;
   @Input() totalView!: string;
+  @Output() recipeSelected = new EventEmitter<number>();
   selectedMenu: string = 'ALL';
   constructor(private homepageService: HomepageService) {}
   RecipesTopView: any[] = [];
@@ -59,5 +60,9 @@ export class HomepageComponent {
         console.error('Error fetching recipes view:', error);
       }
     );
+  }
+
+  onRecipeSelected(recipeId: number): void {
+    this.recipeSelected.emit(recipeId); // Phát ra recipeId
   }
 }

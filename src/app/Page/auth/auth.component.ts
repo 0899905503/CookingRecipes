@@ -16,18 +16,15 @@ import { LoginComponent } from '../login/login.component';
   imports: [FormsModule, CommonModule, RegisterComponent, LoginComponent],
 })
 export class AuthComponent {
-  // Shared state
   activeButton: string = 'login'; // Default to login
   isLoginChecked: boolean = false;
 
-  // Login state
   username = '';
   password = '';
   deviceUuid = '';
   errorMessage = '';
   private loggedIn = false;
 
-  // Register state
   email = '';
   registerUsername = '';
   registerPassword = '';
@@ -41,18 +38,15 @@ export class AuthComponent {
     this.deviceUuid = this.authService.getDeviceUuid();
   }
 
-  // Toggle between Login and Register
   toggleActive(button: string) {
     this.activeButton = button;
   }
 
-  // Handle checkbox change
   onCheckboxChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.isLoginChecked = input.checked;
   }
 
-  // Login logic
   onLogin() {
     this.authService
       .login(this.username, this.password, this.deviceUuid)
@@ -73,7 +67,6 @@ export class AuthComponent {
     return this.loggedIn;
   }
 
-  // Register logic
   onRegister() {
     const formData = {
       email: this.email.trim(),
@@ -82,7 +75,6 @@ export class AuthComponent {
       role: 'user',
     };
 
-    // Validate fields
     if (!formData.email || !formData.username || !formData.password) {
       console.log('All fields are required.');
       return;
@@ -94,7 +86,6 @@ export class AuthComponent {
       return;
     }
 
-    // Hash password
     bcrypt.hash(formData.password, 10, (err, hashedPassword) => {
       if (err) {
         console.error('Error hashing password:', err);

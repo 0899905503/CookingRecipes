@@ -22,16 +22,16 @@ export class AuthService {
 
   login(
     username: string,
-    passwordHash: string,
+    password: string,
     deviceUuid: string
   ): Observable<any> {
     deviceUuid = this.getDeviceUuid();
     return this.http
-      .post<any>(this.apiUrl, { username, passwordHash, deviceUuid })
+      .post<any>(this.apiUrl, { username, password, deviceUuid })
       .pipe(
         tap((response) => {
-          if (response && response.token) {
-            this.storeToken(response.token);
+          if (response.data && response.data.token) {
+            this.storeToken(response.data.token);
             this.isAuthenticated$.next(true);
             console.log(
               'Login successful, isAuthenticated:',
@@ -71,6 +71,7 @@ export class AuthService {
   }
 
   private storeToken(token: string): void {
+    console.log(token);
     if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem(this.tokenKey, token);
       console.log('Token stored:', token);

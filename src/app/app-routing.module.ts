@@ -24,16 +24,12 @@ import { RegisterComponent } from './Shared/register/register.component';
 import { AuthComponent } from './Page/auth/auth.component';
 
 export const routes: Routes = [
-  // {
-  //   path: '',
-  //   redirectTo: 'login',
-  //   pathMatch: 'full',
-  // },
   {
     path: '',
     redirectTo: 'auth',
     pathMatch: 'full',
   },
+  { path: 'recipes/:recipeId', component: RecipesComponent },
   { path: 'auth', component: AuthComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },

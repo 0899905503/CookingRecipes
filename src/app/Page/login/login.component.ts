@@ -34,9 +34,10 @@ export class LoginComponent {
     this.authService
       .login(this.username, this.password, this.deviceUuid)
       .subscribe({
-        next: () => {
+        next: (res: any) => {
           this.router.navigate(['/home']);
           this.loggedIn = true;
+          console.log(res);
         },
         error: (err) => {
           this.errorMessage = ErrorsCodeEnum.AUTH_LOGIN_INVALID_CREDENTIAL;
