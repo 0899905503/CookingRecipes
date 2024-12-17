@@ -7,6 +7,7 @@ import { RecipeIngredientComponent } from '../../Shared/Component/recipe-ingredi
 import { RecipeTipComponent } from '../../Shared/Component/recipe-tip/recipe-tip.component';
 import { RecipeInstructionComponent } from '../../Shared/Component/recipe-instruction/recipe-instruction.component';
 import { RecipeCardComponent } from '../../Shared/Component/recipe-card/recipe-card.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -31,27 +32,31 @@ export class RecipesComponent {
   titleTipDo: string[] = [];
   titleTipDont: string[] = [];
   SimilarRecipes: any[] = [];
-  recipeId!: number;
+  recipeIds!: number;
 
-  constructor(private recipeService: RecipeService) {}
+  constructor(
+    private recipeService: RecipeService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    if (this.recipeId) {
-      this.onGetId(this.recipeId);
-      this.onGetSimilar(this.recipeId);
-      this.steps = this.getInstructionDetails(this.RecipesById.instructions);
+    this.route.paramMap.subscribe((params) => {
+      this.recipeIds = Number(params.get('recipeId'));
+      console.log('Recipe ID received from URL:', this.recipeIds);
+    });
+    if (this.recipeIds) {
+      this.onGetId(this.recipeIds);
+      this.onGetSimilar(this.recipeIds);
     } else {
       console.log('recipeId null');
     }
-
-    this.onRecipeSelected(this.recipeId);
   }
 
   // Nhận giá trị recipeId từ RecipeCardComponent
   onRecipeSelected(id: number): void {
-    this.recipeId = id;
-    this.onGetId(this.recipeId);
-    this.onGetSimilar(this.recipeId);
+    this.recipeIds = id;
+    this.onGetId(this.recipeIds);
+    this.onGetSimilar(this.recipeIds);
     this.steps = this.getInstructionDetails(this.RecipesById.instructions);
   }
 

@@ -1,4 +1,3 @@
-// RecipeCardComponent
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
@@ -8,9 +7,10 @@ import { Router, RouterModule } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './recipe-card.component.html',
-  styleUrl: './recipe-card.component.scss',
+  styleUrls: ['./recipe-card.component.scss'],
 })
 export class RecipeCardComponent {
+  // Các input nhận từ component cha
   @Input() imageUrl!: string;
   @Input() description!: string;
   @Input() prepTime!: string;
@@ -22,15 +22,16 @@ export class RecipeCardComponent {
   @Input() unit2!: string;
   @Input() isVegan: boolean = false;
 
-  @Input() recipeId!: number; // Lấy giá trị từ parent
-  @Output() recipeSelected = new EventEmitter<number>(); // Phát ra sự kiện
+  @Input() recipeId!: number;
+  @Output() recipeSelected = new EventEmitter<number>();
 
   constructor(private router: Router) {}
 
-  navigateToRecipe() {
+  onSelectRecipe(): void {
     if (this.recipeId) {
-      this.recipeSelected.emit(this.recipeId); // Phát ra giá trị recipeId khi chọn công thức
-      this.router.navigate(['/recipes', this.recipeId]); // Điều hướng tới trang chi tiết công thức
+      this.recipeSelected.emit(this.recipeId);
+      console.log(`Recipe ID emitted: ${this.recipeId}`);
+      this.router.navigate(['/recipes', this.recipeId]);
     } else {
       console.warn('Recipe ID not available for navigation.');
     }

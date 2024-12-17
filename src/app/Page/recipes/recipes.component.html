@@ -56,13 +56,12 @@
     <h2>SIMILAR RECIPES</h2>
 
     <div class="recipe-cards" *ngIf="SimilarRecipes.length > 0">
-      <app-recipe-card *ngFor="let recipe of SimilarRecipes; let i = index" [imageUrl]="recipe.recipeDetails.imagePath"
-        [title]="recipe.recipeDetails.title" [description]="recipe.recipeDetails.description"
-        [prepTime]="recipe.recipeDetails.prepTime" [cookTime]="recipe.recipeDetails.cookTime"
-        [serves]="recipe.recipeDetails.servings" [totalView]="recipe.recipeDetails.totalView"
-        [isVegan]="recipe.recipeDetails.vegan" [unit1]="'MIN'" [unit2]="'SERVES'"
-        [recipeId]="recipe.recipeDetails.recipeId" (recipeSelected)="onRecipeSelected($event)">
-      </app-recipe-card>
+      <app-recipe-card *ngFor="let recipe of SimilarRecipes" [imageUrl]="recipe.recipeDetails.imagePath"
+        [description]="recipe.recipeDetails.description" [prepTime]="recipe.recipeDetails.prepTime"
+        [cookTime]="recipe.recipeDetails.cookTime" [serves]="recipe.recipeDetails.servings"
+        [title]="recipe.recipeDetails.title" [isVegan]="recipe.isVegan" [recipeId]="recipe.recipeDetails.recipeId"
+        [unit1]="'MIN'" [unit2]="'SERVES'" (recipeSelected)="ngOnInit()"></app-recipe-card>
+
     </div>
   </div>
 </div>
