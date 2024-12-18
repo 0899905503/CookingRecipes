@@ -1,3 +1,4 @@
+import { NotFoundPageComponent } from './../../Shared/not-found-page/not-found-page.component';
 // RecipesComponent
 import { Component } from '@angular/core';
 import { RecipeService } from '../../Service/Recipe/recipe-service.service';
@@ -21,6 +22,7 @@ import { ActivatedRoute } from '@angular/router';
     RecipeTipComponent,
     RecipeInstructionComponent,
     RecipeCardComponent,
+    NotFoundPageComponent,
   ],
 })
 export class RecipesComponent {
@@ -33,6 +35,7 @@ export class RecipesComponent {
   titleTipDont: string[] = [];
   SimilarRecipes: any[] = [];
   recipeIds!: number;
+  notFound: boolean = false;
 
   constructor(
     private recipeService: RecipeService,
@@ -48,11 +51,11 @@ export class RecipesComponent {
       this.onGetId(this.recipeIds);
       this.onGetSimilar(this.recipeIds);
     } else {
+      this.notFound = true;
       console.log('recipeId null');
     }
   }
 
-  // Nhận giá trị recipeId từ RecipeCardComponent
   onRecipeSelected(id: number): void {
     this.recipeIds = id;
     this.onGetId(this.recipeIds);

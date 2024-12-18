@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Overlock:wght@400;700&display=swap');
+.not-found {
+  font-family: 'Overlock', sans-serif;
+  background-color: #d44a00;
+  color: #E9D8A6;
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    font-family: 'Overlock', sans-serif;
+    margin: 10px;
+    font-size: 307.84px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #E9D8A6;
+
+    img {
+      height: 307.84px;
+      width: auto;
+      margin: 0 10px;
+      animation: spin 5s linear infinite;
+    }
+  }
+
+  h4 {
+    font-family: 'Overlock', sans-serif;
+    font-size: 29.93px;
+  }
+
+  .back-to-homepage-button {
+    font-family: 'Overlock', sans-serif;
+    background-color: transparent;
+    color: #E9D8A6;
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 3px solid #E9D8A6;
+    font-size: 25.65px;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #E9D8A6;
+      color: #d44a00;
+    }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}

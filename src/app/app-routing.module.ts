@@ -22,6 +22,7 @@ import { LoginComponents } from './Shared/login/login.component';
 import { authGuard } from './guards/auth.guard';
 import { RegisterComponent } from './Shared/register/register.component';
 import { AuthComponent } from './Page/auth/auth.component';
+import { NotFoundPageComponent } from './Shared/not-found-page/not-found-page.component';
 
 export const routes: Routes = [
   {
@@ -59,6 +60,7 @@ export const routes: Routes = [
     RecipeTipsComponent,
     LoginComponents,
     RegisterComponent,
+    NotFoundPageComponent,
   ],
   exports: [RouterModule],
   providers: [],

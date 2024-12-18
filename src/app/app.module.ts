@@ -21,6 +21,7 @@ import { RecipeTipsComponent } from './Shared/Component/recipe-tips/recipe-tips.
 import { LoginComponents } from './Shared/login/login.component';
 import { RegisterComponent } from './Shared/register/register.component';
 import { AuthComponent } from './Page/auth/auth.component';
+import { NotFoundPageComponent } from './Shared/not-found-page/not-found-page.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { AuthComponent } from './Page/auth/auth.component';
     RegisterComponent,
     AuthComponent,
     NgModule,
+    NotFoundPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +63,7 @@ import { AuthComponent } from './Page/auth/auth.component';
     RegisterComponent,
     AuthComponent,
     NgModule,
+    NotFoundPageComponent,
   ],
   exports: [RecipeMainComponent, RegisterComponent, AuthComponent],
   providers: [],

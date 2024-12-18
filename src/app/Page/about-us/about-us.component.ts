@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { RecipeTipsComponent } from '../../Shared/Component/recipe-tips/recipe-tips.component';
-import { LoginComponents } from '../../Shared/login/login.component';
+import { NotFoundPageComponent } from '../../Shared/not-found-page/not-found-page.component';
 
 @Component({
   selector: 'app-about-us',
   standalone: true,
-  imports: [RecipeTipsComponent, LoginComponents],
+  imports: [NotFoundPageComponent],
   templateUrl: './about-us.component.html',
   styleUrl: './about-us.component.scss',
 })
