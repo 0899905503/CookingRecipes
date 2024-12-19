@@ -1,5 +1,4 @@
 import { NotFoundPageComponent } from './../../Shared/not-found-page/not-found-page.component';
-// RecipesComponent
 import { Component } from '@angular/core';
 import { RecipeService } from '../../Service/Recipe/recipe-service.service';
 import { RecipeMainComponent } from '../../Shared/Component/recipe-main/recipe-main.component';
@@ -54,6 +53,7 @@ export class RecipesComponent {
       this.notFound = true;
       console.log('recipeId null');
     }
+    this.steps = this.getInstructionDetails(this.RecipesById.instructions);
   }
 
   onRecipeSelected(id: number): void {
@@ -71,16 +71,16 @@ export class RecipesComponent {
 
         if (tips.length > 0) {
           this.doTips = tips
-            .filter((tip: any) => tip.actionType === true)
+            .filter((tip: any) => tip.actionType === 1)
             .map((tip: any) => tip.actionText);
           this.dontTips = tips
-            .filter((tip: any) => tip.actionType === false)
+            .filter((tip: any) => tip.actionType === 0)
             .map((tip: any) => tip.actionText);
           this.titleTipDo = tips
-            .filter((tip: any) => tip.actionType === true)
+            .filter((tip: any) => tip.actionType === 1)
             .map((tip: any) => `${tip.title}:`);
           this.titleTipDont = tips
-            .filter((tip: any) => tip.actionType === false)
+            .filter((tip: any) => tip.actionType === 0)
             .map((tip: any) => `${tip.title}:`);
         } else {
           console.warn('No recipe tips available.');
@@ -92,6 +92,7 @@ export class RecipesComponent {
             (instruction: any) =>
               `Step ${instruction.stepNumber}:  ${instruction.title}`
           );
+          this.steps = this.getInstructionDetails(instructions);
         }
       },
       (error) => {
