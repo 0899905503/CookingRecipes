@@ -64,3 +64,20 @@
 .center {
   width:5%;
 }
+
+button {
+    width: 50%;
+    height: 50px;
+    font-family: 'Roboto', sans-serif;
+    color: #262522;
+    border: 1px solid #262522;
+    background: #FFFBF2;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+
+    &:hover {
+      background-color: #EE6352;
+      color: #fff;
+    }
+}

@@ -8,6 +8,7 @@ import { RecipeTipComponent } from '../../Shared/Component/recipe-tip/recipe-tip
 import { RecipeInstructionComponent } from '../../Shared/Component/recipe-instruction/recipe-instruction.component';
 import { RecipeCardComponent } from '../../Shared/Component/recipe-card/recipe-card.component';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   standalone: true,
@@ -38,7 +39,8 @@ export class RecipesComponent {
 
   constructor(
     private recipeService: RecipeService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -154,5 +156,9 @@ export class RecipesComponent {
       return ['No instructions available.'];
     }
     return instructions.map((instruction) => instruction.instructionText);
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }

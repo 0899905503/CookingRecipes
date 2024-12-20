@@ -1,0 +1,8 @@
+<div class="dialog-overlay" (click)="closeDialog()"></div>
+<div class="dialog-content">
+  <h2>{{ selectedTip?.title }}</h2>
+  <img [src]="selectedTip?.imageUrl" alt="Recipe Image">
+  <p>{{ selectedTip?.description }}</p>
+  <span>{{ selectedTip?.time }} {{ selectedTip?.unit }} - {{ selectedTip?.date }}</span>
+  <button (click)="closeDialog()">Close</button>
+</div>
