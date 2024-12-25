@@ -29,7 +29,8 @@
     <div class="grid-content" *ngIf="Tip?.length">
       <div *ngFor="let item of Tip">
         <app-recipe-tips [imageUrl]="item.imagePath" [title]="item.title" [description]="item.description"
-          [time]="item.time" [unit]="'MIN'" [date]="item.dateCreated"></app-recipe-tips>
+          [time]="item.time" [unit]="'MIN'" [date]="item.dateCreated"
+          [cookingTipId]="item.cookingTipId"></app-recipe-tips>
       </div>
     </div>
   </div>

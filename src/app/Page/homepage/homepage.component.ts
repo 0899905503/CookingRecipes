@@ -40,14 +40,13 @@ export class HomepageComponent {
     if (this.selectedMenu === 'ALL') return this.Recipe;
 
     if (this.selectedMenu === 'Vegan') {
-      return this.Recipe.filter((item) => item.vegan === true);
+      return this.Recipe.filter((item) => item.vegan === 1);
     }
 
     return this.Recipe.filter(
       (item) =>
         item.category.categoryName === this.selectedMenu ||
-        (item.vegan === true &&
-          item.category.categoryName !== this.selectedMenu)
+        (item.vegan === 1 && item.category.categoryName !== this.selectedMenu)
     );
   }
 

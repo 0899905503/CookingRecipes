@@ -19,10 +19,11 @@ import { RecipeInstructionComponent } from './Shared/Component/recipe-instructio
 import { RecipeTitleComponent } from './Shared/Component/recipe-title/recipe-title.component';
 import { RecipeTipsComponent } from './Shared/Component/recipe-tips/recipe-tips.component';
 import { LoginComponents } from './Shared/login/login.component';
-import { authGuard } from './guards/auth.guard';
 import { RegisterComponent } from './Shared/register/register.component';
 import { AuthComponent } from './Page/auth/auth.component';
 import { NotFoundPageComponent } from './Shared/not-found-page/not-found-page.component';
+import { CookingTipComponent } from './Shared/Component/cooking-tip/cooking-tip.component';
+import { CookingTipDetailComponent } from './Page/cooking-tip-detail/cooking-tip-detail.component';
 
 export const routes: Routes = [
   {
@@ -31,6 +32,8 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   { path: 'recipes/:recipeId', component: RecipesComponent },
+  { path: 'cookingtip/:cookingTipId', component: CookingTipComponent },
+  { path: 'cookingTip/:cookingTipId', component: CookingTipDetailComponent },
   { path: 'auth', component: AuthComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
@@ -61,6 +64,8 @@ export const routes: Routes = [
     LoginComponents,
     RegisterComponent,
     NotFoundPageComponent,
+    CookingTipComponent,
+    CookingTipDetailComponent,
   ],
   exports: [RouterModule],
   providers: [],

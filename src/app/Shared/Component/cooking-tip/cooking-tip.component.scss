@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+.cookingtip-main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: #F0EBE1;
+  font-family: 'Arial', sans-serif;
+
+  .cookingtip-info {
+    border: 1px solid #555;
+    border-radius: 32px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 40%;
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+
+    h4 {
+      background-color: #EE6352;
+      border-radius: 25px;
+      color: #F0EBE1;
+      font-size: 18px;
+      font-family: 'Roboto', sans-serif;
+      padding: 5px 10px;
+      text-align: center;
+      display: inline-block;
+    }
+
+    h3 {
+      font-size: 80px;
+      font-weight: Bold;
+      font-family: 'Montserrat', sans-serif;
+      margin-bottom: 10px;
+      color: #262522;
+    }
+
+    .cookingtip-detail {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .cookingtip-image {
+        width: 100%;
+        max-width: 300px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        object-fit: cover;
+      }
+
+      span {
+        text-align: left;
+        width: 100%;
+
+        h2 {
+       font-size: 20px;
+       font-weight: Bold;
+       font-family: 'Montserrat', sans-serif;
+       margin-bottom: 10px;
+       color: #262522;
+        }
+
+        p,
+        span {
+
+          font-size: 18px;
+          font-family: 'Montserrat', sans-serif;
+          margin-left: 20px;
+          color: #33322f;
+          line-height: 1.6;
+          opacity: 0.8;
+        }
+      }
+
+      button {
+        border: 0.1vw solid rgb(124, 124, 124);
+        margin-top: 20px;
+        background-color: #F0EBE1;
+        color: #262522;
+        padding: 10px 20px;
+        border-radius: 32px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          color: white;
+          background-color: #EE6352;
+        }
+      }
+    }
+  }
+}

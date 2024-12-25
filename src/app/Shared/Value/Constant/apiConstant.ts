@@ -15,4 +15,7 @@ export const ApiPaths = {
 
   //User
   CreateUser: 'User/Create-user',
+
+  //Cooking Tip
+  GetByIdCookingTip: 'CookingTip/Get-by-id/',
 };

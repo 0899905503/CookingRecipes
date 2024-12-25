@@ -10,7 +10,6 @@ import { Router, RouterModule } from '@angular/router';
   styleUrls: ['./recipe-card.component.scss'],
 })
 export class RecipeCardComponent {
-  // Các input nhận từ component cha
   @Input() imageUrl!: string;
   @Input() description!: string;
   @Input() prepTime!: string;
@@ -21,7 +20,6 @@ export class RecipeCardComponent {
   @Input() unit1!: string;
   @Input() unit2!: string;
   @Input() isVegan: boolean = false;
-
   @Input() recipeId!: number;
   @Output() recipeSelected = new EventEmitter<number>();
 

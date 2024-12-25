@@ -22,6 +22,8 @@ import { LoginComponents } from './Shared/login/login.component';
 import { RegisterComponent } from './Shared/register/register.component';
 import { AuthComponent } from './Page/auth/auth.component';
 import { NotFoundPageComponent } from './Shared/not-found-page/not-found-page.component';
+import { CookingTipComponent } from './Shared/Component/cooking-tip/cooking-tip.component';
+import { CookingTipDetailComponent } from './Page/cooking-tip-detail/cooking-tip-detail.component';
 
 @NgModule({
   declarations: [
@@ -42,8 +44,11 @@ import { NotFoundPageComponent } from './Shared/not-found-page/not-found-page.co
     AuthComponent,
     NgModule,
     NotFoundPageComponent,
+    CookingTipComponent,
+    CookingTipDetailComponent,
   ],
   imports: [
+    CookingTipComponent,
     BrowserModule,
     AppRoutingModule,
     RouterModule,
@@ -64,6 +69,7 @@ import { NotFoundPageComponent } from './Shared/not-found-page/not-found-page.co
     AuthComponent,
     NgModule,
     NotFoundPageComponent,
+    CookingTipDetailComponent,
   ],
   exports: [RecipeMainComponent, RegisterComponent, AuthComponent],
   providers: [],

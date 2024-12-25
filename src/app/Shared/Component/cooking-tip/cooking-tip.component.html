@@ -1,0 +1,25 @@
+<div class="cookingtip-main">
+  <div class="cookingtip-info">
+    <h4>Cooking tip</h4>
+    <h3>{{ title }}</h3>
+    <div class="cookingtip-detail">
+      <img [src]="imageUrl" alt="{{ title }}" class="cookingtip-image" />
+      <span>
+        <h2> DESCRIPTION </h2>
+        <p>{{ description }}</p>
+
+
+        <h2> CATEGORY </h2>
+        <p>{{ category }}</p>
+
+        <h2> DATE CREATE </h2>
+        <span>{{ time }} minutes - {{ dateCreated }}</span>
+
+        <h2> CREATED BY </h2>
+        <p>{{ user }}</p>
+
+      </span>
+      <button (click)="goBack()">BACK</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<ng-container *ngIf="!notFound; else notFoundTemplate">
+  <app-cooking-tip [imageUrl]="cookingTip.imagePath" [title]="cookingTip.title" [description]="cookingTip.description"
+    [category]="cookingTip.category.categoryName" [time]="cookingTip.time" [dateCreated]="cookingTip.dateCreated"
+    [user]="cookingTip.user.email"></app-cooking-tip>
+</ng-container>
+
+<ng-template #notFoundTemplate>
+  <app-not-found-page></app-not-found-page>
+</ng-template>
