@@ -1,1 +1,42 @@
-<p>create-recipes works!</p>
+<div class="CreateRecipes">
+  <!-- Ingredient Form -->
+  <div class="Ingredient">
+    <h1>Ingredient</h1>
+    <app-create-recipe [formFields]="formIngredient" [check]="true" [textButton]="'Add Ingredient'"
+      [placeHolderDetail]="'Ingredient name'" [layout]="'row'" [totalField]="4"></app-create-recipe>
+  </div>
+
+  <!-- Cooking Tool Form (Vertical Layout) -->
+  <div class="CookingTool">
+    <h1>Cooking Tool</h1>
+    <app-create-recipe [formFields]="formCookingTool" [check]="true" [textButton]="'Add Cooking Tool'"
+      [placeHolderDetail]="'Cooking tool'" [layout]="'column'" [totalField]="1"></app-create-recipe>
+  </div>
+
+  <!-- Nutrient Form -->
+  <div class="Nutrient">
+    <h1>Nutrient</h1>
+    <app-create-recipe [formFields]="formNutrient" [check]="true" [textButton]="'Add Nutrient'"
+      [placeHolderDetail]="'Nutrient name'" [layout]="'row'" [totalField]="3"></app-create-recipe>
+  </div>
+
+  <!-- Details Form (Vertical Layout) -->
+  <div class="Details">
+    <h1>Details</h1>
+    <app-create-recipe [formFields]="formDetails" [layout]="'column'"></app-create-recipe>
+  </div>
+
+  <!-- Instruction Form -->
+  <div class="Instruction">
+    <h1>Instruction</h1>
+    <app-create-recipe [formFields]="formInstruction" [check]="true" [textButton]="'Add Instruction'"
+      [placeHolderDetail]="'Instruction name'" [layout]="'row'" [totalField]="4"></app-create-recipe>
+  </div>
+
+  <!-- Cooking Tips Form -->
+  <div class="CookingTips">
+    <h1>Cooking Tips</h1>
+    <app-create-recipe [formFields]="formCookingTip" [check]="true" [textButton]="'Add Cooking Tip'"
+      [placeHolderDetail]="'Tip name'" [layout]="'row'" [totalField]="3"></app-create-recipe>
+  </div>
+</div>

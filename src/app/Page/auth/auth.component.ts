@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../Service/Auth/Login/login.service';
-import { RegisterService } from '../../Service/Auth/register.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import * as bcrypt from 'bcryptjs';
 import { AppModule } from '../../app.module';
 import { RegisterComponent } from '../../Shared/register/register.component';
 import { LoginComponent } from '../login/login.component';
+import { RegisterService } from '../../Service/Auth/Register/register.service';
 
 @Component({
   standalone: true,

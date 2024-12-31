@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { HomepageService } from '../../Service/Homepage/homepage.service';
+import { AuthService } from '../../Service/Auth/Login/login.service';
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
@@ -15,7 +16,10 @@ export class HomepageComponent {
   @Input() totalView!: string;
   @Output() recipeSelected = new EventEmitter<number>();
   selectedMenu: string = 'ALL';
-  constructor(private homepageService: HomepageService) {}
+  constructor(
+    private homepageService: HomepageService,
+    private authService: AuthService
+  ) {}
   RecipesTopView: any[] = [];
   Recipe: any[] = [];
   DessertRecipes: any[] = [];
@@ -24,7 +28,7 @@ export class HomepageComponent {
     this.onGetTopView();
   }
   onGetAllRecipe(): void {
-    this.homepageService.getAllrecipe().subscribe(
+    this.homepageService.getAllRecipe().subscribe(
       (data) => {
         this.Recipe = data;
       },

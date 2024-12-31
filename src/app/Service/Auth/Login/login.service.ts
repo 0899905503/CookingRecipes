@@ -1,9 +1,8 @@
-// src/app/services/auth.service.ts
 import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, catchError } from 'rxjs/operators';
 import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
@@ -18,12 +17,20 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  ) {
+    const token = this.getToken();
+    if (token && this.isTokenValid(token)) {
+      this.isAuthenticated$.next(true); // Mark as authenticated
+    } else {
+      this.isAuthenticated$.next(false); // Mark as unauthenticated
+    }
+  }
 
   login(
     username: string,
     password: string,
     deviceUuid: string
+    //rememberMe: boolean
   ): Observable<any> {
     deviceUuid = this.getDeviceUuid();
     return this.http
@@ -37,7 +44,16 @@ export class AuthService {
               'Login successful, isAuthenticated:',
               this.isAuthenticated$.value
             );
+          } else {
+            this.isAuthenticated$.next(false);
           }
+        }),
+        catchError((error) => {
+          console.error('Login failed', error);
+          if (error.status === 401) {
+            console.log('Unauthorized: Token may be invalid or expired');
+          }
+          throw error;
         })
       );
   }
@@ -70,19 +86,16 @@ export class AuthService {
     return token !== null;
   }
 
-  private storeToken(token: string): void {
-    console.log(token);
+  storeToken(token: string): void {
     if (isPlatformBrowser(this.platformId)) {
-      localStorage.setItem(this.tokenKey, token);
+      localStorage.setItem(this.tokenKey, token); // Lưu token vào localStorage
       console.log('Token stored:', token);
     }
   }
 
-  private getToken(): string | null {
+  getToken(): string | null {
     if (isPlatformBrowser(this.platformId)) {
-      const token = localStorage.getItem(this.tokenKey);
-      console.log('Token from localStorage:', token);
-      return token;
+      return localStorage.getItem(this.tokenKey); // Lấy token từ localStorage
     }
     return null;
   }
@@ -90,6 +103,11 @@ export class AuthService {
   private removeToken(): void {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.removeItem(this.tokenKey);
+      sessionStorage.removeItem(this.tokenKey);
     }
+  }
+
+  private isTokenValid(token: string): boolean {
+    return true;
   }
 }

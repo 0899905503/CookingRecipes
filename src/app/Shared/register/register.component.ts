@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { RegisterService } from '../../Service/Auth/register.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RegisterService } from '../../Service/Auth/Register/register.service';
 
 @Component({
   standalone: true,

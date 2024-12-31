@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../Service/Auth/Login/login.service';
 import { FormsModule } from '@angular/forms';
 import { ErrorsCodeEnum } from '../../Shared/Value/Enums/errorsCodeEnums';
-import { LoginComponents } from '../../Shared/login/login.component';
 
 @Component({
   standalone: true,
@@ -19,15 +18,18 @@ export class LoginComponent {
   deviceUuid = '';
   errorMessage = '';
   private loggedIn = false;
-  @Input() activeButton: string = ''; // Nhận trạng thái từ AuthComponent
-  @Output() toggle = new EventEmitter<string>(); // Gửi sự kiện lên AuthComponent
+  @Input() activeButton: string = '';
+  @Output() toggle = new EventEmitter<string>();
+
+  isLoginChecked: boolean = false;
+
+  constructor(private authService: AuthService, private router: Router) {
+    this.deviceUuid = this.authService.getDeviceUuid();
+  }
 
   toggleActive(button: string) {
     this.activeButton = button;
-    this.toggle.emit(button); // Kích hoạt sự kiện khi nút được nhấn
-  }
-  constructor(private authService: AuthService, private router: Router) {
-    this.deviceUuid = this.authService.getDeviceUuid();
+    this.toggle.emit(button);
   }
 
   onLogin() {
@@ -46,14 +48,16 @@ export class LoginComponent {
       });
   }
 
-  isLoggedIn(): boolean {
-    return this.loggedIn;
-  }
-
-  isLoginChecked: boolean = false;
-
   onCheckboxChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.isLoginChecked = input.checked;
+    console.log('Remember Me:', this.isLoginChecked);
+  }
+
+  isLoggedIn(): boolean {
+    const token =
+      localStorage.getItem('token') || sessionStorage.getItem('token');
+    console.log('token : ' + token);
+    return !!token;
   }
 }

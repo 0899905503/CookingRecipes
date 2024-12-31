@@ -3,7 +3,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { LoginComponent } from './Page/login/login.component';
 import { CommonModule } from '@angular/common';
@@ -24,9 +28,15 @@ import { AuthComponent } from './Page/auth/auth.component';
 import { NotFoundPageComponent } from './Shared/not-found-page/not-found-page.component';
 import { CookingTipComponent } from './Shared/Component/cooking-tip/cooking-tip.component';
 import { CookingTipDetailComponent } from './Page/cooking-tip-detail/cooking-tip-detail.component';
+import { CreateRecipesComponent } from './Page/create-recipes/create-recipes.component';
+import { CreateRecipeComponent } from './Shared/Component/create-recipe/create-recipe.component';
+import { AuthInterceptor } from './Intercepter/auth.interceptor';
+import { HomepageComponent } from './Page/homepage/homepage.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
+    HomepageComponent,
     AppComponent,
     SelectOptionsComponent,
     RecipesComponent,
@@ -46,6 +56,8 @@ import { CookingTipDetailComponent } from './Page/cooking-tip-detail/cooking-tip
     NotFoundPageComponent,
     CookingTipComponent,
     CookingTipDetailComponent,
+    CreateRecipesComponent,
+    CreateRecipeComponent,
   ],
   imports: [
     CookingTipComponent,
@@ -70,9 +82,14 @@ import { CookingTipDetailComponent } from './Page/cooking-tip-detail/cooking-tip
     NgModule,
     NotFoundPageComponent,
     CookingTipDetailComponent,
+    CreateRecipesComponent,
+    CreateRecipeComponent,
   ],
   exports: [RecipeMainComponent, RegisterComponent, AuthComponent],
-  providers: [],
+  providers: [
+    provideHttpClient(withInterceptorsFromDi()), // Sử dụng API mới
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, // Đăng ký AuthInterceptor
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

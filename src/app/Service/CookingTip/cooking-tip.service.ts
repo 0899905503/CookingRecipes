@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiPaths } from '../../Shared/Value/Constant/apiConstant';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,8 +12,16 @@ export class CookingTipService {
   constructor(private http: HttpClient) {}
 
   getCookingTip(id: number): Observable<any[]> {
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
     return this.http.get<any[]>(
-      `${this.baseUrl + this.getByIdCookingTip + id}`
+      `${this.baseUrl + this.getByIdCookingTip + id}`,
+      {
+        headers,
+      }
     );
   }
 }

@@ -24,6 +24,10 @@ import { AuthComponent } from './Page/auth/auth.component';
 import { NotFoundPageComponent } from './Shared/not-found-page/not-found-page.component';
 import { CookingTipComponent } from './Shared/Component/cooking-tip/cooking-tip.component';
 import { CookingTipDetailComponent } from './Page/cooking-tip-detail/cooking-tip-detail.component';
+import { CreateRecipesComponent } from './Page/create-recipes/create-recipes.component';
+import { CreateRecipeComponent } from './Shared/Component/create-recipe/create-recipe.component';
+import { AuthGuard } from './auth.guard';
+import { AuthService } from './Service/Auth/Login/login.service';
 
 export const routes: Routes = [
   {
@@ -34,21 +38,21 @@ export const routes: Routes = [
   { path: 'recipes/:recipeId', component: RecipesComponent },
   { path: 'cookingtip/:cookingTipId', component: CookingTipComponent },
   { path: 'cookingTip/:cookingTipId', component: CookingTipDetailComponent },
+  { path: 'createRecipes', component: CreateRecipesComponent },
   { path: 'auth', component: AuthComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: '', component: AppComponent },
-  { path: 'home', component: HomepageComponent },
-  { path: 'recipe', component: RecipesComponent },
-  { path: 'tip', component: TipsComponent },
-  { path: 'about', component: AboutUsComponent },
+  { path: 'home', component: HomepageComponent, canActivate: [AuthGuard] },
+  { path: 'recipe', component: RecipesComponent, canActivate: [AuthGuard] },
+  { path: 'tip', component: TipsComponent, canActivate: [AuthGuard] },
+  { path: 'about', component: AboutUsComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
   declarations: [HomepageComponent],
   imports: [
     RouterModule.forRoot(routes),
-    BrowserModule,
     MenuComponent,
     SelectOptionsComponent,
     RecipeCardComponent,
@@ -66,9 +70,11 @@ export const routes: Routes = [
     NotFoundPageComponent,
     CookingTipComponent,
     CookingTipDetailComponent,
+    CreateRecipesComponent,
+    CreateRecipeComponent,
   ],
   exports: [RouterModule],
-  providers: [],
+  providers: [AuthService, AuthGuard],
   bootstrap: [],
 })
 export class AppRoutingModule {}
