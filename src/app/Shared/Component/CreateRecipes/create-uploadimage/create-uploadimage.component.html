@@ -1,0 +1,17 @@
+<div class="description-container">
+  <h2>Recipe Image</h2>
+  <table>
+    <tbody>
+      <tr *ngFor="let description of descriptions; let i = index">
+        <td>
+          <ng-container *ngIf="description.image">
+            <img [src]="description.image" alt="Uploaded Image" class="uploaded-image" />
+          </ng-container>
+
+          <button class="upload-btn" (click)="triggerFileInput(i)">Add Replace Image</button>
+          <input type="file" accept="image/*" #fileInput style="display: none" (change)="uploadImage($event, i)" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

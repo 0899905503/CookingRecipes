@@ -1,0 +1,27 @@
+<div class="nutrient-container">
+  <h2>Nutrient</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Nutrient Name</th>
+        <th>Quantity</th>
+        <th>Unit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let nutrient of nutrients; let i = index">
+        <td>
+          <select [(ngModel)]="nutrient.name">
+            <option value="">Select Nutrient</option>
+            <option value="Ingredient 1">Ingredient 1</option>
+            <option value="Ingredient 2">Ingredient 2</option>
+            <option value="Ingredient 3">Ingredient 3</option>
+          </select>
+        </td>
+        <td><input type="number" [(ngModel)]="nutrient.quantity" placeholder="Quantity" /></td>
+        <td><input type="text" [(ngModel)]="nutrient.unit" placeholder="Unit" /></td>
+      </tr>
+    </tbody>
+  </table>
+  <button (click)="addIngredient()">+ Nutrient</button>
+</div>

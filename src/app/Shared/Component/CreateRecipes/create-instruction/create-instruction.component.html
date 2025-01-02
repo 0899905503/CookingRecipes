@@ -1,0 +1,29 @@
+<div class="instruction-container">
+  <h2>Instruction</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Step</th>
+        <th>Instruction Text</th>
+        <th>Cooking Tool</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let instruction of instructions; let i = index">
+        <td><input type="text" [(ngModel)]="instruction.title" placeholder="Title" /></td>
+        <td><input type="number" [(ngModel)]="instruction.step" placeholder="Step" /></td>
+        <td><input type="text" [(ngModel)]="instruction.text" placeholder="Instruction Text" /></td>
+        <td>
+          <select [(ngModel)]="instruction.tool">
+            <option value="">Select Cooking Tool</option>
+            <option value="Tool 1">Tool 1</option>
+            <option value="Tool 2">Tool 2</option>
+            <option value="Tool 3">Tool 3</option>
+          </select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button (click)="addInstruction()">+ Instruction</button>
+</div>

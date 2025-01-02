@@ -1,0 +1,119 @@
+.settings-container {
+  display: flex;
+  height: 100vh;
+  background-color: #1a1a1a;
+  color: white;
+
+  .left-panel {
+    width: 30%;
+    background-color: #F0EBE1;
+    color: black;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .profile {
+      text-align: center;
+
+      .profile-img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+      }
+
+      .social-icons {
+        margin: 10px 0;
+
+        i {
+          margin: 0 5px;
+          cursor: pointer;
+        }
+      }
+
+      .quote {
+        font-size: 12px;
+        margin-top: 10px;
+      }
+    }
+
+    .h3 {
+      display: block;
+    font-size: 20px;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    unicode-bidi: isolate;
+    }
+
+    .settings {
+      margin-top: 20px;
+
+      h4 {
+        margin-bottom: 10px;
+      }
+
+      .setting-item {
+        margin-bottom: 20px;
+
+        span {
+          display: block;
+          margin-bottom: 5px;
+        }
+
+        input,
+        select {
+          width: 100%;
+          padding: 5px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+        }
+
+        .save-btn {
+          margin-top: 10px;
+          padding: 5px 10px;
+          background-color: #007bff;
+          border: none;
+          color: white;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .logout-btn {
+      margin-top: auto;
+      padding: 10px;
+      background-color: red;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  }
+
+  .right-panel {
+    width: 70%;
+    background-image: url('/assets/RecipeImg/Pan-Seared-Tuna.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.5em;
+      margin-top: 0;
+    }
+  }
+}

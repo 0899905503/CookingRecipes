@@ -1,0 +1,47 @@
+.ingredient-container {
+  background-color: #F0EBE1;
+  border-radius: 32px;
+
+  h2 {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    color: #BB3E03;
+    margin-bottom: 10px;
+  }
+
+  table {
+    border: 0.1vw solid rgb(124, 124, 124);
+    border-collapse: collapse;
+
+    th, td {
+      padding: 20px;
+      text-align: left;
+    }
+
+    th {
+      font-size: 20px;
+      color: #BB3E03;
+    }
+
+    input, select {
+      border: 0.1vw solid rgb(124, 124, 124);
+      border-radius: 5px;
+      padding: 5px;
+    }
+  }
+
+  button {
+    margin-top: 10px;
+    background-color: #BB3E03;
+    color: white;
+    border: none;
+    border-radius: 32px;
+    padding: 8px 12px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #BB3E03;
+    }
+  }
+}

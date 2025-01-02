@@ -1,0 +1,16 @@
+<div class="description-container">
+  <h2>Description</h2>
+  <table>
+    <tbody>
+      <tr *ngFor="let description of descriptions; let i = index">
+        <td>
+          <textarea [(ngModel)]="description.description" (input)="onInputChange(i)" [maxLength]="maxDescriptionLength"
+            placeholder="Introduce your recipe"></textarea>
+          <div class="char-count">
+            {{ description.description.length }}/{{ maxDescriptionLength }}
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

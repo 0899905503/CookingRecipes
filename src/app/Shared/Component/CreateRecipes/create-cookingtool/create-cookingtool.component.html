@@ -1,0 +1,18 @@
+<div class="cookingtool-container">
+  <h2>Cooking Tool</h2>
+  <table>
+    <tbody>
+      <tr *ngFor="let cookingtool of cookingtools; let i = index">
+        <td>
+          <select [(ngModel)]="cookingtool.CookingTool">
+            <option value="">Select Cooking Tool</option>
+            <option value="Tool 1">1</option>
+            <option value="Tool 2">2</option>
+            <option value="Tool 3">3</option>
+          </select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button (click)="addCookingTool()">+ Cooking tool</button>
+</div>

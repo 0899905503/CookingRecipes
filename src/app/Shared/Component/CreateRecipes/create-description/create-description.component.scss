@@ -1,0 +1,39 @@
+.description-container {
+  background-color: #f0ebe1;
+  border-radius: 32px;
+  //border: 0.1vw solid rgb(124, 124, 124);
+  width: 90%;
+
+  h2 {
+    color: #bb3e03;
+    margin-bottom: 10px;
+    font-size:30px;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+
+    td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    textarea {
+      width: 100%;
+      height: 150px;
+      border: 0.1vw solid rgb(124, 124, 124);
+      border-radius: 32px;
+      padding: 10px;
+      resize: none;
+    }
+
+    .char-count {
+      margin-top: 5px;
+      text-align: right;
+      color: #bb3e03;
+    }
+  }
+}

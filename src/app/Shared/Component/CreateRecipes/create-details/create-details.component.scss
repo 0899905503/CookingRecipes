@@ -1,0 +1,31 @@
+.detail-container {
+  background-color: #F0EBE1;
+  border-radius: 32px;
+  border: 0.1vw solid rgb(124, 124, 124);
+  max-width: 500px;
+
+  .form-group {
+    margin-bottom: 15px;
+
+    label {
+      margin: 20px;
+      display: block;
+      margin-bottom: 5px;
+      color: #BB3E03;
+      font-weight: bold;
+    }
+
+    input, select {
+      margin: 20px;
+      width: 90%;
+      padding: 10px;
+      border: 0.1vw solid rgb(124, 124, 124);
+      border-radius: 32px;
+      font-size: 14px;
+    }
+
+    select {
+      background-color: white;
+    }
+  }
+}

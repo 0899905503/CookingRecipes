@@ -28,11 +28,11 @@ import { AuthComponent } from './Page/auth/auth.component';
 import { NotFoundPageComponent } from './Shared/not-found-page/not-found-page.component';
 import { CookingTipComponent } from './Shared/Component/cooking-tip/cooking-tip.component';
 import { CookingTipDetailComponent } from './Page/cooking-tip-detail/cooking-tip-detail.component';
-import { CreateRecipesComponent } from './Page/create-recipes/create-recipes.component';
-import { CreateRecipeComponent } from './Shared/Component/create-recipe/create-recipe.component';
+import { CreateRecipeComponent } from './Page/create-recipe/create-recipe.component';
 import { AuthInterceptor } from './Intercepter/auth.interceptor';
 import { HomepageComponent } from './Page/homepage/homepage.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CreateNutrientComponent } from './Shared/Component/CreateRecipes/create-nutrient/create-nutrient.component';
 
 @NgModule({
   declarations: [
@@ -56,8 +56,8 @@ import { HttpClientModule } from '@angular/common/http';
     NotFoundPageComponent,
     CookingTipComponent,
     CookingTipDetailComponent,
-    CreateRecipesComponent,
     CreateRecipeComponent,
+    CreateNutrientComponent,
   ],
   imports: [
     CookingTipComponent,
@@ -82,8 +82,8 @@ import { HttpClientModule } from '@angular/common/http';
     NgModule,
     NotFoundPageComponent,
     CookingTipDetailComponent,
-    CreateRecipesComponent,
     CreateRecipeComponent,
+    CreateNutrientComponent,
   ],
   exports: [RecipeMainComponent, RegisterComponent, AuthComponent],
   providers: [

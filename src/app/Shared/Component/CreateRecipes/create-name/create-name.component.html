@@ -1,0 +1,13 @@
+<div class="name-container">
+  <h2>Recipe Title</h2>
+  <table>
+    <tbody>
+      <tr *ngFor="let name of names; let i = index">
+        <td>
+          <input type="text" [(ngModel)]="name.name" placeholder="Recipe name" />
+          <button>Back</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
