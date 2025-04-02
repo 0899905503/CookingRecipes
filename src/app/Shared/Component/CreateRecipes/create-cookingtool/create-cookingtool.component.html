@@ -4,11 +4,11 @@
     <tbody>
       <tr *ngFor="let cookingtool of cookingtools; let i = index">
         <td>
-          <select [(ngModel)]="cookingtool.CookingTool">
-            <option value="">Select Cooking Tool</option>
-            <option value="Tool 1">1</option>
-            <option value="Tool 2">2</option>
-            <option value="Tool 3">3</option>
+          <select [(ngModel)]="cookingtool.cookingToolId" (ngModelChange)="updateTool()">
+            <option value="">Select Cooking Tool Name</option>
+            <option *ngFor="let item of Cookingtool" [value]="item.cookingToolId">
+              {{ item.cookingToolName }}
+            </option>
           </select>
         </td>
       </tr>

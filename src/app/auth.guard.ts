@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
     if (token) {
       return true; // Nếu có token, cho phép vào trang
     } else {
-      this.router.navigate(['/auth']); // Nếu không có token, chuyển hướng về trang login
+      this.router.navigate(['/auth']); // Nếu không có token, chuyển hướng về trang auth
       return false;
     }
   }

@@ -11,11 +11,11 @@
     <tbody>
       <tr *ngFor="let nutrient of nutrients; let i = index">
         <td>
-          <select [(ngModel)]="nutrient.name">
-            <option value="">Select Nutrient</option>
-            <option value="Ingredient 1">Ingredient 1</option>
-            <option value="Ingredient 2">Ingredient 2</option>
-            <option value="Ingredient 3">Ingredient 3</option>
+          <select [(ngModel)]="nutrient.name" (change)="onNutrientChange(nutrient)">
+            <option value="">Select Nutrient Name</option>
+            <option *ngFor="let item of Nutrient" [value]="item.nutrientTypeName">
+              {{ item.nutrientTypeName }}
+            </option>
           </select>
         </td>
         <td><input type="number" [(ngModel)]="nutrient.quantity" placeholder="Quantity" /></td>

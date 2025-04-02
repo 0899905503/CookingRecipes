@@ -1,11 +1,12 @@
 import { Component, Input } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router'; // Import Router để điều hướng
 import { MenuComponent } from './Shared/menu/menu.component';
 import { BottomMenuComponent } from './Shared/bottom-menu/bottom-menu.component';
 import { AuthService } from './Service/Auth/Login/login.service';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './Page/login/login.component';
 import { Observable } from 'rxjs/internal/Observable';
+
 @Component({
   standalone: true,
   selector: 'app-root',
@@ -23,14 +24,23 @@ export class AppComponent {
   title = 'CookingRecipes';
   isLoggedIn$!: Observable<boolean>;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
+    // Lấy trạng thái đăng nhập từ AuthService
     this.isLoggedIn$ = this.authService.isAuthenticated$;
+
+    // Kiểm tra trạng thái đăng nhập và điều hướng
     this.isLoggedIn$.subscribe((isLoggedIn) => {
       console.log('Is Logged In: ', isLoggedIn); // Kiểm tra trạng thái đăng nhập
+      if (isLoggedIn) {
+        this.router.navigate(['/home']); // Điều hướng đến homepage nếu đã đăng nhập
+      } else {
+        this.router.navigate(['/auth']); // Điều hướng đến authpage nếu chưa đăng nhập
+      }
     });
   }
+
   activeButton: string = 'login'; // Default active button
 
   toggleActive(button: string) {

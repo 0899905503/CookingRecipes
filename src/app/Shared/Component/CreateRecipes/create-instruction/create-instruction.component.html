@@ -10,16 +10,16 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let instruction of instructions; let i = index">
+      <tr *ngFor="let instruction of instructions; let i = index;">
         <td><input type="text" [(ngModel)]="instruction.title" placeholder="Title" /></td>
         <td><input type="number" [(ngModel)]="instruction.step" placeholder="Step" /></td>
         <td><input type="text" [(ngModel)]="instruction.text" placeholder="Instruction Text" /></td>
         <td>
-          <select [(ngModel)]="instruction.tool">
+          <select [(ngModel)]="instruction.cookingToolId" (ngModelChange)="logInstructions()">
             <option value="">Select Cooking Tool</option>
-            <option value="Tool 1">Tool 1</option>
-            <option value="Tool 2">Tool 2</option>
-            <option value="Tool 3">Tool 3</option>
+            <option *ngFor="let item of Cookingtool" [value]="item.cookingToolId">
+              {{ item.cookingToolName }}
+            </option>
           </select>
         </td>
       </tr>

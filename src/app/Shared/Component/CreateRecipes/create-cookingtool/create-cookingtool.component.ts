@@ -1,18 +1,52 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { CookingtoolService } from './../../../../Service/CookingTool/cookingtool.service';
+import { CreateRecipeDataService } from '../../../../Service/CreateRecipeData/create-recipe-data.service';
 
 @Component({
   selector: 'app-create-cookingtool',
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './create-cookingtool.component.html',
-  styleUrl: './create-cookingtool.component.scss',
+  styleUrls: ['./create-cookingtool.component.scss'],
 })
 export class CreateCookingtoolComponent {
-  cookingtools = [{ CookingTool: '' }];
+  cookingtools = [{ cookingToolId: '' }];
+  Cookingtool: any[] = [];
+
+  constructor(
+    private cookingtoolService: CookingtoolService,
+    private createRecipeDataService: CreateRecipeDataService
+  ) {}
+
+  ngOnInit(): void {
+    this.onGetAllCookingTool();
+  }
 
   addCookingTool() {
-    this.cookingtools.push({ CookingTool: '' });
+    this.cookingtools.push({ cookingToolId: '' });
+    this.updateTool(); // Cập nhật luôn khi thêm công cụ mới
+  }
+
+  onGetAllCookingTool(): void {
+    this.cookingtoolService.getAllCookingTools().subscribe(
+      (response: any) => {
+        this.Cookingtool = response;
+      },
+      (error) => {
+        console.error('Error fetching cooking tools:', error);
+      }
+    );
+  }
+
+  updateTool() {
+    console.log('Updating CookingTools:', this.cookingtools);
+
+    // Truyền toàn bộ danh sách công cụ hiện tại sang service
+    this.createRecipeDataService.updateRecipeTool(
+      'cookingToolId',
+      this.cookingtools
+    );
   }
 }

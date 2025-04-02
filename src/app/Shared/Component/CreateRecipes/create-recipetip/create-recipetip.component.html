@@ -1,0 +1,26 @@
+<div class="instruction-container">
+  <h2>Recipe Tips</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Action Text</th>
+        <th>Action Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let recipetip of recipetips; let i = index">
+        <td><input type="text" [(ngModel)]="recipetip.title" placeholder="Title" /></td>
+        <td><input type="text" [(ngModel)]="recipetip.actiontext" placeholder="Action Text" /></td>
+        <td>
+          <select [(ngModel)]="recipetip.actiontype" (ngModelChange)="logRecipeTips()">
+            <option value="">Select Action Type</option>
+            <option value="0">Do</option>
+            <option value="1">Don`t</option>
+          </select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button (click)="addRecipeTip()">+ Recipe tip</button>
+</div>

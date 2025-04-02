@@ -1,33 +1,39 @@
 <div class="detail-container">
   <div class="form-group">
     <label for="servings">Servings</label>
-    <input id="servings" type="text" [(ngModel)]="details.servings" placeholder="Serves" />
+    <input id="servings" type="text" [(ngModel)]="Servings" (ngModelChange)="updateDetails()" placeholder="Serves" />
   </div>
 
   <div class="form-group">
     <label for="cookingTime">Cooking Time</label>
-    <input id="cookingTime" type="text" [(ngModel)]="details.cookingTime" placeholder="Cooking Time" />
+    <input id="cookingTime" type="text" [(ngModel)]="CookTime" (ngModelChange)="updateDetails()"
+      placeholder="Cooking Time" />
   </div>
 
   <div class="form-group">
     <label for="prepTime">Prep Time</label>
-    <!-- <input id="prepTime" type="text" [(ngModel)]="details.prepTime" placeholder="Prep time" /> -->
-    <select id="preptime" [(ngModel)]="details.prepTime">
-      <option *ngFor="let preptime of preptimes" [value]="preptime">{{ preptime }}</option>
+    <select id="prepTime" [(ngModel)]="PrepTime" (change)="updateDetails()">
+      <option *ngFor="let preptime of preptimes" [value]="preptime">
+        {{ preptime }}
+      </option>
     </select>
   </div>
 
   <div class="form-group">
     <label for="category">Category</label>
-    <select id="category" [(ngModel)]="details.category">
-      <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+    <select id="category" [(ngModel)]="CategoryId" (ngModelChange)="updateDetails()">
+      <option *ngFor="let category of categories" [ngValue]="category.value">
+        {{ category.label }}
+      </option>
     </select>
   </div>
 
   <div class="form-group">
     <label for="isVegetarian">Is this a vegetarian recipe?</label>
-    <select id="isVegetarian" [(ngModel)]="details.isVegetarian">
-      <option *ngFor="let option of vegetarianOptions" [value]="option">{{ option }}</option>
+    <select id="isVegetarian" [(ngModel)]="Vegan" (ngModelChange)="updateDetails()">
+      <option *ngFor="let option of vegetarianOptions" [ngValue]="option.value">
+        {{ option.label }}
+      </option>
     </select>
   </div>
 </div>

@@ -1,0 +1,17 @@
+export enum CategoryEnum {
+  Vegan = 1,
+  Breakfast = 2,
+  Lunch = 3,
+  Dinner = 4,
+  Dessert = 5,
+  QuickBite = 6,
+  Meat_Tips = 7,
+  Vegetable_Tips = 8,
+  Sauce_Tips = 9,
+  Pasta_Tips = 10,
+  Dessert_Tips = 11,
+  Time_Saving_Tips = 12,
+  Spice_Tips = 13,
+  Vegetarian_Tips = 14,
+  Beverage_Tips = 15,
+}

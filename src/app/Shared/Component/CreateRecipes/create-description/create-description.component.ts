@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CreateRecipeDataService } from '../../../../Service/CreateRecipeData/create-recipe-data.service';
 
 @Component({
   selector: 'app-create-description',
@@ -10,16 +11,22 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./create-description.component.scss'],
 })
 export class CreateDescriptionComponent {
-  descriptions = [{ description: '' }];
+  description: string = '';
   maxDescriptionLength = 2000;
 
-  onInputChange(index: number) {
-    const desc = this.descriptions[index].description;
-    if (desc.length > this.maxDescriptionLength) {
-      this.descriptions[index].description = desc.substring(
+  constructor(private createRecipeDataService: CreateRecipeDataService) {}
+
+  onDescriptionChange() {
+    if (this.description.length > this.maxDescriptionLength) {
+      this.description = this.description.substring(
         0,
         this.maxDescriptionLength
       );
     }
+    // Cập nhật `description` vào service
+    this.createRecipeDataService.updateRecipeData(
+      'Description',
+      this.description
+    );
   }
 }
