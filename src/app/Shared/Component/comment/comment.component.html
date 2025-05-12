@@ -1,0 +1,18 @@
+<div class="comment-section">
+
+  <div class="comment-list">
+    <div class="comment-box">
+      <img class="avatar" [src]=avatarUrl alt="avatar" />
+      <div class="comment-content">
+        <div class="username">{{ email }} </div>
+        <div class="dateposted">{{ datePosted }}</div>
+        <div class="text">{{ commentText }}</div>
+        <div class="stars">
+          <span class="star" *ngFor="let s of getStars(+rating)">★</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

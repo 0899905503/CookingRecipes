@@ -44,9 +44,6 @@ export class CreateCookingtoolComponent {
     console.log('Updating CookingTools:', this.cookingtools);
 
     // Truyền toàn bộ danh sách công cụ hiện tại sang service
-    this.createRecipeDataService.updateRecipeTool(
-      'cookingToolId',
-      this.cookingtools
-    );
+    this.createRecipeDataService.updateRecipeTool(this.cookingtools);
   }
 }

@@ -12,8 +12,8 @@
     <tbody>
       <tr *ngFor="let instruction of instructions; let i = index;">
         <td><input type="text" [(ngModel)]="instruction.title" placeholder="Title" /></td>
-        <td><input type="number" [(ngModel)]="instruction.step" placeholder="Step" /></td>
-        <td><input type="text" [(ngModel)]="instruction.text" placeholder="Instruction Text" /></td>
+        <td><input type="number" [(ngModel)]="instruction.stepNumber" placeholder="Step" /></td>
+        <td><input type="text" [(ngModel)]="instruction.instructionText" placeholder="Instruction Text" /></td>
         <td>
           <select [(ngModel)]="instruction.cookingToolId" (ngModelChange)="logInstructions()">
             <option value="">Select Cooking Tool</option>

@@ -33,6 +33,7 @@ import { AuthInterceptor } from './Intercepter/auth.interceptor';
 import { HomepageComponent } from './Page/homepage/homepage.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CreateNutrientComponent } from './Shared/Component/CreateRecipes/create-nutrient/create-nutrient.component';
+import { CommentComponent } from './Shared/Component/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { CreateNutrientComponent } from './Shared/Component/CreateRecipes/create
     CookingTipDetailComponent,
     CreateRecipeComponent,
     CreateNutrientComponent,
+    CommentComponent,
   ],
   imports: [
     CookingTipComponent,
@@ -84,6 +86,7 @@ import { CreateNutrientComponent } from './Shared/Component/CreateRecipes/create
     CookingTipDetailComponent,
     CreateRecipeComponent,
     CreateNutrientComponent,
+    CommentComponent,
   ],
   exports: [RecipeMainComponent, RegisterComponent, AuthComponent],
   providers: [

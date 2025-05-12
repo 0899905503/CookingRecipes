@@ -28,6 +28,9 @@ import { AuthGuard } from './auth.guard';
 import { AuthService } from './Service/Auth/Login/login.service';
 import { CreateRecipeComponent } from './Page/create-recipe/create-recipe.component';
 import { CreateNutrientComponent } from './Shared/Component/CreateRecipes/create-nutrient/create-nutrient.component';
+import { SettingpageComponent } from './Page/settingpage/settingpage.component';
+import { FavoriteComponent } from './Page/favorite/favorite.component';
+import { CommentComponent } from './Shared/Component/comment/comment.component';
 
 export const routes: Routes = [
   {
@@ -47,6 +50,12 @@ export const routes: Routes = [
   { path: 'recipe', component: RecipesComponent, canActivate: [AuthGuard] },
   { path: 'tip', component: TipsComponent, canActivate: [AuthGuard] },
   { path: 'about', component: AboutUsComponent, canActivate: [AuthGuard] },
+  {
+    path: 'setting',
+    component: SettingpageComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'favorite', component: FavoriteComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
@@ -72,6 +81,7 @@ export const routes: Routes = [
     CookingTipDetailComponent,
     CreateRecipeComponent,
     CreateNutrientComponent,
+    CommentComponent,
   ],
   exports: [RouterModule],
   providers: [AuthService, AuthGuard],

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CreateIngredientComponent } from '../../Shared/Component/CreateRecipes/create-ingredient/create-ingredient.component';
-import { CreateNutrientComponent } from '../../Shared/Component/CreateRecipes/create-nutrient/create-nutrient.component';
 import { CreateInstructionComponent } from '../../Shared/Component/CreateRecipes/create-instruction/create-instruction.component';
 import { CreateRecipetipComponent } from '../../Shared/Component/CreateRecipes/create-recipetip/create-recipetip.component';
 import { CreateDetailsComponent } from '../../Shared/Component/CreateRecipes/create-details/create-details.component';
@@ -12,6 +11,7 @@ import { CreateSaveComponent } from '../../Shared/Component/CreateRecipes/create
 import { RecipeTipComponent } from '../../Shared/Component/recipe-tip/recipe-tip.component';
 import { CreateRecipeDataService } from '../../Service/CreateRecipeData/create-recipe-data.service';
 import { CreateRecipeService } from './../../Service/CreateRecipe/create-recipe.service';
+import { CreateNutrientComponent } from '../../Shared/Component/CreateRecipes/create-nutrient/create-nutrient.component';
 
 @Component({
   selector: 'app-create-recipe',
@@ -26,7 +26,6 @@ import { CreateRecipeService } from './../../Service/CreateRecipe/create-recipe.
     CreateDetailsComponent,
     CreateCookingtoolComponent,
     CreateDescriptionComponent,
-    CreateRecipetipComponent,
     CreateNameComponent,
     RecipeTipComponent,
   ],
@@ -39,144 +38,249 @@ export class CreateRecipeComponent {
     private createRecipeService: CreateRecipeService
   ) {}
 
-  saveRecipe() {
+  async saveRecipe() {
     const recipeData = this.createRecipeDataService.getRecipeData();
-    const recipeTools = this.createRecipeDataService.getRecipeTool();
-    const recipeIngredients =
-      this.createRecipeDataService.getRecipeIngredient();
-    const recipeNutrients = this.createRecipeDataService.getRecipeNutrient();
-    const recipeInstructions = this.createRecipeDataService.getInstructions();
-    const recipeRecipeTips = this.createRecipeDataService.getRecipeTips();
 
-    this.createRecipeService.createRecipe(recipeData).subscribe({
-      next: (response: any) => {
-        const recipeId = response.data?.recipeId;
-        if (recipeId) {
-          console.log('Recipe ID:', recipeId);
-          //console.log('Recipe Tools:', recipeTools);
-          //this.saveRecipeTools(recipeId, recipeTools);
-          console.log('check : ', recipeIngredients);
-          this.saveRecipeIngredients(recipeId, recipeIngredients);
-          //this.saveNutrients(recipeId, recipeNutrients);
-          //this.saveInstrucions(recipeId, recipeInstructions);
-          // this.saveRecipeTips(recipeId, recipeRecipeTips);
-        } else {
-          console.error('Failed to get recipe ID from response:', response);
-        }
-      },
-      error: (error) => {
-        console.error('Error creating recipe:', error);
-      },
-    });
+    const tools = this.createRecipeDataService.getRecipeTool() || [];
+    const ingredients =
+      this.createRecipeDataService.getRecipeIngredient() || [];
+    const nutrients = this.createRecipeDataService.getRecipeNutrient() || [];
+    const instructions = this.createRecipeDataService.getInstructions() || [];
+    const tips = this.createRecipeDataService.getRecipeTips() || [];
+
+    console.table({ tools, ingredients, nutrients, instructions, tips });
+
+    try {
+      const response: any = await this.createRecipeService
+        .createRecipe(recipeData)
+        .toPromise();
+      console.log('📥 Response từ server:', response);
+
+      const recipeId = response?.data?.recipeId;
+
+      if (!recipeId) {
+        console.error('❌ Không nhận được recipeId từ server:', response);
+        return;
+      }
+
+      await this.saveAllRecipeData(
+        recipeId,
+        tools,
+        ingredients,
+        nutrients,
+        instructions,
+        tips
+      );
+
+      console.log(
+        '✅ Recipe và toàn bộ dữ liệu liên quan đã được lưu thành công!'
+      );
+    } catch (error) {
+      console.error('❌ Lỗi tạo công thức chính:', error);
+    }
   }
 
-  saveRecipeTools(recipeId: number, tools: any[]) {
-    if (!tools || tools.length === 0) {
-      console.warn('No tools to save for this recipe.');
+  private async saveAllRecipeData(
+    recipeId: number,
+    tools: any[],
+    ingredients: any[],
+    nutrients: any[],
+    instructions: any[],
+    tips: any[]
+  ) {
+    try {
+      await Promise.all([
+        this.saveRecipeTools(recipeId, tools),
+        this.saveRecipeIngredients(recipeId, ingredients),
+        this.saveNutrients(recipeId, nutrients),
+        this.saveInstructions(recipeId, instructions),
+        this.saveRecipeTips(recipeId, tips),
+      ]);
+      console.log('✅ Tất cả dữ liệu đã được lưu!');
+    } catch (error) {
+      console.error('❌ Một số phần dữ liệu bị lỗi khi lưu:', error);
+    }
+  }
+
+  private async saveRecipeTools(recipeId: number, tools: any[]) {
+    if (!tools.length) {
+      console.warn('⚠️ Không có công cụ nấu ăn để lưu.');
       return;
     }
 
-    const recipeTools = tools.map((tool) => ({
+    const toolData = tools.map((t) => ({
       recipeId,
-      cookingToolId: tool.cookingToolId,
+      cookingToolId: t.cookingToolId,
     }));
 
-    this.createRecipeService.addRecipeTool(recipeTools).subscribe({
-      next: () => {
-        console.log('Recipe tools saved successfully.');
-      },
-      error: (error) => {
-        console.error('Error saving recipe tools:', error);
-      },
-    });
+    console.table(toolData);
+
+    try {
+      await this.createRecipeService.addRecipeTool(toolData).toPromise();
+      console.log('✅ Recipe tools đã được lưu.');
+    } catch (error) {
+      console.error('❌ Lỗi lưu recipe tools:', error);
+    }
   }
 
-  saveRecipeIngredients(recipeId: number, ingredients: any[] = []) {
+  async saveRecipeIngredients(recipeId: number, ingredients: any[] = []) {
     if (!ingredients || ingredients.length === 0) {
       console.warn('No ingredients to save.');
       return;
     }
-    const recipeIngredients = ingredients.map((ingredient) => ({
-      recipeId: recipeId,
+
+    // Kiểm tra và lọc các giá trị null, undefined hoặc rỗng
+    const validIngredients = ingredients.filter(
+      (ingredient) =>
+        ingredient &&
+        ingredient.ingredientId &&
+        ingredient.quantity &&
+        ingredient.ingredientId !== '' &&
+        ingredient.quantity !== ''
+    );
+
+    if (validIngredients.length === 0) {
+      console.warn('No valid ingredients to save.');
+      return;
+    }
+
+    const ingredientData = validIngredients.map((ingredient) => ({
+      recipeId,
       ingredientId: ingredient.ingredientId,
-      quantity: ingredient.Quantity,
+      quantity: ingredient.quantity,
     }));
 
-    this.createRecipeService.addRecipeIngredient(recipeIngredients).subscribe({
-      next: (res: any) => {
-        console.log('Recipe ingredients saved successfully.', res);
-      },
-      error: (error) => {
-        console.error('Error saving recipe ingredients:', error);
-      },
-    });
+    console.log('Sending Recipe Ingredients:', ingredientData);
+
+    try {
+      await this.createRecipeService
+        .addRecipeIngredient(ingredientData)
+        .toPromise();
+      console.log('Recipe ingredients saved successfully.');
+    } catch (error) {
+      console.error('Error saving recipe ingredients:', error);
+    }
   }
 
-  saveNutrients(recipeId: number, nutrients: any[]) {
+  private async saveNutrients(recipeId: number, nutrients: any[]) {
     if (!nutrients || nutrients.length === 0) {
-      console.warn('No nutrients to save for this recipe.');
+      console.warn('⚠️ Không có chất dinh dưỡng để lưu.');
       return;
     }
 
-    const recipeNutrients = nutrients.map((nutrients) => ({
+    // Kiểm tra và lọc các giá trị null, undefined hoặc rỗng
+    const validNutrients = nutrients.filter(
+      (nutrient) =>
+        nutrient &&
+        nutrient.nutrientTypeId &&
+        nutrient.quantity &&
+        nutrient.nutrientTypeId !== '' &&
+        nutrient.quantity !== ''
+    );
+
+    if (validNutrients.length === 0) {
+      console.warn('No valid nutrients to save.');
+      return;
+    }
+
+    const nutrientData = validNutrients.map((n) => ({
       recipeId,
-      nutrientId: nutrients.nutrientId,
-      quantity: nutrients.quantity,
+      nutrientTypeId: n.nutrientTypeId,
+      quantity: n.quantity,
     }));
 
-    this.createRecipeService.addRecipeNutrient(recipeNutrients).subscribe({
-      next: (res: any) => {
-        console.log('Recipe nutrients saved successfully.', res);
-      },
-      error: (error) => {
-        console.error('Error saving recipe nutrients:', error);
-      },
-    });
+    console.log('Sending Recipe Nutrients:', nutrientData);
+
+    try {
+      await this.createRecipeService
+        .addRecipeNutrient(nutrientData)
+        .toPromise();
+      console.log('✅ Recipe nutrients đã được lưu.');
+    } catch (error) {
+      console.error('❌ Lỗi lưu recipe nutrients:', error);
+    }
   }
 
-  saveInstrucions(recipeId: number, instructions: any[]) {
+  private async saveInstructions(recipeId: number, instructions: any[]) {
     if (!instructions || instructions.length === 0) {
-      console.warn('No nutrients to save for this recipe.');
+      console.warn('⚠️ Không có hướng dẫn để lưu.');
       return;
     }
 
-    const recipeInstruction = instructions.map((instructions) => ({
+    // Kiểm tra và lọc các giá trị null, undefined hoặc rỗng
+    const validInstructions = instructions.filter(
+      (instruction) =>
+        instruction &&
+        instruction.stepNumber &&
+        instruction.instructionText &&
+        instruction.title &&
+        instruction.title !== '' &&
+        instruction.stepNumber !== '' &&
+        instruction.instructionText !== ''
+    );
+
+    if (validInstructions.length === 0) {
+      console.warn('No valid instructions to save.');
+      return;
+    }
+
+    const instructionsData = validInstructions.map((i) => ({
       recipeId,
-      stepNumber: instructions.stepNumber,
-      instructionText: instructions.instructionText,
-      cookingToolId: instructions.cookingToolId,
+      stepNumber: i.stepNumber,
+      instructionText: i.instructionText,
+      cookingToolId: i.cookingToolId,
+      title: i.title,
     }));
 
-    this.createRecipeService.addRecipeInstruction(recipeInstruction).subscribe({
-      next: (res: any) => {
-        console.log('Recipe instructions saved successfully.', res);
-      },
-      error: (error) => {
-        console.error('Error saving recipe instructions:', error);
-      },
-    });
+    console.log('Sending Recipe Instructions:', instructionsData);
+
+    try {
+      await this.createRecipeService
+        .addRecipeInstruction(instructionsData)
+        .toPromise();
+      console.log('✅ Recipe instructions đã được lưu.');
+    } catch (error) {
+      console.error('❌ Lỗi lưu recipe instructions:', error);
+    }
   }
 
-  saveRecipeTips(recipeId: number, recipeTips: any[]) {
-    if (!recipeTips || recipeTips.length === 0) {
-      console.warn('No recipeTips to save for this recipe.');
+  private async saveRecipeTips(recipeId: number, tips: any[]) {
+    if (!tips || tips.length === 0) {
+      console.warn('⚠️ Không có mẹo công thức để lưu.');
       return;
     }
 
-    const recipeRecipeTips = recipeTips.map((recipeTips) => ({
+    // Kiểm tra và lọc các giá trị null, undefined hoặc rỗng
+    const validTips = tips.filter(
+      (tip) =>
+        tip &&
+        tip.actionType &&
+        tip.actionText &&
+        tip.title &&
+        tip.actionType !== '' &&
+        tip.actionText !== '' &&
+        tip.title !== ''
+    );
+
+    if (validTips.length === 0) {
+      console.warn('No valid recipe tips to save.');
+      return;
+    }
+
+    const recipeTipData = validTips.map((t) => ({
       recipeId,
-      actionType: recipeTips.actionType,
-      actionText: recipeTips.actionText,
-      title: recipeTips.Title,
+      actionType: t.actionType,
+      actionText: t.actionText,
+      title: t.title,
     }));
 
-    this.createRecipeService.addRecipeTip(recipeRecipeTips).subscribe({
-      next: (res: any) => {
-        console.log('Recipe recipeTips saved successfully.', res);
-      },
-      error: (error) => {
-        console.error('Error saving recipeTips instructions:', error);
-      },
-    });
+    console.log('Sending Recipe Tips:', recipeTipData);
+
+    try {
+      await this.createRecipeService.addRecipeTip(recipeTipData).toPromise();
+      console.log('✅ Recipe tips đã được lưu.');
+    } catch (error) {
+      console.error('❌ Lỗi lưu recipe tips:', error);
+    }
   }
 }

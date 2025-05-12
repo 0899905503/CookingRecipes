@@ -1,0 +1,36 @@
+<div class="HomePage">
+
+  <!-- Recipe Categories -->
+  <div class="select-food">
+    <div class="content">
+      <h4>MY FAVORITES RECIPES</h4>
+      <h2>CHOOSE A RECIPE <br />FOR TODAY</h2>
+      <p>Cook what you like and enjoy it!</p>
+    </div>
+    <div class="menu">
+      <ul>
+        <li><a (click)="selectedMenu = 'ALL'" [class.active]="selectedMenu === 'ALL'">ALL</a></li>
+        <li><a (click)="selectedMenu = 'Vegan'" [class.active]="selectedMenu === 'Vegan'">VEGAN</a></li>
+        <li><a (click)="selectedMenu = 'Breakfast'" [class.active]="selectedMenu === 'Breakfast'">BREAKFAST</a></li>
+        <li><a (click)="selectedMenu = 'Lunch'" [class.active]="selectedMenu === 'Lunch'">LUNCH</a></li>
+        <li><a (click)="selectedMenu = 'Dinner'" [class.active]="selectedMenu === 'Dinner'">DINNER</a></li>
+        <li><a (click)="selectedMenu = 'Dessert'" [class.active]="selectedMenu === 'Dessert'">DESSERT</a></li>
+        <li><a (click)="selectedMenu = 'QuickBite'" [class.active]="selectedMenu === 'QuickBite'">QUICK BITE!</a></li>
+      </ul>
+    </div>
+
+    <div class="grid-content" *ngIf="FavoritesRecipe?.length">
+      <div *ngFor="let item of filteredRecipes()">
+        <app-recipe-card [imageUrl]="item.imagePath" [title]="item.title" [description]="item.description"
+          [cookTime]="item.cookTime" [prepTime]="item.prepTime" [serves]="item.servings" [isVegan]="item.vegan"
+          [unit1]="'MIN'" [unit2]="'SERVES'" [recipeId]="item.recipeId" (recipeSelected)="onRecipeSelected($event)">
+        </app-recipe-card>
+      </div>
+    </div>
+
+    <div *ngIf="!FavoritesRecipe?.length">
+      <p>No favorite recipes found.</p>
+    </div>
+
+  </div>
+</div>

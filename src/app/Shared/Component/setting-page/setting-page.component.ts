@@ -7,9 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./setting-page.component.scss'],
 })
 export class SettingPageComponent {
-  isDarkMode: boolean = false;
-
-  toggleDarkMode() {
-    this.isDarkMode = !this.isDarkMode;
+  toggleDarkMode(event: Event): void {
+    const isChecked = (event.target as HTMLInputElement).checked;
+    if (isChecked) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
   }
 }

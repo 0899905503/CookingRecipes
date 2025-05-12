@@ -11,7 +11,7 @@
     <tbody>
       <tr *ngFor="let nutrient of nutrients; let i = index">
         <td>
-          <select [(ngModel)]="nutrient.name" (change)="onNutrientChange(nutrient)">
+          <select [(ngModel)]="nutrient.nutrientTypeName" (change)="onNutrientChange(nutrient)">
             <option value="">Select Nutrient Name</option>
             <option *ngFor="let item of Nutrient" [value]="item.nutrientTypeName">
               {{ item.nutrientTypeName }}

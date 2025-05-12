@@ -64,7 +64,22 @@
 .center {
   width:5%;
 }
+.heart-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: black; /* Mặc định là viền đen */
+  transition: color 0.3s ease;
 
+  &.favorited {
+    color: red; /* Màu đỏ khi đã yêu thích */
+  }
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
 button {
     width: 50%;
     height: 50px;
@@ -80,4 +95,135 @@ button {
       background-color: #EE6352;
       color: #fff;
     }
+
+
+
+}
+.comment-section-wrapper {
+  margin: 20px;
+  border: 1px solid #262522;
+  border-radius: 32px;
+  overflow: hidden;
+}
+
+.comment-title {
+  color: #262522;
+  font-size: 40px;
+  font-weight: bold;
+  margin: 20px 30px 10px 30px;
+  font-family: 'Montserrat', sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 10px 0;
+}
+
+.comment-section {
+  max-height: 500px;
+  overflow: auto;
+  padding: 10px 30px;
+  display: grid;
+  grid-template-columns: repeat(1, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.comment-section::-webkit-scrollbar {
+  display: none;
+}
+.comment-section {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.comment-form {
+  border: 0.1vw solid #7c7c7c; /* giống .carousel và .Recipe-info */
+  margin: 20px;
+  background-color: #F0EBE1;
+  border-radius: 32px;
+  padding: 30px;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+.comment-form-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #262522;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.star-rating .stars {
+  display: flex;
+  gap: 6px;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.star-rating .star {
+  color: #ccc;
+  transition: color 0.2s ease-in-out;
+}
+
+.star-rating .star.filled {
+  color: #ff6600;
+}
+
+.submit-comment-btn {
+    width: 50%;
+    height: 50px;
+    font-family: 'Roboto', sans-serif;
+    color: #262522;
+    border: 1px solid #262522;
+    background: #FFFBF2;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+
+    &:hover {
+      background-color: #EE6352;
+      color: #fff;
+    }
+}
+
+.comment-title {
+  color: #262522;
+  font-size: 40px;
+  font-weight: bold;
+  margin: 20px 30px 10px 30px;
+  font-family: 'Montserrat', sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  padding: 10px 0;
+}
+
+.comment-section {
+  max-height: 500px;
+  overflow: auto;
+  padding: 10px 30px;
+  display: grid;
+  grid-template-columns: repeat(1, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.comment-section::-webkit-scrollbar {
+  display: none;
+}
+.comment-section {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

@@ -30,7 +30,7 @@ export class CreateRecipeService {
       }
     }
 
-    return this.http.post(`${this.baseUrl + ApiPaths.CreateRecipe}`, formData, {
+    return this.http.post(`${this.baseUrl + this.createRecipes}`, formData, {
       headers,
     });
   }

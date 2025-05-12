@@ -11,9 +11,9 @@
     <tbody>
       <tr *ngFor="let recipetip of recipetips; let i = index">
         <td><input type="text" [(ngModel)]="recipetip.title" placeholder="Title" /></td>
-        <td><input type="text" [(ngModel)]="recipetip.actiontext" placeholder="Action Text" /></td>
+        <td><input type="text" [(ngModel)]="recipetip.actionText" placeholder="Action Text" /></td>
         <td>
-          <select [(ngModel)]="recipetip.actiontype" (ngModelChange)="logRecipeTips()">
+          <select [(ngModel)]="recipetip.actionType" (ngModelChange)="logRecipeTips()">
             <option value="">Select Action Type</option>
             <option value="0">Do</option>
             <option value="1">Don`t</option>

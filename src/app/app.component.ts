@@ -33,7 +33,7 @@ export class AppComponent {
     // Kiểm tra trạng thái đăng nhập và điều hướng
     this.isLoggedIn$.subscribe((isLoggedIn) => {
       console.log('Is Logged In: ', isLoggedIn); // Kiểm tra trạng thái đăng nhập
-      if (isLoggedIn) {
+      if (isLoggedIn == true) {
         this.router.navigate(['/home']); // Điều hướng đến homepage nếu đã đăng nhập
       } else {
         this.router.navigate(['/auth']); // Điều hướng đến authpage nếu chưa đăng nhập

@@ -41,4 +41,14 @@ export const ApiPaths = {
 
   //Recipe Nutrient
   CreateRecipeNutrient: 'RecipeNutrient/create-recipe-nutrient',
+
+  //Favorite Recipe
+  GetFavoriteRecipeByUserId: 'Favorite/get-favorites-by-user-id/',
+  CreateFavoriteRecipe: 'Favorite/create-favorite',
+  DeleteFavoriteRecipe: 'Favorite/delete-favorite',
+  CheckFavoriteRecipe: 'Favorite/check-favorite',
+
+  //Comment
+  GetCommentByRecipeId: 'Comment/get-comments-by-recipe-id/',
+  CreateComment: 'Comment/create-comment',
 };

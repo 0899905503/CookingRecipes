@@ -4,7 +4,7 @@ import { SettingPageComponent } from '../../Shared/Component/setting-page/settin
 @Component({
   selector: 'app-about-us',
   standalone: true,
-  imports: [SettingPageComponent],
+  imports: [],
   templateUrl: './about-us.component.html',
   styleUrl: './about-us.component.scss',
 })

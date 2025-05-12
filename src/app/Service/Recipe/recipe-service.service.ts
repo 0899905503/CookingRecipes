@@ -11,6 +11,11 @@ export class RecipeService {
   private getAllRecipe = ApiPaths.GetAllRecipe;
   private getById = ApiPaths.GetByIdRecipe;
   private getSimilar = ApiPaths.GetSimilar;
+  private createFavoriteRecipe = ApiPaths.CreateFavoriteRecipe;
+  private deleteFavoriteRecipe = ApiPaths.DeleteFavoriteRecipe;
+  private checkFavoriteRecipe = ApiPaths.CheckFavoriteRecipe;
+  private getCommntentByRecipeId = ApiPaths.GetCommentByRecipeId;
+  private createComments = ApiPaths.CreateComment;
 
   constructor(private http: HttpClient) {}
 
@@ -36,6 +41,68 @@ export class RecipeService {
       Authorization: `Bearer ${token}`,
     });
     return this.http.get<any[]>(this.baseUrl + this.getSimilar + id, {
+      headers,
+    });
+  }
+
+  createFavorite(recipeId: number, userId: number): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    const payload = { recipeId, userId };
+    console.log('Sending createFavorite request with payload:', payload); // Log kiểm tra
+    return this.http.post(
+      `${this.baseUrl}${this.createFavoriteRecipe}`,
+      payload,
+      { headers }
+    );
+  }
+
+  checkFavorite(recipeId: number, userId: number): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    const url = `${this.baseUrl}${this.checkFavoriteRecipe}/${recipeId}/${userId}`;
+    console.log('Sending checkFavorite request to:', url); // Log kiểm tra
+    return this.http.get<any>(url, { headers });
+  }
+
+  deleteFavorite(recipeId: number, userId: number): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    const url = `${this.baseUrl}${this.deleteFavoriteRecipe}/${recipeId}/${userId}`;
+    console.log('Sending deleteFavorite request to:', url); // Log kiểm tra
+    return this.http.delete(url, { headers });
+  }
+
+  getCommentByRecipeId(recipeId: number): Observable<any[]> {
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.get<any[]>(
+      this.baseUrl + this.getCommntentByRecipeId + recipeId,
+      {
+        headers,
+      }
+    );
+  }
+  createComment(comment: {}): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    const payload = comment;
+    console.log('Sending createComment request with payload:', payload); // Log kiểm tra
+    return this.http.post(`${this.baseUrl}${this.createComments}`, payload, {
       headers,
     });
   }

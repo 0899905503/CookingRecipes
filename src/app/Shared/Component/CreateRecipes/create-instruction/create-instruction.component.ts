@@ -12,17 +12,20 @@ import { CreateRecipeDataService } from '../../../../Service/CreateRecipeData/cr
   styleUrl: './create-instruction.component.scss',
 })
 export class CreateInstructionComponent {
-  instructions = [{ title: '', step: 1, text: '', cookingToolId: '' }];
+  instructions = [
+    { title: '', stepNumber: 1, instructionText: '', cookingToolId: '' },
+  ];
   currentStep = 2;
 
   addInstruction() {
     this.instructions.push({
       title: '',
-      step: this.currentStep,
-      text: '',
+      stepNumber: this.currentStep,
+      instructionText: '',
       cookingToolId: '',
     });
     this.currentStep++;
+    this.updateInstruction();
   }
 
   Cookingtool: any[] = [];
@@ -49,19 +52,16 @@ export class CreateInstructionComponent {
 
   updateInstruction() {
     const instructionData = this.instructions.map((instruction) => ({
-      name: instruction.title,
-      step: instruction.step,
-      text: instruction.text,
+      title: instruction.title,
+      stepNumber: instruction.stepNumber,
+      instructionText: instruction.instructionText,
       cookingToolId: instruction.cookingToolId,
     }));
 
     console.log('Updating recipe ninstructions:', instructionData);
 
     // Update via service
-    this.createRecipeDataService.updateInstructions(
-      'Instructions',
-      instructionData
-    );
+    this.createRecipeDataService.updateInstructions(instructionData);
   }
   logInstructions() {
     console.log('Current instructions:', this.instructions);

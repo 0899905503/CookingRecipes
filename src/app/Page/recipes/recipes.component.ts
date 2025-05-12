@@ -9,6 +9,9 @@ import { RecipeInstructionComponent } from '../../Shared/Component/recipe-instru
 import { RecipeCardComponent } from '../../Shared/Component/recipe-card/recipe-card.component';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { CommentComponent } from '../../Shared/Component/comment/comment.component';
+import { FormsModule } from '@angular/forms';
+import { stat } from 'fs';
 
 @Component({
   standalone: true,
@@ -18,11 +21,14 @@ import { Location } from '@angular/common';
   imports: [
     RecipeMainComponent,
     CommonModule,
+
     RecipeIngredientComponent,
     RecipeTipComponent,
     RecipeInstructionComponent,
     RecipeCardComponent,
     NotFoundPageComponent,
+    CommentComponent,
+    FormsModule,
   ],
 })
 export class RecipesComponent {
@@ -34,9 +40,16 @@ export class RecipesComponent {
   titleTipDo: string[] = [];
   titleTipDont: string[] = [];
   SimilarRecipes: any[] = [];
+  Comment: any[] = [];
   recipeIds!: number;
   notFound: boolean = false;
-
+  isFavorite: boolean = false; // Trạng thái yêu thích
+  userId: number = 10; // Thay bằng ID người dùng thực tế
+  //comment
+  newCommentText: string = '';
+  rating: number = 0;
+  hoverRating: number = 0;
+  stars = Array(5).fill(0);
   constructor(
     private recipeService: RecipeService,
     private route: ActivatedRoute,
@@ -51,6 +64,17 @@ export class RecipesComponent {
     if (this.recipeIds) {
       this.onGetId(this.recipeIds);
       this.onGetSimilar(this.recipeIds);
+      this.onGetComment(this.recipeIds);
+      //this.recipeService.checkFavorite(this.recipeIds, this.userId).subscribe({
+      this.recipeService.checkFavorite(this.recipeIds, 10).subscribe({
+        next: (isFavorite) => {
+          this.isFavorite = isFavorite?.data;
+          console.log('Trạng thái yêu thích:', isFavorite);
+        },
+        error: (error) => {
+          console.error('Lỗi khi kiểm tra trạng thái yêu thích:', error);
+        },
+      });
     } else {
       this.notFound = true;
       console.log('recipeId null');
@@ -160,5 +184,87 @@ export class RecipesComponent {
 
   goBack(): void {
     this.location.back();
+  }
+
+  toggleFavorite(recipeId: number, userId: number): void {
+    console.log('toggleFavorite called with:', { recipeId, userId }); // Log kiểm tra
+    if (this.isFavorite) {
+      const confirmRemove = confirm(
+        'Bạn có chắc chắn muốn hủy mục yêu thích này?'
+      );
+      if (confirmRemove) {
+        this.isFavorite = false;
+        console.log('Đã hủy mục yêu thích.');
+        this.recipeService.deleteFavorite(recipeId, userId).subscribe({
+          next: (response) => {
+            console.log('Hủy mục yêu thích thành công:', response);
+          },
+          error: (error) => {
+            console.error('Lỗi khi hủy mục yêu thích:', error);
+          },
+        });
+      }
+    } else {
+      const confirmAdd = confirm(
+        'Bạn có chắc chắn muốn thêm vào mục yêu thích?'
+      );
+      if (confirmAdd) {
+        this.isFavorite = true;
+        console.log('Đã thêm vào mục yêu thích.');
+        this.recipeService.createFavorite(recipeId, userId).subscribe({
+          next: (response) => {
+            console.log('Thêm vào mục yêu thích thành công:', response);
+          },
+          error: (error) => {
+            console.error('Lỗi khi thêm vào mục yêu thích:', error);
+          },
+        });
+      }
+    }
+  }
+
+  async onGetComment(id: number) {
+    try {
+      const data = await this.recipeService
+        .getCommentByRecipeId(id)
+        .toPromise();
+      if (data) {
+        this.Comment = data;
+        console.log('Similar recipes fetched successfully');
+      } else {
+        console.warn('No similar recipes found');
+      }
+    } catch (error) {
+      console.error('Error fetching similar recipes:', error);
+    }
+  }
+
+  //comment
+  submitComment(userId: number, recipeId: number) {
+    const commentData = {
+      recipeId: recipeId,
+      userId: userId,
+      commentText: this.newCommentText,
+      rating: this.rating,
+      datePosted: new Date().toISOString(),
+      status: 'pending',
+    };
+
+    console.log('Comment data:', commentData);
+
+    this.recipeService.createComment(commentData).subscribe({
+      next: (res) => {
+        this.newCommentText = res.commentText;
+        this.rating = res.rating;
+        console.log('Comment submitted successfully:', res);
+      },
+      error: (err) => {
+        console.error('Error submitting comment:', err);
+      },
+    });
+  }
+
+  setRating(star: number) {
+    this.rating = star;
   }
 }

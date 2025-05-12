@@ -13,15 +13,18 @@ import { CreateRecipeDataService } from '../../../../Service/CreateRecipeData/cr
 })
 export class CreateNutrientComponent {
   Nutrient: any[] = [];
-  nutrients = [{ name: '', quantity: '', unit: '', nutrientTypeId: '' }];
+  nutrients = [
+    { nutrientTypeName: '', quantity: '', unit: '', nutrientTypeId: '' },
+  ];
 
   addIngredient() {
     this.nutrients.push({
-      name: '',
+      nutrientTypeName: '',
       quantity: '',
       unit: '',
       nutrientTypeId: '',
     });
+    this.updateRecipeNutrients();
   }
   constructor(
     private nutrientService: NutrientService,
@@ -45,7 +48,7 @@ export class CreateNutrientComponent {
 
   onNutrientChange(nutrient: any): void {
     const selectedNutrient = this.Nutrient.find(
-      (item) => item.nutrientTypeName === nutrient.name
+      (item) => item.nutrientTypeName === nutrient.nutrientTypeName
     );
     if (selectedNutrient) {
       nutrient.nutrientTypeId = selectedNutrient.nutrientTypeId;
@@ -63,16 +66,14 @@ export class CreateNutrientComponent {
 
   updateRecipeNutrients() {
     const nutrientData = this.nutrients.map((nutrient) => ({
-      name: nutrient.name,
+      nutrientTypeName: nutrient.nutrientTypeName,
+      nutrientTypeId: nutrient.nutrientTypeId,
       quantity: nutrient.quantity,
     }));
 
     console.log('Updating recipe nutrients:', nutrientData);
 
     // Update via service
-    this.createRecipeDataService.updateRecipeNutrient(
-      'Nutrients',
-      nutrientData
-    );
+    this.createRecipeDataService.updateRecipeNutrient(nutrientData);
   }
 }

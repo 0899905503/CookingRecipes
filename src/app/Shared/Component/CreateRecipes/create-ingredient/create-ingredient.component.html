@@ -12,7 +12,7 @@
     <tbody>
       <tr *ngFor="let ingredient of ingredients; let i = index">
         <td>
-          <select [(ngModel)]="ingredient.name" (change)="onIngredientChange(ingredient)">
+          <select [(ngModel)]="ingredient.ingredientName" (change)="onIngredientChange(ingredient)">
             <option value="">Select Ingredient Name</option>
             <option *ngFor="let item of Ingredient" [value]="item.ingredientName">
               {{ item.ingredientName }}
@@ -20,7 +20,7 @@
           </select>
         </td>
         <td>
-          <input type="number" [(ngModel)]="ingredient.Quantity" (ngModelChange)="updateQuantity(i)"
+          <input type="number" [(ngModel)]="ingredient.quantity" (ngModelChange)="updateQuantity(i)"
             placeholder="Quantity" />
         </td>
         <td>

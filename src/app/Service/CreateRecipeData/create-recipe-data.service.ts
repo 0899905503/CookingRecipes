@@ -13,34 +13,15 @@ export class CreateRecipeDataService {
     PrepTime: '',
     CookTime: '',
     CategoryId: '',
-    DateCreated: '2025-01-01',
+    DateCreated: '2025-1-1',
     Vegan: '',
   };
 
   recipeTool: any[] = [];
-
-  recipeIngredient: any = {
-    IngredientId: '',
-    Quantity: '',
-  };
-
-  recipeNutrient: any = {
-    NutrientId: '',
-    Quantity: '',
-  };
-
-  instructions: any = {
-    Title: '',
-    Step: '',
-    InstructionText: '',
-    CookingToolId: '',
-  };
-
-  recipeTips: any = {
-    Title: '',
-    ActionText: '',
-    ActionType: '',
-  };
+  recipeIngredient: any[] = [];
+  recipeNutrient: any[] = [];
+  recipeInstructions: any[] = [];
+  recipeTips: any[] = [];
 
   updateRecipeData(key: string, value: any): void {
     this.recipeData[key] = value;
@@ -50,43 +31,135 @@ export class CreateRecipeDataService {
     return this.recipeData;
   }
 
-  updateRecipeTool(key: string, value: any[]): void {
-    this.recipeTool = value;
+  updateRecipeTool(value: any[]): void {
+    this.recipeTool = value || []; // Đảm bảo không bị null
+    console.log('Updated Tools:', this.recipeTool);
   }
 
   getRecipeTool(): any[] {
-    return this.recipeTool;
+    return this.recipeTool || []; // Đảm bảo trả về mảng rỗng nếu null
   }
 
-  updateRecipeIngredient(key: string, value: any[]): void {
-    this.recipeIngredient[key] = value;
+  updateRecipeIngredient(value: any[]): void {
+    if (!Array.isArray(value)) {
+      console.error('Invalid data for ingredients. Expected an array:', value);
+      return;
+    }
+
+    // In log toàn bộ dữ liệu trước khi lọc
+    console.log('Original Ingredients:', value);
+
+    // Lọc các giá trị không hợp lệ
+    const validIngredients = value.filter(
+      (ingredient) =>
+        ingredient &&
+        ingredient.ingredientId !== null &&
+        ingredient.quantity !== null &&
+        ingredient.ingredientId !== '' &&
+        ingredient.quantity !== ''
+    );
+
+    // In log dữ liệu sau khi lọc
+    console.log('Valid Ingredients:', validIngredients);
+
+    this.recipeIngredient = validIngredients;
+
+    // In log dữ liệu sau khi cập nhật
+    console.log('Updated Ingredients in service:', this.recipeIngredient);
   }
 
   getRecipeIngredient(): any[] {
-    return this.recipeIngredient;
+    return this.recipeIngredient || []; // Đảm bảo trả về mảng rỗng nếu null
   }
 
-  updateRecipeNutrient(key: string, value: any[]): void {
-    this.recipeNutrient[key] = value;
+  updateRecipeNutrient(value: any[]): void {
+    if (!Array.isArray(value)) {
+      console.error('Invalid data for nutrients. Expected an array:', value);
+      return;
+    }
+
+    // In log toàn bộ dữ liệu trước khi lọc
+    console.log('Original Nutrients:', value);
+
+    // Lọc các giá trị không hợp lệ
+    const validNutrients = value.filter(
+      (nutrient) =>
+        nutrient &&
+        nutrient.nutrientTypeId &&
+        nutrient.quantity &&
+        nutrient.nutrientTypeId !== '' &&
+        nutrient.quantity !== ''
+    );
+
+    // In log dữ liệu sau khi lọc
+    console.log('Valid Nutrients:', validNutrients);
+
+    this.recipeNutrient = validNutrients;
+    console.log('Updated Nutrients:', this.recipeNutrient);
   }
 
   getRecipeNutrient(): any[] {
-    return this.recipeNutrient;
+    return this.recipeNutrient || []; // Đảm bảo trả về mảng rỗng nếu null
   }
 
-  updateInstructions(key: string, value: any[]): void {
-    this.instructions[key] = value;
+  updateInstructions(value: any[]): void {
+    if (!Array.isArray(value)) {
+      console.error('Invalid data for instructions. Expected an array:', value);
+      return;
+    }
+
+    // In log toàn bộ dữ liệu trước khi lọc
+    console.log('Original Instructions:', value);
+
+    // Lọc các giá trị không hợp lệ
+    const validInstructions = value.filter(
+      (instruction) =>
+        instruction &&
+        instruction.stepNumber &&
+        instruction.instructionText &&
+        instruction.stepNumber !== '' &&
+        instruction.instructionText !== ''
+    );
+
+    // In log dữ liệu sau khi lọc
+    console.log('Valid Instructions:', validInstructions);
+
+    this.recipeInstructions = validInstructions;
+    console.log('Updated Instructions:', this.recipeInstructions);
   }
 
   getInstructions(): any[] {
-    return this.recipeNutrient;
+    return this.recipeInstructions || []; // Đảm bảo trả về mảng rỗng nếu null
   }
 
-  updateRecipeTips(key: string, value: any[]): void {
-    this.recipeTips[key] = value;
-  }
+  updateRecipeTips(value: any[]): void {
+    if (!Array.isArray(value)) {
+      console.error('Invalid data for recipe tips. Expected an array:', value);
+      return;
+    }
 
+    // In log toàn bộ dữ liệu trước khi lọc
+    console.log('Original Tips:', value);
+
+    // Lọc các giá trị không hợp lệ
+    const validTips = value.filter(
+      (tip) =>
+        tip &&
+        tip.actionType &&
+        tip.actionText &&
+        tip.title &&
+        tip.actionType !== '' &&
+        tip.actionText !== '' &&
+        tip.title !== ''
+    );
+
+    // In log dữ liệu sau khi lọc
+    console.log('Valid Tips:', validTips);
+
+    this.recipeTips = validTips;
+    console.log('Updated RecipeTips:', this.recipeTips);
+  }
   getRecipeTips(): any[] {
-    return this.recipeNutrient;
+    return this.recipeTips || []; // Đảm bảo trả về mảng rỗng nếu null
   }
 }

@@ -13,11 +13,9 @@ import { CreateRecipeDataService } from '../../../../Service/CreateRecipeData/cr
 })
 export class CreateIngredientComponent implements OnInit {
   ingredients = [
-    { name: '', Quantity: '', unit: '', type: '', IngredientId: '' },
+    { ingredientName: '', quantity: 1, unit: '', type: '', ingredientId: null },
   ];
   Ingredient: any[] = [];
-  IngredientId: string = '';
-  Quantity: string = '';
 
   constructor(
     private ingredientService: IngredientService,
@@ -30,12 +28,13 @@ export class CreateIngredientComponent implements OnInit {
 
   addIngredient() {
     this.ingredients.push({
-      name: '',
-      Quantity: '',
+      ingredientName: '',
+      quantity: 1,
       unit: '',
       type: '',
-      IngredientId: '',
+      ingredientId: null,
     });
+    this.updateRecipeIngredients();
   }
 
   onGetAllIngredient(): void {
@@ -56,26 +55,27 @@ export class CreateIngredientComponent implements OnInit {
 
   onIngredientChange(ingredient: any): void {
     const selectedIngredient = this.Ingredient.find(
-      (item) => item.ingredientName === ingredient.name
+      (item) => item.ingredientName === ingredient.ingredientName
     );
     if (selectedIngredient) {
-      ingredient.IngredientId = selectedIngredient.ingredientId;
-      ingredient.Quantity = selectedIngredient.Quantity;
+      ingredient.ingredientId = selectedIngredient.ingredientId;
       ingredient.unit = selectedIngredient.unit;
       ingredient.type = selectedIngredient.type;
     } else {
-      ingredient.IngredientId = '';
-      ingredient.Quantity = '';
+      ingredient.ingredientId = '';
       ingredient.unit = '';
       ingredient.type = '';
     }
+
+    // Log dữ liệu sau khi thay đổi
+    console.log('Ingredient updated:', ingredient);
     this.logIngredients();
   }
 
   updateQuantity(index: number): void {
     console.log(
       `Ingredient ${index + 1} quantity updated:`,
-      this.ingredients[index].Quantity
+      this.ingredients[index].quantity
     );
     this.logIngredients();
   }
@@ -84,19 +84,18 @@ export class CreateIngredientComponent implements OnInit {
     console.log('Current ingredients:', this.ingredients);
   }
 
-  updateRecipeIngredients() {
+  updateRecipeIngredients(): void {
     if (Array.isArray(this.ingredients)) {
+      console.log('Ingredients before update:', this.ingredients);
+
       const ingredientDatas = this.ingredients.map((ingredient) => ({
-        IngredientId: ingredient.IngredientId,
-        Quantity: ingredient.Quantity,
+        ingredientId: ingredient.ingredientId || null,
+        quantity: ingredient.quantity || null,
       }));
 
-      console.log('Updating recipe ingredients:', ingredientDatas);
+      console.log('Mapped ingredients for update:', ingredientDatas);
 
-      this.createRecipeDataService.updateRecipeIngredient(
-        'recipeIngredient',
-        ingredientDatas
-      );
+      this.createRecipeDataService.updateRecipeIngredient(ingredientDatas);
 
       console.log('Recipe ingredients have been updated in the service.');
     } else {

@@ -16,13 +16,15 @@ export class CreateRecipetipComponent {
     private createRecipeService: CreateRecipeService,
     private createRecipeDataService: CreateRecipeDataService
   ) {}
-  recipetips = [{ title: '', actiontext: '', actiontype: '' }];
+  recipetips = [{ title: '', actionText: '', actionType: '' }];
   loading = false;
+
+  ngOnInit(): void {}
 
   CreateRecipeTips(): void {
     if (
       this.recipetips.some(
-        (inst) => !inst.title || !inst.actiontext || !inst.actiontype
+        (inst) => !inst.title || !inst.actionText || !inst.actionType
       )
     ) {
       alert('Please fill in all fields for each recipe tip.');
@@ -45,20 +47,21 @@ export class CreateRecipetipComponent {
   }
 
   addRecipeTip() {
-    this.recipetips.push({ title: '', actiontext: '', actiontype: '' });
+    this.recipetips.push({ title: '', actionText: '', actionType: '' });
+    this.updateRecipeTip();
   }
 
   updateRecipeTip() {
     const recipeTipData = this.recipetips.map((recipetip) => ({
-      name: recipetip.title,
-      text: recipetip.actiontext,
-      type: recipetip.actiontype,
+      title: recipetip.title,
+      actionText: recipetip.actionText,
+      actionType: recipetip.actionType,
     }));
 
     console.log('Updating recipe tip:', recipeTipData);
 
     // Update via service
-    this.createRecipeDataService.updateRecipeTips('RecipeTip', recipeTipData);
+    this.createRecipeDataService.updateRecipeTips(recipeTipData);
   }
   logRecipeTips() {
     console.log('Current recipe tips:', this.recipetips);
