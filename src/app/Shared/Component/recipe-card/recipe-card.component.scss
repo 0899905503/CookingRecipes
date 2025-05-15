@@ -7,6 +7,17 @@
   overflow: hidden;
   font-family: 'Roboto', sans-serif;
   position: relative;
+.star-rating {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+  color: gold;
+  font-size: 14px;
+
+  i {
+    color: gold;
+  }
+}
 
   .vegan-badge {
     position: absolute;

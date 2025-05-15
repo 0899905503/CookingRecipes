@@ -4,6 +4,24 @@
   margin: 20px auto;
 }
 
+.star-rating {
+  align-items: center;
+  font-size: 50px;
+}
+
+.star-rating .full {
+  color: #EE6352; /* Vàng */
+}
+
+.star-rating .half {
+  color: #EE6352;
+}
+
+.star-rating .empty {
+  color: #e0e0e0; /* Xám nhạt */
+}
+
+
 .Recipe-info {
   margin: 10px;
   text-align: center;

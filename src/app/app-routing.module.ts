@@ -31,6 +31,7 @@ import { CreateNutrientComponent } from './Shared/Component/CreateRecipes/create
 import { SettingpageComponent } from './Page/settingpage/settingpage.component';
 import { FavoriteComponent } from './Page/favorite/favorite.component';
 import { CommentComponent } from './Shared/Component/comment/comment.component';
+import { AdminPageComponent } from './Page/admin-page/admin-page.component';
 
 export const routes: Routes = [
   {
@@ -38,6 +39,7 @@ export const routes: Routes = [
     redirectTo: 'auth',
     pathMatch: 'full',
   },
+
   { path: 'recipes/:recipeId', component: RecipesComponent },
   { path: 'cookingtip/:cookingTipId', component: CookingTipComponent },
   { path: 'cookingTip/:cookingTipId', component: CookingTipDetailComponent },
@@ -56,6 +58,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'favorite', component: FavoriteComponent, canActivate: [AuthGuard] },
+  { path: 'admin', component: AdminPageComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
@@ -82,6 +85,7 @@ export const routes: Routes = [
     CreateRecipeComponent,
     CreateNutrientComponent,
     CommentComponent,
+    AdminPageComponent,
   ],
   exports: [RouterModule],
   providers: [AuthService, AuthGuard],

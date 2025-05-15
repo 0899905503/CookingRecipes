@@ -18,4 +18,7 @@ export const ImagePaths = {
   icCookTime: 'assets/images/icCookTime.png',
   icPrepTime: 'assets/images/icPrepTime.png',
   icServes: 'assets/images/icServes.png',
+
+  //Admin page
+  icSearch: 'assets/images/icSearch.png',
 };

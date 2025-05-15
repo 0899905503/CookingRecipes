@@ -6,6 +6,7 @@ import {
 } from '@angular/common/http';
 import { provideClientHydration } from '@angular/platform-browser';
 import { routes } from './app-routing.module';
+import { provideTranslate } from './translate.config';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,5 +15,6 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideHttpClient(),
     provideHttpClient(withInterceptorsFromDi()),
+    provideTranslate(),
   ],
 };

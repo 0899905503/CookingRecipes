@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ImagePaths } from '../Value/Constant/imageConstants';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-bottom-menu',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, TranslateModule],
   templateUrl: './bottom-menu.component.html',
   styleUrl: './bottom-menu.component.scss',
 })

@@ -8,6 +8,15 @@
     <p>{{ description }}</p>
     <div class="recipe-details">
       <span>{{ cookTime }} {{unit1}} - {{ prepTime }} - {{ serves }} {{unit2}} </span>
+      <div class="star-rating">
+        <ng-container *ngFor="let star of fullStars">
+          <i class="fas fa-star"></i>
+        </ng-container>
+        <i *ngIf="hasHalfStar" class="fas fa-star-half-alt"></i>
+        <ng-container *ngFor="let star of emptyStars">
+          <i class="far fa-star"></i>
+        </ng-container>
+      </div>
       <button class="view-recipe-button" (click)="onSelectRecipe()">VIEW RECIPE</button>
     </div>
   </div>

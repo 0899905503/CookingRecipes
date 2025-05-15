@@ -1,0 +1,53 @@
+<div class="admin-managerment">
+  <h2>All Recipes</h2>
+
+  <!-- Search and Sort Controls -->
+  <div class="controls">
+    <input type="text" placeholder="Search" class="search-input" />
+    <div class="sort-dropdown">
+      <label for="sort">Sort by:</label>
+      <select id="sort">
+        <option>Approved</option>
+        <option>Pending</option>
+        <option>Rejected</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Recipes Table -->
+  <table>
+    <thead>
+      <tr>
+        <th>Recipe Name</th>
+        <th>Category</th>
+        <th>User Created</th>
+        <th>Date Created</th>
+        <th>Details</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let recipe of recipes">
+        <td>{{ recipe.name }}</td>
+        <td>{{ recipe.category }}</td>
+        <td>{{ recipe.user }}</td>
+        <td>{{ recipe.date }}</td>
+        <td>
+          <button class="details-btn">
+            <i class="fas fa-search"></i>
+          </button>
+        </td>
+        <td>
+          <span [ngClass]="getStatusClass(recipe.status)">{{ recipe.status }}</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Pagination -->
+  <div class="pagination">
+    <button>&lt;</button>
+    <button *ngFor="let page of pages" [class.active]="page === currentPage">{{ page }}</button>
+    <button>&gt;</button>
+  </div>
+</div>

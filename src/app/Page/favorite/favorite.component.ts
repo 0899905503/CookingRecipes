@@ -3,11 +3,12 @@ import { AuthService } from '../../Service/Auth/Login/login.service';
 import { FavoriteService } from '../../Service/Favorite/favorite.service';
 import { RecipeCardComponent } from '../../Shared/Component/recipe-card/recipe-card.component';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-favorite',
   standalone: true,
-  imports: [RecipeCardComponent, CommonModule],
+  imports: [RecipeCardComponent, CommonModule, TranslateModule],
   templateUrl: './favorite.component.html',
   styleUrl: './favorite.component.scss',
 })
@@ -26,8 +27,16 @@ export class FavoriteComponent {
     private authService: AuthService
   ) {}
   FavoritesRecipe: any[] = [];
+
   ngOnInit(): void {
-    this.onGetAllFavoriteRecipe(10);
+    const userId = this.authService.getUserId();
+    console.log('User ID:', userId);
+
+    if (userId !== null) {
+      this.onGetAllFavoriteRecipe(userId);
+    } else {
+      console.error('Không tìm thấy userId. Có thể chưa đăng nhập.');
+    }
   }
   onGetAllFavoriteRecipe(userId: number): void {
     this.favoriteService.getFavoriteRecipeByUserId(userId).subscribe(

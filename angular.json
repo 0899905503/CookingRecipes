@@ -29,9 +29,12 @@
               "src/favicon.ico",
               "src/assets"
             ],
+
             "styles": [
-              "src/styles.scss"
-            ],
+  "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+  "src/styles.scss"
+],
+
             "scripts": [],
             "server": "src/main.server.ts",
             "prerender": true,
@@ -102,6 +105,7 @@
       }
     }
   },
+
   "cli": {
     "analytics": "087efd69-7ade-40f5-9cca-6e6e21107e88"
   }

@@ -168,17 +168,24 @@
         text-decoration: none;
       }
     }
-
-    .login-btn {
+.login-btn {
       width: 30%;
       border-radius: 50px;
       padding: 10px;
-      background-color: #820000;
-      color: yellow;
-      border: none;
+      background-color: #F0EBE1;
+      color: #820000;
       border-radius: 5px;
       font-size: 18px;
       cursor: pointer;
     }
-  }
+    ::ng-deep .login-btn:hover {
+  border: 1px solid #820000;
+  background-color: #820000;
+  color: yellow;
 }
+
+  }
+
+}
+
+

@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-save',
   standalone: true,
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './create-save.component.html',
   styleUrl: './create-save.component.scss',
 })

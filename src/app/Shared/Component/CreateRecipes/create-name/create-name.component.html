@@ -1,11 +1,11 @@
 <div class="name-container">
-  <h2>Recipe Title</h2>
+  <h2>{{'CREATE_RECIPE.RECIPE_TITLE'| translate}}</h2>
   <table>
     <tbody>
       <tr *ngFor="let name of names; let i = index">
         <td>
           <input type="text" [(ngModel)]="title" (ngModelChange)="onTitleChange()" placeholder="Recipe name" />
-          <button (click)="goBack()">Back</button>
+          <button (click)="goBack()">{{'CREATE_RECIPE.BACK'| translate}}</button>
         </td>
       </tr>
     </tbody>

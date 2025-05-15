@@ -1,18 +1,18 @@
 <div class="nutrient-container">
-  <h2>Nutrient</h2>
+  <h2>{{'CREATE_RECIPE.NUTRIENT.NUTRIENTS'| translate}}</h2>
   <table>
     <thead>
       <tr>
-        <th>Nutrient Name</th>
-        <th>Quantity</th>
-        <th>Unit</th>
+        <th>{{'CREATE_RECIPE.NUTRIENT.NUTRIENT_NAME'| translate}}</th>
+        <th>{{'CREATE_RECIPE.NUTRIENT.QUANTITY'| translate}}</th>
+        <th>{{'CREATE_RECIPE.NUTRIENT.UNIT'| translate}}</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let nutrient of nutrients; let i = index">
         <td>
           <select [(ngModel)]="nutrient.nutrientTypeName" (change)="onNutrientChange(nutrient)">
-            <option value="">Select Nutrient Name</option>
+            <option value="">{{'CREATE_RECIPE.NUTRIENT.SELECT_NUTRIENT'| translate}}</option>
             <option *ngFor="let item of Nutrient" [value]="item.nutrientTypeName">
               {{ item.nutrientTypeName }}
             </option>
@@ -23,5 +23,5 @@
       </tr>
     </tbody>
   </table>
-  <button (click)="addIngredient()">+ Nutrient</button>
+  <button (click)="addIngredient()">{{'CREATE_RECIPE.NUTRIENT.ADD_NUTRIENT'| translate}}</button>
 </div>

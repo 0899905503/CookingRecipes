@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import {
   HTTP_INTERCEPTORS,
+  HttpClient,
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
@@ -34,6 +35,14 @@ import { HomepageComponent } from './Page/homepage/homepage.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CreateNutrientComponent } from './Shared/Component/CreateRecipes/create-nutrient/create-nutrient.component';
 import { CommentComponent } from './Shared/Component/comment/comment.component';
+import { AdminPageComponent } from './Page/admin-page/admin-page.component';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+// Hàm tải file dịch
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -60,6 +69,7 @@ import { CommentComponent } from './Shared/Component/comment/comment.component';
     CreateRecipeComponent,
     CreateNutrientComponent,
     CommentComponent,
+    AdminPageComponent,
   ],
   imports: [
     CookingTipComponent,
@@ -87,6 +97,14 @@ import { CommentComponent } from './Shared/Component/comment/comment.component';
     CreateRecipeComponent,
     CreateNutrientComponent,
     CommentComponent,
+    AdminPageComponent,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateModule,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ],
   exports: [RecipeMainComponent, RegisterComponent, AuthComponent],
   providers: [

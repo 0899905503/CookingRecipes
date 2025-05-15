@@ -22,9 +22,16 @@ export class RecipeCardComponent {
   @Input() isVegan: boolean = false;
   @Input() recipeId!: number;
   @Output() recipeSelected = new EventEmitter<number>();
+  @Input() averageRating: number = 0;
+
+  fullStars: number[] = [];
+  hasHalfStar: boolean = false;
+  emptyStars: number[] = [];
 
   constructor(private router: Router) {}
-
+  ngOnInit(): void {
+    this.setupStars(this.averageRating);
+  }
   onSelectRecipe(): void {
     if (this.recipeId) {
       this.recipeSelected.emit(this.recipeId);
@@ -33,5 +40,14 @@ export class RecipeCardComponent {
     } else {
       console.warn('Recipe ID not available for navigation.');
     }
+  }
+  setupStars(rating: number): void {
+    const full = Math.floor(rating);
+    const hasHalf = rating - full >= 0.5;
+    const empty = 5 - full - (hasHalf ? 1 : 0);
+
+    this.fullStars = Array(full).fill(0);
+    this.hasHalfStar = hasHalf;
+    this.emptyStars = Array(empty).fill(0);
   }
 }

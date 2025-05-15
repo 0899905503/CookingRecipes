@@ -8,11 +8,11 @@ import { ApiPaths } from '../../../Shared/Value/Constant/apiConstant';
 })
 export class RegisterService {
   private baseUrl = ApiPaths.baseUrl;
-  private createUser = ApiPaths.CreateUser;
+  private createUser = ApiPaths.Register;
 
   constructor(private http: HttpClient) {}
 
-  registerUser(user: any): Observable<any> {
+  register(user: any): Observable<any> {
     return this.http.post(this.baseUrl + this.createUser, user);
   }
 }

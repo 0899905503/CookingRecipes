@@ -1,11 +1,11 @@
 <div class="instruction-container">
-  <h2>Recipe Tips</h2>
+  <h2>{{'CREATE_RECIPE.RECIPE_TIP.RECIPE_TIPS'| translate}}</h2>
   <table>
     <thead>
       <tr>
-        <th>Title</th>
-        <th>Action Text</th>
-        <th>Action Type</th>
+        <th>{{'CREATE_RECIPE.RECIPE_TIP.TITLE'| translate}}</th>
+        <th>{{'CREATE_RECIPE.RECIPE_TIP.ACTION_TEXT'| translate}}</th>
+        <th>{{'CREATE_RECIPE.RECIPE_TIP.ACTION_TYPE'| translate}}</th>
       </tr>
     </thead>
     <tbody>
@@ -14,13 +14,13 @@
         <td><input type="text" [(ngModel)]="recipetip.actionText" placeholder="Action Text" /></td>
         <td>
           <select [(ngModel)]="recipetip.actionType" (ngModelChange)="logRecipeTips()">
-            <option value="">Select Action Type</option>
-            <option value="0">Do</option>
-            <option value="1">Don`t</option>
+            <option value="">{{'CREATE_RECIPE.RECIPE_TIP.SELECT_TYPE'| translate}}</option>
+            <option value="0">{{'CREATE_RECIPE.RECIPE_TIP.DO'| translate}}</option>
+            <option value="1">{{'CREATE_RECIPE.RECIPE_TIP.DO_NOT'| translate}}</option>
           </select>
         </td>
       </tr>
     </tbody>
   </table>
-  <button (click)="addRecipeTip()">+ Recipe tip</button>
+  <button (click)="addRecipeTip()">{{'CREATE_RECIPE.RECIPE_TIP.ADD_RECIPE_TIP'| translate}}</button>
 </div>

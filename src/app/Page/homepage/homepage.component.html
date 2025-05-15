@@ -1,4 +1,6 @@
 <div class="HomePage">
+
+
   <!-- Hero Section -->
   <div class="HomePageMain">
     <div class="image-container">
@@ -37,8 +39,10 @@
     <div class="recipe-cards" *ngIf="RecipesTopView.length > 0">
       <app-recipe-card *ngFor="let recipe of RecipesTopView" [imageUrl]="recipe.imagePath" [title]="recipe.title"
         [description]="recipe.description" [prepTime]="recipe.prepTime" [cookTime]="recipe.cookTime"
-        [serves]="recipe.servings" [totalView]="recipe.totalView" [unit1]="'MIN'" [unit2]="'SERVES'"
-        [recipeId]="recipe.recipeId" (recipeSelected)="onRecipeSelected($event)"> </app-recipe-card>
+        [isVegan]="recipe.vegan" [serves]="recipe.servings" [totalView]="recipe.totalView" [unit1]="'MIN'"
+        [unit2]="'SERVES'" [recipeId]="recipe.recipeId" [averageRating]="recipe.averageRating"
+        (recipeSelected)="onRecipeSelected($event)">
+      </app-recipe-card>
     </div>
   </div>
 
@@ -66,7 +70,8 @@
       <div *ngFor="let item of filteredRecipes()">
         <app-recipe-card [imageUrl]="item.imagePath" [title]="item.title" [description]="item.description"
           [cookTime]="item.cookTime" [prepTime]="item.prepTime" [serves]="item.servings" [isVegan]="item.vegan"
-          [unit1]="'MIN'" [unit2]="'SERVES'" [recipeId]="item.recipeId" (recipeSelected)="onRecipeSelected($event)">
+          [unit1]="'MIN'" [unit2]="'SERVES'" [recipeId]="item.recipeId" (recipeSelected)="onRecipeSelected($event)"
+          [averageRating]="item.averageRating">
         </app-recipe-card>
       </div>
     </div>

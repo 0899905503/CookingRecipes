@@ -1,0 +1,180 @@
+<div class="admin-page">
+  <!-- Sidebar -->
+  <div class="admin-menu" [ngClass]="{ 'expanded': isExpanded, 'collapsed': !isExpanded }">
+    <div class="sidebar-container">
+      <!-- Toggle Button -->
+      <button (click)="toggleSidebar()" class="toggle-button">
+        <span>{{ isExpanded ? '◀' : '▶' }}</span>
+      </button>
+
+      <!-- Header -->
+      <div class="menu-header">
+        <img [src]="logo" alt="Logo" />
+        <h1 *ngIf="isExpanded">COOKING RECIPES</h1>
+      </div>
+
+      <!-- Menu -->
+      <ul>
+        <li *ngFor="let item of menuItems" [ngClass]="{ 'active': item.label === activeItem }"
+          (click)="setActive(item.label)">
+          <i [class]="item.icon"></i>
+          <span *ngIf="isExpanded">{{ item.label }}</span>
+        </li>
+      </ul>
+
+      <!-- Footer -->
+      <div class="sidebar-footer">
+        <img src="assets/avatar.png" alt="Avatar" />
+        <div *ngIf="isExpanded" class="user-info">
+          <p>Welcome back 👋</p>
+          <p>BAVO</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content Area -->
+  <!-- Content Area -->
+  <div class="admin-managerment">
+    <h2>{{ activeItem }}</h2>
+
+    <!-- Dashboard content -->
+    <ng-container *ngIf="activeItem === 'Dashboard'">
+      <p>Welcome to the Admin Dashboard.</p>
+      <!-- Add dashboard cards, stats, charts, etc. -->
+    </ng-container>
+
+    <!-- Recipe content -->
+    <ng-container *ngIf="activeItem === 'Recipe'">
+      <!-- Search and Sort Controls -->
+      <div class="controls">
+        <input type="text" placeholder="Search" class="search-input" />
+        <div class="sort-dropdown">
+          <label for="sort">Sort by:</label>
+          <select id="sort" [(ngModel)]="selectedStatusFilter" (change)="filterRecipesByStatus()">
+            <option value="">All</option>
+            <option value="Approved">Approved</option>
+            <option value="Pending">Pending</option>
+            <option value="Rejected">Rejected</option>
+          </select>
+
+        </div>
+
+      </div>
+
+      <!-- Recipes Table -->
+      <table>
+        <thead>
+          <tr>
+            <th>Recipe Name</th>
+            <th>Category</th>
+            <th>User Created</th>
+            <th>Date Created</th>
+            <th>Details</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let recipe of paginatedRecipe">
+            <td>{{ recipe.title }}</td>
+            <td>{{ recipe.category.categoryName }}</td>
+            <td>{{ recipe.user.email }}</td>
+            <td>{{ recipe.dateCreated }}</td>
+            <td>
+              <a class="details-btn" [routerLink]="['/recipes', recipe.recipeId]">
+                <img [src]="IcSearch" alt="search" />
+              </a>
+
+            </td>
+            <td>
+              <span [ngClass]="getStatusClass(recipe.status)">
+                {{ recipe.status }}
+              </span>
+            </td>
+          </tr>
+          <tr *ngIf="paginatedRecipe.length === 0">
+            <td colspan="6">No recipes found.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Pagination -->
+      <div class="pagination">
+        <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">&lt;</button>
+        <button *ngFor="let page of pages" [class.active]="page === currentPage" (click)="changePage(page)">
+          {{ page }}
+        </button>
+        <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === pages.length">&gt;</button>
+      </div>
+    </ng-container>
+
+    <!-- Comment content -->
+    <ng-container *ngIf="activeItem === 'Comment'">
+      <table>
+        <thead>
+          <tr>
+            <th>Recipe Name</th>
+            <th>User Posted</th>
+            <th>Comment</th>
+            <th>Rating</th>
+            <th>Date Posted</th>
+            <th>Details</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let comment of paginatedComment">
+            <td>{{ comment.recipe.title }}</td>
+            <td>{{ comment.user.email }}</td>
+            <td>{{ comment.commentText }}</td>
+            <td>{{ comment.rating }}</td>
+            <td>{{ comment.datePosted }}</td>
+            <td>
+              <button class="details-btn">
+                <i class="fas fa-search"></i>
+              </button>
+            </td>
+            <td>
+              <span [ngClass]="getStatusClass(comment.status)">
+                {{ comment.status }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- Pagination -->
+      <div class="pagination">
+        <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">&lt;</button>
+        <button *ngFor="let page of pages" [class.active]="page === currentPage" (click)="changePage(page)">
+          {{ page }}
+        </button>
+        <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === pages.length">&gt;</button>
+      </div>
+    </ng-container>
+
+    <!-- Reports content -->
+    <ng-container *ngIf="activeItem === 'Reports'">
+      <p>Reports section</p>
+      <!-- Add reports/chart display -->
+    </ng-container>
+
+    <!-- Notifications content -->
+    <ng-container *ngIf="activeItem === 'Notifications'">
+      <p>Notification messages and alerts</p>
+      <!-- Add notification center -->
+    </ng-container>
+
+    <!-- Settings content -->
+    <ng-container *ngIf="activeItem === 'Settings'">
+      <p>System settings and preferences</p>
+      <!-- Add form for settings -->
+    </ng-container>
+
+    <!-- Support content -->
+    <ng-container *ngIf="activeItem === 'Support'">
+      <p>Need help? Contact support here.</p>
+      <!-- Add support form or links -->
+    </ng-container>
+  </div>
+
+</div>

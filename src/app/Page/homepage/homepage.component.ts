@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { HomepageService } from '../../Service/Homepage/homepage.service';
 import { AuthService } from '../../Service/Auth/Login/login.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
@@ -26,6 +28,8 @@ export class HomepageComponent {
   ngOnInit(): void {
     this.onGetAllRecipe();
     this.onGetTopView();
+    const userId = this.authService.getUserId();
+    console.log('User ID:', userId);
   }
   onGetAllRecipe(): void {
     this.homepageService.getAllRecipe().subscribe(
@@ -41,13 +45,18 @@ export class HomepageComponent {
   filteredRecipes(): any[] {
     if (!this.Recipe) return [];
 
-    if (this.selectedMenu === 'ALL') return this.Recipe;
+    // Lọc bỏ những công thức có status là 'pending'
+    const visibleRecipes = this.Recipe.filter(
+      (item) => item.status !== 'Pending' && item.status !== 'Rejected'
+    );
+
+    if (this.selectedMenu === 'ALL') return visibleRecipes;
 
     if (this.selectedMenu === 'Vegan') {
-      return this.Recipe.filter((item) => item.vegan === 1);
+      return visibleRecipes.filter((item) => item.vegan === 1);
     }
 
-    return this.Recipe.filter(
+    return visibleRecipes.filter(
       (item) =>
         item.category.categoryName === this.selectedMenu ||
         (item.vegan === 1 && item.category.categoryName !== this.selectedMenu)
@@ -57,7 +66,9 @@ export class HomepageComponent {
   onGetTopView(): void {
     this.homepageService.getTopView().subscribe(
       (data) => {
-        this.RecipesTopView = data;
+        this.RecipesTopView = data.filter(
+          (item: any) => item.status !== 'Pending' && item.status !== 'Rejected'
+        );
       },
       (error) => {
         console.error('Error fetching recipes view:', error);

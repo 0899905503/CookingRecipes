@@ -1,12 +1,12 @@
 <div class="instruction-container">
-  <h2>Instruction</h2>
+  <h2>{{'CREATE_RECIPE.INSTRUCTION.INSTRUCTIONS'| translate}}</h2>
   <table>
     <thead>
       <tr>
-        <th>Title</th>
-        <th>Step</th>
-        <th>Instruction Text</th>
-        <th>Cooking Tool</th>
+        <th>{{'CREATE_RECIPE.INSTRUCTION.TITLE'| translate}}</th>
+        <th>{{'CREATE_RECIPE.INSTRUCTION.STEP'| translate}}</th>
+        <th>{{'CREATE_RECIPE.INSTRUCTION.INSTRUCTION_TEXT'| translate}}</th>
+        <th>{{'CREATE_RECIPE.INSTRUCTION.COOKING_TOOL'| translate}}</th>
       </tr>
     </thead>
     <tbody>
@@ -16,7 +16,7 @@
         <td><input type="text" [(ngModel)]="instruction.instructionText" placeholder="Instruction Text" /></td>
         <td>
           <select [(ngModel)]="instruction.cookingToolId" (ngModelChange)="logInstructions()">
-            <option value="">Select Cooking Tool</option>
+            <option value="">{{'CREATE_RECIPE.INSTRUCTION.SELECT_TOOL'| translate}}</option>
             <option *ngFor="let item of Cookingtool" [value]="item.cookingToolId">
               {{ item.cookingToolName }}
             </option>
@@ -25,5 +25,5 @@
       </tr>
     </tbody>
   </table>
-  <button (click)="addInstruction()">+ Instruction</button>
+  <button (click)="addInstruction()">{{'CREATE_RECIPE.INSTRUCTION.ADD_INSTRUCTION'| translate}}</button>
 </div>

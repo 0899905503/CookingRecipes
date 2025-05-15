@@ -1,17 +1,17 @@
 <div class="detail-container">
   <div class="form-group">
-    <label for="servings">Servings</label>
+    <label for="servings">{{'CREATE_RECIPE.DETAILS.SERVING'| translate}}</label>
     <input id="servings" type="text" [(ngModel)]="Servings" (ngModelChange)="updateDetails()" placeholder="Serves" />
   </div>
 
   <div class="form-group">
-    <label for="cookingTime">Cooking Time</label>
+    <label for="cookingTime">{{'CREATE_RECIPE.DETAILS.COOKING_TIME'| translate}}</label>
     <input id="cookingTime" type="text" [(ngModel)]="CookTime" (ngModelChange)="updateDetails()"
       placeholder="Cooking Time" />
   </div>
 
   <div class="form-group">
-    <label for="prepTime">Prep Time</label>
+    <label for="prepTime">{{'CREATE_RECIPE.DETAILS.PREP_TIME'| translate}}</label>
     <select id="prepTime" [(ngModel)]="PrepTime" (change)="updateDetails()">
       <option *ngFor="let preptime of preptimes" [value]="preptime">
         {{ preptime }}
@@ -20,7 +20,7 @@
   </div>
 
   <div class="form-group">
-    <label for="category">Category</label>
+    <label for="category">{{'CREATE_RECIPE.DETAILS.CATEGORY'| translate}}</label>
     <select id="category" [(ngModel)]="CategoryId" (ngModelChange)="updateDetails()">
       <option *ngFor="let category of categories" [ngValue]="category.value">
         {{ category.label }}
@@ -29,7 +29,7 @@
   </div>
 
   <div class="form-group">
-    <label for="isVegetarian">Is this a vegetarian recipe?</label>
+    <label for="isVegetarian">{{'CREATE_RECIPE.DETAILS.IS_VEGAN'| translate}}</label>
     <select id="isVegetarian" [(ngModel)]="Vegan" (ngModelChange)="updateDetails()">
       <option *ngFor="let option of vegetarianOptions" [ngValue]="option.value">
         {{ option.label }}

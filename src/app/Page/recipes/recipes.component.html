@@ -1,6 +1,26 @@
 <ng-container *ngIf="!notFound; else notFoundTemplate">
   <div class="Recipe">
     <div class="Recipe-info" *ngIf="RecipesById">
+
+      <!-- HTML: Hiển thị số sao dựa trên averageRating -->
+      <div class="star-rating">
+        <!-- Sao đầy -->
+        <ng-container *ngFor="let star of fullStars">
+          <i class="fas fa-star" style="color: #EE6352;"></i>
+        </ng-container>
+
+        <!-- Nửa sao -->
+        <i *ngIf="hasHalfStar" class="fas fa-star-half-alt" style="color: #EE6352;"></i>
+
+        <!-- Sao rỗng -->
+        <ng-container *ngFor="let star of emptyStars">
+          <i class="far fa-star" style="color: #EE6352;"></i>
+        </ng-container>
+
+      </div>
+
+
+
       <app-recipe-main [title]="RecipesById.title"
         [additionalText]="'Welcome to Cooks Delight, where culinary dreams come alive! \nToday, we embark on a journey of flavors with a dish that promises \n to elevate your dining experience – our Recipes:\n'"
         [description]="RecipesById.description" [cookTime]="RecipesById.cookTime" [prepTime]="RecipesById.prepTime"
@@ -57,7 +77,20 @@
               ❤
             </button>
           </div>
+          <ng-container *ngIf="RecipesById.status === 'Pending'|| RecipesById.status === 'Rejected'  && isAdmin">
+            <button (click)="checkRecipe(RecipesById.recipeId,RecipesById,true)" class="btn btn-success">
+              Approve
+            </button>
+            <button (click)="checkRecipe(RecipesById.recipeId,RecipesById,false)" class="btn btn-danger">
+              Reject
+            </button>
+            <button (click)="removeRecipe(RecipesById.recipeId)" class="btn btn-danger">
+              Remove
+            </button>
+
+          </ng-container>
         </div>
+
       </div>
     </div>
 
@@ -69,7 +102,7 @@
           [description]="recipe.recipeDetails.description" [prepTime]="recipe.recipeDetails.prepTime"
           [cookTime]="recipe.recipeDetails.cookTime" [serves]="recipe.recipeDetails.servings"
           [title]="recipe.recipeDetails.title" [isVegan]="recipe.isVegan" [recipeId]="recipe.recipeDetails.recipeId"
-          [unit1]="'MIN'" [unit2]="'SERVES'"
+          [unit1]="'MIN'" [unit2]="'SERVES'" [averageRating]="recipe.recipeDetails.averageRating"
           (recipeSelected)="onRecipeSelected(recipe.recipeDetails.recipeId)"></app-recipe-card>
 
       </div>

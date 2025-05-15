@@ -47,68 +47,68 @@ export class AuthComponent {
     this.isLoginChecked = input.checked;
   }
 
-  onLogin() {
-    this.authService
-      .login(this.username, this.password, this.deviceUuid)
-      .subscribe({
-        next: () => {
-          this.router.navigate(['/home']);
-          this.loggedIn = true;
-          console.log('Login successful!');
-        },
-        error: (err) => {
-          this.errorMessage = 'Invalid login credentials.';
-          console.error('Login error:', err);
-        },
-      });
-  }
+  // onLogin() {
+  //   this.authService
+  //     .login(this.username, this.password, this.deviceUuid)
+  //     .subscribe({
+  //       next: () => {
+  //         this.router.navigate(['/home']);
+  //         this.loggedIn = true;
+  //         console.log('Login successful!');
+  //       },
+  //       error: (err) => {
+  //         this.errorMessage = 'Invalid login credentials.';
+  //         console.error('Login error:', err);
+  //       },
+  //     });
+  // }
 
   isLoggedIn(): boolean {
     return this.loggedIn;
   }
 
-  onRegister() {
-    const formData = {
-      email: this.email.trim(),
-      username: this.registerUsername.trim(),
-      password: this.registerPassword.trim(),
-      role: 'user',
-    };
+  // onRegister() {
+  //   const formData = {
+  //     email: this.email.trim(),
+  //     username: this.registerUsername.trim(),
+  //     password: this.registerPassword.trim(),
+  //     role: 'user',
+  //   };
 
-    if (!formData.email || !formData.username || !formData.password) {
-      console.log('All fields are required.');
-      return;
-    }
+  //   if (!formData.email || !formData.username || !formData.password) {
+  //     console.log('All fields are required.');
+  //     return;
+  //   }
 
-    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    if (!emailPattern.test(formData.email)) {
-      console.log('Please enter a valid email address.');
-      return;
-    }
+  //   const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+  //   if (!emailPattern.test(formData.email)) {
+  //     console.log('Please enter a valid email address.');
+  //     return;
+  //   }
 
-    bcrypt.hash(formData.password, 10, (err, hashedPassword) => {
-      if (err) {
-        console.error('Error hashing password:', err);
-        return;
-      }
+  //   bcrypt.hash(formData.password, 10, (err, hashedPassword) => {
+  //     if (err) {
+  //       console.error('Error hashing password:', err);
+  //       return;
+  //     }
 
-      const userData = {
-        email: formData.email,
-        username: formData.username,
-        passwordHash: hashedPassword,
-        role: formData.role,
-      };
+  //     const userData = {
+  //       email: formData.email,
+  //       username: formData.username,
+  //       passwordHash: hashedPassword,
+  //       role: formData.role,
+  //     };
 
-      this.registerService.registerUser(userData).subscribe({
-        next: (response) => {
-          console.log('User registered successfully:', response);
-          console.log('Registration successful!');
-        },
-        error: (error) => {
-          console.error('Error during registration:', error);
-          console.log('Registration failed. Please try again.');
-        },
-      });
-    });
-  }
+  //     this.registerService.registerUser(userData).subscribe({
+  //       next: (response) => {
+  //         console.log('User registered successfully:', response);
+  //         console.log('Registration successful!');
+  //       },
+  //       error: (error) => {
+  //         console.error('Error during registration:', error);
+  //         console.log('Registration failed. Please try again.');
+  //       },
+  //     });
+  //   });
+  // }
 }

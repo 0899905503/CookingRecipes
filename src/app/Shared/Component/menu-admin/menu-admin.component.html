@@ -1,0 +1,37 @@
+<div class="relative">
+
+  <div class="sidebar-wrapper">
+    <!-- Sidebar -->
+    <div class="sidebar-container" [ngClass]="{ 'collapsed': !isExpanded }">
+      <!-- Toggle Button (nằm bên trong container) -->
+      <button (click)="toggleSidebar()" class="toggle-button">
+        <span>{{ isExpanded ? '◀' : '▶' }}</span>
+      </button>
+
+      <!-- Header -->
+      <div class="menu-header">
+        <img [src]="logo" alt="Logo" />
+        <h1 *ngIf="isExpanded">COOKING RECIPES</h1>
+      </div>
+
+      <!-- Menu -->
+      <ul>
+        <li *ngFor="let item of menuItems" [ngClass]="{ 'active': item.label === activeItem }"
+          (click)="setActive(item.label)">
+          <i [class]="item.icon"></i>
+          <span *ngIf="isExpanded">{{ item.label }}</span>
+        </li>
+      </ul>
+
+      <!-- Footer -->
+      <div class="sidebar-footer">
+        <img src="assets/avatar.png" alt="Avatar" />
+        <div *ngIf="isExpanded" class="user-info">
+          <p>Welcome back 👋</p>
+          <p>BAVO</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

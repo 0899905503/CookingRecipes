@@ -12,6 +12,7 @@ import { RecipeTipComponent } from '../../Shared/Component/recipe-tip/recipe-tip
 import { CreateRecipeDataService } from '../../Service/CreateRecipeData/create-recipe-data.service';
 import { CreateRecipeService } from './../../Service/CreateRecipe/create-recipe.service';
 import { CreateNutrientComponent } from '../../Shared/Component/CreateRecipes/create-nutrient/create-nutrient.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-recipe',
@@ -28,6 +29,7 @@ import { CreateNutrientComponent } from '../../Shared/Component/CreateRecipes/cr
     CreateDescriptionComponent,
     CreateNameComponent,
     RecipeTipComponent,
+    TranslateModule,
   ],
   templateUrl: './create-recipe.component.html',
   styleUrl: './create-recipe.component.scss',

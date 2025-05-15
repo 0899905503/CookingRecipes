@@ -1,12 +1,29 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../../Service/Auth/Login/login.service';
+import { TranslateService } from '@ngx-translate/core';
+import { HttpClientModule } from '@angular/common/http';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   standalone: true,
   selector: 'app-setting-page',
   templateUrl: './setting-page.component.html',
   styleUrls: ['./setting-page.component.scss'],
+  imports: [TranslateModule, HttpClientModule],
 })
 export class SettingPageComponent {
+  constructor(
+    private authService: AuthService,
+    public translate: TranslateService
+  ) {
+    // Khởi tạo ngôn ngữ mặc định
+    translate.addLangs(['en', 'vi']);
+    translate.setDefaultLang('en');
+
+    const browserLang = translate.getBrowserLang();
+    translate.use(browserLang?.match(/en|vi/) ? browserLang : 'en');
+  }
+
   toggleDarkMode(event: Event): void {
     const isChecked = (event.target as HTMLInputElement).checked;
     if (isChecked) {
@@ -14,5 +31,14 @@ export class SettingPageComponent {
     } else {
       document.body.classList.remove('dark-mode');
     }
+  }
+
+  changeLanguage(event: Event): void {
+    const select = event.target as HTMLSelectElement;
+    this.translate.use(select.value);
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

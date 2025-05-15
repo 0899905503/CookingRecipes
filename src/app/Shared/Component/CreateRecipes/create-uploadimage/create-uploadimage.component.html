@@ -1,5 +1,5 @@
 <div class="description-container">
-  <h2>Recipe Image</h2>
+  <h2>{{'CREATE_RECIPE.RECIPE_IMAGE'| translate}}</h2>
   <table>
     <tbody>
       <tr *ngFor="let description of descriptions; let i = index">
@@ -8,7 +8,8 @@
             <img [src]="description.image" alt="Uploaded Image" class="uploaded-image" />
           </ng-container>
 
-          <button class="upload-btn" (click)="triggerFileInput(i)">Add Replace Image</button>
+          <button class="upload-btn" (click)="triggerFileInput(i)">{{'CREATE_RECIPE.ADD_RECIPE_IAMGE'|
+            translate}}</button>
           <input type="file" accept="image/*" #fileInput style="display: none" (change)="uploadImage($event, i)" />
         </td>
       </tr>

@@ -11,7 +11,10 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { CommentComponent } from '../../Shared/Component/comment/comment.component';
 import { FormsModule } from '@angular/forms';
-import { stat } from 'fs';
+import { AuthService } from '../../Service/Auth/Login/login.service';
+import e from 'express';
+import { stat } from 'node:fs';
+import { DateUtils } from '../../Util/date-format-util';
 
 @Component({
   standalone: true,
@@ -44,37 +47,65 @@ export class RecipesComponent {
   recipeIds!: number;
   notFound: boolean = false;
   isFavorite: boolean = false; // Trạng thái yêu thích
-  userId: number = 10; // Thay bằng ID người dùng thực tế
+  userId: number = 0; // Thay bằng ID người dùng thực tế
   //comment
   newCommentText: string = '';
   rating: number = 0;
   hoverRating: number = 0;
   stars = Array(5).fill(0);
+  averageRating: number = 0;
+
+  fullStars: number[] = [];
+  emptyStars: number[] = [];
+  hasHalfStar: boolean = false;
+
+  //check role
+  isAdmin: boolean = false;
+  role: any;
+
+  //status button check
+  statusButton: string = '';
   constructor(
     private recipeService: RecipeService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
+    const userIdst = this.authService.getUserId();
+    console.log('User ID:', userIdst);
+    if (userIdst !== null) {
+      this.userId = userIdst;
+    }
+
     this.route.paramMap.subscribe((params) => {
       this.recipeIds = Number(params.get('recipeId'));
       console.log('Recipe ID received from URL:', this.recipeIds);
     });
+    this.role = this.authService.getRole();
+    if (this.role) {
+      this.isAdmin = true;
+    } else {
+      this.isAdmin = false;
+    }
+
     if (this.recipeIds) {
       this.onGetId(this.recipeIds);
       this.onGetSimilar(this.recipeIds);
       this.onGetComment(this.recipeIds);
       //this.recipeService.checkFavorite(this.recipeIds, this.userId).subscribe({
-      this.recipeService.checkFavorite(this.recipeIds, 10).subscribe({
-        next: (isFavorite) => {
-          this.isFavorite = isFavorite?.data;
-          console.log('Trạng thái yêu thích:', isFavorite);
-        },
-        error: (error) => {
-          console.error('Lỗi khi kiểm tra trạng thái yêu thích:', error);
-        },
-      });
+      if (userIdst !== null) {
+        this.recipeService.checkFavorite(this.recipeIds, userIdst).subscribe({
+          next: (isFavorite) => {
+            this.isFavorite = isFavorite?.data;
+            console.log('Trạng thái yêu thích:', isFavorite);
+          },
+          error: (error) => {
+            console.error('Lỗi khi kiểm tra trạng thái yêu thích:', error);
+          },
+        });
+      }
     } else {
       this.notFound = true;
       console.log('recipeId null');
@@ -94,7 +125,8 @@ export class RecipesComponent {
       (data) => {
         this.RecipesById = data || {};
         const tips = this.RecipesById.recipeTip || [];
-
+        this.averageRating = this.RecipesById.averageRating;
+        console.log('Average rating:', this.averageRating);
         if (tips.length > 0) {
           this.doTips = tips
             .filter((tip: any) => tip.actionType === 1)
@@ -120,6 +152,11 @@ export class RecipesComponent {
           );
           this.steps = this.getInstructionDetails(instructions);
         }
+        if (this.averageRating == 0) {
+          this.setupStars(5);
+        } else {
+          this.setupStars(this.averageRating);
+        }
       },
       (error) => {
         console.error('Error fetching recipes:', error);
@@ -130,15 +167,21 @@ export class RecipesComponent {
   async onGetSimilar(id: number) {
     try {
       const data = await this.recipeService.getSimilarRecipes(id).toPromise();
+
       if (data) {
-        this.SimilarRecipes = data.map((recipeData: any) => {
-          return {
+        // Lọc trước, rồi map để tránh ghi đè dữ liệu
+        this.SimilarRecipes = data
+          .filter(
+            (item: any) =>
+              item.status !== 'Pending' && item.status !== 'Rejected'
+          )
+          .map((recipeData: any) => ({
             recipeId: recipeData.recipeId,
             sharedIngredientsCount: recipeData.sharedIngredientsCount,
             recipeDetails: recipeData.recipe[0],
-            isVegan: recipeData.recipe[0].vegan,
-          };
-        });
+            isVegan: recipeData.recipe[0]?.vegan ?? false,
+          }));
+
         console.log('Similar recipes fetched successfully');
       } else {
         console.warn('No similar recipes found');
@@ -230,6 +273,10 @@ export class RecipesComponent {
         .toPromise();
       if (data) {
         this.Comment = data;
+        this.Comment = data.map((comment: any) => ({
+          ...comment,
+          datePosted: DateUtils.formatDate(comment.datePosted),
+        }));
         console.log('Similar recipes fetched successfully');
       } else {
         console.warn('No similar recipes found');
@@ -266,5 +313,50 @@ export class RecipesComponent {
 
   setRating(star: number) {
     this.rating = star;
+  }
+  setupStars(rating: number) {
+    const full = Math.floor(rating);
+    const hasHalf = rating % 1 >= 0.25 && rating % 1 < 0.75;
+    const empty = 5 - full - (hasHalf ? 1 : 0);
+
+    this.fullStars = Array(full).fill(0);
+    this.hasHalfStar = hasHalf;
+    this.emptyStars = Array(empty).fill(0);
+
+    console.log('Rating passed to setupStars:', rating);
+  }
+
+  checkRecipe(recipeId: number, recipe: any, checkStatus: boolean) {
+    if (checkStatus) {
+      this.statusButton = 'Approved';
+    } else {
+      this.statusButton = 'Rejected';
+    }
+    const updatedRecipe = {
+      title: recipe.title,
+      description: recipe.description,
+      prepTime: recipe.prepTime,
+      cookTime: recipe.cookTime,
+      servings: recipe.servings,
+      imageUrl: recipe.imageUrl,
+      vegan: !!recipe.vegan, // đảm bảo là boolean chứ không phải chuỗi
+      status: this.statusButton,
+    };
+
+    this.recipeService.updateRecipeById(recipeId, updatedRecipe).subscribe({
+      next: (response) => {
+        console.log('Recipe updated successfully', response);
+        // Có thể update UI hoặc báo thành công tại đây
+      },
+      error: (error) => {
+        console.error('Error updating recipe', error);
+        // Báo lỗi tại đây nếu cần
+      },
+    });
+  }
+
+  removeRecipe(recipeId: number) {
+    this.recipeService.deleteRecipes(recipeId).subscribe(() => {});
+    console.log('Recipe rejected successfully');
   }
 }

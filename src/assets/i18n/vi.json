@@ -1,0 +1,90 @@
+{
+  "LOGOUT": "Đăng xuất",
+  "LANGUAGE": "Ngôn ngữ",
+  "DARK_MODE": "Chế độ tối",
+  "CHANGE_PASSWORD": "Đổi mật khẩu",
+  "SETTINGS": "Cài đặt",
+  "SAVE": "Lưu",
+  "FAVORITE" : {
+    "HEADING": "Món ăn yêu thích",
+    "TITLE": "Chọn món ăn mà bạn muốn nấu hôm nay",
+    "DESCRIPTION": "Nấu món bạn muốn và tận hương thành quả",
+    "VEGAN": "Chay",
+    "ALL": "Tất cả",
+    "BREAKFAST": "Bữa sáng",
+    "LUNCH": "Bữa trưa",
+    "DINNER": "Bữa tối",
+    "DESSERT": "Tráng miệng",
+    "QUICK_BITE": "Thức ăn nhanh!"
+  },
+
+
+  "CREATE_RECIPE": {
+    "CREATE_RECIPE": "Tạo công thức mới",
+    "RECIPE_TITLE": "Tên công thức",
+    "RECIPE_IMAGE": "Hình ảnh công thức",
+    "ADD_RECIPE_IAMGE": "Thêm hình ảnh công thức",
+    "DESCRIPTION": "Mô tả",
+    "INGREDIENT": {
+              "INGREDIENTS": "NGUYÊN LIỆU",
+              "INGREDIENT_NAME": "TÊN NGUYÊN LIỆU",
+              "QUANTITY": "SỐ LƯỢNG",
+              "UNIT": "ĐƠN VỊ",
+              "TYPE": "LOẠI",
+              "SELLECT_INGREDIENT": "Chọn nguyên liệu",
+              "ADD_INGREDIENT": "+ THÊM NGUYÊN LIỆU"
+    },
+
+    "COOKING_TOOL": {
+      "COOKING_TOOLS": "DỤNG CỤ NẤU ĂN",
+      "TOOL_NAME": "CHỌN TÊN DỤNG CỤ",
+      "ADD_TOOL": "+ THÊM DỤNG CỤ"
+    },
+    "NUTRIENT": {
+      "NUTRIENTS": "DINH DƯỠNG",
+      "NUTRIENT_NAME": "TÊN DINH DƯỠNG",
+      "QUANTITY": "SỐ LƯỢNG",
+      "UNIT": "ĐƠN VỊ",
+      "ADD_NUTRIENT": "+ THÊM DINH DƯỠNG",
+      "SELECT_NUTRIENT": "CHỌN DINH DƯỠNG"
+    },
+    "DETAILS": {
+      "SERVING": "Phần ăn",
+      "COOKING_TIME": "Thời gian nấu",
+      "PREP_TIME": "Độ khó",
+      "CATEGORY": "Phân loại",
+      "IS_VEGAN": "Có phải là món chay không?"
+    },
+    "INSTRUCTION": {
+      "INSTRUCTIONS":"HƯỚNG DẪN",
+      "TITLE": "Tiêu đề",
+      "STEP": "Bước",
+      "INSTRUCTION_TEXT": "Hướng dẫn chi tiết",
+      "COOKING_TOOL": "Công cụ nấu ăn",
+      "SELECT_TOOL": "Chọn công cụ nấu ăn",
+      "ADD_INSTRUCTION": "+ Thêm hướng dẫn"
+    },
+    "RECIPE_TIP": {
+      "RECIPE_TIPS":"MẸO CHO CÔNG THỨC",
+      "TITLE":"Tiêu đề",
+      "ACTION_TEXT": "Việc làm",
+      "ACTION_TYPE": "Có nên hay không",
+      "SELECT_TYPE": "Nên làm hay không",
+      "DO" : "Nên làm",
+      "DO_NOT" : "Không nên làm",
+      "ADD_RECIPE_TIP": "+ Thêm mẹo cho công thức"
+    },
+    "SAVE": "Lưu",
+    "BACK": "Quay lại"
+  },
+
+  "MENU":{
+    "HOME":"Trang Chủ",
+    "COOKING_TIPS":"Mẹo Nấu Ăn",
+    "CREATE_RECIPE": "Tạo Công Thức",
+    "FAVORITE": "Yêu Thích",
+    "ABOUT_US": "Giới Thiệu",
+    "SETTING": "Cài Đặt",
+    "SUBSCRIBE": "Đăng ký"
+  }
+}

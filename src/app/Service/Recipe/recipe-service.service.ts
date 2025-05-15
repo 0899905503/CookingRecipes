@@ -10,12 +10,14 @@ export class RecipeService {
   private baseUrl = ApiPaths.baseUrl;
   private getAllRecipe = ApiPaths.GetAllRecipe;
   private getById = ApiPaths.GetByIdRecipe;
-  private getSimilar = ApiPaths.GetSimilar;
   private createFavoriteRecipe = ApiPaths.CreateFavoriteRecipe;
   private deleteFavoriteRecipe = ApiPaths.DeleteFavoriteRecipe;
   private checkFavoriteRecipe = ApiPaths.CheckFavoriteRecipe;
   private getCommntentByRecipeId = ApiPaths.GetCommentByRecipeId;
   private createComments = ApiPaths.CreateComment;
+  private getSimilarRecipe = ApiPaths.GetSimilar;
+  private updateRecipe = ApiPaths.UpdateRecipe;
+  private deleteRecipe = ApiPaths.DeleteRecipe;
 
   constructor(private http: HttpClient) {}
 
@@ -40,7 +42,7 @@ export class RecipeService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    return this.http.get<any[]>(this.baseUrl + this.getSimilar + id, {
+    return this.http.get<any[]>(this.baseUrl + this.getSimilarRecipe + id, {
       headers,
     });
   }
@@ -105,5 +107,27 @@ export class RecipeService {
     return this.http.post(`${this.baseUrl}${this.createComments}`, payload, {
       headers,
     });
+  }
+
+  updateRecipeById(recipeId: number, recipeData: any): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    const url = `${this.baseUrl}${this.updateRecipe}${recipeId}`;
+    console.log('Sending updateRecipe request to:', url); // Log kiểm tra
+    return this.http.put(url, recipeData, { headers });
+  }
+
+  deleteRecipes(recipeId: number): Observable<any> {
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    const url = `${this.baseUrl}${this.deleteRecipe}${recipeId}`;
+    console.log('Sending deleteFavorite request to:', url); // Log kiểm tra
+    return this.http.delete(url, { headers });
   }
 }

@@ -1,0 +1,91 @@
+{
+  "LOGOUT": "LOGOUT",
+  "LANGUAGE": "Language",
+  "DARK_MODE": "Dark Mode",
+  "CHANGE_PASSWORD": "Change Password",
+  "SETTINGS": "Settings",
+  "SAVE": "Save",
+  "FAVORITE" : {
+    "HEADING": "MY FAVORITE RECIPE",
+    "TITLE": "CHOOSE A RECIPE YOU WANT TO COOK TODAY",
+    "DESCRIPTION": "COOK YOUR FAVORITE RECIPE AND ENJOY THE RESULT",
+    "ALL": "ALL",
+    "VEGAN": "VEGAN",
+    "BREAKFAST": "BREAKFAST",
+    "LUNCH": "LUNCH",
+    "DINNER": "DINNER",
+    "DESSERT": "DESSERT",
+    "QUICK_BITE": "QUICK BITE!"
+  },
+  "CREATE_RECIPE": {
+    "CREATE_RECIPE": "CREATE NEW RECIPE",
+    "RECIPE_TITLE": "RECIPE TITLE",
+    "RECIPE_IMAGE": "RECIPE IMAGE",
+    "ADD_RECIPE_IAMGE": "ADD RECIPE IMAGE",
+    "DESCRIPTION": "DESCRIPTION",
+    "INGREDIENT": {
+              "INGREDIENTS": "INGREDIENTS",
+              "INGREDIENT_NAME": "INGREDIENT NAME",
+              "QUANTITY": "QUANTITY",
+              "UNIT": "UNIT",
+              "TYPE": "TYPE",
+              "SELLECT_INGREDIENT": "SELECT INGREDIENT",
+              "ADD_INGREDIENT": "+ ADD INGREDIENT"
+    },
+    "COOKING_TOOL": {
+      "COOKING_TOOLS": "COOKING TOOLS",
+      "TOOL_NAME": "SELECT TOOL NAME",
+      "ADD_TOOL": "+ ADD TOOL"
+    },
+    "NUTRIENT":{
+      "NUTRIENTS": "NUTRIENTS",
+      "NUTRIENT_NAME": "NUTRIENT NAME",
+      "QUANTITY": "QUANTITY",
+      "UNIT": "UNIT",
+      "ADD_NUTRIENT": "+ ADD NUTRIENT",
+      "SELECT_NUTRIENT": "SELECT NUTRIENT"
+    },
+    "DETAILS":{
+      "SERVING": "SERVING",
+      "COOKING_TIME": "COOKING TIME",
+      "PREP_TIME": "PREP TIME",
+      "CATEGORY": "CATEGORY",
+      "IS_VEGAN": "Is this a vegetarian recipe?"
+    },
+    "INSTRUCTION": {
+      "INSTRUCTIONS":"INSTRUCTIONS",
+      "TITLE":"TITLE",
+      "STEP": "STEP",
+      "INSTRUCTION_TEXT": "INSTRUCTION DETAILS",
+      "COOKING_TOOL": "COOKING TOOL",
+       "SELECT_TOOL": "Select Cooking Tool",
+      "ADD_INSTRUCTION": "+ Instruction"
+    },
+    "RECIPE_TIP": {
+      "RECIPE_TIPS":"RECIPE TIPS",
+      "TITLE":"Title",
+      "ACTION_TEXT": "Action Text",
+      "ACTION_TYPE": "Action Type",
+      "SELECT_TYPE": "Select action type",
+      "DO" : "Do",
+      "DO_NOT" : "Don`t",
+       "ADD_RECIPE_TIP": "+ Recipe Tip"
+    },
+    "SAVE": "SAVE",
+    "BACK": "BACK"
+  },
+
+  "MENU":{
+    "HOME":"HOME",
+    "COOKING_TIPS":"COOKING TIP",
+    "CREATE_RECIPE": "CREATE RECIPE",
+    "FAVORITE": "FARVORITE",
+    "ABOUT_US": "ABOUT US",
+    "SETTING": "SETTING",
+    "SUBSCRIBE": "SUBSCRIBE"
+  }
+
+}
+
+
+

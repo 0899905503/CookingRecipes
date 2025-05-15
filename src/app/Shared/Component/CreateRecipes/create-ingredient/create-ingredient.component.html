@@ -1,19 +1,19 @@
 <div class="ingredient-container">
-  <h2>Ingredient</h2>
+  <h2>{{'CREATE_RECIPE.INGREDIENT.INGREDIENTS'| translate}}</h2>
   <table>
     <thead>
       <tr>
-        <th>Ingredient Name</th>
-        <th>Quantity</th>
-        <th>Unit</th>
-        <th>Type</th>
+        <th>{{'CREATE_RECIPE.INGREDIENT.INGREDIENT_NAME'| translate}}</th>
+        <th>{{'CREATE_RECIPE.INGREDIENT.QUANTITY'| translate}}</th>
+        <th>{{'CREATE_RECIPE.INGREDIENT.UNIT'| translate}}</th>
+        <th>{{'CREATE_RECIPE.INGREDIENT.TYPE'| translate}}</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let ingredient of ingredients; let i = index">
         <td>
           <select [(ngModel)]="ingredient.ingredientName" (change)="onIngredientChange(ingredient)">
-            <option value="">Select Ingredient Name</option>
+            <option value="">{{'CREATE_RECIPE.INGREDIENT.SELLECT_INGREDIENT'| translate}}</option>
             <option *ngFor="let item of Ingredient" [value]="item.ingredientName">
               {{ item.ingredientName }}
             </option>
@@ -32,5 +32,5 @@
       </tr>
     </tbody>
   </table>
-  <button (click)="addIngredient()">+ Ingredient</button>
+  <button (click)="addIngredient()">{{'CREATE_RECIPE.INGREDIENT.ADD_INGREDIENT'| translate}}</button>
 </div>

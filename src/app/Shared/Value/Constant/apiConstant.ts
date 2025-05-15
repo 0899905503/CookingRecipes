@@ -1,14 +1,18 @@
 export const ApiPaths = {
   baseUrl: 'http://localhost:5099/api/v1/',
+  baseAuthUrl: 'http://localhost:5099/api/Auth/',
   //Recipe
   GetAllRecipe: 'Recipe/Get-all-recipe',
   GetByIdRecipe: 'Recipe/Get-recipe-by-id/',
   GetTopView: 'Recipe/Get-recipe-top-view',
   GetNewRecipe: 'Recipe/Get-new-recipe',
   CreateRecipe: 'Recipe/create-recipe',
+  GetSimilar: 'Recipe/Get-similar-recipe/',
+  UpdateRecipe: 'Recipe/Update/',
+  DeleteRecipe: 'Recipe/Delete/',
 
   //Recipe Ingredient
-  GetSimilar: 'RecipeIngredient/Get-similar-recipe/',
+
   GetAllIngredient: 'Ingredient/Get-all-ingredient',
 
   //Tip
@@ -16,7 +20,7 @@ export const ApiPaths = {
   GetByIdTip: 'CookingTip/Get-cookingtip-by-id/',
 
   //User
-  CreateUser: 'User/Create-user',
+  Register: 'register',
 
   //Cooking Tip
   GetByIdCookingTip: 'CookingTip/Get-cookingtip-by-id/',
@@ -49,6 +53,12 @@ export const ApiPaths = {
   CheckFavoriteRecipe: 'Favorite/check-favorite',
 
   //Comment
+  GetAllComment: 'Comment/get-all-comments',
   GetCommentByRecipeId: 'Comment/get-comments-by-recipe-id/',
   CreateComment: 'Comment/create-comment',
+
+  //Auth
+  SendOtp: 'send-otp-email',
+  VerifyOtp: 'verify-otp',
+  ResetPassword: 'reset-password',
 };

@@ -4,13 +4,14 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../Service/Auth/Login/login.service';
 import { FormsModule } from '@angular/forms';
 import { ErrorsCodeEnum } from '../../Shared/Value/Enums/errorsCodeEnums';
+import { ForgotPasswordComponent } from '../../Shared/Component/forgot-password/forgot-password.component';
 
 @Component({
   standalone: true,
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, ForgotPasswordComponent],
 })
 export class LoginComponent {
   username = '';
@@ -20,6 +21,17 @@ export class LoginComponent {
   private loggedIn = false;
   @Input() activeButton: string = '';
   @Output() toggle = new EventEmitter<string>();
+
+  //forgot password
+  showForgotPasswordModal = false;
+  emailForOtp = '';
+  otpCode = '';
+  newPassword = '';
+  step = 1;
+  message = '';
+  emailError = '';
+  otpError = '';
+  resetError = '';
 
   isLoginChecked: boolean = false;
 
@@ -59,5 +71,51 @@ export class LoginComponent {
       localStorage.getItem('token') || sessionStorage.getItem('token');
     console.log('token : ' + token);
     return !!token;
+  }
+  openForgotPasswordModal() {
+    this.showForgotPasswordModal = true;
+    this.step = 1;
+    this.emailForOtp = '';
+    this.otpCode = '';
+    this.newPassword = '';
+    this.message = '';
+  }
+
+  sendOtp() {
+    this.authService.sendOtpS(this.emailForOtp).subscribe({
+      next: (res) => {
+        this.message = res.message;
+        this.step = 2;
+      },
+      error: (err) => {
+        this.emailError = 'Failed to send OTP. Check email.';
+      },
+    });
+  }
+
+  verifyOtp() {
+    this.authService.verifyOtpS(this.emailForOtp, this.otpCode).subscribe({
+      next: (res) => {
+        this.message = res.message;
+        this.step = 3;
+      },
+      error: (err) => {
+        this.otpError = 'OTP verification failed.';
+      },
+    });
+  }
+
+  resetPassword() {
+    this.authService
+      .resetPasswordS(this.emailForOtp, this.newPassword)
+      .subscribe({
+        next: (res) => {
+          this.message = res.message;
+          this.showForgotPasswordModal = false;
+        },
+        error: (err) => {
+          this.resetError = 'Password reset failed.';
+        },
+      });
   }
 }
