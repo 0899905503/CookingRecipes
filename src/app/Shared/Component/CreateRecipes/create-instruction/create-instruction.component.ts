@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CookingtoolService } from '../../../../Service/CookingTool/cookingtool.service';
 import { CreateRecipeDataService } from '../../../../Service/CreateRecipeData/create-recipe-data.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-instruction',
@@ -30,11 +30,20 @@ export class CreateInstructionComponent {
   }
 
   Cookingtool: any[] = [];
+  //translate
+  currentLang: string = 'en';
 
   constructor(
     private cookingtoolService: CookingtoolService,
-    private createRecipeDataService: CreateRecipeDataService
-  ) {}
+    private createRecipeDataService: CreateRecipeDataService,
+    private translate: TranslateService
+  ) {
+    this.currentLang = this.translate.currentLang || 'en';
+
+    this.translate.onLangChange.subscribe((event) => {
+      this.currentLang = event.lang;
+    });
+  }
 
   ngOnInit(): void {
     this.onGetAllCookingTool();

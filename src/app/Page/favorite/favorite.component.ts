@@ -3,7 +3,7 @@ import { AuthService } from '../../Service/Auth/Login/login.service';
 import { FavoriteService } from '../../Service/Favorite/favorite.service';
 import { RecipeCardComponent } from '../../Shared/Component/recipe-card/recipe-card.component';
 import { CommonModule } from '@angular/common';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-favorite',
@@ -22,10 +22,18 @@ export class FavoriteComponent {
   @Input() totalView!: string;
   @Output() recipeSelected = new EventEmitter<number>();
   selectedMenu: string = 'ALL';
+  currentLang: string = 'en';
   constructor(
     private favoriteService: FavoriteService,
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    private translate: TranslateService
+  ) {
+    this.currentLang = this.translate.currentLang || 'en';
+
+    this.translate.onLangChange.subscribe((event) => {
+      this.currentLang = event.lang;
+    });
+  }
   FavoritesRecipe: any[] = [];
 
   ngOnInit(): void {

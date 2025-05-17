@@ -3,7 +3,7 @@
     <div class="overlay">
       <div class="content">
         <h2>COOKING RECIPES</h2>
-        <p>Formulated with the Best Selected Spices</p>
+        <p>{{'AUTH.LOGIN.LOGIN_TITLE'| translate}}</p>
       </div>
     </div>
     <img src="assets/images/BackgroundLogin.png" alt="Recipe Image">
@@ -11,42 +11,45 @@
 
   <div class="register-right">
     <div class="header">
-      <h1 class="top-right">COOKING <span class="highlight">RECIPES</span></h1>
-      <h4>Welcome to <span class="highlight">COOKING RECIPES</span></h4>
+      <h1 class="top-right">{{'AUTH.LOGIN.TITLE_NAME_1'| translate}} <span
+          class="highlight">{{'AUTH.LOGIN.TITLE_NAME_2'|
+          translate}}</span></h1>
+      <h4>{{'AUTH.LOGIN.WELCOME_1'| translate}}<span class="highlight">{{'AUTH.LOGIN.WELCOME_2'| translate}}</span></h4>
       <div class="button-container">
         <button class="button"
           [ngClass]="{ 'active-login': activeButton === 'login', 'inactive-login': activeButton !== 'login' }"
           (click)="toggleActive('login')">
-          Login
+          {{'AUTH.LOGIN.LOGIN_BUTTON'| translate}}
         </button>
         <button class="button"
           [ngClass]="{ 'active-register': activeButton === 'register', 'inactive-register': activeButton !== 'register' }"
           (click)="toggleActive('register')">
-          Register
+          {{'AUTH.LOGIN.REGISTER_BUTTON'| translate}}
         </button>
       </div>
 
       <p>
-        You want to eat <span class="highlight">delicious food?</span> This is
-        recipe with the best selected spices.
+        {{'AUTH.LOGIN.DESCRIPTION_1'| translate}} <span class="highlight"> {{'AUTH.LOGIN.DESCRIPTION_2'|
+          translate}}</span>
+        {{'AUTH.LOGIN.DESCRIPTION_3'| translate}}
       </p>
     </div>
 
     <form (ngSubmit)="onRegister()" #registerForm="ngForm">
       <div class="form-group">
-        <label for="email">Email Address</label>
+        <label for="email">{{'AUTH.LOGIN.EMAIL_ADDRESS'| translate}}</label>
         <input type="text" id="email" name="email" placeholder="Enter your Email Address" [(ngModel)]="email"
           required />
       </div>
 
       <div class="form-group">
-        <label for="username">User name</label>
+        <label for="username">{{'AUTH.LOGIN.USER_NAME'| translate}}</label>
         <input type="text" id="username" name="username" placeholder="Enter your User name" [(ngModel)]="username"
           required />
       </div>
 
       <div class="form-group">
-        <label for="password">Password</label>
+        <label for="password">{{'AUTH.LOGIN.PASSWORD'| translate}}</label>
         <div class="password-container">
           <input type="password" id="password" name="password" placeholder="Enter your Password" [(ngModel)]="password"
             [type]="passwordVisible ? 'text' : 'password'" required />
@@ -54,10 +57,10 @@
       </div>
       <!-- Nhập mã OTP -->
       <div class="otp-section" *ngIf="otpSent && !emailConfirmed">
-        <label for="otp">Enter OTP:</label>
+        <label for="otp"> {{'AUTH.OTP_EMAIL'| translate}}</label>
         <input type="text" id="otp" [(ngModel)]="otpCode" name="otp" placeholder="Enter OTP" />
 
-        <button type="button" (click)="verifyOtp()">Verify OTP</button>
+        <button type="button" (click)="verifyOtp()"> {{'AUTH.VERIFY_OTP'| translate}}</button>
 
         <p *ngIf="otpError" class="error">{{ otpError }}</p>
       </div>
@@ -66,9 +69,10 @@
 
       <!-- Hiển thị nút Register nếu đã xác thực OTP -->
       <button class="register-btn" type="button" (click)="onRegisterOtp()" *ngIf="!otpSent">
-        Send OTP
+        {{'AUTH.SEND_OTP'| translate}}
       </button>
-      <button class="register-btn" type="submit" (click)="onRegister()" *ngIf="emailConfirmed">Register</button>
+      <button class="register-btn" type="submit" (click)="onRegister()" *ngIf="emailConfirmed">
+        {{'AUTH.LOGIN.REGISTER_BUTTON'| translate}}</button>
       <div *ngIf="registerError" class="text-danger mt-2">
         {{ registerError }}
       </div>

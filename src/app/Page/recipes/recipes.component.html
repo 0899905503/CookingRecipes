@@ -21,56 +21,53 @@
 
 
 
-      <app-recipe-main [title]="RecipesById.title"
-        [additionalText]="'Welcome to Cooks Delight, where culinary dreams come alive! \nToday, we embark on a journey of flavors with a dish that promises \n to elevate your dining experience – our Recipes:\n'"
-        [description]="RecipesById.description" [cookTime]="RecipesById.cookTime" [prepTime]="RecipesById.prepTime"
-        [serves]="RecipesById.servings" [imageUrl]="RecipesById.imagePath">
+      <app-recipe-main *ngIf="'RECIPE_DETAILS.RECIPE_DETAILS_DESCRIPTION' | translate as additionalText"
+        [title]="currentLang === 'vi' ? RecipesById.titleVI || RecipesById.title : RecipesById.title"
+        [additionalText]="additionalText"
+        [description]="currentLang === 'vi' ? RecipesById.descriptionVI || RecipesById.description : RecipesById.description"
+        [cookTime]="RecipesById.cookTime" [prepTime]="RecipesById.prepTime" [serves]="RecipesById.servings"
+        [imageUrl]="RecipesById.imagePath">
       </app-recipe-main>
 
       <div class="Recipe-detail">
         <div class="note">
           <p>
-            Picture succulent chicken infused with the bright notes of lemon and the <br>aromatic richness of garlic.
-            It's a symphony of flavors that will have your taste<br> buds dancing. Join us as we delve into the art of
-            roasting
-            and uncover the <br>secrets behind creating a masterpiece that's not just a meal but a celebration<br> of
-            culinary
-            craftsmanship.<br> <br>
-            As you preheat your oven, envision the kitchen filling with the tantalizing <br>aroma of herbs and citrus,
-            setting the stage for a delightful meal that<br> transcends the ordinary. The anticipation builds as the
-            chicken
-            roasts to<br> golden perfection, promising a dining experience that marries simplicity with
-            <br>sophistication. Whether
-            you're a seasoned chef or a kitchen novice, this recipe<br> invites you to become a culinary artist,
-            creating
-            a
-            masterpiece that will leave a<br> lasting impression on your guests and loved ones.
+            {{'RECIPE_DETAILS.DESCRIPTION'| translate}}
           </p>
 
-          <app-recipe-tip [actionType]="'DO\'S:'" [actionType1]="'DON\'TS:'" [description]="doTips"
-            [description1]="dontTips" [title]="titleTipDo" [title1]="titleTipDont">
-          </app-recipe-tip>
+          <ng-container *ngIf="'RECIPE_DETAILS.TIPS_DO' | translate as doText">
+            <ng-container *ngIf="'RECIPE_DETAILS.TIPS_DONOT' | translate as dontText">
+              <app-recipe-tip [actionType]="doText" [actionType1]="dontText" [description]="doTips"
+                [description1]="dontTips" [title]="titleTipDo" [title1]="titleTipDont">
+              </app-recipe-tip>
+            </ng-container>
+          </ng-container>
 
-          <app-recipe-instruction [title]="'INSTRUCTION'" [steps]="steps" [stepTitle]="stepTitle">
-          </app-recipe-instruction>
+          <ng-container *ngIf="'RECIPE_DETAILS.INSTRUCTION_TITLE' | translate as instructions">
+            <app-recipe-instruction [title]="instructions" [steps]="steps" [stepTitle]="stepTitle">
+            </app-recipe-instruction>
+          </ng-container>
         </div>
 
         <div class="ingredients">
-          <app-recipe-ingredient [title]="'INGREDIENT'"
-            [ingredientName]="getIngredientDetails(RecipesById.recipeIngredients)">
-          </app-recipe-ingredient>
-
-          <app-recipe-ingredient [title]="'EQUIPMENT NEEDED FOR \n PREPARATION'"
-            [ingredientName]="getCookingToolDetails(RecipesById.recipeTools)">
-          </app-recipe-ingredient>
-
-          <app-recipe-ingredient [title]="'NUTRIENT TYPES'"
-            [ingredientName]="getNutrientDetails(RecipesById.recipeNutrient)">
-          </app-recipe-ingredient>
-
-          <p>Note: Nutritional values are approximate and may vary based on <br> specific ingredients and portion sizes.
+          <ng-container *ngIf="'RECIPE_DETAILS.INGREDIENT_TITLE' | translate as ingredients">
+            <app-recipe-ingredient [title]="ingredients"
+              [ingredientName]="getIngredientDetails(RecipesById.recipeIngredients)">
+            </app-recipe-ingredient>
+          </ng-container>
+          <ng-container *ngIf="'RECIPE_DETAILS.COOKING_TOOL_TITLE' | translate as cookingtool">
+            <app-recipe-ingredient [title]="cookingtool"
+              [ingredientName]="getCookingToolDetails(RecipesById.recipeTools)">
+            </app-recipe-ingredient>
+          </ng-container>
+          <ng-container *ngIf="'RECIPE_DETAILS.NUTRIENT_TITLE' | translate as nutrients">
+            <app-recipe-ingredient [title]="nutrients"
+              [ingredientName]="getNutrientDetails(RecipesById.recipeNutrient)">
+            </app-recipe-ingredient>
+          </ng-container>
+          <p> {{'RECIPE_DETAILS.NOTE'| translate}}
           </p>
-          <button (click)="goBack()">Back</button>
+          <button (click)="goBack()">{{'RECIPE_DETAILS.BACK'| translate}}</button>
           <div class="favorite-button">
             <button (click)="toggleFavorite(RecipesById.recipeId, userId)" [class.favorited]="isFavorite"
               class="heart-button">
@@ -79,13 +76,13 @@
           </div>
           <ng-container *ngIf="RecipesById.status === 'Pending'|| RecipesById.status === 'Rejected'  && isAdmin">
             <button (click)="checkRecipe(RecipesById.recipeId,RecipesById,true)" class="btn btn-success">
-              Approve
+              {{'RECIPE_DETAILS.APPROVE'|translate}}
             </button>
             <button (click)="checkRecipe(RecipesById.recipeId,RecipesById,false)" class="btn btn-danger">
-              Reject
+              {{'RECIPE_DETAILS.REJECT'|translate}}
             </button>
             <button (click)="removeRecipe(RecipesById.recipeId)" class="btn btn-danger">
-              Remove
+              {{'RECIPE_DETAILS.REMOVE'|translate}}
             </button>
 
           </ng-container>
@@ -95,21 +92,23 @@
     </div>
 
     <div class="carousel">
-      <h2>SIMILAR RECIPES</h2>
+      <h2>{{'RECIPE_DETAILS.SIMILAR_RECIPE'|translate}}</h2>
 
       <div class="recipe-cards" *ngIf="SimilarRecipes.length > 0">
         <app-recipe-card *ngFor="let recipe of SimilarRecipes" [imageUrl]="recipe.recipeDetails.imagePath"
-          [description]="recipe.recipeDetails.description" [prepTime]="recipe.recipeDetails.prepTime"
-          [cookTime]="recipe.recipeDetails.cookTime" [serves]="recipe.recipeDetails.servings"
-          [title]="recipe.recipeDetails.title" [isVegan]="recipe.isVegan" [recipeId]="recipe.recipeDetails.recipeId"
-          [unit1]="'MIN'" [unit2]="'SERVES'" [averageRating]="recipe.recipeDetails.averageRating"
+          [description]="currentLang === 'vi' ? recipe.recipeDetails.titleVI || recipe.recipeDetails.title : recipe.recipeDetails.title"
+          [prepTime]="recipe.recipeDetails.prepTime" [cookTime]="recipe.recipeDetails.cookTime"
+          [serves]="recipe.recipeDetails.servings"
+          [title]="currentLang === 'vi' ? recipe.recipeDetails.titleVI || recipe.recipeDetails.title : recipe.recipeDetails.title"
+          [isVegan]="recipe.isVegan" [recipeId]="recipe.recipeDetails.recipeId" [unit1]="'MIN'" [unit2]="'SERVES'"
+          [averageRating]="recipe.recipeDetails.averageRating"
           (recipeSelected)="onRecipeSelected(recipe.recipeDetails.recipeId)"></app-recipe-card>
 
       </div>
     </div>
     <!-- Comment Section -->
     <div class="comment-section-wrapper" *ngIf="Comment.length > 0">
-      <h2 class="comment-title">COMMENT</h2>
+      <h2 class="comment-title">{{'RECIPE_DETAILS.COMMENT'|translate}}</h2>
       <div class="comment-section">
         <div class="comment-list">
           <app-comment *ngFor="let comment of Comment" [email]="comment.user.email" [commentText]="comment.commentText"
@@ -120,17 +119,17 @@
     </div>
     <!-- New comment input -->
     <div class="comment-form">
-      <h3 class="comment-form-title">Leave a Comment</h3>
+      <h3 class="comment-form-title">{{'RECIPE_DETAILS.LEAVE_A_COMMENT'|translate}}</h3>
 
       <!-- Textarea for comment -->
       <div class="form-group">
-        <label for="commentText">Your Comment:</label>
+        <label for="commentText">{{'RECIPE_DETAILS.YOUR_COMMENT'|translate}}</label>
         <textarea id="commentText" [(ngModel)]="newCommentText" placeholder="Write your comment..." rows="4"></textarea>
       </div>
 
       <!-- Star Rating -->
       <div class="form-group star-rating">
-        <label>Your Rating:</label>
+        <label>{{'RECIPE_DETAILS.YOUR_RATING'|translate}}</label>
         <div class="stars">
           <span *ngFor="let star of stars; let i = index" class="star" (mouseenter)="hoverRating = i + 1"
             (mouseleave)="hoverRating = 0" (click)="setRating(i + 1)" [class.filled]="(hoverRating || rating) > i">
@@ -141,7 +140,8 @@
 
       <!-- Submit Button -->
       <div class="form-group">
-        <button class="submit-comment-btn" (click)="submitComment(userId,recipeIds)">Submit Comment</button>
+        <button class="submit-comment-btn"
+          (click)="submitComment(userId,recipeIds)">{{'RECIPE_DETAILS.SUBMIT_COMMENT'|translate}}</button>
       </div>
     </div>
 

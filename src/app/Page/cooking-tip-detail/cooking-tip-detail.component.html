@@ -1,7 +1,9 @@
 <ng-container *ngIf="!notFound; else notFoundTemplate">
-  <app-cooking-tip [imageUrl]="cookingTip.imagePath" [title]="cookingTip.title" [description]="cookingTip.description"
-    [category]="cookingTip.category.categoryName" [time]="cookingTip.time" [dateCreated]="cookingTip.dateCreated"
-    [user]="cookingTip.user.email"></app-cooking-tip>
+  <app-cooking-tip [imageUrl]="cookingTip.imagePath"
+    [title]="currentLang === 'vi' ? cookingTip.titleVI || cookingTip.title : cookingTip.title"
+    [description]="currentLang === 'vi' ? cookingTip.descriptionVI || cookingTip.description : cookingTip.description"
+    [category]="currentLang === 'vi' ? cookingTip.category.categoryNameVI || cookingTip.category.categoryName : cookingTip.category.categoryName"
+    [time]="cookingTip.time" [dateCreated]="cookingTip.dateCreated" [user]="cookingTip.user.email"></app-cooking-tip>
 </ng-container>
 
 <ng-template #notFoundTemplate>

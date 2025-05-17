@@ -15,7 +15,7 @@
           <select [(ngModel)]="ingredient.ingredientName" (change)="onIngredientChange(ingredient)">
             <option value="">{{'CREATE_RECIPE.INGREDIENT.SELLECT_INGREDIENT'| translate}}</option>
             <option *ngFor="let item of Ingredient" [value]="item.ingredientName">
-              {{ item.ingredientName }}
+              {{ currentLang === 'vi' ? item.ingredientNameVI : item.ingredientName }}
             </option>
           </select>
         </td>

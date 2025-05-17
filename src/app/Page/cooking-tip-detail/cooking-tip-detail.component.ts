@@ -5,6 +5,7 @@ import { DateUtils } from '../../Util/date-format-util';
 import { CookingTipComponent } from '../../Shared/Component/cooking-tip/cooking-tip.component';
 import { NotFoundPageComponent } from '../../Shared/not-found-page/not-found-page.component';
 import { CommonModule } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-cooking-tip-detail',
@@ -19,11 +20,18 @@ export class CookingTipDetailComponent {
   cookingTipsId!: number;
   cookingTip: any = {};
   notFound: boolean = false;
-
+  currentLang: string = 'en';
   constructor(
     private cookingTipService: CookingTipService,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+    private translate: TranslateService
+  ) {
+    this.currentLang = this.translate.currentLang || 'en';
+
+    this.translate.onLangChange.subscribe((event) => {
+      this.currentLang = event.lang;
+    });
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {

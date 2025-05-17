@@ -15,6 +15,7 @@ import { AuthService } from '../../Service/Auth/Login/login.service';
 import e from 'express';
 import { stat } from 'node:fs';
 import { DateUtils } from '../../Util/date-format-util';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   standalone: true,
@@ -24,7 +25,6 @@ import { DateUtils } from '../../Util/date-format-util';
   imports: [
     RecipeMainComponent,
     CommonModule,
-
     RecipeIngredientComponent,
     RecipeTipComponent,
     RecipeInstructionComponent,
@@ -32,6 +32,7 @@ import { DateUtils } from '../../Util/date-format-util';
     NotFoundPageComponent,
     CommentComponent,
     FormsModule,
+    TranslateModule,
   ],
 })
 export class RecipesComponent {
@@ -65,12 +66,22 @@ export class RecipesComponent {
 
   //status button check
   statusButton: string = '';
+
+  //translate
+  currentLang: string = 'en';
   constructor(
     private recipeService: RecipeService,
     private route: ActivatedRoute,
     private location: Location,
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    private translate: TranslateService
+  ) {
+    this.currentLang = this.translate.currentLang || 'en';
+
+    this.translate.onLangChange.subscribe((event) => {
+      this.currentLang = event.lang;
+    });
+  }
 
   ngOnInit(): void {
     const userIdst = this.authService.getUserId();
@@ -146,10 +157,14 @@ export class RecipesComponent {
 
         const instructions = this.RecipesById.instructions || [];
         if (instructions.length > 0) {
-          this.stepTitle = instructions.map(
-            (instruction: any) =>
-              `Step ${instruction.stepNumber}:  ${instruction.title}`
-          );
+          this.stepTitle = instructions.map((instruction: any) => {
+            const step_details =
+              this.currentLang === 'vi'
+                ? instruction.titleVI || instruction.title
+                : instruction.title;
+            const step = this.currentLang === 'vi' ? 'Bước' : 'Step';
+            return `${step} ${instruction.stepNumber}:  ${step_details}`;
+          });
           this.steps = this.getInstructionDetails(instructions);
         }
         if (this.averageRating == 0) {
@@ -193,36 +208,63 @@ export class RecipesComponent {
 
   getIngredientDetails(recipeIngredients: any[]): string[] {
     if (!recipeIngredients || recipeIngredients.length === 0) {
-      return ['No ingredients available.'];
+      return [this.translate.instant('RECIPE_DETAILS.NO_INGREDIENT')];
     }
-    return recipeIngredients.map(
-      (ingredient) =>
-        `${ingredient.ingredient.ingredientName}: ${ingredient.quantity} (${ingredient.ingredient.unit})`
-    );
+
+    return recipeIngredients.map((ingredient) => {
+      const ingredientName =
+        this.currentLang === 'vi'
+          ? ingredient.ingredient.ingredientNameVI ||
+            ingredient.ingredient.ingredientName
+          : ingredient.ingredient.ingredientName;
+      const unitVi =
+        this.currentLang === 'vi'
+          ? ingredient.ingredient.unitVI || ingredient.ingredient.unit
+          : ingredient.ingredient.unit;
+
+      return `${ingredientName}: ${ingredient.quantity} ${unitVi}`;
+    });
   }
 
   getCookingToolDetails(recipeTools: any[]): string[] {
     if (!recipeTools || recipeTools.length === 0) {
       return ['No cooking tools available.'];
     }
-    return recipeTools.map((tool) => tool.cookingTool.cookingToolName);
+    return recipeTools.map((tool) => {
+      const toolName =
+        this.currentLang === 'vi'
+          ? tool.cookingTool.cookingToolNameVI ||
+            tool.cookingTool.cookingToolName
+          : tool.cookingTool.cookingToolName;
+      return toolName;
+    });
   }
 
   getNutrientDetails(recipeNutrient: any[]): string[] {
     if (!recipeNutrient || recipeNutrient.length === 0) {
       return ['No nutrient information available.'];
     }
-    return recipeNutrient.map(
-      (nutrientType) =>
-        `${nutrientType.nutrientType.nutrientTypeName}: ~ ${nutrientType.quantity} (${nutrientType.nutrientType.unit})`
-    );
+    return recipeNutrient.map((nutrientType) => {
+      const nutrientName =
+        this.currentLang === 'vi'
+          ? nutrientType.nutrientType.nutrientTypeNameVI ||
+            nutrientType.nutrientType.nutrientTypeName
+          : nutrientType.nutrientType.nutrientTypeName;
+      return `${nutrientName}: ~ ${nutrientType.quantity} (${nutrientType.nutrientType.unit})`;
+    });
   }
 
   getInstructionDetails(instructions: any[]): string[] {
     if (!instructions || instructions.length === 0) {
       return ['No instructions available.'];
     }
-    return instructions.map((instruction) => instruction.instructionText);
+    return instructions.map((instruction) => {
+      const intruction_details =
+        this.currentLang === 'vi'
+          ? instruction.instructionTextVI || instruction.instructionText
+          : instruction.instructionTextVI;
+      return intruction_details;
+    });
   }
 
   goBack(): void {

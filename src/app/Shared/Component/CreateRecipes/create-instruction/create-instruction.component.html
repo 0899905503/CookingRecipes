@@ -18,7 +18,7 @@
           <select [(ngModel)]="instruction.cookingToolId" (ngModelChange)="logInstructions()">
             <option value="">{{'CREATE_RECIPE.INSTRUCTION.SELECT_TOOL'| translate}}</option>
             <option *ngFor="let item of Cookingtool" [value]="item.cookingToolId">
-              {{ item.cookingToolName }}
+              {{ currentLang === 'vi' ? item.cookingToolNameVI : item.cookingToolName }}
             </option>
           </select>
         </td>

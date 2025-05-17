@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-select-options',
   standalone: true,
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './select-options.component.html',
   styleUrl: './select-options.component.scss',
 })

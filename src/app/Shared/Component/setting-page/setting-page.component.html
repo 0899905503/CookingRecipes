@@ -25,10 +25,11 @@
       </div>
       <div class="setting-item">
         <span>{{ 'LANGUAGE' | translate }}</span>
-        <select (change)="changeLanguage($event)">
+        <select (change)="changeLanguage($event)" [value]="translate.currentLang">
           <option value="en">English</option>
           <option value="vi">Tiếng Việt</option>
         </select>
+
       </div>
       <div class="setting-item">
         <span>{{ 'CHANGE_PASSWORD' | translate }}</span>

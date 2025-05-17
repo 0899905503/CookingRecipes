@@ -14,7 +14,7 @@
           <select [(ngModel)]="nutrient.nutrientTypeName" (change)="onNutrientChange(nutrient)">
             <option value="">{{'CREATE_RECIPE.NUTRIENT.SELECT_NUTRIENT'| translate}}</option>
             <option *ngFor="let item of Nutrient" [value]="item.nutrientTypeName">
-              {{ item.nutrientTypeName }}
+              {{ currentLang === 'vi' ? item.nutrientTypeNameVI : item.nutrientTypeName }}
             </option>
           </select>
         </td>

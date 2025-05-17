@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NutrientService } from '../../../../Service/Nutrient/nutrient.service';
 import { CreateRecipeDataService } from '../../../../Service/CreateRecipeData/create-recipe-data.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-nutrient',
@@ -17,6 +17,7 @@ export class CreateNutrientComponent {
   nutrients = [
     { nutrientTypeName: '', quantity: '', unit: '', nutrientTypeId: '' },
   ];
+  currentLang: string = 'en';
 
   addIngredient() {
     this.nutrients.push({
@@ -29,8 +30,15 @@ export class CreateNutrientComponent {
   }
   constructor(
     private nutrientService: NutrientService,
-    private createRecipeDataService: CreateRecipeDataService
-  ) {}
+    private createRecipeDataService: CreateRecipeDataService,
+    private translate: TranslateService
+  ) {
+    this.currentLang = this.translate.currentLang || 'en';
+
+    this.translate.onLangChange.subscribe((event) => {
+      this.currentLang = event.lang;
+    });
+  }
 
   ngOnInit(): void {
     this.onGetAllNutrient();

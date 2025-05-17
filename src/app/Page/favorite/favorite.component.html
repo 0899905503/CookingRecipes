@@ -28,7 +28,9 @@
 
     <div class="grid-content" *ngIf="FavoritesRecipe?.length">
       <div *ngFor="let item of filteredRecipes()">
-        <app-recipe-card [imageUrl]="item.imagePath" [title]="item.title" [description]="item.description"
+        <app-recipe-card [imageUrl]="item.imagePath"
+          [title]="currentLang === 'vi' ? item.titleVI || item.title : item.title"
+          [description]="currentLang === 'vi' ? item.descriptionVI || item.description : item.description"
           [cookTime]="item.cookTime" [prepTime]="item.prepTime" [serves]="item.servings" [isVegan]="item.vegan"
           [unit1]="'MIN'" [unit2]="'SERVES'" [recipeId]="item.recipeId" [averageRating]="item.averageRating"
           (recipeSelected)="onRecipeSelected($event)">

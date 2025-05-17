@@ -5,7 +5,7 @@ import { CreateRecipeService } from '../../../../Service/CreateRecipe/create-rec
 import { CategoryEnum } from '../../../Value/Enums/category.enum';
 import { VeganEnum } from '../../../Value/Enums/vegan.enum';
 import { CreateRecipeDataService } from '../../../../Service/CreateRecipeData/create-recipe-data.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-details',
@@ -15,8 +15,17 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrl: './create-details.component.scss',
 })
 export class CreateDetailsComponent {
-  constructor(private createRecipeDataService: CreateRecipeDataService) {}
+  constructor(
+    private createRecipeDataService: CreateRecipeDataService,
+    private translate: TranslateService
+  ) {
+    this.currentLang = this.translate.currentLang || 'en';
 
+    this.translate.onLangChange.subscribe((event) => {
+      this.currentLang = event.lang;
+    });
+  }
+  currentLang: string = 'en';
   Servings: string = '';
   CookTime: string = '';
   PrepTime: string = '';
@@ -31,13 +40,32 @@ export class CreateDetailsComponent {
     }))
     .slice(0, 6); // Chỉ lấy 6 phần tử đầu tiên
 
-  preptimes = ['EASY PREP', 'MEDIUM PREP', 'HARD PREP'];
-  vegetarianOptions = Object.keys(VeganEnum)
-    .filter((key) => isNaN(Number(key)))
-    .map((key) => ({
-      label: key.replace('_', ' '),
-      value: (VeganEnum as any)[key],
-    }));
+  preptimes = [
+    { en: 'EASY PREP', vi: 'DỄ' },
+    { en: 'MEDIUM PREP', vi: 'TRUNG BÌNH' },
+    { en: 'HARD PREP', vi: 'KHÓ' },
+  ];
+  categoriesList = [
+    { labelEN: 'Vegan', labelVI: 'Chay', value: CategoryEnum.Vegan },
+    {
+      labelEN: 'Breakfast',
+      labelVI: 'Bữa sáng',
+      value: CategoryEnum.Breakfast,
+    },
+    { labelEN: 'Lunch', labelVI: 'Bữa trưa', value: CategoryEnum.Lunch },
+    { labelEN: 'Dinner', labelVI: 'Bữa tối', value: CategoryEnum.Dinner },
+    { labelEN: 'Dessert', labelVI: 'Tráng miệng', value: CategoryEnum.Dessert },
+    {
+      labelEN: 'Quick Bite',
+      labelVI: 'Ăn nhanh',
+      value: CategoryEnum.QuickBite,
+    },
+  ];
+
+  vegetarianOptions = [
+    { labelEN: 'Yes', labelVI: 'Có', value: VeganEnum.Yes },
+    { labelEN: 'No', labelVI: 'Không', value: VeganEnum.No },
+  ];
 
   updateDetails() {
     console.log('Updating details:', {

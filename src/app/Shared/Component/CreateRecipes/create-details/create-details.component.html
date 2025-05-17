@@ -13,27 +13,30 @@
   <div class="form-group">
     <label for="prepTime">{{'CREATE_RECIPE.DETAILS.PREP_TIME'| translate}}</label>
     <select id="prepTime" [(ngModel)]="PrepTime" (change)="updateDetails()">
-      <option *ngFor="let preptime of preptimes" [value]="preptime">
-        {{ preptime }}
+      <option *ngFor="let preptime of preptimes" [value]="preptime.en">
+        {{ currentLang === 'vi' ? preptime.vi : preptime.en }}
       </option>
     </select>
+
   </div>
 
   <div class="form-group">
     <label for="category">{{'CREATE_RECIPE.DETAILS.CATEGORY'| translate}}</label>
     <select id="category" [(ngModel)]="CategoryId" (ngModelChange)="updateDetails()">
-      <option *ngFor="let category of categories" [ngValue]="category.value">
-        {{ category.label }}
+      <option *ngFor="let category of categoriesList" [ngValue]="category.value">
+        {{ currentLang === 'vi' ? category.labelVI : category.labelEN }}
       </option>
     </select>
+
   </div>
 
   <div class="form-group">
     <label for="isVegetarian">{{'CREATE_RECIPE.DETAILS.IS_VEGAN'| translate}}</label>
     <select id="isVegetarian" [(ngModel)]="Vegan" (ngModelChange)="updateDetails()">
       <option *ngFor="let option of vegetarianOptions" [ngValue]="option.value">
-        {{ option.label }}
+        {{ currentLang === 'vi' ? option.labelVI : option.labelEN }}
       </option>
     </select>
+
   </div>
 </div>

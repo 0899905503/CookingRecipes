@@ -5,13 +5,19 @@ import { AuthService } from '../../Service/Auth/Login/login.service';
 import { FormsModule } from '@angular/forms';
 import { ErrorsCodeEnum } from '../../Shared/Value/Enums/errorsCodeEnums';
 import { ForgotPasswordComponent } from '../../Shared/Component/forgot-password/forgot-password.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   standalone: true,
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  imports: [FormsModule, CommonModule, ForgotPasswordComponent],
+  imports: [
+    FormsModule,
+    CommonModule,
+    ForgotPasswordComponent,
+    TranslateModule,
+  ],
 })
 export class LoginComponent {
   username = '';

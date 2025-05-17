@@ -70,6 +70,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CreateNutrientComponent,
     CommentComponent,
     AdminPageComponent,
+    HomepageComponent,
   ],
   imports: [
     CookingTipComponent,
@@ -98,6 +99,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CreateNutrientComponent,
     CommentComponent,
     AdminPageComponent,
+    HomepageComponent,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateModule,

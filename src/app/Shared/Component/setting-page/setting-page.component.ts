@@ -20,8 +20,13 @@ export class SettingPageComponent {
     translate.addLangs(['en', 'vi']);
     translate.setDefaultLang('en');
 
-    const browserLang = translate.getBrowserLang();
-    translate.use(browserLang?.match(/en|vi/) ? browserLang : 'en');
+    const savedLang = localStorage.getItem('selectedLanguage');
+    if (savedLang && ['en', 'vi'].includes(savedLang)) {
+      this.translate.use(savedLang);
+    } else {
+      const browserLang = this.translate.getBrowserLang();
+      this.translate.use(browserLang?.match(/en|vi/) ? browserLang : 'en');
+    }
   }
 
   toggleDarkMode(event: Event): void {
@@ -35,7 +40,9 @@ export class SettingPageComponent {
 
   changeLanguage(event: Event): void {
     const select = event.target as HTMLSelectElement;
-    this.translate.use(select.value);
+    const selectedLang = select.value;
+    this.translate.use(selectedLang);
+    localStorage.setItem('selectedLanguage', selectedLang); // 👈 Lưu vào localStorage
   }
 
   logout() {

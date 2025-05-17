@@ -1,13 +1,14 @@
 import { Component, Input } from '@angular/core';
 import { ImagePaths } from '../../Value/Constant/imageConstants';
 import { RecipeIngredientComponent } from '../recipe-ingredient/recipe-ingredient.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   standalone: true,
   selector: 'app-recipe-main',
   templateUrl: './recipe-main.component.html',
   styleUrl: './recipe-main.component.scss',
-  imports: [RecipeIngredientComponent],
+  imports: [RecipeIngredientComponent, TranslateModule],
 })
 export class RecipeMainComponent {
   @Input() title!: string;

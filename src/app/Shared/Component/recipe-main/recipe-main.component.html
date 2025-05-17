@@ -1,12 +1,12 @@
 <div class="recipe-main">
   <div class="recipe-info">
-    <h4>RECIPES</h4>
+    <h4>{{'RECIPE_DETAILS.RECIPE_HEADER'| translate}}</h4>
     <h3>{{ title }}</h3>
     <p class="additional-text">{{ additionalText }}</p>
     <p>{{ description }}</p>
     <div class="recipe-details">
       <span class="detail-item">
-        <img [src]="icCookTime" alt="Cook Time"> {{ cookTime }} MIN
+        <img [src]="icCookTime" alt="Cook Time"> {{ cookTime }} {{'RECIPE_DETAILS.MIN'| translate}}
       </span>
       <div>
         <p>•</p>
@@ -18,7 +18,7 @@
         <p>•</p>
       </div>
       <span class="detail-item">
-        <img [src]="icServes" alt="Serves"> {{ serves }} SERVES
+        <img [src]="icServes" alt="Serves"> {{ serves }} {{'RECIPE_DETAILS.SERVES'| translate}}
       </span>
 
     </div>

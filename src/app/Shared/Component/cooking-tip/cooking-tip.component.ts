@@ -2,11 +2,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CookingTipService } from './../../../Service/CookingTip/cooking-tip.service';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Location } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-cooking-tip',
   standalone: true,
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './cooking-tip.component.html',
   styleUrl: './cooking-tip.component.scss',
 })

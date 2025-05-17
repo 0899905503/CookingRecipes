@@ -86,5 +86,106 @@
     "ABOUT_US": "Giới Thiệu",
     "SETTING": "Cài Đặt",
     "SUBSCRIBE": "Đăng ký"
+  },
+
+  "TIP":{
+    "TITLE":"MẸO NẤU ĂN CẦN THIẾT CỦA CHÚNG TÔI",
+    "DESCRIPTION":"Chào mừng đến với kho tàng Công thức nấu ăn của Cooking Recipes! Cho dù bạn là một đầu bếp dày dạn kinh nghiệm hay chỉ mới bắt đầu hành trình ẩm thực của mình, các mẹo nấu ăn của chúng tôi được thiết kế để nâng cao kỹ năng của bạn, nâng cao trải nghiệm nấu ăn của bạn và mang lại niềm vui cho cuộc phiêu lưu nấu ăn của bạn",
+    "QUANTITY_TOOL":"Công Cụ Chất Lượng",
+    "QUANTITY_TOOL_DESCRIPTION":"Đầu tư vào dao, thớt và đồ nấu nướng chất lượng cao.",
+    "ESSENTIAL_UTENSILS": "Đồ Dùng Thiết Yếu",
+    "ESSENTIAL_UTENSILS_DESCRIPTION":"Chuẩn bị nhiều dụng cụ khác nhau, bao gồm thìa, kẹp gắp và muôi.",
+    "MEASURING_ACCURACY": "Đo Độ Chính Xác",
+    "MEASURING_ACCURACY_DESCRIPTION":"Sử dụng cốc và thìa đong để đong chính xác lượng nguyên liệu.",
+    "NEWEST_RECIPES": "CÔNG THỨC MỚI NHẤT",
+    "TIPS_TRICK":"MẸO & THỦ THUẬT",
+    "READ_MORE": "Đọc Thêm"
+  },
+
+  "RECIPE_DETAILS":
+  {
+    "RECIPE_HEADER":"CÔNG THỨC",
+    "RECIPE_DETAILS_DESCRIPTION":"Chào mừng đến với Cooking Recipes, nơi những giấc mơ ẩm thực trở thành hiện thực! Hôm nay, chúng ta sẽ bắt đầu hành trình hương vị với một món ăn hứa hẹn sẽ nâng tầm trải nghiệm ẩm thực của bạn – Công thức nấu ăn của chúng tôi:",
+    "MIN": "PHÚT",
+    "SERVES":"KHẨU PHẦN",
+    "TIPS_TITLE":"Những việc nên làm và không nên làm",
+    "TIPS_DO":"NÊN LÀM",
+    "TIPS_DONOT":"KHÔNG NÊN LÀM",
+    "INSTRUCTION_TITLE":"HƯỚNG DẪN",
+    "INGREDIENT_TITLE":"NGUYÊN LIỆU",
+    "COOKING_TOOL_TITLE":"CÔNG CỤ CẦN THIẾT CHO VIỆC CHUẨN BỊ",
+    "NUTRIENT_TITLE":"CÁC LOẠI DINH DƯỠNG",
+    "INSTRUCTION_DESCRIPTION":"Công thức là hướng dẫn chi tiết để tạo ra một món ăn hoàn chỉnh, từ khâu chuẩn bị nguyên liệu đến quy trình nấu. Mỗi công thức thường bao gồm danh sách nguyên liệu, các phép đo chính xác và hướng dẫn từng bước theo thứ tự cụ thể. Công thức không chỉ là cách nấu một món ăn mà còn là nghệ thuật kết hợp nguyên liệu và kỹ thuật nấu ăn để tạo ra hương vị hấp dẫn. Nó phản ánh sự sáng tạo và đam mê của người nấu ăn, biến những nguyên liệu đơn giản thành kiệt tác làm hài lòng cả khẩu vị và tâm hồn. Nấu ăn, thông qua công thức, trở thành hành trình khám phá và thể hiện.",
+    "VIEW_RECIPE":"Xem Công Thức",
+    "DESCRIPTION":"Hãy tưởng tượng đến món gà mọng nước được tẩm ướp với hương chanh tươi sáng và vị thơm nồng nàn của tỏi. Đây là bản giao hưởng của các hương vị sẽ khiến vị giác của bạn nhảy múa. Hãy cùng chúng tôi khám phá nghệ thuật nướng và khám phá bí quyết đằng sau việc tạo ra một kiệt tác không chỉ là một bữa ăn mà còn là sự tôn vinh của nghệ thuật nấu ăn. Khi bạn làm nóng lò nướng, hãy hình dung căn bếp tràn ngập hương thơm hấp dẫn của các loại thảo mộc và cam quýt, tạo nên bối cảnh cho một bữa ăn thú vị vượt qua sự bình thường. Sự mong đợi tăng lên khi gà nướng đến độ hoàn hảo vàng, hứa hẹn một trải nghiệm ăn uống kết hợp giữa sự đơn giản với sự tinh tế. Cho dù bạn là một đầu bếp dày dạn kinh nghiệm hay một người mới vào bếp, công thức này sẽ mời bạn trở thành một nghệ sĩ ẩm thực, tạo ra một kiệt tác sẽ để lại ấn tượng lâu dài cho khách và những người thân yêu của bạn.",
+    "NOTE":"Lưu ý: Giá trị dinh dưỡng chỉ mang tính chất tham khảo và có thể thay đổi tùy theo thành phần và khẩu phần cụ thể.",
+    "BACK":"Quay lại",
+    "APPROVE":"Chấp Thuận",
+    "REJECT":"Từ Chối",
+    "REMOVE":"Xóa Công Thức",
+    "SIMILAR_RECIPE":"CÔNG THỨC TƯƠNG TỰ",
+    "COMMENT":"BÌNH LUẬN",
+    "LEAVE_A_COMMENT":"Để lại bình luận",
+    "YOUR_COMMENT":"Bình luận của bạn:",
+    "YOUR_RATING":"Đánh giá của bạn:",
+    "SUBMIT_COMMENT": "Gửi bình luận"
+  },
+
+  "AUTH": {
+    "EMAIL_OTP":"Nhập Email để nhận mã OTP",
+    "SEND_OTP":"Gửi mã OTP",
+    "OTP_EMAIL":"Nhập mã OTP từ Email",
+    "VERIFY_OTP":"Xác thực mã OTP",
+    "NEW_PASSWORD":"Nhập mật khẩu mới",
+    "RESET_PASSWORD":"Đặt lại mật khẩu",
+    "CLOSE":"Đóng",
+    "LOGIN":{
+      "LOGIN_TITLE":"Được pha chế với các loại gia vị được lựa chọn tốt nhất",
+      "TITLE_NAME_1":"COOKING",
+      "TITLE_NAME_2":"RECIPE",
+      "WELCOME_1":"Chào mừng đến với ",
+      "WELCOME_2":"COOKING RECIPES",
+      "LOGIN_BUTTON":"Đăng nhập",
+      "REGISTER_BUTTON":"Đăng ký",
+      "DESCRIPTION_1":"Bạn muốn ăn",
+      "DESCRIPTION_2":"đồ ăn ngon?",
+      "DESCRIPTION_3":"Đây là công thức nấu ăn sử dụng những loại gia vị được lựa chọn tốt nhất.",
+      "USER_NAME":"Tên đăng nhập",
+      "PASSWORD":"Mật khẩu",
+      "REMEMBER":"Nhớ tôi",
+      "FORGOT":"Quên mật khẩu?",
+      "EMAIL_ADDRESS":"Địa chỉ Email"
+    }
+  },
+
+  "HOMEPAGE":{
+    "HOMEPAGE_HEADER_1":"GIẢI PHÓNG ẨM THỰC",
+    "HOMEPAGE_HEADER_2":" TUYỆT VỜI",
+    "DESCRIPTION_1":"Khám phá thế giới hương vị, khám phá ",
+    "DESCRIPTION_2":"công thức nấu ăn thủ công, và để hương thơm của ",
+    "DESCRIPTION_3":"niềm đam mê nấu ăn của chúng tôi tràn ngập căn bếp của bạn",
+    "HEADER_BUTTON":"KHÁM PHÁ CÔNG THỨC",
+    "VIEW_HEADER":"KHÁM PHÁ",
+    "HEADER_TITLE_1":"ĐA DẠNG CỦA CHÚNG TÔI",
+    "HEADER_TITLE_2":"BẢNG MÀU",
+    "VIEW_DESCRIPTION":"Nếu bạn là người thích ăn sáng, sành ăn các món mặn hoặc đang tìm kiếm những món tráng miệng hấp dẫn, thì danh mục tuyển chọn của chúng tôi có thể đáp ứng mọi khẩu vị.",
+    "SEE_VIEW":"XEM THÊM",
+    "FEATURED_RECIPES":"CÔNG THỨC NỔI BẬT",
+    "SELECT_TITLE":"CÔNG THỨC",
+    "SELECT_HEADER_1":"BẮT ĐẦU VÀO MỘT ",
+    "SELECT_HEADER_2":"HÀNH TRÌNH",
+    "SELECT_DESCRIPTION_1":"Với bộ sưu tập công thức nấu ăn đa dạng của chúng tôi, chúng tôi có thứ gì đó để",
+    "SELECT_DESCRIPTION_2":" thỏa mãn mọi khẩu vị."
+  },
+
+  "COOKING_TIP":{
+    "COOKING_TIP_TITLE":"Mẹo nấu ăn",
+    "COOKING_TIP_DESCRIPTION":"MIÊU TẢ",
+    "COOKING_TIP_CATEGORY":"LOẠI",
+    "COOKING_TIP_DATE_CREATE":"NGÀY TẠO",
+    "COOKING_TIP_MINUTES":"Phút",
+    "COOKING_TIP_CREATED_BY":"ĐƯỢC TẠO BỞI",
+    "COOKING_TIP_BACK":"QUAY LẠI"
   }
+
 }

@@ -1,34 +1,35 @@
 <div class="Tip">
   <div class="title">
-    <h1>OUR ESSENTIAL <br>COOKING TIPS</h1>
-    <p>Welcome to Cooks Delight's treasure trove of cooking<br> wisdom! Whether you're a seasoned chef or just
-      starting<br> your
-      culinary journey, our cooking tips are designed to<br> elevate your skills, enhance your kitchen experience, and
-      <br>bring
-      joy to your cooking adventures.
+    <h1>{{'TIP.TITLE'| translate}}</h1>
+    <p>{{'TIP.DESCRIPTION'| translate}}
     </p>
   </div>
   <div class="main-content">
     <app-recipe-title></app-recipe-title>
   </div>
   <div class="newest-recipes">
-    <h2>NEWEST RECIPES</h2>
+    <h2>{{'TIP.NEWEST_RECIPES'| translate}}</h2>
     <div class="recipe-cards" *ngIf="NewRecipe.length > 0">
-      <app-recipe-card *ngFor="let new of NewRecipe" [imageUrl]="new.imagePath" [title]="new.title"
-        [description]="new.description" [prepTime]="new.prepTime" [cookTime]="new.cookTime" [serves]="new.servings"
-        [totalView]="new.totalView" [unit1]="'MIN'" [unit2]="'SERVES'" [recipeId]="new.recipeId"> </app-recipe-card>
+      <app-recipe-card *ngFor="let new of NewRecipe" [imageUrl]="new.imagePath"
+        [title]="currentLang === 'vi' ? new.titleVI || new.title : new.title"
+        [description]="currentLang === 'vi' ? new.descriptionVI || new.description : new.description"
+        [prepTime]="new.prepTime" [cookTime]="new.cookTime" [serves]="new.servings" [totalView]="new.totalView"
+        [averageRating]="new.averageRating" [unit1]="'MIN'" [unit2]="'SERVES'" [recipeId]="new.recipeId">
+      </app-recipe-card>
     </div>
   </div>
 
   <div class="tips">
     <div class="content">
       <h2>
-        TIPS & TRICKS
+        <h2>{{'TIP.TIPS_TRICK'| translate}}</h2>
       </h2>
     </div>
     <div class="grid-content" *ngIf="Tip?.length">
       <div *ngFor="let item of Tip">
-        <app-recipe-tips [imageUrl]="item.imagePath" [title]="item.title" [description]="item.description"
+        <app-recipe-tips [imageUrl]="item.imagePath"
+          [title]="currentLang === 'vi' ? item.titleVI || item.title : item.title"
+          [description]="currentLang === 'vi' ? item.descriptionVI || item.description : item.description"
           [time]="item.time" [unit]="'MIN'" [date]="item.dateCreated"
           [cookingTipId]="item.cookingTipId"></app-recipe-tips>
       </div>

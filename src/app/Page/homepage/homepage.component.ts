@@ -1,12 +1,21 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { HomepageService } from '../../Service/Homepage/homepage.service';
 import { AuthService } from '../../Service/Auth/Login/login.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { RecipeCardComponent } from '../../Shared/Component/recipe-card/recipe-card.component';
+import { SelectOptionsComponent } from '../../Shared/Component/select-options/select-options.component';
 import { CommonModule } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 @Component({
+  standalone: true,
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss',
+  imports: [
+    RecipeCardComponent,
+    SelectOptionsComponent,
+    CommonModule,
+    TranslateModule,
+  ],
 })
 export class HomepageComponent {
   @Input() title!: string;
@@ -18,10 +27,18 @@ export class HomepageComponent {
   @Input() totalView!: string;
   @Output() recipeSelected = new EventEmitter<number>();
   selectedMenu: string = 'ALL';
+  currentLang: string = 'en';
   constructor(
     private homepageService: HomepageService,
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    private translate: TranslateService
+  ) {
+    this.currentLang = this.translate.currentLang || 'en';
+
+    this.translate.onLangChange.subscribe((event) => {
+      this.currentLang = event.lang;
+    });
+  }
   RecipesTopView: any[] = [];
   Recipe: any[] = [];
   DessertRecipes: any[] = [];

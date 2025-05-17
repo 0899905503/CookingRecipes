@@ -62,7 +62,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [HomepageComponent],
+  declarations: [],
   imports: [
     RouterModule.forRoot(routes),
     MenuComponent,
@@ -86,6 +86,7 @@ export const routes: Routes = [
     CreateNutrientComponent,
     CommentComponent,
     AdminPageComponent,
+    HomepageComponent,
   ],
   exports: [RouterModule],
   providers: [AuthService, AuthGuard],

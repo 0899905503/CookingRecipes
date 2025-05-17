@@ -3,7 +3,7 @@
     <div class="overlay">
       <div class="content">
         <h2>COOKING RECIPES</h2>
-        <p>Formulated with the Best Selected Spices</p>
+        <p>{{'AUTH.LOGIN.LOGIN_TITLE'| translate}}</p>
       </div>
     </div>
     <img src="assets/images/BackgroundLogin.png" alt="Recipe Image">
@@ -11,68 +11,72 @@
 
   <div class="login-right">
     <div class="header">
-      <h1 class="top-right">COOKING <span class="highlight">RECIPES</span></h1>
-      <h4>Welcome to <span class="highlight">COOKING RECIPES</span></h4>
+      <h1>{{'AUTH.LOGIN.TITLE_NAME_1'| translate}} <span class="highlight">{{'AUTH.LOGIN.TITLE_NAME_2'|
+          translate}}</span></h1>
+      <h4>{{'AUTH.LOGIN.WELCOME_1'| translate}} <span class="highlight"> {{'AUTH.LOGIN.WELCOME_2'| translate}}</span>
+      </h4>
       <div class="button-container">
         <button class="button"
           [ngClass]="{ 'active-login': activeButton === 'login', 'inactive-login': activeButton !== 'login' }"
           (click)="toggleActive('login')">
-          Login
+          {{'AUTH.LOGIN.LOGIN_BUTTON'| translate}}
         </button>
         <button class="button"
           [ngClass]="{ 'active-register': activeButton === 'register', 'inactive-register': activeButton !== 'register' }"
           (click)="toggleActive('register')">
-          Register
+          {{'AUTH.LOGIN.REGISTER_BUTTON'| translate}}
         </button>
       </div>
 
       <p>
-        You want to eat <span class="highlight">delicious food?</span> This is
-        recipe with the best selected spices.
+        {{'AUTH.LOGIN.DESCRIPTION_1'| translate}} <span class="highlight">{{'AUTH.LOGIN.DESCRIPTION_2'|
+          translate}}</span>
+        {{'AUTH.LOGIN.DESCRIPTION_3'| translate}}
       </p>
     </div>
 
     <form (ngSubmit)="onLogin()" #loginForm="ngForm">
       <div class="form-group">
-        <label for="username">User name</label>
+        <label for="username">{{'AUTH.LOGIN.USER_NAME'| translate}}</label>
         <input type="text" id="username" name="username" placeholder="Enter your User name" [(ngModel)]="username"
           required />
       </div>
 
       <div class="form-group">
-        <label for="password">Password</label>
+        <label for="password">{{'AUTH.LOGIN.PASSWORD'| translate}}</label>
         <input type="password" id="password" name="password" placeholder="Enter your Password" [(ngModel)]="password"
           required />
       </div>
 
       <div class="options">
-        <label><input type="checkbox" (change)="onCheckboxChange($event)" /> Remember me</label>
-        <a (click)="openForgotPasswordModal()">Forgot Password?</a>
+        <label><input type="checkbox" (change)="onCheckboxChange($event)" />{{'AUTH.LOGIN.REMEMBER'| translate}}</label>
+        <a (click)="openForgotPasswordModal()">{{'AUTH.LOGIN.FORGOT'| translate}}</a>
       </div>
 
-      <button class="login-btn" type="submit" [disabled]="!loginForm.valid">Login</button>
+      <button class="login-btn" type="submit" [disabled]="!loginForm.valid">{{'AUTH.LOGIN.LOGIN_BUTTON'|
+        translate}}</button>
     </form>
 
     <!-- Forgot Password Modal -->
     <div class="modal" *ngIf="showForgotPasswordModal">
       <div class="modal-content">
-        <h3 *ngIf="step === 1">Enter your email to receive OTP</h3>
+        <h3 *ngIf="step === 1">{{'AUTH.EMAIL_OTP'|translate}}</h3>
         <input *ngIf="step === 1" [(ngModel)]="emailForOtp" placeholder="Email" />
-        <button *ngIf="step === 1" (click)="sendOtp()">Send OTP</button>
+        <button *ngIf="step === 1" (click)="sendOtp()">{{'AUTH.SEND_OTP'|translate}}</button>
         <div *ngIf="emailError">{{ emailError }}</div>
 
-        <h3 *ngIf="step === 2">Enter the OTP sent to your email</h3>
+        <h3 *ngIf="step === 2">{{'AUTH.OTP_EMAIL'|translate}}</h3>
         <input *ngIf="step === 2" [(ngModel)]="otpCode" placeholder="OTP" />
-        <button *ngIf="step === 2" (click)="verifyOtp()">Verify OTP</button>
+        <button *ngIf="step === 2" (click)="verifyOtp()">{{'AUTH.VERIFY_OTP'|translate}}</button>
         <div *ngIf="otpError">{{ otpError }}</div>
 
-        <h3 *ngIf="step === 3">Enter your new password</h3>
+        <h3 *ngIf="step === 3">{{'AUTH.NEW_PASSWORD'|translate}}</h3>
         <input *ngIf="step === 3" [(ngModel)]="newPassword" type="password" placeholder="New Password" />
-        <button *ngIf="step === 3" (click)="resetPassword()">Reset Password</button>
+        <button *ngIf="step === 3" (click)="resetPassword()">{{'AUTH.RESET_PASSWORD'|translate}}</button>
         <div *ngIf="resetError">{{ resetError }}</div>
 
         <p *ngIf="message">{{ message }}</p>
-        <button (click)="showForgotPasswordModal = false">Close</button>
+        <button (click)="showForgotPasswordModal = false">{{'AUTH.CLOSE'|translate}}</button>
       </div>
     </div>
 

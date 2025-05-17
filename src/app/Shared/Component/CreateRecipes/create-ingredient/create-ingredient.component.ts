@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IngredientService } from '../../../../Service/Ingredient/ingredient.service';
 import { CreateRecipeDataService } from '../../../../Service/CreateRecipeData/create-recipe-data.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-ingredient',
@@ -14,14 +14,32 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class CreateIngredientComponent implements OnInit {
   ingredients = [
-    { ingredientName: '', quantity: 1, unit: '', type: '', ingredientId: null },
+    {
+      ingredientName: '',
+      quantity: 1,
+      unit: '',
+      type: '',
+      ingredientId: null,
+      ingredientNameVI: '',
+      unitVI: '',
+      typeVI: '',
+    },
   ];
   Ingredient: any[] = [];
+  //translate
+  currentLang: string = 'en';
 
   constructor(
     private ingredientService: IngredientService,
-    private createRecipeDataService: CreateRecipeDataService
-  ) {}
+    private createRecipeDataService: CreateRecipeDataService,
+    private translate: TranslateService
+  ) {
+    this.currentLang = this.translate.currentLang || 'en';
+
+    this.translate.onLangChange.subscribe((event) => {
+      this.currentLang = event.lang;
+    });
+  }
 
   ngOnInit(): void {
     this.onGetAllIngredient();
@@ -34,6 +52,9 @@ export class CreateIngredientComponent implements OnInit {
       unit: '',
       type: '',
       ingredientId: null,
+      ingredientNameVI: '',
+      unitVI: '',
+      typeVI: '',
     });
     this.updateRecipeIngredients();
   }
@@ -60,8 +81,13 @@ export class CreateIngredientComponent implements OnInit {
     );
     if (selectedIngredient) {
       ingredient.ingredientId = selectedIngredient.ingredientId;
-      ingredient.unit = selectedIngredient.unit;
-      ingredient.type = selectedIngredient.type;
+      if (this.currentLang === 'vi') {
+        ingredient.unit = selectedIngredient.unitVI;
+        ingredient.type = selectedIngredient.typeVI;
+      } else {
+        ingredient.unit = selectedIngredient.unit;
+        ingredient.type = selectedIngredient.type;
+      }
     } else {
       ingredient.ingredientId = '';
       ingredient.unit = '';
