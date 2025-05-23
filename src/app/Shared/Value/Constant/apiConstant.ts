@@ -1,6 +1,7 @@
 export const ApiPaths = {
   baseUrl: 'http://localhost:5099/api/v1/',
   baseAuthUrl: 'http://localhost:5099/api/Auth/',
+  baseVisit: 'http://localhost:5099/api/',
   //Recipe
   GetAllRecipe: 'Recipe/Get-all-recipe',
   GetByIdRecipe: 'Recipe/Get-recipe-by-id/',
@@ -61,4 +62,17 @@ export const ApiPaths = {
   SendOtp: 'send-otp-email',
   VerifyOtp: 'verify-otp',
   ResetPassword: 'reset-password',
+  Guest: 'guest-login',
+
+  //Admin
+  GetReport: 'Recipe/Get-report/',
+
+  //Visit
+  PostVisit: 'Visit',
+  ByDate: 'Visit/by-date',
+  Monthly: 'Visit/monthly',
+  GetDate: 'Visit/total-by-date',
+  GetWeek: 'Visit/total-by-week',
+  GetMonth: 'Visit/total-by-month',
+  GetYear: 'Visit/total-by-year',
 };

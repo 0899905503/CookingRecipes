@@ -23,6 +23,7 @@ export class FavoriteComponent {
   @Output() recipeSelected = new EventEmitter<number>();
   selectedMenu: string = 'ALL';
   currentLang: string = 'en';
+  userRole: string = '';
   constructor(
     private favoriteService: FavoriteService,
     private authService: AuthService,
@@ -37,6 +38,7 @@ export class FavoriteComponent {
   FavoritesRecipe: any[] = [];
 
   ngOnInit(): void {
+    this.userRole = localStorage.getItem('role') || 'guest';
     const userId = this.authService.getUserId();
     console.log('User ID:', userId);
 
@@ -58,21 +60,6 @@ export class FavoriteComponent {
     );
   }
 
-  // filteredRecipes(): any[] {
-  //   if (!this.FavoritesRecipe) return [];
-
-  //   if (this.selectedMenu === 'ALL') return this.FavoritesRecipe;
-
-  //   if (this.selectedMenu === 'Vegan') {
-  //     return this.FavoritesRecipe.filter((item) => item.vegan === 1);
-  //   }
-
-  //   return this.FavoritesRecipe.filter(
-  //     (item) =>
-  //       item.category.categoryName === this.selectedMenu ||
-  //       (item.vegan === 1 && item.category.categoryName !== this.selectedMenu)
-  //   );
-  // }
   filteredRecipes(): any[] {
     if (!this.FavoritesRecipe) return [];
 
@@ -88,5 +75,28 @@ export class FavoriteComponent {
 
   onRecipeSelected(recipeId: number): void {
     this.recipeSelected.emit(recipeId); // Phát ra recipeId
+  }
+
+  getTranslatedPrepTime(prepTime: string): string {
+    switch (prepTime) {
+      case 'EASY PREP':
+        return 'HOMEPAGE.EASY_PREP';
+      case 'MEDIUM PREP':
+        return 'HOMEPAGE.MEDIUM_PREP';
+      case 'HARD PREP':
+        return 'HOMEPAGE.HARD_PREP';
+      default:
+        return prepTime; // fallback nếu không khớp
+    }
+  }
+  checkAccessAndNavigate(event: Event) {
+    event.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ <a>
+
+    if (this.userRole === 'guest') {
+      this.translate.get('ALERT').subscribe((res: string) => {
+        alert(res);
+      });
+      return;
+    }
   }
 }

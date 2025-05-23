@@ -69,6 +69,9 @@ export class RecipesComponent {
 
   //translate
   currentLang: string = 'en';
+
+  //guest
+  roleGuest: string = '';
   constructor(
     private recipeService: RecipeService,
     private route: ActivatedRoute,
@@ -84,6 +87,8 @@ export class RecipesComponent {
   }
 
   ngOnInit(): void {
+    this.roleGuest = localStorage.getItem('role') || 'guest';
+    console.log('Role:', this.roleGuest);
     const userIdst = this.authService.getUserId();
     console.log('User ID:', userIdst);
     if (userIdst !== null) {
@@ -121,14 +126,12 @@ export class RecipesComponent {
       this.notFound = true;
       console.log('recipeId null');
     }
-    this.steps = this.getInstructionDetails(this.RecipesById.instructions);
   }
 
   onRecipeSelected(id: number): void {
     this.recipeIds = id;
     this.onGetId(this.recipeIds);
     this.onGetSimilar(this.recipeIds);
-    this.steps = this.getInstructionDetails(this.RecipesById.instructions);
   }
 
   onGetId(id: number): void {
@@ -138,19 +141,39 @@ export class RecipesComponent {
         const tips = this.RecipesById.recipeTip || [];
         this.averageRating = this.RecipesById.averageRating;
         console.log('Average rating:', this.averageRating);
+
         if (tips.length > 0) {
           this.doTips = tips
             .filter((tip: any) => tip.actionType === 1)
-            .map((tip: any) => tip.actionText);
+            .map((tip: any) =>
+              this.currentLang === 'vi'
+                ? tip.actionTextVI || tip.actionText
+                : tip.actionText
+            );
+
           this.dontTips = tips
             .filter((tip: any) => tip.actionType === 0)
-            .map((tip: any) => tip.actionText);
+            .map((tip: any) =>
+              this.currentLang === 'vi'
+                ? tip.actionTextVI || tip.actionText
+                : tip.actionText
+            );
+
           this.titleTipDo = tips
             .filter((tip: any) => tip.actionType === 1)
-            .map((tip: any) => `${tip.title}:`);
+            .map((tip: any) =>
+              this.currentLang === 'vi'
+                ? `${tip.titleVI || tip.title}:`
+                : `${tip.title}:`
+            );
+
           this.titleTipDont = tips
             .filter((tip: any) => tip.actionType === 0)
-            .map((tip: any) => `${tip.title}:`);
+            .map((tip: any) =>
+              this.currentLang === 'vi'
+                ? `${tip.titleVI || tip.title}:`
+                : `${tip.title}:`
+            );
         } else {
           console.warn('No recipe tips available.');
         }
@@ -158,15 +181,23 @@ export class RecipesComponent {
         const instructions = this.RecipesById.instructions || [];
         if (instructions.length > 0) {
           this.stepTitle = instructions.map((instruction: any) => {
-            const step_details =
+            const stepDetails =
               this.currentLang === 'vi'
                 ? instruction.titleVI || instruction.title
                 : instruction.title;
-            const step = this.currentLang === 'vi' ? 'Bước' : 'Step';
-            return `${step} ${instruction.stepNumber}:  ${step_details}`;
+            const stepLabel = this.currentLang === 'vi' ? 'Bước' : 'Step';
+            return `${stepLabel} ${instruction.stepNumber}: ${stepDetails}`;
           });
-          this.steps = this.getInstructionDetails(instructions);
+
+          this.steps = instructions.map((instruction: any) => {
+            const steps =
+              this.currentLang === 'vi'
+                ? instruction.instructionTextVI || instruction.instructionText
+                : instruction.instructionText;
+            return steps;
+          });
         }
+
         if (this.averageRating == 0) {
           this.setupStars(5);
         } else {
@@ -376,7 +407,9 @@ export class RecipesComponent {
     }
     const updatedRecipe = {
       title: recipe.title,
+      titleVI: recipe.titleVI,
       description: recipe.description,
+      descriptionVI: recipe.descriptionVI,
       prepTime: recipe.prepTime,
       cookTime: recipe.cookTime,
       servings: recipe.servings,
@@ -400,5 +433,18 @@ export class RecipesComponent {
   removeRecipe(recipeId: number) {
     this.recipeService.deleteRecipes(recipeId).subscribe(() => {});
     console.log('Recipe rejected successfully');
+  }
+
+  getTranslatedPrepTime(prepTime: string): string {
+    switch (prepTime) {
+      case 'EASY PREP':
+        return 'HOMEPAGE.EASY_PREP';
+      case 'MEDIUM PREP':
+        return 'HOMEPAGE.MEDIUM_PREP';
+      case 'HARD PREP':
+        return 'HOMEPAGE.HARD_PREP';
+      default:
+        return prepTime; // fallback nếu không khớp
+    }
   }
 }

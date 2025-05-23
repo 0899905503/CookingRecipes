@@ -4,14 +4,22 @@
     <thead>
       <tr>
         <th>{{'CREATE_RECIPE.RECIPE_TIP.TITLE'| translate}}</th>
+        <th>{{'CREATE_RECIPE.RECIPE_TIP.TITLE_VI'| translate}}</th>
         <th>{{'CREATE_RECIPE.RECIPE_TIP.ACTION_TEXT'| translate}}</th>
+        <th>{{'CREATE_RECIPE.RECIPE_TIP.ACTION_TEXT_VI'| translate}}</th>
         <th>{{'CREATE_RECIPE.RECIPE_TIP.ACTION_TYPE'| translate}}</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let recipetip of recipetips; let i = index">
-        <td><input type="text" [(ngModel)]="recipetip.title" placeholder="Title" /></td>
-        <td><input type="text" [(ngModel)]="recipetip.actionText" placeholder="Action Text" /></td>
+        <td><input type="text" [(ngModel)]="recipetip.title"
+            placeholder="{{'CREATE_RECIPE.RECIPE_TIP.TITLE'| translate}}" /></td>
+        <td><input type="text" [(ngModel)]="recipetip.titleVI"
+            placeholder="{{'CREATE_RECIPE.RECIPE_TIP.TITLE_VI'| translate}}" /></td>
+        <td><input type="text" [(ngModel)]="recipetip.actionText"
+            placeholder="{{'CREATE_RECIPE.RECIPE_TIP.ACTION_TEXT'| translate}}" /></td>
+        <td><input type="text" [(ngModel)]="recipetip.actionTextVI"
+            placeholder="{{'CREATE_RECIPE.RECIPE_TIP.ACTION_TEXT_VI'| translate}}" /></td>
         <td>
           <select [(ngModel)]="recipetip.actionType" (ngModelChange)="logRecipeTips()">
             <option value="">{{'CREATE_RECIPE.RECIPE_TIP.SELECT_TYPE'| translate}}</option>

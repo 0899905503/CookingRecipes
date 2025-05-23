@@ -25,8 +25,8 @@
         [title]="currentLang === 'vi' ? RecipesById.titleVI || RecipesById.title : RecipesById.title"
         [additionalText]="additionalText"
         [description]="currentLang === 'vi' ? RecipesById.descriptionVI || RecipesById.description : RecipesById.description"
-        [cookTime]="RecipesById.cookTime" [prepTime]="RecipesById.prepTime" [serves]="RecipesById.servings"
-        [imageUrl]="RecipesById.imagePath">
+        [cookTime]="RecipesById.cookTime" [prepTime]="getTranslatedPrepTime(RecipesById.prepTime) | translate"
+        [serves]="RecipesById.servings" [imageUrl]="RecipesById.imagePath">
       </app-recipe-main>
 
       <div class="Recipe-detail">
@@ -34,7 +34,6 @@
           <p>
             {{'RECIPE_DETAILS.DESCRIPTION'| translate}}
           </p>
-
           <ng-container *ngIf="'RECIPE_DETAILS.TIPS_DO' | translate as doText">
             <ng-container *ngIf="'RECIPE_DETAILS.TIPS_DONOT' | translate as dontText">
               <app-recipe-tip [actionType]="doText" [actionType1]="dontText" [description]="doTips"
@@ -68,13 +67,14 @@
           <p> {{'RECIPE_DETAILS.NOTE'| translate}}
           </p>
           <button (click)="goBack()">{{'RECIPE_DETAILS.BACK'| translate}}</button>
-          <div class="favorite-button">
+          <div class="favorite-button" *ngIf="this.roleGuest !== 'guest'">
             <button (click)="toggleFavorite(RecipesById.recipeId, userId)" [class.favorited]="isFavorite"
               class="heart-button">
               ❤
             </button>
           </div>
-          <ng-container *ngIf="RecipesById.status === 'Pending'|| RecipesById.status === 'Rejected'  && isAdmin">
+          <ng-container *ngIf="(RecipesById.status === 'Pending' || RecipesById.status === 'Rejected') && isAdmin">
+
             <button (click)="checkRecipe(RecipesById.recipeId,RecipesById,true)" class="btn btn-success">
               {{'RECIPE_DETAILS.APPROVE'|translate}}
             </button>
@@ -118,13 +118,14 @@
       </div>
     </div>
     <!-- New comment input -->
-    <div class="comment-form">
+    <div class="comment-form" *ngIf="this.roleGuest !== 'guest'">
       <h3 class="comment-form-title">{{'RECIPE_DETAILS.LEAVE_A_COMMENT'|translate}}</h3>
 
       <!-- Textarea for comment -->
       <div class="form-group">
         <label for="commentText">{{'RECIPE_DETAILS.YOUR_COMMENT'|translate}}</label>
-        <textarea id="commentText" [(ngModel)]="newCommentText" placeholder="Write your comment..." rows="4"></textarea>
+        <textarea id="commentText" [(ngModel)]="newCommentText"
+          placeholder="{{'CREATE_RECIPE.LEAVE_A_COMMENT' | translate }}" rows="4"></textarea>
       </div>
 
       <!-- Star Rating -->
@@ -140,8 +141,11 @@
 
       <!-- Submit Button -->
       <div class="form-group">
-        <button class="submit-comment-btn"
-          (click)="submitComment(userId,recipeIds)">{{'RECIPE_DETAILS.SUBMIT_COMMENT'|translate}}</button>
+        <button class="submit-comment-btn" [disabled]="!newCommentText || rating === 0"
+          (click)="submitComment(userId, recipeIds)">
+          {{'RECIPE_DETAILS.SUBMIT_COMMENT'|translate}}
+        </button>
+
       </div>
     </div>
 

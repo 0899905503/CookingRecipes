@@ -1,9 +1,11 @@
 <div class="wrapper">
   <div class="create-recipe">
     <app-create-save (saveClicked)="saveRecipe()"></app-create-save>
-    <app-create-name></app-create-name>
+    <app-create-name [titleName]="TitleENG"></app-create-name>
+    <app-create-name [titleName]="TitleVIE"></app-create-name>
     <app-create-uploadimage></app-create-uploadimage>
-    <app-create-description></app-create-description>
+    <app-create-description [DescriptionName]="Description"></app-create-description>
+    <app-create-description [DescriptionName]="DescriptionVI"></app-create-description>
     <app-create-ingredient></app-create-ingredient>
     <app-create-cookingtool></app-create-cookingtool>
     <app-create-nutrient></app-create-nutrient>

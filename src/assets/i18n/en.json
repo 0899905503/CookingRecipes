@@ -5,6 +5,15 @@
   "CHANGE_PASSWORD": "Change Password",
   "SETTINGS": "Settings",
   "SAVE": "Save",
+  "OLD_PASSWORD": "Old Password",
+  "NEW_PASSWORD": "New Password",
+  "EMAIL": "Email",
+  "GUEST": "GUEST",
+  "GUEST_LOGIN": "GUEST LOGIN",
+  "ENTER_NAME": "Enter your name",
+  "PLEASE_ENTER_NAME": "Please enter your name",
+  "FAILED":"Guest login failed",
+  "ALERT":"You are using a guest account You need to log in to use this feature",
   "FAVORITE" : {
     "HEADING": "MY FAVORITE RECIPE",
     "TITLE": "CHOOSE A RECIPE YOU WANT TO COOK TODAY",
@@ -19,10 +28,12 @@
   },
   "CREATE_RECIPE": {
     "CREATE_RECIPE": "CREATE NEW RECIPE",
-    "RECIPE_TITLE": "RECIPE TITLE",
+    "RECIPE_TITLEEN": "RECIPE TITLE (ENG)",
+    "RECIPE_TITLEVI": "RECIPE TITLE (VIE)",
     "RECIPE_IMAGE": "RECIPE IMAGE",
     "ADD_RECIPE_IAMGE": "ADD RECIPE IMAGE",
-    "DESCRIPTION": "DESCRIPTION",
+    "DESCRIPTION": "DESCRIPTION (ENG)",
+    "DESCRIPTION_VI": "DESCRIPTION (VIE)",
     "INGREDIENT": {
               "INGREDIENTS": "INGREDIENTS",
               "INGREDIENT_NAME": "INGREDIENT NAME",
@@ -54,17 +65,21 @@
     },
     "INSTRUCTION": {
       "INSTRUCTIONS":"INSTRUCTIONS",
-      "TITLE":"TITLE",
+      "TITLE":"TITLE (ENG)",
+      "TITLE_VI":"TITLE (VIE)",
       "STEP": "STEP",
-      "INSTRUCTION_TEXT": "INSTRUCTION DETAILS",
+      "INSTRUCTION_TEXT": "INSTRUCTION (ENG)",
+      "INSTRUCTION_TEXT_VI": "INSTRUCTION (VIE)",
       "COOKING_TOOL": "COOKING TOOL",
        "SELECT_TOOL": "Select Cooking Tool",
       "ADD_INSTRUCTION": "+ Instruction"
     },
     "RECIPE_TIP": {
       "RECIPE_TIPS":"RECIPE TIPS",
-      "TITLE":"Title",
-      "ACTION_TEXT": "Action Text",
+      "TITLE":"Title (ENG)",
+      "TITLE_VI":"Title (VIE)",
+      "ACTION_TEXT": "Action Text (ENG)",
+      "ACTION_TEXT_VI":"Action Text (VIE)",
       "ACTION_TYPE": "Action Type",
       "SELECT_TYPE": "Select action type",
       "DO" : "Do",
@@ -72,7 +87,8 @@
        "ADD_RECIPE_TIP": "+ Recipe Tip"
     },
     "SAVE": "SAVE",
-    "BACK": "BACK"
+    "BACK": "BACK",
+    "LEAVE_A_COMMENT": "Leave a comment"
   },
 
   "MENU":{
@@ -82,6 +98,7 @@
     "FAVORITE": "FARVORITE",
     "ABOUT_US": "ABOUT US",
     "SETTING": "SETTING",
+    "PROFILE": "PROFILE ",
     "SUBSCRIBE": "SUBSCRIBE"
   },
 
@@ -151,7 +168,11 @@
       "PASSWORD":"Password",
       "REMEMBER":"Remember me",
       "FORGOT":"Forgot Password?",
-      "EMAIL_ADDRESS":"Email Address"
+      "EMAIL_ADDRESS":"Email Address",
+      "ENTER_EMAIL":"Enter your email",
+      "ENTER_PASSWORD":"Enter your password",
+      "ENTER_USER_NAME":"Enter your user name",
+      "ENTER_NEW_PASSWORD":"Enter your new password"
     }
   },
 
@@ -172,7 +193,12 @@
     "SELECT_HEADER_1":"EMBARK ON A ",
     "SELECT_HEADER_2":"JOURNEY",
     "SELECT_DESCRIPTION_1":"With our diverse collection of recipes we have something to",
-    "SELECT_DESCRIPTION_2":" satisfy every palate."
+    "SELECT_DESCRIPTION_2":" satisfy every palate.",
+    "MIN": "MIN",
+    "SERVES":"SERVES",
+    "EASY_PREP":"EASY PREP",
+    "MEDIUM_PREP":"MEDIUM PREP",
+    "HARD_PREP":"HARD PREP"
   },
 
   "COOKING_TIP":{
@@ -182,7 +208,95 @@
     "COOKING_TIP_DATE_CREATE":"DATE CREATE",
     "COOKING_TIP_MINUTES":"minutes",
     "COOKING_TIP_CREATED_BY":"CREATED BY",
-    "COOKING_TIP_BACK":"BACK"
+    "COOKING_TIP_BACK":"BACK",
+    "TIP_TITLE":"TIPS & TRICKS",
+    "DESCRIPTION":"SELECT THE TIPS YOU WANNA SEE",
+    "MEAT":"Meat Tips",
+    "VEGETABLE":"Vegetable Tips",
+    "SAUCE": "Sauce Tips",
+    "PASTA":"Pasta Tips",
+    "DESSERT": "Dessert Tips",
+    "TIME": "Time Saving Tips",
+    "SPICE": "Spice Tips",
+    "VEGETARIAN": "Vegetarian Tips",
+    "BEVERAGE":"Beverage Tips"
+  },
+
+  "SETTING_PAGE":{
+    "SETTING":"SETTING",
+    "ENGLISH":"English",
+    "VIETNAMESE":"Vietnamese",
+    "SAVE":"Save",
+    "ADMIN_PAGE":"Admin"
+  },
+
+  "ADMIN_PAGE":{
+    "MENU": {
+      "DASHBOARD":"Dashboard",
+      "RECIPE":"Recipes",
+      "COMMENT":"Comments",
+      "REPORT":"Report",
+      "NOTIFICATION":"Nofitication",
+      "SETTING":"Settings",
+      "SUPPORT":"Support",
+      "WELCOME_BACK":"Welcome back "
+    },
+    "DASHBOARD": {
+      "TOTAL_RECIPES":"Total Recipes",
+      "TOTAL_USERS":"Total Users",
+      "NEW_RECIPE":"New Recipes",
+      "TABLES_TOP_VIEWS":{
+        "TOP_10_VIEWS":"List of 10 most viewed recipes",
+        "IMAGE":"Image",
+        "RECIPE_NAME":"Recipe Name",
+        "DATE_CREATED":"Date Created",
+        "CATEGORY":"Category",
+        "VIEWS":"Views",
+        "STATUS":"Status"
+      },
+      "TABLE_STATISTICS": {
+        "STATISTICS":"Recipe statistics over time",
+        "TIME_PRERIOD":"Time Period",
+        "DURING_THE_WEEK":"During the week",
+        "DURING_THE_MONTH":"During the month",
+        "DURING_THE_YEAR":"During the year",
+        "TOTAL_RECIPES":"Total Recipes",
+        "TOTAL_DURING_THE_WEEK":"List of recipes created this week",
+        "TOTAL_DURING_THE_MONTH":"List of recipes created this month",
+        "TOTAL_DURING_THE_YEAR":"List of recipes created this year",
+        "IMAGE":"Image",
+        "RECIPE_NAME":"Recipe Name",
+        "DATE_CREATED":"Date Created",
+        "CATEGORY":"Category",
+        "VIEWS":"Views",
+        "STATUS":"Status"
+      }
+    },
+    "SEARCH": "Search",
+    "SORT_BY": "Sort by",
+    "ALL": "All",
+    "APPROVED": "Approved",
+    "PENDING": "Pending",
+    "REJECTED": "Rejected",
+    "RECIPE_NAME": "Recipe Name",
+    "CATEGORY": "Category",
+    "USER_CREATED": "User Created",
+    "DATE_CREATED": "Date Created",
+    "DETAILS": "Details",
+    "STATUS": "Status",
+    "NO_RECIPES": "No recipes found.",
+    "USER_POSTED": "User Posted",
+    "COMMENT_TEXT": "Comment",
+    "RATING": "Rating",
+    "DATE_POSTED": "Date Posted",
+    "NO_COMMENTS": "No comments found.",
+    "REPORT": {
+      "SELECT_YEAR": "Select Year",
+      "USER":"User Created",
+      "RECIPE": "Recipe Created",
+      "COMMENT": "Comment Created",
+      "VISIT": "Visit"
+    }
   }
 
 }

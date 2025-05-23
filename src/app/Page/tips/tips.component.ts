@@ -24,6 +24,7 @@ export class TipsComponent {
   Tip: any[] = [];
   NewRecipe: any[] = [];
   currentLang: string = 'en';
+  selectedMenu: string = 'ALL';
 
   constructor(
     private tipService: TipService,
@@ -45,9 +46,14 @@ export class TipsComponent {
     this.tipService.getAllTips().subscribe(
       (data) => {
         this.Tip = data;
-        this.Tip.forEach((tip) => {
-          tip.dateCreated = DateUtils.formatDate(tip.dateCreated);
-        });
+        if (this.Tip.length > 0) {
+          this.Tip.map((item: any) => {
+            item.dateCreated =
+              this.currentLang === 'vi'
+                ? DateUtils.formatDateVI(item.dateCreated)
+                : DateUtils.formatDate(item.dateCreated);
+          });
+        }
       },
       (error) => {
         console.error('Error fetching tip:', error);
@@ -65,6 +71,30 @@ export class TipsComponent {
       (error) => {
         console.error('Error fetching recipes new:', error);
       }
+    );
+  }
+  getTranslatedPrepTime(prepTime: string): string {
+    switch (prepTime) {
+      case 'EASY PREP':
+        return 'HOMEPAGE.EASY_PREP';
+      case 'MEDIUM PREP':
+        return 'HOMEPAGE.MEDIUM_PREP';
+      case 'HARD PREP':
+        return 'HOMEPAGE.HARD_PREP';
+      default:
+        return prepTime; // fallback nếu không khớp
+    }
+  }
+  filteredRecipes(): any[] {
+    if (!this.Tip) return [];
+
+    if (this.selectedMenu === 'ALL') {
+      return this.Tip;
+    }
+
+    // Sửa điều kiện ở đây: dùng categoryName thay vì item.vegan
+    return this.Tip.filter(
+      (item) => item.category?.categoryName === this.selectedMenu
     );
   }
 }

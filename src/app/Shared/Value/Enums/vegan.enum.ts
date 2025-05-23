@@ -1,4 +1,4 @@
 export enum VeganEnum {
-  Yes = 1,
-  No = 0,
+  Yes = 'True',
+  No = 'False',
 }

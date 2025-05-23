@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CookingtoolService } from '../../../../Service/CookingTool/cookingtool.service';
 import { CreateRecipeDataService } from '../../../../Service/CreateRecipeData/create-recipe-data.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { title } from 'process';
 
 @Component({
   selector: 'app-create-instruction',
@@ -14,16 +15,25 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 })
 export class CreateInstructionComponent {
   instructions = [
-    { title: '', stepNumber: 1, instructionText: '', cookingToolId: '' },
+    {
+      title: '',
+      stepNumber: 1,
+      instructionText: '',
+      cookingToolId: '',
+      titleVI: '',
+      instructionTextVI: '',
+    },
   ];
   currentStep = 2;
 
   addInstruction() {
     this.instructions.push({
       title: '',
+      titleVI: '',
       stepNumber: this.currentStep,
       instructionText: '',
       cookingToolId: '',
+      instructionTextVI: '',
     });
     this.currentStep++;
     this.updateInstruction();
@@ -66,6 +76,8 @@ export class CreateInstructionComponent {
       stepNumber: instruction.stepNumber,
       instructionText: instruction.instructionText,
       cookingToolId: instruction.cookingToolId,
+      titleVI: instruction.titleVI,
+      instructionTextVI: instruction.instructionTextVI,
     }));
 
     console.log('Updating recipe ninstructions:', instructionData);

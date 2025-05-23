@@ -16,12 +16,19 @@ export class AuthService {
   //UserId
   private userIdKey = 'userId'; // key lưu trong localStorage
   private userId: number | null = null;
+  //Role
+  private role = 'role';
+
+  //Infor
+  private avt = 'avt';
+  private email1 = 'email';
 
   public isAuthenticated$ = new BehaviorSubject<boolean>(this.hasToken());
   private baseAuthsUrl = ApiPaths.baseAuthUrl;
   private sendOtp = ApiPaths.SendOtp;
   private verifyOtp = ApiPaths.VerifyOtp;
   private resetPassword = ApiPaths.ResetPassword;
+  private guest = ApiPaths.Guest;
 
   constructor(
     private http: HttpClient,
@@ -36,6 +43,8 @@ export class AuthService {
     }
   }
   Role: any;
+  avatar1: any;
+  email: any;
   login(
     username: string,
     password: string,
@@ -55,11 +64,16 @@ export class AuthService {
               this.isAuthenticated$.value
             );
             this.Role = response.data.user.role;
+            this.avatar1 = response.data.user.avatar;
             this.userId = Number(response.data.user.userId); // giả sử userId nằm ở đây
+            this.email = response.data.user.email;
             if (isPlatformBrowser(this.platformId)) {
               if (this.userId != null) {
                 // khác null và undefined
                 localStorage.setItem(this.userIdKey, this.userId.toString());
+                localStorage.setItem(this.role, this.Role);
+                localStorage.setItem(this.email1, this.email);
+                localStorage.setItem(this.avt, this.avatar1);
               }
             }
           } else {
@@ -98,8 +112,17 @@ export class AuthService {
     this.removeToken();
     this.isAuthenticated$.next(false);
     this.userId = null;
+    this.Role = '';
+    this.avatar1 = '';
+    this.email = '';
+
     if (isPlatformBrowser(this.platformId)) {
       localStorage.removeItem(this.userIdKey);
+      localStorage.removeItem(this.role);
+      localStorage.removeItem(this.email1);
+      localStorage.removeItem(this.avt);
+      // Nếu bạn muốn xóa deviceUuid thì thêm dòng này, nhưng thường giữ lại để nhận dạng thiết bị
+      // localStorage.removeItem(this.deviceUuidKey);
     }
   }
 
@@ -132,9 +155,6 @@ export class AuthService {
   private isTokenValid(token: string): boolean {
     return true;
   }
-  public getRole(): string {
-    return this.Role;
-  }
 
   sendOtpS(email: string) {
     return this.http.post<any>(this.baseAuthsUrl + this.sendOtp, { email });
@@ -160,5 +180,24 @@ export class AuthService {
       return id ? Number(id) : null;
     }
     return null;
+  }
+  getRole(): string {
+    if (!this.Role && isPlatformBrowser(this.platformId)) {
+      this.Role = localStorage.getItem(this.role) || '';
+    }
+    return this.Role;
+  }
+  //GUEST
+  loginGuest(name: string) {
+    return this.http.post<any>(this.baseAuthsUrl + this.guest, { name }).pipe(
+      tap((response) => {
+        if (response.role && response.token) {
+          localStorage.setItem(this.role, response.role);
+          console.log('Role:', response.role);
+          localStorage.setItem(this.tokenKey, response.token);
+          this.isAuthenticated$.next(true);
+        }
+      })
+    );
   }
 }

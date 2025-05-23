@@ -5,7 +5,7 @@ import { AuthService } from '../../Service/Auth/Login/login.service';
 import { FormsModule } from '@angular/forms';
 import { ErrorsCodeEnum } from '../../Shared/Value/Enums/errorsCodeEnums';
 import { ForgotPasswordComponent } from '../../Shared/Component/forgot-password/forgot-password.component';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   standalone: true,
@@ -24,6 +24,11 @@ export class LoginComponent {
   password = '';
   deviceUuid = '';
   errorMessage = '';
+
+  //GUEST
+  showGuestForm: boolean = false;
+  guestName: string = '';
+
   private loggedIn = false;
   @Input() activeButton: string = '';
   @Output() toggle = new EventEmitter<string>();
@@ -40,9 +45,23 @@ export class LoginComponent {
   resetError = '';
 
   isLoginChecked: boolean = false;
-
-  constructor(private authService: AuthService, private router: Router) {
+  //translate
+  currentLang: string = 'en';
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private translate: TranslateService
+  ) {
     this.deviceUuid = this.authService.getDeviceUuid();
+    this.currentLang = this.translate.currentLang || 'en';
+
+    this.translate.onLangChange.subscribe((event) => {
+      this.currentLang = event.lang;
+    });
+  }
+  ngOnInit() {
+    this.deviceUuid = this.authService.getDeviceUuid();
+    console.log('Device UUID:', this.deviceUuid);
   }
 
   toggleActive(button: string) {
@@ -123,5 +142,29 @@ export class LoginComponent {
           this.resetError = 'Password reset failed.';
         },
       });
+  }
+  onGuestLogin() {
+    if (!this.guestName || this.guestName.trim() === '') {
+      this.currentLang === 'vi'
+        ? (this.errorMessage = this.translate.instant('PLEASE_ENTER_NAME'))
+        : (this.errorMessage = this.translate.instant('PLEASE_ENTER_NAME'));
+      return;
+    }
+    this.authService.loginGuest(this.guestName).subscribe({
+      next: (res: any) => {
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('role', res.role);
+        localStorage.setItem('name', res.name);
+        this.router.navigate(['/home']);
+        this.loggedIn = true;
+        console.log(res);
+      },
+      error: (err) => {
+        this.currentLang === 'vi'
+          ? (this.errorMessage = this.translate.instant('FAILED'))
+          : (this.errorMessage = this.translate.instant('FAILED'));
+        console.error(err);
+      },
+    });
   }
 }

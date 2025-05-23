@@ -18,8 +18,10 @@
             </option>
           </select>
         </td>
-        <td><input type="number" [(ngModel)]="nutrient.quantity" placeholder="Quantity" /></td>
-        <td><input type="text" [(ngModel)]="nutrient.unit" placeholder="Unit" /></td>
+        <td><input type="number" [(ngModel)]="nutrient.quantity"
+            placeholder="{{'CREATE_RECIPE.INGREDIENT.QUANTITY'| translate}}" /></td>
+        <td><input type="text" [(ngModel)]="nutrient.unit"
+            placeholder="{{'CREATE_RECIPE.INGREDIENT.UNIT'| translate}}" /></td>
       </tr>
     </tbody>
   </table>

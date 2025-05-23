@@ -1,9 +1,11 @@
-<ng-container *ngIf="isLoggedIn$ | async">
+<!-- Chỉ hiển thị menu nếu không phải trang admin -->
+<ng-container *ngIf="(isLoggedIn$ | async) && !isAdminPage()">
   <app-menu></app-menu>
 </ng-container>
 
 <router-outlet></router-outlet>
 
-<ng-container *ngIf="isLoggedIn$ | async">
+<!-- Chỉ hiển thị bottom menu nếu không phải trang admin -->
+<ng-container *ngIf="(isLoggedIn$ | async) && !isAdminPage()">
   <app-bottom-menu></app-bottom-menu>
 </ng-container>

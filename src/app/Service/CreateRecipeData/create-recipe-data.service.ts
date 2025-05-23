@@ -160,6 +160,6 @@ export class CreateRecipeDataService {
     console.log('Updated RecipeTips:', this.recipeTips);
   }
   getRecipeTips(): any[] {
-    return this.recipeTips || []; // Đảm bảo trả về mảng rỗng nếu null
+    return this.recipeTips || [];
   }
 }

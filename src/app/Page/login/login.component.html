@@ -38,14 +38,14 @@
     <form (ngSubmit)="onLogin()" #loginForm="ngForm">
       <div class="form-group">
         <label for="username">{{'AUTH.LOGIN.USER_NAME'| translate}}</label>
-        <input type="text" id="username" name="username" placeholder="Enter your User name" [(ngModel)]="username"
-          required />
+        <input type="text" id="username" name="username" placeholder="{{'AUTH.LOGIN.ENTER_USER_NAME'|translate}}"
+          [(ngModel)]="username" required />
       </div>
 
       <div class="form-group">
         <label for="password">{{'AUTH.LOGIN.PASSWORD'| translate}}</label>
-        <input type="password" id="password" name="password" placeholder="Enter your Password" [(ngModel)]="password"
-          required />
+        <input type="password" id="password" name="password" placeholder="{{'AUTH.LOGIN.ENTER_PASSWORD'|translate}}"
+          [(ngModel)]="password" required />
       </div>
 
       <div class="options">
@@ -55,6 +55,27 @@
 
       <button class="login-btn" type="submit" [disabled]="!loginForm.valid">{{'AUTH.LOGIN.LOGIN_BUTTON'|
         translate}}</button>
+
+
+    </form>
+    <form (ngSubmit)="onGuestLogin()" #loginForm="ngForm">
+      <!-- Nút GUEST ban đầu -->
+      <button class="guest-login-btn" type="button" (click)="showGuestForm = true" *ngIf="!showGuestForm">
+        {{'GUEST'|translate}}
+      </button>
+
+      <!-- Form nhập tên hiển thị sau khi bấm -->
+      <div *ngIf="showGuestForm" class="guest-form">
+        <input type="text" [(ngModel)]="guestName" placeholder="{{'ENTER_NAME'|translate}}" class="form-control"
+          name="guestName" />
+
+
+        <div *ngIf="errorMessage" class="text-danger mt-2">{{ errorMessage }}</div>
+
+        <button class="login-btn" type="submit">
+          {{'GUEST_LOGIN'|translate}}
+        </button>
+      </div>
     </form>
 
     <!-- Forgot Password Modal -->
@@ -71,7 +92,8 @@
         <div *ngIf="otpError">{{ otpError }}</div>
 
         <h3 *ngIf="step === 3">{{'AUTH.NEW_PASSWORD'|translate}}</h3>
-        <input *ngIf="step === 3" [(ngModel)]="newPassword" type="password" placeholder="New Password" />
+        <input *ngIf="step === 3" [(ngModel)]="newPassword" type="password"
+          placeholder="{{'AUTH.LOGIN.ENTER_NEW_PASSWORD'|translate}}" />
         <button *ngIf="step === 3" (click)="resetPassword()">{{'AUTH.RESET_PASSWORD'|translate}}</button>
         <div *ngIf="resetError">{{ resetError }}</div>
 

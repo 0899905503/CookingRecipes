@@ -1,7 +1,10 @@
 <div class="description-container">
-  <h2>{{'CREATE_RECIPE.DESCRIPTION'| translate}}</h2>
-  <textarea [(ngModel)]="description" (ngModelChange)="onDescriptionChange()"
-    placeholder="Introduce your recipe"></textarea>
+  <h2>{{ ('CREATE_RECIPE.' + (DescriptionName === 'Description' ? 'DESCRIPTION' : 'DESCRIPTION_VI')) | translate }}</h2>
+  <textarea [(ngModel)]="description" (ngModelChange)="onDescriptionChange(DescriptionName)"
+    [ngClass]="{'error': description.length > maxDescriptionLength}" [placeholder]="DescriptionName === 'Description'
+      ? ('CREATE_RECIPE.DESCRIPTION' | translate)
+      : ('CREATE_RECIPE.DESCRIPTION_VI' | translate)" class="description-textarea" rows="5"
+    maxlength="{{ maxDescriptionLength }}" placeholder="Introduce your recipe"></textarea>
   <div class="char-count">
     {{ description.length }}/{{ maxDescriptionLength }}
   </div>

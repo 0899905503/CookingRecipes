@@ -49,10 +49,12 @@ export class CookingTipDetailComponent {
     this.cookingTipService.getCookingTip(id).subscribe(
       (data) => {
         this.cookingTip = data;
-
-        this.cookingTip.dateCreated = DateUtils.formatDate(
-          this.cookingTip.dateCreated
-        );
+        if (this.cookingTip) {
+          this.cookingTip.dateCreated =
+            this.currentLang === 'vi'
+              ? DateUtils.formatDateVI(this.cookingTip.dateCreated)
+              : DateUtils.formatDate(this.cookingTip.dateCreated);
+        }
       },
       (error) => {
         console.error('Error fetching cooking tip:', error);

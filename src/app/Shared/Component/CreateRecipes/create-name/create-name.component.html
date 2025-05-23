@@ -1,10 +1,12 @@
 <div class="name-container">
-  <h2>{{'CREATE_RECIPE.RECIPE_TITLE'| translate}}</h2>
+  <h2>{{ ('CREATE_RECIPE.' + (titleName === 'Title' ? 'RECIPE_TITLEEN' : 'RECIPE_TITLEVI')) | translate }}</h2>
   <table>
     <tbody>
       <tr *ngFor="let name of names; let i = index">
         <td>
-          <input type="text" [(ngModel)]="title" (ngModelChange)="onTitleChange()" placeholder="Recipe name" />
+          <input type="text" [(ngModel)]="title" (ngModelChange)="onTitleChange(titleName)" [placeholder]="titleName === 'Title'
+      ? ('CREATE_RECIPE.RECIPE_TITLEEN' | translate)
+      : ('CREATE_RECIPE.RECIPE_TITLEVI' | translate)" />
           <button (click)="goBack()">{{'CREATE_RECIPE.BACK'| translate}}</button>
         </td>
       </tr>

@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 export class AdminService {
   private baseUrl = ApiPaths.baseUrl;
   private getAllComments = ApiPaths.GetAllComment;
+  private getReports = ApiPaths.GetReport;
   constructor(private http: HttpClient) {}
 
   getAllComment(): Observable<any[]> {
@@ -18,6 +19,16 @@ export class AdminService {
     });
 
     return this.http.get<any[]>(`${this.baseUrl + this.getAllComments}`, {
+      headers,
+    });
+  }
+  getReport(year: number): Observable<any[]> {
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.get<any[]>(`${this.baseUrl + this.getReports + year}`, {
       headers,
     });
   }

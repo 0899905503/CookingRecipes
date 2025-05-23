@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Location } from '@angular/common';
 import { CreateRecipeDataService } from '../../../../Service/CreateRecipeData/create-recipe-data.service';
@@ -18,11 +18,17 @@ export class CreateNameComponent {
     private location: Location,
     private createRecipeDataService: CreateRecipeDataService
   ) {}
-
+  @Input() titleName: string = '';
   title: string = '';
+  header: string = '';
 
-  onTitleChange() {
-    this.createRecipeDataService.updateRecipeData('Title', this.title);
+  onTitleChange(titleCheck: string) {
+    this.titleName = titleCheck;
+    if (this.titleName === 'Title') {
+      this.createRecipeDataService.updateRecipeData('Title', this.title);
+    } else if (this.titleName === 'TitleVI') {
+      this.createRecipeDataService.updateRecipeData('TitleVI', this.title);
+    }
   }
 
   goBack(): void {

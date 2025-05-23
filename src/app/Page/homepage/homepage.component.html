@@ -54,8 +54,9 @@
       <app-recipe-card *ngFor="let recipe of RecipesTopView" [imageUrl]="recipe.imagePath"
         [title]="currentLang === 'vi' ? recipe.titleVI || recipe.title : recipe.title"
         [description]="currentLang === 'vi' ? recipe.descriptionVI || recipe.description : recipe.description"
-        [prepTime]="recipe.prepTime" [cookTime]="recipe.cookTime" [isVegan]="recipe.vegan" [serves]="recipe.servings"
-        [totalView]="recipe.totalView" [unit1]="'MIN'" [unit2]="'SERVES'" [recipeId]="recipe.recipeId"
+        [prepTime]="getTranslatedPrepTime(recipe.prepTime) | translate" [cookTime]="recipe.cookTime"
+        [isVegan]="recipe.vegan" [serves]="recipe.servings" [totalView]="recipe.totalView"
+        [unit1]="'HOMEPAGE.MIN' | translate" [unit2]="'HOMEPAGE.SERVES' | translate" [recipeId]="recipe.recipeId"
         [averageRating]="recipe.averageRating" (recipeSelected)="onRecipeSelected($event)">
       </app-recipe-card>
 
@@ -94,8 +95,9 @@
         <app-recipe-card [imageUrl]="item.imagePath"
           [title]="currentLang === 'vi' ? item.titleVI || item.title : item.title"
           [description]="currentLang === 'vi' ? item.descriptionVI || item.description : item.description"
-          [cookTime]="item.cookTime" [prepTime]="item.prepTime" [serves]="item.servings" [isVegan]="item.vegan"
-          [unit1]="'MIN'" [unit2]="'SERVES'" [recipeId]="item.recipeId" (recipeSelected)="onRecipeSelected($event)"
+          [cookTime]="item.cookTime" [prepTime]="getTranslatedPrepTime(item.prepTime) | translate"
+          [serves]="item.servings" [isVegan]="item.vegan" [unit1]="'HOMEPAGE.MIN' | translate"
+          [unit2]="'HOMEPAGE.SERVES' | translate" [recipeId]="item.recipeId" (recipeSelected)="onRecipeSelected($event)"
           [averageRating]="item.averageRating">
         </app-recipe-card>
       </div>

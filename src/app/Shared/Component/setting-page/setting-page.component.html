@@ -1,21 +1,16 @@
 <div class="settings-container">
   <div class="left-panel">
     <div class="profile">
-      <img class="profile-img" src="assets/RecipeImg/Pan-Seared-Tuna.jpg" alt="Profile Picture" />
-      <h3>General Winter</h3>
-      <p>Russia</p>
-      <div class="social-icons">
-        <i class="fab fa-facebook"></i>
-        <i class="fab fa-twitter"></i>
-        <i class="fab fa-instagram"></i>
-      </div>
-      <p class="quote">
-        I am the general winter. I come back every year. Because I am a part of nature. Without me, nature will die. The
-        human will die.
-      </p>
+      <img class="profile-img" [src]="avatar" alt="Profile Picture" />
+      <h3>{{ isGuest ? name : (email ? email : name) }}</h3>
+
+
+      <p>{{ userRole }}</p>
     </div>
+
     <div class="settings">
-      <h4>SETTINGS</h4>
+      <h4>{{ 'SETTING_PAGE.SETTING' | translate }}</h4>
+
       <div class="setting-item">
         <span>{{ 'DARK_MODE' | translate }}</span>
         <label class="switch">
@@ -23,25 +18,56 @@
           <span class="slider round"></span>
         </label>
       </div>
+
       <div class="setting-item">
         <span>{{ 'LANGUAGE' | translate }}</span>
         <select (change)="changeLanguage($event)" [value]="translate.currentLang">
-          <option value="en">English</option>
-          <option value="vi">Tiếng Việt</option>
+          <option value="en">{{ 'SETTING_PAGE.ENGLISH' | translate }}</option>
+          <option value="vi">{{ 'SETTING_PAGE.VIETNAMESE' | translate }}</option>
         </select>
+      </div>
 
-      </div>
-      <div class="setting-item">
+      <div class="setting-item" *ngIf="userRole !== 'guest'">
         <span>{{ 'CHANGE_PASSWORD' | translate }}</span>
-        <input type="password" placeholder="{{ 'OLD_PASSWORD' | translate }}" />
-        <input type="password" placeholder="{{ 'NEW_PASSWORD' | translate }}" />
-        <button class="save-btn">{{ 'SAVE' | translate }}</button>
+
+        <div *ngIf="step === 1">
+          <input type="text" placeholder="{{ 'EMAIL' | translate }}" [(ngModel)]="emailForOtp" />
+          <input type="password" placeholder="{{ 'NEW_PASSWORD' | translate }}" [(ngModel)]="newPassword" />
+          <button class="save-btn" (click)="sendOtp()">
+            {{ 'AUTH.SEND_OTP' | translate }}
+          </button>
+          <div *ngIf="emailError">{{ emailError }}</div>
+        </div>
+
+        <div *ngIf="step === 2">
+          <input type="text" placeholder="{{ 'AUTH.OTP_EMAIL' | translate }}" [(ngModel)]="otpCode" />
+          <button class="save-btn" (click)="verifyOtp()">
+            {{ 'SETTING_PAGE.SAVE' | translate }}
+          </button>
+          <div *ngIf="otpError">{{ otpError }}</div>
+          <div *ngIf="resetError">{{ resetError }}</div>
+        </div>
+
+        <div *ngIf="step === 3">
+          <input type="text" placeholder="{{ 'AUTH.OTP_EMAIL' | translate }}" [(ngModel)]="otpCode" />
+          <button class="save-btn" (click)="resetPassword()">
+            {{ 'SETTING_PAGE.SAVE' | translate }}
+          </button>
+        </div>
+        <button *ngIf="userRole === 'admin'" class="admin-btn" (click)="goToAdminPage()">
+          {{ 'SETTING_PAGE.ADMIN_PAGE' | translate }}
+        </button>
       </div>
+
     </div>
+
     <button class="logout-btn" (click)="logout()">{{ 'LOGOUT' | translate }}</button>
   </div>
+
   <div class="right-panel">
-    <h1>{{ 'TITLE' | translate }}</h1>
-    <p>{{ 'SUBTITLE' | translate }}</p>
+    <div class="content">
+      <h1>{{ 'PROFILE' | translate }}</h1>
+      <p>{{ 'Welcome Back' | translate }}</p>
+    </div>
   </div>
 </div>

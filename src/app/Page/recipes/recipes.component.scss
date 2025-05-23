@@ -40,7 +40,7 @@
 
 .Recipe-detail p {
   text-align: left;
-  margin: 10px;
+  margin-right:20%;
   color: #333333;
   opacity: 0.8;
   font-family: 'Roboto', sans-serif;
@@ -55,6 +55,12 @@
   flex-direction: column;
   gap: 20px;
 }
+
+.Recipe-instructions
+{
+  margin-right:10%
+}
+
 
 .carousel {
   background-color: #F0EBE1;
@@ -172,11 +178,13 @@ button {
 
 .form-group {
   margin-bottom: 20px;
+  background-color: #F0EBE1;
 }
 
 textarea {
   width: 100%;
   padding: 12px;
+  background-color: #F0EBE1;
   border-radius: 12px;
   border: 1px solid #ccc;
   resize: vertical;

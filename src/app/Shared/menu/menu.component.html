@@ -8,10 +8,18 @@
     <li><a routerLink="/home" routerLinkActive="active">{{'MENU.HOME'| translate}}</a></li>
     <!-- <li><a routerLink="/recipe" routerLinkActive="active">RECIPES</a></li> -->
     <li><a routerLink="/tip" routerLinkActive="active">{{'MENU.COOKING_TIPS'| translate}}</a></li>
-    <li><a routerLink="/createRecipes" routerLinkActive="active">{{'MENU.CREATE_RECIPE'| translate}} </a></li>
-    <li><a routerLink="/favorite" routerLinkActive="active">{{'MENU.FAVORITE'| translate}}</a></li>
+    <li>
+      <a href="#" (click)="checkAccessAndNavigate('createRecipes', $event)">
+        {{ 'MENU.CREATE_RECIPE' | translate }}
+      </a>
+    </li>
+    <li>
+      <a href="#" (click)="checkAccessAndNavigate('favorite', $event)">
+        {{ 'MENU.FAVORITE' | translate }}
+      </a>
+    </li>
     <li><a routerLink="/about" routerLinkActive="active">{{'MENU.ABOUT_US'| translate}}</a></li>
-    <li><a routerLink="/setting" routerLinkActive="active">{{'MENU.SETTING'| translate}}</a></li>
+    <li><a routerLink="/setting" routerLinkActive="active">{{'MENU.PROFILE'| translate}}</a></li>
   </ul>
   <div class="actions">
     <!-- <button class="search-button">🔍</button> -->

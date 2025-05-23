@@ -1,11 +1,12 @@
-import { Component, Input } from '@angular/core';
-import { Router, RouterModule } from '@angular/router'; // Import Router để điều hướng
+import { Component } from '@angular/core';
+import { Router, NavigationEnd, RouterModule } from '@angular/router';
 import { MenuComponent } from './Shared/menu/menu.component';
 import { BottomMenuComponent } from './Shared/bottom-menu/bottom-menu.component';
 import { AuthService } from './Service/Auth/Login/login.service';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './Page/login/login.component';
-import { Observable } from 'rxjs/internal/Observable';
+import { filter } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   standalone: true,
@@ -23,27 +24,36 @@ import { Observable } from 'rxjs/internal/Observable';
 export class AppComponent {
   title = 'CookingRecipes';
   isLoggedIn$!: Observable<boolean>;
+  currentUrl: string = '';
+  activeButton: string = 'login'; // Default active button
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {
+    // Lắng nghe URL thay đổi
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: any) => {
+        this.currentUrl = event.urlAfterRedirects;
+      });
+  }
 
   ngOnInit(): void {
-    // Lấy trạng thái đăng nhập từ AuthService
     this.isLoggedIn$ = this.authService.isAuthenticated$;
 
-    // Kiểm tra trạng thái đăng nhập và điều hướng
     this.isLoggedIn$.subscribe((isLoggedIn) => {
-      console.log('Is Logged In: ', isLoggedIn); // Kiểm tra trạng thái đăng nhập
+      console.log('Is Logged In: ', isLoggedIn);
       if (isLoggedIn == true) {
-        this.router.navigate(['/home']); // Điều hướng đến homepage nếu đã đăng nhập
+        this.router.navigate(['/home']);
       } else {
-        this.router.navigate(['/auth']); // Điều hướng đến authpage nếu chưa đăng nhập
+        this.router.navigate(['/auth']);
       }
     });
   }
 
-  activeButton: string = 'login'; // Default active button
-
   toggleActive(button: string) {
-    this.activeButton = button; // Change active button
+    this.activeButton = button;
+  }
+
+  isAdminPage(): boolean {
+    return this.currentUrl.startsWith('/admin');
   }
 }

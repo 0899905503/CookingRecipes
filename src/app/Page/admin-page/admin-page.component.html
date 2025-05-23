@@ -2,103 +2,331 @@
   <!-- Sidebar -->
   <div class="admin-menu" [ngClass]="{ 'expanded': isExpanded, 'collapsed': !isExpanded }">
     <div class="sidebar-container">
-      <!-- Toggle Button -->
       <button (click)="toggleSidebar()" class="toggle-button">
         <span>{{ isExpanded ? '◀' : '▶' }}</span>
       </button>
 
-      <!-- Header -->
       <div class="menu-header">
         <img [src]="logo" alt="Logo" />
         <h1 *ngIf="isExpanded">COOKING RECIPES</h1>
       </div>
 
-      <!-- Menu -->
       <ul>
         <li *ngFor="let item of menuItems" [ngClass]="{ 'active': item.label === activeItem }"
           (click)="setActive(item.label)">
           <i [class]="item.icon"></i>
-          <span *ngIf="isExpanded">{{ item.label }}</span>
+          <span *ngIf="isExpanded">{{ item.labelKey | translate }}</span>
         </li>
       </ul>
 
-      <!-- Footer -->
       <div class="sidebar-footer">
-        <img src="assets/avatar.png" alt="Avatar" />
+        <img [src]="avatar" alt="Avatar" />
         <div *ngIf="isExpanded" class="user-info">
-          <p>Welcome back 👋</p>
-          <p>BAVO</p>
+          <p>{{ 'ADMIN_PAGE.MENU.WELCOME_BACK' | translate }} 👋</p>
+          <p>{{email}}</p>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Content Area -->
-  <!-- Content Area -->
+  <!-- Main Content -->
   <div class="admin-managerment">
-    <h2>{{ activeItem }}</h2>
+    <h2>{{ 'ADMIN_PAGE.MENU.' + activeItem.toUpperCase() | translate }}</h2>
 
-    <!-- Dashboard content -->
+    <!-- Dashboard -->
     <ng-container *ngIf="activeItem === 'Dashboard'">
-      <p>Welcome to the Admin Dashboard.</p>
-      <!-- Add dashboard cards, stats, charts, etc. -->
-    </ng-container>
+      <!-- Dashboard component template -->
+      <!-- dashboard.component.html -->
+      <div class="dashboard-container">
+        <!-- Tổng số công thức, user, công thức mới -->
+        <!-- Các stat-box mặc định -->
+        <div class="dashboard-card">
+          <div class="stat-box">
+            <div class="icon-circle">
+              <i class="fa fa-fire"></i>
+            </div>
+            <div class="stat-content">
+              <span class="label">{{'ADMIN_PAGE.DASHBOARD.TOTAL_RECIPES'| translate}}</span>
+              <h2>{{ report.totalRecipes }}</h2>
+            </div>
+          </div>
 
-    <!-- Recipe content -->
-    <ng-container *ngIf="activeItem === 'Recipe'">
-      <!-- Search and Sort Controls -->
-      <div class="controls">
-        <input type="text" placeholder="Search" class="search-input" />
-        <div class="sort-dropdown">
-          <label for="sort">Sort by:</label>
-          <select id="sort" [(ngModel)]="selectedStatusFilter" (change)="filterRecipesByStatus()">
-            <option value="">All</option>
-            <option value="Approved">Approved</option>
-            <option value="Pending">Pending</option>
-            <option value="Rejected">Rejected</option>
-          </select>
+          <div class="divider"></div>
+
+          <div class="stat-box">
+            <div class="icon-circle">
+              <i class="fa fa-user-check"></i>
+            </div>
+            <div class="stat-content">
+              <span class="label">{{'ADMIN_PAGE.DASHBOARD.TOTAL_USERS'| translate}}</span>
+              <h2>{{ report.totalUsers }}</h2>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="stat-box">
+            <div class="icon-circle">
+              <i class="fa fa-desktop"></i>
+            </div>
+            <div class="stat-content">
+              <span class="label">{{'ADMIN_PAGE.DASHBOARD.NEW_RECIPE'| translate}}</span>
+              <h2>{{ report.recipeTimeStats.recipesThisWeek }}</h2>
+            </div>
+          </div>
+
+          <!-- Các category hiển thị riêng như stat-box -->
+          <ng-container *ngFor="let cat of report.recipesByCategory">
+            <div class="divider"></div>
+            <div class="stat-box">
+              <div class="icon-circle">
+                <!-- Nếu là ảnh -->
+                <img *ngIf="iconMap[cat.categoryId]?.includes('assets')" [src]="iconMap[cat.categoryId]" alt="icon"
+                  width="30" height="30" />
+
+                <!-- Nếu là FontAwesome icon -->
+                <i *ngIf="!iconMap[cat.categoryId]?.includes('assets')" class="fa"
+                  [ngClass]="iconMap[cat.categoryId] || 'fa-utensils'"></i>
+              </div>
+              <div class="stat-content">
+                <span class="label"> {{ getLocalizedText() === 'vi' ? cat.categoryNameVI : cat.categoryName}}</span>
+                <h2>{{ cat.totalRecipes }}</h2>
+              </div>
+            </div>
+          </ng-container>
 
         </div>
 
+        <!-- Món ăn có nhiều lượt xem nhất -->
+        <!-- Món ăn có nhiều lượt xem nhất -->
+        <div class="highlighted-recipe card-section">
+          <h3>{{'ADMIN_PAGE.DASHBOARD.TABLES_TOP_VIEWS.TOP_10_VIEWS'| translate}}</h3>
+
+          <div *ngIf="report.mostCommentedRecipe?.length > 0" class="recipe-list-section">
+            <table class="recipe-table">
+              <thead>
+                <tr>
+                  <th>{{'ADMIN_PAGE.DASHBOARD.TABLES_TOP_VIEWS.IMAGE'| translate}}</th>
+                  <th>{{'ADMIN_PAGE.DASHBOARD.TABLES_TOP_VIEWS.RECIPE_NAME'| translate}}</th>
+                  <th>{{'ADMIN_PAGE.DASHBOARD.TABLES_TOP_VIEWS.DATE_CREATED'| translate}}</th>
+                  <th>{{'ADMIN_PAGE.DASHBOARD.TABLES_TOP_VIEWS.CATEGORY'| translate}}</th>
+                  <th>{{'ADMIN_PAGE.DASHBOARD.TABLES_TOP_VIEWS.VIEWS'| translate}}</th>
+                  <th>{{'ADMIN_PAGE.DASHBOARD.TABLES_TOP_VIEWS.STATUS'| translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of report.mostCommentedRecipe">
+                  <td><img [src]="item.imagePath" alt="Ảnh" width="80" /></td>
+                  <td>{{ getLocalizedText() === 'vi' ? item.titleVI : item.title}}</td>
+                  <td>{{ item.dateCreated }}</td>
+                  <td>{{ getLocalizedText() === 'vi' ? item.category.categoryNameVI : item.category.categoryName }}</td>
+                  <td>{{ item.totalView }}</td>
+                  <td> <span class="status" [ngClass]="{
+                        'status-approved': item.status === 'Approved',
+                        'status-pending': item.status === 'Pending',
+                        'status-rejected': item.status === 'Rejected'
+                        }">
+                      {{ getStatusText(item.status)}}
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+        <!-- Tổng số công thức theo thời gian -->
+        <div class="time-stats card-section">
+          <h3>{{'ADMIN_PAGE.DASHBOARD.TABLE_STATISTICS.STATISTICS'| translate}}</h3>
+
+          <table class="time-stats-table">
+            <thead>
+              <tr>
+                <th>{{'ADMIN_PAGE.DASHBOARD.TABLE_STATISTICS.TIME_PRERIOD'| translate}}</th>
+                <th>{{'ADMIN_PAGE.DASHBOARD.TABLE_STATISTICS.TOTAL_RECIPES'| translate}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{'ADMIN_PAGE.DASHBOARD.TABLE_STATISTICS.DURING_THE_WEEK'| translate}}</td>
+                <td>{{ report.recipeTimeStats.recipesThisWeek }}</td>
+              </tr>
+              <tr>
+                <td>{{'ADMIN_PAGE.DASHBOARD.TABLE_STATISTICS.DURING_THE_MONTH'| translate}}</td>
+                <td>{{ report.recipeTimeStats.recipesThisMonth }}</td>
+              </tr>
+              <tr>
+                <td>{{'ADMIN_PAGE.DASHBOARD.TABLE_STATISTICS.DURING_THE_YEAR'| translate}}</td>
+                <td>{{ report.recipeTimeStats.recipesThisYear }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Danh sách công thức trong tuần -->
+          <div *ngIf="report.recipeTimeStats.recipesThisWeekList.length > 0" class="recipe-list-section">
+            <h4>{{'ADMIN_PAGE.DASHBOARD.TABLE_STATISTICS.TOTAL_DURING_THE_WEEK'| translate}}</h4>
+            <table class="recipe-table">
+              <thead>
+                <tr>
+                  <th>{{'ADMIN_PAGE.DASHBOARD.TABLE_STATISTICS.IMAGE'| translate}}</th>
+                  <th>{{'ADMIN_PAGE.DASHBOARD.TABLE_STATISTICS.RECIPE_NAME'| translate}}</th>
+                  <th>{{'ADMIN_PAGE.DASHBOARD.TABLE_STATISTICS.DATE_CREATED'| translate}}</th>
+                  <th>{{'ADMIN_PAGE.DASHBOARD.TABLE_STATISTICS.CATEGORY'| translate}}</th>
+                  <th>{{'ADMIN_PAGE.DASHBOARD.TABLE_STATISTICS.VIEWS'| translate}}</th>
+                  <th>{{'ADMIN_PAGE.DASHBOARD.TABLE_STATISTICS.STATUS'| translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of report.recipeTimeStats.recipesThisWeekList">
+                  <td><img [src]="item.imagePath" alt="Ảnh" width="80" /></td>
+                  <td>{{ getLocalizedText() === 'vi' ? item.titleVI : item.title}}</td>
+                  <td>{{ item.dateCreated }}</td>
+                  <td>{{ getLocalizedText() === 'vi' ? item.category.categoryNameVI : item.category.categoryName }}</td>
+                  <td>{{ item.totalView }}</td>
+                  <td> <span class="status" [ngClass]="{
+          'status-approved': item.status === 'Approved',
+          'status-pending': item.status === 'Pending',
+          'status-rejected': item.status === 'Rejected'
+        }">
+                      {{ getStatusText(item.status)}}
+                    </span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Danh sách công thức trong tháng -->
+          <div *ngIf="report.recipeTimeStats.recipesThisMonthList.length > 0" class="recipe-list-section">
+            <h4>{{'ADMIN_PAGE.DASHBOARD.TABLE_STATISTICS.TOTAL_DURING_THE_MONTH'| translate}}</h4>
+            <table class="recipe-table">
+              <thead>
+                <tr>
+                  <th>{{'ADMIN_PAGE.DASHBOARD.TABLE_STATISTICS.IMAGE'| translate}}</th>
+                  <th>{{'ADMIN_PAGE.DASHBOARD.TABLE_STATISTICS.RECIPE_NAME'| translate}}</th>
+                  <th>{{'ADMIN_PAGE.DASHBOARD.TABLE_STATISTICS.DATE_CREATED'| translate}}</th>
+                  <th>{{'ADMIN_PAGE.DASHBOARD.TABLE_STATISTICS.CATEGORY'| translate}}</th>
+                  <th>{{'ADMIN_PAGE.DASHBOARD.TABLE_STATISTICS.VIEWS'| translate}}</th>
+                  <th>{{'ADMIN_PAGE.DASHBOARD.TABLE_STATISTICS.STATUS'| translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of report.recipeTimeStats.recipesThisMonthList">
+                  <td><img [src]="item.imagePath" alt="Ảnh" width="80" /></td>
+                  <td>{{ getLocalizedText() === 'vi' ? item.titleVI : item.title}}</td>
+                  <td>{{item.dateCreated }}</td>
+                  <td>{{ getLocalizedText() === 'vi' ? item.category.categoryNameVI : item.category.categoryName }}</td>
+                  <td>{{ item.totalView }}</td>
+                  <td> <span class="status" [ngClass]="{
+          'status-approved': item.status === 'Approved',
+          'status-pending': item.status === 'Pending',
+          'status-rejected': item.status === 'Rejected'
+        }">
+                      {{ getStatusText(item.status)}}
+                    </span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Danh sách công thức trong năm -->
+          <div *ngIf="report.recipeTimeStats.recipesThisYearList.length > 0" class="recipe-list-section">
+            <h4>{{'ADMIN_PAGE.DASHBOARD.TABLE_STATISTICS.TOTAL_DURING_THE_YEAR'| translate}}</h4>
+            <table class="recipe-table">
+              <thead>
+                <tr>
+                  <th>{{'ADMIN_PAGE.DASHBOARD.TABLE_STATISTICS.IMAGE'| translate}}</th>
+                  <th>{{'ADMIN_PAGE.DASHBOARD.TABLE_STATISTICS.RECIPE_NAME'| translate}}</th>
+                  <th>{{'ADMIN_PAGE.DASHBOARD.TABLE_STATISTICS.DATE_CREATED'| translate}}</th>
+                  <th>{{'ADMIN_PAGE.DASHBOARD.TABLE_STATISTICS.CATEGORY'| translate}}</th>
+                  <th>{{'ADMIN_PAGE.DASHBOARD.TABLE_STATISTICS.VIEWS'| translate}}</th>
+                  <th>{{'ADMIN_PAGE.DASHBOARD.TABLE_STATISTICS.STATUS'| translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of report.recipeTimeStats.recipesThisYearList">
+                  <td><img [src]="item.imagePath" alt="Ảnh" width="80" /></td>
+                  <td>{{ getLocalizedText() === 'vi' ? item.titleVI : item.title}}</td>
+                  <td>{{ item.dateCreated }}</td>
+                  <td>{{ getLocalizedText() === 'vi' ? item.category.categoryNameVI : item.category.categoryName }}</td>
+                  <td>{{ item.totalView }}</td>
+                  <td> <span class="status" [ngClass]="{
+          'status-approved': item.status === 'Approved',
+          'status-pending': item.status === 'Pending',
+          'status-rejected': item.status === 'Rejected'
+        }">
+                      {{ getStatusText(item.status)}}
+                    </span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
       </div>
 
-      <!-- Recipes Table -->
+      <ng-template #loadingTpl>
+        <p>Loading report data...</p>
+      </ng-template>
+
+
+
+    </ng-container>
+
+    <!-- Recipe -->
+    <ng-container *ngIf="activeItem === 'Recipe'">
+      <div class="controls">
+        <input type="text" placeholder="{{ 'ADMIN_PAGE.SEARCH' | translate }}" class="search-input" />
+        <div class="sort-dropdown">
+          <label>{{ 'ADMIN_PAGE.SORT_BY' | translate }}</label>
+          <select [(ngModel)]="selectedStatusFilter" (change)="filterRecipesByStatus()">
+            <option value="">{{ 'ADMIN_PAGE.ALL' | translate }}</option>
+            <option value="Approved">{{ 'ADMIN_PAGE.APPROVED' | translate }}</option>
+            <option value="Pending">{{ 'ADMIN_PAGE.PENDING' | translate }}</option>
+            <option value="Rejected">{{ 'ADMIN_PAGE.REJECTED' | translate }}</option>
+          </select>
+        </div>
+      </div>
+
       <table>
         <thead>
           <tr>
-            <th>Recipe Name</th>
-            <th>Category</th>
-            <th>User Created</th>
-            <th>Date Created</th>
-            <th>Details</th>
-            <th>Status</th>
+            <th>{{ 'ADMIN_PAGE.RECIPE_NAME' | translate }}</th>
+            <th>{{ 'ADMIN_PAGE.CATEGORY' | translate }}</th>
+            <th>{{ 'ADMIN_PAGE.USER_CREATED' | translate }}</th>
+            <th>{{ 'ADMIN_PAGE.DATE_CREATED' | translate }}</th>
+            <th>{{ 'ADMIN_PAGE.DETAILS' | translate }}</th>
+            <th>{{ 'ADMIN_PAGE.STATUS' | translate }}</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let recipe of paginatedRecipe">
-            <td>{{ recipe.title }}</td>
-            <td>{{ recipe.category.categoryName }}</td>
+            <td> {{ getLocalizedText() === 'vi' ? recipe.titleVI : recipe.title}}</td>
+            <td> {{ getLocalizedText() === 'vi' ? recipe.category.categoryNameVI : recipe.category.categoryName}}</td>
             <td>{{ recipe.user.email }}</td>
             <td>{{ recipe.dateCreated }}</td>
             <td>
               <a class="details-btn" [routerLink]="['/recipes', recipe.recipeId]">
                 <img [src]="IcSearch" alt="search" />
               </a>
-
             </td>
             <td>
-              <span [ngClass]="getStatusClass(recipe.status)">
-                {{ recipe.status }}
+              <span class="status" [ngClass]="{
+          'status-approved': recipe.status === 'Approved',
+          'status-pending': recipe.status === 'Pending',
+          'status-rejected': recipe.status === 'Rejected'
+        }">
+                {{getStatusText(recipe.status)}}
               </span>
             </td>
           </tr>
           <tr *ngIf="paginatedRecipe.length === 0">
-            <td colspan="6">No recipes found.</td>
+            <td colspan="6">{{ 'ADMIN_PAGE.NO_RECIPES' | translate }}</td>
           </tr>
         </tbody>
       </table>
 
-      <!-- Pagination -->
       <div class="pagination">
         <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">&lt;</button>
         <button *ngFor="let page of pages" [class.active]="page === currentPage" (click)="changePage(page)">
@@ -108,41 +336,47 @@
       </div>
     </ng-container>
 
-    <!-- Comment content -->
+    <!-- Comment -->
     <ng-container *ngIf="activeItem === 'Comment'">
       <table>
         <thead>
           <tr>
-            <th>Recipe Name</th>
-            <th>User Posted</th>
-            <th>Comment</th>
-            <th>Rating</th>
-            <th>Date Posted</th>
-            <th>Details</th>
-            <th>Status</th>
+            <th>{{ 'ADMIN_PAGE.RECIPE_NAME' | translate }}</th>
+            <th>{{ 'ADMIN_PAGE.USER_POSTED' | translate }}</th>
+            <th>{{ 'ADMIN_PAGE.MENU.COMMENT' | translate }}</th>
+            <th>{{ 'ADMIN_PAGE.RATING' | translate }}</th>
+            <th>{{ 'ADMIN_PAGE.DATE_POSTED' | translate }}</th>
+            <th>{{ 'ADMIN_PAGE.DETAILS' | translate }}</th>
+            <th>{{ 'ADMIN_PAGE.STATUS' | translate }}</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let comment of paginatedComment">
-            <td>{{ comment.recipe.title }}</td>
+            <td>
+              {{ getLocalizedText() === 'vi' ? comment.recipe.titleVI : comment.recipe.title}}</td>
             <td>{{ comment.user.email }}</td>
             <td>{{ comment.commentText }}</td>
             <td>{{ comment.rating }}</td>
             <td>{{ comment.datePosted }}</td>
+            <td><button class="details-btn"><i class="fas fa-search"></i></button></td>
             <td>
-              <button class="details-btn">
-                <i class="fas fa-search"></i>
-              </button>
-            </td>
-            <td>
-              <span [ngClass]="getStatusClass(comment.status)">
-                {{ comment.status }}
+              <span class="status" [ngClass]="{
+          'status-approved': comment.status === 'Approved',
+          'status-pending': comment.status === 'Pending',
+          'status-rejected': comment.status === 'Rejected'
+        }">
+                {{ getStatusText(comment.status)}}
               </span>
             </td>
+
+
+          </tr>
+          <tr *ngIf="paginatedComment.length === 0">
+            <td colspan="7">{{ 'ADMIN_PAGE.NO_COMMENTS' | translate }}</td>
           </tr>
         </tbody>
       </table>
-      <!-- Pagination -->
+
       <div class="pagination">
         <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">&lt;</button>
         <button *ngFor="let page of pages" [class.active]="page === currentPage" (click)="changePage(page)">
@@ -152,29 +386,35 @@
       </div>
     </ng-container>
 
-    <!-- Reports content -->
-    <ng-container *ngIf="activeItem === 'Reports'">
-      <p>Reports section</p>
-      <!-- Add reports/chart display -->
+    <ng-container *ngIf="activeItem === 'Report'">
+      <label for="yearSelect"> {{'ADMIN_PAGE.REPORT.SELECT_YEAR'| translate}} </label>
+      <select id="yearSelect" [(ngModel)]="selectedYear" (change)="onGetReport(selectedYear)">
+        <option *ngFor="let year of availableYears" [value]="year">{{ year }}</option>
+      </select>
+
+      <div class="chart-wrapper">
+        <h4>{{'ADMIN_PAGE.REPORT.USER'| translate}}</h4>
+        <canvas #userChart></canvas>
+
+        <h4>{{'ADMIN_PAGE.REPORT.RECIPE'| translate}}</h4>
+        <canvas #recipeChart></canvas>
+
+        <h4>{{'ADMIN_PAGE.REPORT.COMMENT'| translate}}</h4>
+        <canvas #commentChart></canvas>
+
+        <h4>{{'ADMIN_PAGE.REPORT.VISIT'| translate}}</h4>
+        <canvas #visitChart></canvas>
+      </div>
     </ng-container>
 
-    <!-- Notifications content -->
-    <ng-container *ngIf="activeItem === 'Notifications'">
-      <p>Notification messages and alerts</p>
-      <!-- Add notification center -->
+    <ng-container *ngIf="activeItem === 'Notification'">
+      <p>HELLO Notification</p>
     </ng-container>
-
-    <!-- Settings content -->
-    <ng-container *ngIf="activeItem === 'Settings'">
-      <p>System settings and preferences</p>
-      <!-- Add form for settings -->
+    <ng-container *ngIf="activeItem === 'Setting'">
+      <p>HELLO Setting</p>
     </ng-container>
-
-    <!-- Support content -->
     <ng-container *ngIf="activeItem === 'Support'">
-      <p>Need help? Contact support here.</p>
-      <!-- Add support form or links -->
+      <p>HELLO Support</p>
     </ng-container>
   </div>
-
 </div>

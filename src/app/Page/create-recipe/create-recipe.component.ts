@@ -1,3 +1,4 @@
+import { title } from 'process';
 import { Component } from '@angular/core';
 import { CreateIngredientComponent } from '../../Shared/Component/CreateRecipes/create-ingredient/create-ingredient.component';
 import { CreateInstructionComponent } from '../../Shared/Component/CreateRecipes/create-instruction/create-instruction.component';
@@ -39,6 +40,13 @@ export class CreateRecipeComponent {
     private createRecipeDataService: CreateRecipeDataService,
     private createRecipeService: CreateRecipeService
   ) {}
+
+  Description = 'Description';
+  DescriptionVI = 'DescriptionVI';
+  TitleENG = 'Title';
+  TitleVIE = 'TitleVI';
+
+  userRole: string = '';
 
   async saveRecipe() {
     const recipeData = this.createRecipeDataService.getRecipeData();
@@ -203,7 +211,10 @@ export class CreateRecipeComponent {
     }
   }
 
-  private async saveInstructions(recipeId: number, instructions: any[]) {
+  private async saveInstructions(
+    recipeId: number,
+    instructions: any[]
+  ): Promise<void> {
     if (!instructions || instructions.length === 0) {
       console.warn('⚠️ Không có hướng dẫn để lưu.');
       return;
@@ -216,13 +227,17 @@ export class CreateRecipeComponent {
         instruction.stepNumber &&
         instruction.instructionText &&
         instruction.title &&
+        instruction.titleVI &&
+        instruction.instructionTextVI &&
         instruction.title !== '' &&
         instruction.stepNumber !== '' &&
-        instruction.instructionText !== ''
+        instruction.instructionText !== '' &&
+        instruction.titleVI !== '' &&
+        instruction.instructionTextVI !== ''
     );
 
     if (validInstructions.length === 0) {
-      console.warn('No valid instructions to save.');
+      console.warn('⚠️ Không có hướng dẫn hợp lệ để lưu.');
       return;
     }
 
@@ -230,11 +245,13 @@ export class CreateRecipeComponent {
       recipeId,
       stepNumber: i.stepNumber,
       instructionText: i.instructionText,
+      instructionTextVI: i.instructionTextVI,
       cookingToolId: i.cookingToolId,
       title: i.title,
+      titleVI: i.titleVI,
     }));
 
-    console.log('Sending Recipe Instructions:', instructionsData);
+    console.log('📤 Sending Recipe Instructions:', instructionsData);
 
     try {
       await this.createRecipeService
@@ -246,7 +263,7 @@ export class CreateRecipeComponent {
     }
   }
 
-  private async saveRecipeTips(recipeId: number, tips: any[]) {
+  private async saveRecipeTips(recipeId: number, tips: any[]): Promise<void> {
     if (!tips || tips.length === 0) {
       console.warn('⚠️ Không có mẹo công thức để lưu.');
       return;
@@ -258,25 +275,31 @@ export class CreateRecipeComponent {
         tip &&
         tip.actionType &&
         tip.actionText &&
+        tip.actionTextVI &&
+        tip.titleVI &&
         tip.title &&
         tip.actionType !== '' &&
         tip.actionText !== '' &&
-        tip.title !== ''
+        tip.title !== '' &&
+        tip.actionTextVI !== '' &&
+        tip.titleVI !== ''
     );
 
     if (validTips.length === 0) {
-      console.warn('No valid recipe tips to save.');
+      console.warn('⚠️ Không có mẹo hợp lệ để lưu.');
       return;
     }
 
     const recipeTipData = validTips.map((t) => ({
       recipeId,
       actionType: t.actionType,
+      actionTextVI: t.actionTextVI,
       actionText: t.actionText,
       title: t.title,
+      titleVI: t.titleVI,
     }));
 
-    console.log('Sending Recipe Tips:', recipeTipData);
+    console.log('📤 Sending Recipe Tips:', recipeTipData);
 
     try {
       await this.createRecipeService.addRecipeTip(recipeTipData).toPromise();

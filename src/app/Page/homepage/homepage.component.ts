@@ -58,11 +58,22 @@ export class HomepageComponent {
       }
     );
   }
+  getTranslatedPrepTime(prepTime: string): string {
+    switch (prepTime) {
+      case 'EASY PREP':
+        return 'HOMEPAGE.EASY_PREP';
+      case 'MEDIUM PREP':
+        return 'HOMEPAGE.MEDIUM_PREP';
+      case 'HARD PREP':
+        return 'HOMEPAGE.HARD_PREP';
+      default:
+        return prepTime; // fallback nếu không khớp
+    }
+  }
 
   filteredRecipes(): any[] {
     if (!this.Recipe) return [];
 
-    // Lọc bỏ những công thức có status là 'pending'
     const visibleRecipes = this.Recipe.filter(
       (item) => item.status !== 'Pending' && item.status !== 'Rejected'
     );
@@ -70,13 +81,12 @@ export class HomepageComponent {
     if (this.selectedMenu === 'ALL') return visibleRecipes;
 
     if (this.selectedMenu === 'Vegan') {
-      return visibleRecipes.filter((item) => item.vegan === 1);
+      return visibleRecipes.filter((item) => item.vegan == 1);
     }
 
+    // Các danh mục còn lại
     return visibleRecipes.filter(
-      (item) =>
-        item.category.categoryName === this.selectedMenu ||
-        (item.vegan === 1 && item.category.categoryName !== this.selectedMenu)
+      (item) => item.category?.categoryName === this.selectedMenu
     );
   }
 

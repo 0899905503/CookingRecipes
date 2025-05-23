@@ -193,7 +193,7 @@ a {
 }
 
 .login-btn {
-  width: 30%;
+  width: 200px;
   margin-right: 20px;
   border-radius: 50px;
   padding: 10px;
@@ -206,6 +206,8 @@ a {
   margin: 20px auto;
 
 }
+
+
 input[type="checkbox"] {
   appearance: none;
   -webkit-appearance: none;
@@ -347,4 +349,18 @@ input[type="checkbox"] {
       }
     }
   }
+}
+.guest-login-btn {
+  width: 30%;
+  margin-right: 20px;
+  border-radius: 50px;
+  padding: 10px;
+  background-color: #820000;
+  color: yellow;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  display: block;
+  margin: 20px auto;
+
 }

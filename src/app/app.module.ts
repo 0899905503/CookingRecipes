@@ -38,6 +38,8 @@ import { CommentComponent } from './Shared/Component/comment/comment.component';
 import { AdminPageComponent } from './Page/admin-page/admin-page.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+// For ng2-charts v4 and above, use NgChartsModule; for older versions, use ChartsModule
+// If you get an error, try: import { ChartsModule } from 'ng2-charts';
 
 // Hàm tải file dịch
 export function HttpLoaderFactory(http: HttpClient) {

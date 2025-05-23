@@ -4,16 +4,25 @@
     <thead>
       <tr>
         <th>{{'CREATE_RECIPE.INSTRUCTION.TITLE'| translate}}</th>
+        <th>{{'CREATE_RECIPE.INSTRUCTION.TITLE_VI'| translate}}</th>
         <th>{{'CREATE_RECIPE.INSTRUCTION.STEP'| translate}}</th>
         <th>{{'CREATE_RECIPE.INSTRUCTION.INSTRUCTION_TEXT'| translate}}</th>
+        <th>{{'CREATE_RECIPE.INSTRUCTION.INSTRUCTION_TEXT_VI'| translate}}</th>
         <th>{{'CREATE_RECIPE.INSTRUCTION.COOKING_TOOL'| translate}}</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let instruction of instructions; let i = index;">
-        <td><input type="text" [(ngModel)]="instruction.title" placeholder="Title" /></td>
-        <td><input type="number" [(ngModel)]="instruction.stepNumber" placeholder="Step" /></td>
-        <td><input type="text" [(ngModel)]="instruction.instructionText" placeholder="Instruction Text" /></td>
+        <td><input type="text" [(ngModel)]="instruction.title"
+            placeholder="{{'CREATE_RECIPE.INSTRUCTION.TITLE'| translate}}" /></td>
+        <td><input type="text" [(ngModel)]="instruction.titleVI"
+            placeholder="{{'CREATE_RECIPE.INSTRUCTION.TITLE_VI'| translate}}" /></td>
+        <td><input type="number" [(ngModel)]="instruction.stepNumber"
+            placeholder="{{'CREATE_RECIPE.INSTRUCTION.STEP'| translate}}" /></td>
+        <td><input type="text" [(ngModel)]="instruction.instructionText"
+            placeholder="{{'CREATE_RECIPE.INSTRUCTION.INSTRUCTION_TEXT'| translate}}" /></td>
+        <td><input type="text" [(ngModel)]="instruction.instructionTextVI"
+            placeholder="{{'CREATE_RECIPE.INSTRUCTION.INSTRUCTION_TEXT_VI'| translate}}" /></td>
         <td>
           <select [(ngModel)]="instruction.cookingToolId" (ngModelChange)="logInstructions()">
             <option value="">{{'CREATE_RECIPE.INSTRUCTION.SELECT_TOOL'| translate}}</option>

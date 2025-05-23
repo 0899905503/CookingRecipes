@@ -5,6 +5,15 @@
   "CHANGE_PASSWORD": "Đổi mật khẩu",
   "SETTINGS": "Cài đặt",
   "SAVE": "Lưu",
+  "OLD_PASSWORD": "Mật khẩu cũ",
+  "NEW_PASSWORD": "Mật khẩu mới",
+  "EMAIL": "Email",
+  "GUEST": "Khách",
+  "ENTER_NAME": "Nhập tên của bạn",
+  "PLEASE_ENTER_NAME": "Vui lòng nhập tên của bạn",
+  "FAILED":"Đăng nhập khách không thành công",
+  "GUEST_LOGIN":"Đăng nhập với tư cách khách",
+  "ALERT": "Bạn đang sử dụng tài khoản khách. Để sử dụng tất cả các tính năng của ứng dụng, vui lòng đăng nhập hoặc tạo tài khoản.",
   "FAVORITE" : {
     "HEADING": "Món ăn yêu thích",
     "TITLE": "Chọn món ăn mà bạn muốn nấu hôm nay",
@@ -21,10 +30,12 @@
 
   "CREATE_RECIPE": {
     "CREATE_RECIPE": "Tạo công thức mới",
-    "RECIPE_TITLE": "Tên công thức",
+    "RECIPE_TITLEEN": "Tên công thức (tiếng Anh)",
+    "RECIPE_TITLEVI": "Tên công thức (tiếng Việt)",
     "RECIPE_IMAGE": "Hình ảnh công thức",
     "ADD_RECIPE_IAMGE": "Thêm hình ảnh công thức",
-    "DESCRIPTION": "Mô tả",
+    "DESCRIPTION": "Mô tả (tiếng Anh)",
+    "DESCRIPTION_VI": "Mô tả (tiếng Việt)",
     "INGREDIENT": {
               "INGREDIENTS": "NGUYÊN LIỆU",
               "INGREDIENT_NAME": "TÊN NGUYÊN LIỆU",
@@ -57,17 +68,21 @@
     },
     "INSTRUCTION": {
       "INSTRUCTIONS":"HƯỚNG DẪN",
-      "TITLE": "Tiêu đề",
+      "TITLE": "Tiêu đề (tiếng Anh)",
+      "TITLE_VI":"Tiêu đề (tiếng Việt)",
       "STEP": "Bước",
-      "INSTRUCTION_TEXT": "Hướng dẫn chi tiết",
+      "INSTRUCTION_TEXT": "Hướng dẫn chi tiết (tiếng Anh)",
+      "INSTRUCTION_TEXT_VI": "Hướng dẫn chi tiết (tiếng Việt)",
       "COOKING_TOOL": "Công cụ nấu ăn",
       "SELECT_TOOL": "Chọn công cụ nấu ăn",
       "ADD_INSTRUCTION": "+ Thêm hướng dẫn"
     },
     "RECIPE_TIP": {
       "RECIPE_TIPS":"MẸO CHO CÔNG THỨC",
-      "TITLE":"Tiêu đề",
-      "ACTION_TEXT": "Việc làm",
+      "TITLE":"Tiêu đề (tiếng Anh)",
+      "TITLE_VI":"Tiêu đề (tiếng Việt)",
+      "ACTION_TEXT": "Hành động (tiếng Anh)",
+      "ACTION_TEXT_VI": "Hành động (tiếng Việt)",
       "ACTION_TYPE": "Có nên hay không",
       "SELECT_TYPE": "Nên làm hay không",
       "DO" : "Nên làm",
@@ -75,7 +90,8 @@
       "ADD_RECIPE_TIP": "+ Thêm mẹo cho công thức"
     },
     "SAVE": "Lưu",
-    "BACK": "Quay lại"
+    "BACK": "Quay lại",
+    "LEAVE_A_COMMENT": "Để lại bình luận"
   },
 
   "MENU":{
@@ -85,6 +101,7 @@
     "FAVORITE": "Yêu Thích",
     "ABOUT_US": "Giới Thiệu",
     "SETTING": "Cài Đặt",
+    "PROFILE": "Hồ Sơ",
     "SUBSCRIBE": "Đăng ký"
   },
 
@@ -154,7 +171,11 @@
       "PASSWORD":"Mật khẩu",
       "REMEMBER":"Nhớ tôi",
       "FORGOT":"Quên mật khẩu?",
-      "EMAIL_ADDRESS":"Địa chỉ Email"
+      "EMAIL_ADDRESS":"Địa chỉ Email",
+      "ENTER_EMAIL":"Nhập địa chỉ email của bạn",
+      "ENTER_USER_NAME":"Nhập tên người dùng của bạn",
+      "ENTER_PASSWORD":"Nhập mật khẩu của bạn",
+      "ENTER_NEW_PASSWORD":"Nhập mật khẩu mới của bạn"
     }
   },
 
@@ -175,7 +196,12 @@
     "SELECT_HEADER_1":"BẮT ĐẦU VÀO MỘT ",
     "SELECT_HEADER_2":"HÀNH TRÌNH",
     "SELECT_DESCRIPTION_1":"Với bộ sưu tập công thức nấu ăn đa dạng của chúng tôi, chúng tôi có thứ gì đó để",
-    "SELECT_DESCRIPTION_2":" thỏa mãn mọi khẩu vị."
+    "SELECT_DESCRIPTION_2":" thỏa mãn mọi khẩu vị.",
+    "MIN":"Phút",
+    "SERVES":"Khẩu phần",
+    "EASY_PREP":"Dễ",
+    "MEDIUM_PREP":"Trung Bình",
+    "HARD_PREP":"Khó"
   },
 
   "COOKING_TIP":{
@@ -185,7 +211,94 @@
     "COOKING_TIP_DATE_CREATE":"NGÀY TẠO",
     "COOKING_TIP_MINUTES":"Phút",
     "COOKING_TIP_CREATED_BY":"ĐƯỢC TẠO BỞI",
-    "COOKING_TIP_BACK":"QUAY LẠI"
+    "COOKING_TIP_BACK":"QUAY LẠI",
+    "TIP_TITLE":"MẸO VẶT",
+    "DESCRIPTION":"CHỌN MẸO VẶT BẠN MUỐN XEM",
+    "MEAT":"Chế Biến Thịt",
+    "VEGETABLE":"Chế Biến Rau Củ",
+    "SAUCE": "Làm Nước Sốt",
+    "PASTA":"Nấu Mì",
+    "DESSERT": "Làm Món Tráng Miệng",
+    "TIME": "Tiết Kiệm Thời Gian",
+    "SPICE": "Dùng Gia Vị",
+    "VEGETARIAN": "Nấu Món Chay",
+    "BEVERAGE":"Pha Chế Đồ Uống"
+  },
+  "SETTING_PAGE":{
+    "SETTING":"Cài Đặt",
+    "ENGLISH":"Tiếng Anh",
+    "VIETNAMESE":"Tiếng Việt",
+    "SAVE":"Lưu",
+    "ADMIN_PAGE":"Admin"
+  },
+
+  "ADMIN_PAGE":{
+    "MENU": {
+      "DASHBOARD":"Trang Chủ",
+      "RECIPE":"Công Thức",
+      "COMMENT":"Bình Luận",
+      "REPORT":"Báo Cáo",
+      "NOTIFICATION":"Thông Báo",
+      "SETTING":"Cài Đặt",
+      "SUPPORT":"Hỗ Trợ",
+      "WELCOME_BACK":"Chào mừng trở lại "
+    },
+    "DASHBOARD": {
+      "TOTAL_RECIPES":"Công Thức",
+      "TOTAL_USERS":"Người Dùng",
+      "NEW_RECIPE":"Công Thức Mới",
+      "TABLES_TOP_VIEWS":{
+        "TOP_10_VIEWS":"Danh sách 10 công thức có lượt xem cao nhất",
+        "IMAGE":"Ảnh",
+        "RECIPE_NAME":"Tên Công Thức",
+        "DATE_CREATED":"Ngày Tạo",
+        "CATEGORY":"Loại",
+        "VIEWS":"Lượt Xem",
+        "STATUS":"Trạng Thái"
+      },
+      "TABLE_STATISTICS": {
+        "STATISTICS":"Thống kê công thức theo thời gian",
+        "TIME_PRERIOD":"Khoảng Thời Gian",
+        "DURING_THE_WEEK":"Trong tuần",
+        "DURING_THE_MONTH":"Trong tháng",
+        "DURING_THE_YEAR":"Trong năm",
+        "TOTAL_RECIPES":"Số Lượng Công Thức",
+        "TOTAL_DURING_THE_WEEK":"Danh sách công thức được tạo trong tuần",
+        "TOTAL_DURING_THE_MONTH":"Danh sách công thức được tạo trong tháng",
+        "TOTAL_DURING_THE_YEAR":"Danh sách công thức được tạo trong năm",
+        "IMAGE":"Ảnh",
+        "RECIPE_NAME":"Tên Công Thức",
+        "DATE_CREATED":"Ngày Tạo",
+        "CATEGORY":"Loại",
+        "VIEWS":"Lượt Xem",
+        "STATUS":"Trạng Thái"
+      }
+    },
+    "SEARCH": "Tìm Kiếm",
+    "SORT_BY": "Sắp Xếp",
+    "ALL": "Tất Cả",
+    "APPROVED": "Chấp Thuận",
+    "PENDING": "Đang Chờ Xử Lí",
+    "REJECTED": "Từ Chối",
+    "RECIPE_NAME": "Tên Công Thức",
+    "CATEGORY": "Phân Loại",
+    "USER_CREATED": "Người Tạo",
+    "DATE_CREATED": "Ngày Tạo",
+    "DETAILS": "Chi Tiết",
+    "STATUS": "Trạng Thái",
+    "NO_RECIPES": "Không Có Công Thức",
+    "USER_POSTED": "Người Đăng",
+    "COMMENT_TEXT": "Bình Luận",
+    "RATING": "Đánh Giá",
+    "DATE_POSTED": "Ngày Đăng",
+    "NO_COMMENTS": "Không Có Bình Luận",
+    "REPORT":{
+       "SELECT_YEAR": "Chọn Năm",
+      "USER":"Người Dùng Được Tạo",
+      "RECIPE": "Công Thức Được Tạo",
+      "COMMENT": "Bình Luận Được Tạo",
+      "VISIT": "Lượng Truy Cập"
+    }
   }
 
 }

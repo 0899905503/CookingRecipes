@@ -17,7 +17,15 @@ export class CreateRecipetipComponent {
     private createRecipeService: CreateRecipeService,
     private createRecipeDataService: CreateRecipeDataService
   ) {}
-  recipetips = [{ title: '', actionText: '', actionType: '' }];
+  recipetips = [
+    {
+      title: '',
+      actionText: '',
+      actionType: '',
+      titleVI: '',
+      actionTextVI: '',
+    },
+  ];
   loading = false;
 
   ngOnInit(): void {}
@@ -48,7 +56,13 @@ export class CreateRecipetipComponent {
   }
 
   addRecipeTip() {
-    this.recipetips.push({ title: '', actionText: '', actionType: '' });
+    this.recipetips.push({
+      title: '',
+      actionText: '',
+      actionType: '',
+      titleVI: '',
+      actionTextVI: '',
+    });
     this.updateRecipeTip();
   }
 
@@ -57,6 +71,8 @@ export class CreateRecipetipComponent {
       title: recipetip.title,
       actionText: recipetip.actionText,
       actionType: recipetip.actionType,
+      titleVI: recipetip.titleVI,
+      actionTextVI: recipetip.actionTextVI,
     }));
 
     console.log('Updating recipe tip:', recipeTipData);
