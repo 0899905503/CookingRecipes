@@ -13,15 +13,15 @@
     </thead>
     <tbody>
       <tr *ngFor="let instruction of instructions; let i = index;">
-        <td><input type="text" [(ngModel)]="instruction.title"
+        <td><input type="text" [(ngModel)]="instruction.title" (change)="updateInstruction()"
             placeholder="{{'CREATE_RECIPE.INSTRUCTION.TITLE'| translate}}" /></td>
-        <td><input type="text" [(ngModel)]="instruction.titleVI"
+        <td><input type="text" [(ngModel)]="instruction.titleVI" (change)="updateInstruction()"
             placeholder="{{'CREATE_RECIPE.INSTRUCTION.TITLE_VI'| translate}}" /></td>
-        <td><input type="number" [(ngModel)]="instruction.stepNumber"
+        <td><input type="number" [(ngModel)]="instruction.stepNumber" (change)="updateInstruction()"
             placeholder="{{'CREATE_RECIPE.INSTRUCTION.STEP'| translate}}" /></td>
-        <td><input type="text" [(ngModel)]="instruction.instructionText"
+        <td><input type="text" [(ngModel)]="instruction.instructionText" (change)="updateInstruction()"
             placeholder="{{'CREATE_RECIPE.INSTRUCTION.INSTRUCTION_TEXT'| translate}}" /></td>
-        <td><input type="text" [(ngModel)]="instruction.instructionTextVI"
+        <td><input type="text" [(ngModel)]="instruction.instructionTextVI" (change)="updateInstruction()"
             placeholder="{{'CREATE_RECIPE.INSTRUCTION.INSTRUCTION_TEXT_VI'| translate}}" /></td>
         <td>
           <select [(ngModel)]="instruction.cookingToolId" (ngModelChange)="logInstructions()">

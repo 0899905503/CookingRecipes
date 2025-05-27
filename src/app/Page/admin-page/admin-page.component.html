@@ -338,6 +338,18 @@
 
     <!-- Comment -->
     <ng-container *ngIf="activeItem === 'Comment'">
+      <div class="controls">
+        <input type="text" placeholder="{{ 'ADMIN_PAGE.SEARCH' | translate }}" class="search-input" />
+        <div class="sort-dropdown">
+          <label>{{ 'ADMIN_PAGE.SORT_BY' | translate }}</label>
+          <select [(ngModel)]="selectedStatusCommentFilter" (change)="filterCommentsByStatus()">
+            <option value="">{{ 'ADMIN_PAGE.ALL' | translate }}</option>
+            <option value="Approved">{{ 'ADMIN_PAGE.APPROVED' | translate }}</option>
+            <option value="Pending">{{ 'ADMIN_PAGE.PENDING' | translate }}</option>
+            <option value="Rejected">{{ 'ADMIN_PAGE.REJECTED' | translate }}</option>
+          </select>
+        </div>
+      </div>
       <table>
         <thead>
           <tr>
@@ -386,6 +398,68 @@
       </div>
     </ng-container>
 
+    <ng-container *ngIf="activeItem === 'CookingTip'">
+      <div class="controls">
+        <input type="text" placeholder="{{ 'ADMIN_PAGE.SEARCH' | translate }}" class="search-input" />
+        <div class="sort-dropdown">
+          <label>{{ 'ADMIN_PAGE.SORT_BY' | translate }}</label>
+          <select [(ngModel)]="selectedStatusTipFilter" (change)="filterCookingTipsByStatus()">
+
+            <option value="">{{ 'ADMIN_PAGE.ALL' | translate }}</option>
+            <option value="Approved">{{ 'ADMIN_PAGE.APPROVED' | translate }}</option>
+            <option value="Pending">{{ 'ADMIN_PAGE.PENDING' | translate }}</option>
+            <option value="Rejected">{{ 'ADMIN_PAGE.REJECTED' | translate }}</option>
+          </select>
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>{{ 'ADMIN_PAGE.TIP_NAME' | translate }}</th>
+            <th>{{ 'ADMIN_PAGE.CATEGORY' | translate }}</th>
+            <th>{{ 'ADMIN_PAGE.USER_CREATED' | translate }}</th>
+            <th>{{ 'ADMIN_PAGE.DATE_CREATED' | translate }}</th>
+            <th>{{ 'ADMIN_PAGE.DETAILS' | translate }}</th>
+            <th>{{ 'ADMIN_PAGE.STATUS' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let tip of paginatedTip">
+            <td> {{ getLocalizedText() === 'vi' ? tip.titleVI : tip.title}}</td>
+            <td> {{ getLocalizedText() === 'vi' ? tip.category.categoryNameVI : tip.category.categoryName}}</td>
+            <td>{{ tip.user.email }}</td>
+            <td>{{ tip.dateCreated }}</td>
+            <td>
+              <a class="details-btn" [routerLink]="['/cookingTip', tip.cookingTipId]">
+                <img [src]="IcSearch" alt="search" />
+              </a>
+            </td>
+            <td>
+              <span class="status" [ngClass]="{
+          'status-approved': tip.status === 'Approved',
+          'status-pending': tip.status === 'Pending',
+          'status-rejected': tip.status === 'Rejected'
+        }">
+                {{getStatusText(tip.status)}}
+              </span>
+            </td>
+          </tr>
+          <tr *ngIf="paginatedTip.length === 0">
+            <td colspan="6">{{ 'ADMIN_PAGE.NO_RECIPES' | translate }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="pagination">
+        <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">&lt;</button>
+        <button *ngFor="let page of pages" [class.active]="page === currentPage" (click)="changePage(page)">
+          {{ page }}
+        </button>
+        <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === pages.length">&gt;</button>
+      </div>
+    </ng-container>
+
     <ng-container *ngIf="activeItem === 'Report'">
       <label for="yearSelect"> {{'ADMIN_PAGE.REPORT.SELECT_YEAR'| translate}} </label>
       <select id="yearSelect" [(ngModel)]="selectedYear" (change)="onGetReport(selectedYear)">
@@ -402,14 +476,15 @@
         <h4>{{'ADMIN_PAGE.REPORT.COMMENT'| translate}}</h4>
         <canvas #commentChart></canvas>
 
+        <h4>{{'ADMIN_PAGE.REPORT.COOKING_TIP'| translate}}</h4>
+        <canvas #cookingTipChart></canvas>
+
         <h4>{{'ADMIN_PAGE.REPORT.VISIT'| translate}}</h4>
         <canvas #visitChart></canvas>
       </div>
     </ng-container>
 
-    <ng-container *ngIf="activeItem === 'Notification'">
-      <p>HELLO Notification</p>
-    </ng-container>
+
     <ng-container *ngIf="activeItem === 'Setting'">
       <p>HELLO Setting</p>
     </ng-container>

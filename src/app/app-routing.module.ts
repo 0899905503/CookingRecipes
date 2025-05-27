@@ -32,6 +32,8 @@ import { SettingpageComponent } from './Page/settingpage/settingpage.component';
 import { FavoriteComponent } from './Page/favorite/favorite.component';
 import { CommentComponent } from './Shared/Component/comment/comment.component';
 import { AdminPageComponent } from './Page/admin-page/admin-page.component';
+import { UpdateRecipeComponent } from './Page/update-recipe/update-recipe.component';
+import { CreateCookingTipComponent } from './Page/create-cooking-tip/create-cooking-tip.component';
 
 export const routes: Routes = [
   {
@@ -43,6 +45,7 @@ export const routes: Routes = [
   { path: 'recipes/:recipeId', component: RecipesComponent },
   { path: 'cookingtip/:cookingTipId', component: CookingTipComponent },
   { path: 'cookingTip/:cookingTipId', component: CookingTipDetailComponent },
+  { path: 'createCookingTip', component: CreateCookingTipComponent },
   { path: 'createRecipes', component: CreateRecipeComponent },
   { path: 'auth', component: AuthComponent },
   { path: 'login', component: LoginComponent },
@@ -50,6 +53,12 @@ export const routes: Routes = [
   { path: '', component: AppComponent },
   { path: 'home', component: HomepageComponent, canActivate: [AuthGuard] },
   { path: 'recipe', component: RecipesComponent, canActivate: [AuthGuard] },
+  {
+    path: 'updateRecipe/:recipeId',
+    component: UpdateRecipeComponent,
+    canActivate: [AuthGuard],
+  },
+
   { path: 'tip', component: TipsComponent, canActivate: [AuthGuard] },
   { path: 'about', component: AboutUsComponent, canActivate: [AuthGuard] },
   {
@@ -87,6 +96,7 @@ export const routes: Routes = [
     CommentComponent,
     AdminPageComponent,
     HomepageComponent,
+    UpdateRecipeComponent,
   ],
   exports: [RouterModule],
   providers: [AuthService, AuthGuard],

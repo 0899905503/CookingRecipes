@@ -179,3 +179,14 @@
     }
   }
 }
+.edit-icon {
+  cursor: pointer;
+  margin-left: 10px;
+  color: #EE6352;
+  font-size: 1.2rem;
+  transition: color 0.3s;
+
+  &:hover {
+    border: solid 1px #EE6352;
+  }
+}

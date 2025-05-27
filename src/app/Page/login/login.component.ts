@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { ErrorsCodeEnum } from '../../Shared/Value/Enums/errorsCodeEnums';
 import { ForgotPasswordComponent } from '../../Shared/Component/forgot-password/forgot-password.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { RecaptchaFormsModule, RecaptchaModule } from 'ng-recaptcha';
 
 @Component({
   standalone: true,
@@ -17,6 +18,8 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
     CommonModule,
     ForgotPasswordComponent,
     TranslateModule,
+    RecaptchaModule,
+    RecaptchaFormsModule,
   ],
 })
 export class LoginComponent {
@@ -28,7 +31,7 @@ export class LoginComponent {
   //GUEST
   showGuestForm: boolean = false;
   guestName: string = '';
-
+  guestCaptchaToken: string = '';
   private loggedIn = false;
   @Input() activeButton: string = '';
   @Output() toggle = new EventEmitter<string>();
@@ -143,28 +146,28 @@ export class LoginComponent {
         },
       });
   }
+
+  //GUEST LOGIN
+  onCaptchaResolved(token: string | null) {
+    console.log('Token:', token); // ✅ kiểm tra token thực sự có
+    this.guestCaptchaToken = token ?? '';
+  }
   onGuestLogin() {
-    if (!this.guestName || this.guestName.trim() === '') {
-      this.currentLang === 'vi'
-        ? (this.errorMessage = this.translate.instant('PLEASE_ENTER_NAME'))
-        : (this.errorMessage = this.translate.instant('PLEASE_ENTER_NAME'));
+    if (!this.guestCaptchaToken || !this.guestName.trim()) {
+      this.errorMessage = 'Vui lòng điền đầy đủ thông tin và xác thực Captcha';
       return;
     }
-    this.authService.loginGuest(this.guestName).subscribe({
-      next: (res: any) => {
-        localStorage.setItem('token', res.token);
-        localStorage.setItem('role', res.role);
-        localStorage.setItem('name', res.name);
-        this.router.navigate(['/home']);
-        this.loggedIn = true;
-        console.log(res);
-      },
-      error: (err) => {
-        this.currentLang === 'vi'
-          ? (this.errorMessage = this.translate.instant('FAILED'))
-          : (this.errorMessage = this.translate.instant('FAILED'));
-        console.error(err);
-      },
-    });
+
+    this.authService
+      .loginGuest(this.guestName, this.guestCaptchaToken)
+      .subscribe({
+        next: (res) => {
+          // Xử lý thành công
+          console.log('Đăng nhập guest thành công');
+        },
+        error: (err) => {
+          this.errorMessage = err?.error?.message || 'Đăng nhập thất bại';
+        },
+      });
   }
 }

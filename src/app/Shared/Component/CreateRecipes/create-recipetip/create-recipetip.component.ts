@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CreateRecipeService } from '../../../../Service/CreateRecipe/create-recipe.service';
 import { CreateRecipeDataService } from '../../../../Service/CreateRecipeData/create-recipe-data.service';
@@ -17,6 +23,11 @@ export class CreateRecipetipComponent {
     private createRecipeService: CreateRecipeService,
     private createRecipeDataService: CreateRecipeDataService
   ) {}
+
+  @Input() recipetipsInput: any[] = [];
+
+  @Output() recipetipsChange = new EventEmitter<any[]>();
+
   recipetips = [
     {
       title: '',
@@ -29,6 +40,12 @@ export class CreateRecipetipComponent {
   loading = false;
 
   ngOnInit(): void {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['recipetipsInput'] && this.recipetipsInput) {
+      this.recipetips = [...this.recipetipsInput]; // Clone để tránh mutation từ bên ngoài
+    }
+  }
 
   CreateRecipeTips(): void {
     if (
@@ -76,7 +93,8 @@ export class CreateRecipetipComponent {
     }));
 
     console.log('Updating recipe tip:', recipeTipData);
-
+    // Emit dữ liệu cho component cha
+    this.recipetipsChange.emit(recipeTipData);
     // Update via service
     this.createRecipeDataService.updateRecipeTips(recipeTipData);
   }

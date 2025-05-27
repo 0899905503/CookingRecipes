@@ -1,38 +1,38 @@
 <div class="ingredient-container">
-  <h2>{{'CREATE_RECIPE.INGREDIENT.INGREDIENTS'| translate}}</h2>
+  <h2>{{ 'CREATE_RECIPE.INGREDIENT.INGREDIENTS' | translate }}</h2>
   <table>
     <thead>
       <tr>
-        <th>{{'CREATE_RECIPE.INGREDIENT.INGREDIENT_NAME'| translate}}</th>
-        <th>{{'CREATE_RECIPE.INGREDIENT.QUANTITY'| translate}}</th>
-        <th>{{'CREATE_RECIPE.INGREDIENT.UNIT'| translate}}</th>
-        <th>{{'CREATE_RECIPE.INGREDIENT.TYPE'| translate}}</th>
+        <th>{{ 'CREATE_RECIPE.INGREDIENT.INGREDIENT_NAME' | translate }}</th>
+        <th>{{ 'CREATE_RECIPE.INGREDIENT.QUANTITY' | translate }}</th>
+        <th>{{ 'CREATE_RECIPE.INGREDIENT.UNIT' | translate }}</th>
+        <th>{{ 'CREATE_RECIPE.INGREDIENT.TYPE' | translate }}</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let ingredient of ingredients; let i = index">
         <td>
-          <select [(ngModel)]="ingredient.ingredientName" (change)="onIngredientChange(ingredient)">
-            <option value="">{{'CREATE_RECIPE.INGREDIENT.SELLECT_INGREDIENT'| translate}}</option>
-            <option *ngFor="let item of Ingredient" [value]="item.ingredientName">
+          <select [(ngModel)]="ingredient.ingredientId" (change)="onIngredientChange(ingredient)">
+            <option value="">{{ 'CREATE_RECIPE.INGREDIENT.SELLECT_INGREDIENT' | translate }}</option>
+            <option *ngFor="let item of Ingredient" [ngValue]="item.ingredientId">
               {{ currentLang === 'vi' ? item.ingredientNameVI : item.ingredientName }}
             </option>
           </select>
         </td>
         <td>
           <input type="number" [(ngModel)]="ingredient.quantity" (ngModelChange)="updateQuantity(i)"
-            placeholder="{{'CREATE_RECIPE.INGREDIENT.QUANTITY'| translate}}" />
+            placeholder="{{ 'CREATE_RECIPE.INGREDIENT.QUANTITY' | translate }}" />
         </td>
         <td>
-          <input type="text" [(ngModel)]="ingredient.unit" placeholder="{{'CREATE_RECIPE.INGREDIENT.UNIT'| translate}}"
-            readonly />
+          <input type="text" [value]="getUnit(ingredient)" (change)="onIngredientChange(ingredient)"
+            placeholder="{{ 'CREATE_RECIPE.INGREDIENT.UNIT' | translate }}" readonly />
         </td>
         <td>
-          <input type="text" [(ngModel)]="ingredient.type" placeholder="{{'CREATE_RECIPE.INGREDIENT.TYPE'| translate}}"
-            readonly />
+          <input type="text" [value]="getType(ingredient)" (change)="onIngredientChange(ingredient)"
+            placeholder="{{ 'CREATE_RECIPE.INGREDIENT.TYPE' | translate }}" readonly />
         </td>
       </tr>
     </tbody>
   </table>
-  <button (click)="addIngredient()">{{'CREATE_RECIPE.INGREDIENT.ADD_INGREDIENT'| translate}}</button>
+  <button (click)="addIngredient()">{{ 'CREATE_RECIPE.INGREDIENT.ADD_INGREDIENT' | translate }}</button>
 </div>

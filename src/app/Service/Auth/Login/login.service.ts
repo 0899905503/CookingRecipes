@@ -5,6 +5,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { v4 as uuidv4 } from 'uuid';
 import { ApiPaths } from '../../../Shared/Value/Constant/apiConstant';
+import { RecaptchaComponent } from 'ng-recaptcha';
 
 @Injectable({
   providedIn: 'root',
@@ -188,16 +189,20 @@ export class AuthService {
     return this.Role;
   }
   //GUEST
-  loginGuest(name: string) {
-    return this.http.post<any>(this.baseAuthsUrl + this.guest, { name }).pipe(
-      tap((response) => {
-        if (response.role && response.token) {
-          localStorage.setItem(this.role, response.role);
-          console.log('Role:', response.role);
-          localStorage.setItem(this.tokenKey, response.token);
-          this.isAuthenticated$.next(true);
-        }
+  loginGuest(name: string, recaptchaToken: string) {
+    return this.http
+      .post<any>(`${this.baseAuthsUrl}${this.guest}`, {
+        name,
+        recaptchaToken,
       })
-    );
+      .pipe(
+        tap((response) => {
+          if (response.role && response.token) {
+            localStorage.setItem(this.role, response.role);
+            localStorage.setItem(this.tokenKey, response.token);
+            this.isAuthenticated$.next(true);
+          }
+        })
+      );
   }
 }

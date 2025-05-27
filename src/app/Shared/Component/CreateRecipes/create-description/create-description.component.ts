@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CreateRecipeDataService } from '../../../../Service/CreateRecipeData/create-recipe-data.service';
 import { TranslateModule } from '@ngx-translate/core';
@@ -15,35 +21,36 @@ export class CreateDescriptionComponent {
   description: string = '';
   maxDescriptionLength = 2000;
   @Input() DescriptionName: string = '';
+  @Input() DescriptionNameTitle: string = '';
+  @Input() descriptionText: string = ''; // <-- thêm dòng này
+
+  @Output() descriptionChange = new EventEmitter<string>();
 
   constructor(private createRecipeDataService: CreateRecipeDataService) {}
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (
+      changes['descriptionText'] &&
+      changes['descriptionText'].currentValue !== undefined
+    ) {
+      this.description = this.descriptionText;
+    }
+  }
+
   onDescriptionChange(title: string) {
     this.DescriptionName = title;
-    if (this.DescriptionName === 'Description') {
-      if (this.description.length > this.maxDescriptionLength) {
-        this.description = this.description.substring(
-          0,
-          this.maxDescriptionLength
-        );
-      }
-      // Cập nhật `description` vào service
-      this.createRecipeDataService.updateRecipeData(
-        'Description',
-        this.description
-      );
-    } else if (this.DescriptionName === 'DescriptionVI') {
-      if (this.description.length > this.maxDescriptionLength) {
-        this.description = this.description.substring(
-          0,
-          this.maxDescriptionLength
-        );
-      }
-      // Cập nhật `description` vào service
-      this.createRecipeDataService.updateRecipeData(
-        'DescriptionVI',
-        this.description
+    this.descriptionChange.emit(this.description);
+    if (this.description.length > this.maxDescriptionLength) {
+      this.description = this.description.substring(
+        0,
+        this.maxDescriptionLength
       );
     }
+
+    // Cập nhật dữ liệu mô tả vào service theo key DescriptionName
+    this.createRecipeDataService.updateRecipeData(
+      this.DescriptionName,
+      this.description
+    );
   }
 }

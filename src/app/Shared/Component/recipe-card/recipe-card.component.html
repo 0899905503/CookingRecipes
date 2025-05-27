@@ -19,6 +19,9 @@
       </div>
       <button class="view-recipe-button" (click)="onSelectRecipe()">{{'RECIPE_DETAILS.VIEW_RECIPE' |
         translate}}</button>
+      <i class="fas fa-edit edit-icon" *ngIf="isOnAboutUsPage && createdByUserId === currentUserId"
+        (click)="onEditRecipe($event)" title="Chỉnh sửa công thức"></i>
+
     </div>
   </div>
 </div>

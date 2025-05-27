@@ -1,29 +1,33 @@
 <div class="nutrient-container">
-  <h2>{{'CREATE_RECIPE.NUTRIENT.NUTRIENTS'| translate}}</h2>
+  <h2>{{ 'CREATE_RECIPE.NUTRIENT.NUTRIENTS' | translate }}</h2>
   <table>
     <thead>
       <tr>
-        <th>{{'CREATE_RECIPE.NUTRIENT.NUTRIENT_NAME'| translate}}</th>
-        <th>{{'CREATE_RECIPE.NUTRIENT.QUANTITY'| translate}}</th>
-        <th>{{'CREATE_RECIPE.NUTRIENT.UNIT'| translate}}</th>
+        <th>{{ 'CREATE_RECIPE.NUTRIENT.NUTRIENT_NAME' | translate }}</th>
+        <th>{{ 'CREATE_RECIPE.NUTRIENT.QUANTITY' | translate }}</th>
+        <th>{{ 'CREATE_RECIPE.NUTRIENT.UNIT' | translate }}</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let nutrient of nutrients; let i = index">
         <td>
-          <select [(ngModel)]="nutrient.nutrientTypeName" (change)="onNutrientChange(nutrient)">
-            <option value="">{{'CREATE_RECIPE.NUTRIENT.SELECT_NUTRIENT'| translate}}</option>
-            <option *ngFor="let item of Nutrient" [value]="item.nutrientTypeName">
+          <select [(ngModel)]="nutrient.nutrientTypeId" (change)="onNutrientChange(nutrient)">
+            <option value="">{{ 'CREATE_RECIPE.NUTRIENT.SELECT_NUTRIENT' | translate }}</option>
+            <option *ngFor="let item of Nutrient" [ngValue]="item.nutrientTypeId">
               {{ currentLang === 'vi' ? item.nutrientTypeNameVI : item.nutrientTypeName }}
             </option>
           </select>
         </td>
-        <td><input type="number" [(ngModel)]="nutrient.quantity"
-            placeholder="{{'CREATE_RECIPE.INGREDIENT.QUANTITY'| translate}}" /></td>
-        <td><input type="text" [(ngModel)]="nutrient.unit"
-            placeholder="{{'CREATE_RECIPE.INGREDIENT.UNIT'| translate}}" /></td>
+        <td>
+          <input type="number" [(ngModel)]="nutrient.quantity" (change)="onNutrientChange(nutrient)"
+            placeholder="{{ 'CREATE_RECIPE.NUTRIENT.QUANTITY' | translate }}" />
+        </td>
+        <td>
+          <input type="text" [value]="getUnit(nutrient)" (change)="onNutrientChange(nutrient)"
+            placeholder="{{ 'CREATE_RECIPE.NUTRIENT.UNIT' | translate }}" readonly />
+        </td>
       </tr>
     </tbody>
   </table>
-  <button (click)="addIngredient()">{{'CREATE_RECIPE.NUTRIENT.ADD_NUTRIENT'| translate}}</button>
+  <button (click)="addNutrient()">{{ 'CREATE_RECIPE.NUTRIENT.ADD_NUTRIENT' | translate }}</button>
 </div>

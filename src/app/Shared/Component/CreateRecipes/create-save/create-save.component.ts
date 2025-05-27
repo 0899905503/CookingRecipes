@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -9,6 +9,8 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrl: './create-save.component.scss',
 })
 export class CreateSaveComponent {
+  @Input() isUpdateMode: boolean = false;
+
   @Output() saveClicked = new EventEmitter<void>();
   onSave() {
     this.saveClicked.emit(); // Phát sự kiện "saveClicked"

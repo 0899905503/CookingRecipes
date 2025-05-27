@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CookingtoolService } from './../../../../Service/CookingTool/cookingtool.service';
@@ -13,7 +13,9 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
   styleUrls: ['./create-cookingtool.component.scss'],
 })
 export class CreateCookingtoolComponent {
-  cookingtools = [{ cookingToolId: '' }];
+  @Input() cookingtools: any[] = []; // nhận dữ liệu từ cha
+  @Output() cookingtoolsChange = new EventEmitter<any[]>(); // gửi dữ liệu mới về cha
+
   Cookingtool: any[] = [];
   //translate
   currentLang: string = 'en';

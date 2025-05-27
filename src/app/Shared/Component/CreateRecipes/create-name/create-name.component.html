@@ -4,9 +4,9 @@
     <tbody>
       <tr *ngFor="let name of names; let i = index">
         <td>
-          <input type="text" [(ngModel)]="title" (ngModelChange)="onTitleChange(titleName)" [placeholder]="titleName === 'Title'
-      ? ('CREATE_RECIPE.RECIPE_TITLEEN' | translate)
-      : ('CREATE_RECIPE.RECIPE_TITLEVI' | translate)" />
+          <input type="text" [(ngModel)]="title" (ngModelChange)="onTitleChange($event)"
+            [placeholder]="titleName === 'Title' ? ('CREATE_RECIPE.RECIPE_TITLEEN' | translate) : ('CREATE_RECIPE.RECIPE_TITLEVI' | translate)" />
+
           <button (click)="goBack()">{{'CREATE_RECIPE.BACK'| translate}}</button>
         </td>
       </tr>

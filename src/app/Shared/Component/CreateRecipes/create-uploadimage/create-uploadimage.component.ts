@@ -1,5 +1,12 @@
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
 import { CreateRecipeDataService } from '../../../../Service/CreateRecipeData/create-recipe-data.service';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -12,31 +19,26 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class CreateUploadimageComponent {
   constructor(private createRecipeDataService: CreateRecipeDataService) {}
-  // Array to store images with `image` of type `string | null`
-  descriptions: { image: string | null }[] = [{ image: null }];
 
-  // Trigger the file input for image upload
-  triggerFileInput(index: number) {
-    const fileInput =
-      document.querySelectorAll<HTMLInputElement>('input[type="file"]')[index];
+  @Input() imageUrl: string | null = null;
+  @Output() imageChange = new EventEmitter<File>();
+
+  // Use ViewChild to get the file input
+  @ViewChild('fileInput') fileInputRef!: ElementRef<HTMLInputElement>;
+
+  triggerFileInput() {
+    const fileInput = this.fileInputRef?.nativeElement;
     if (fileInput) {
+      fileInput.value = ''; // reset để có thể chọn cùng file nhiều lần
       fileInput.click();
     }
   }
 
-  uploadImage(event: Event, index: number) {
+  uploadImage(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input?.files?.length) {
       const file = input.files[0];
-
-      // Sử dụng URL.createObjectURL để tạo một URL tạm thời cho tệp
-      const imageUrl = URL.createObjectURL(file);
-
-      // Cập nhật ảnh trong descriptions
-      this.descriptions[index].image = imageUrl;
-
-      // Cập nhật File vào service nếu cần
-      this.createRecipeDataService.updateRecipeData('ImagePath', file);
+      this.imageChange.emit(file);
     }
   }
 }

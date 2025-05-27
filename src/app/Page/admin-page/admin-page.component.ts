@@ -1,3 +1,5 @@
+import { filter } from 'rxjs/operators';
+import { CookingTipService } from './../../Service/CookingTip/cooking-tip.service';
 import {
   Component,
   EventEmitter,
@@ -47,6 +49,8 @@ export class AdminPageComponent implements OnInit {
   @ViewChild('userChart') userChartRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('recipeChart') recipeChartRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('commentChart') commentChartRef!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('cookingTipChart')
+  cookingTipChartRef!: ElementRef<HTMLCanvasElement>;
   @ViewChild('visitChart') visitChartRef!: ElementRef<HTMLCanvasElement>;
 
   isExpanded = true;
@@ -54,8 +58,13 @@ export class AdminPageComponent implements OnInit {
 
   Recipe: any[] = [];
   Comment: any[] = [];
+  CookingTip: any[] = []; // Chưa sử dụng, nhưng có thể dùng sau này
 
   paginatedComment: any[] = [];
+
+  paginatedTip: any[] = [];
+  isFilteringTip = false;
+
   allRecipes: any[] = [];
   filteredRecipes: any[] = [];
   paginatedRecipe: any[] = [];
@@ -63,7 +72,10 @@ export class AdminPageComponent implements OnInit {
   currentPage = 1;
   itemsPerPage = 10;
   pages: number[] = [];
+
   selectedStatusFilter: string = '';
+  selectedStatusTipFilter: string = '';
+  selectedStatusCommentFilter: string = '';
 
   //REPORT
   report: any = {};
@@ -72,6 +84,7 @@ export class AdminPageComponent implements OnInit {
   userChart?: Chart;
   recipeChart?: Chart;
   commentChart?: Chart;
+  cookingTipChart?: Chart; // Biểu đồ cho CookingTip, nếu cần
   visitChart?: Chart;
   selectedYear: number = new Date().getFullYear(); // mặc định là năm hiện tại
   //availableYears: number[] = []; // danh sách năm để hiển thị
@@ -103,15 +116,16 @@ export class AdminPageComponent implements OnInit {
       labelKey: 'ADMIN_PAGE.MENU.COMMENT',
     },
     {
+      icon: 'fas fa-bell',
+      label: 'CookingTip',
+      labelKey: 'ADMIN_PAGE.MENU.COOKINGTIP',
+    },
+    {
       icon: 'fas fa-file-alt',
       label: 'Report',
       labelKey: 'ADMIN_PAGE.MENU.REPORT',
     },
-    {
-      icon: 'fas fa-bell',
-      label: 'Notification',
-      labelKey: 'ADMIN_PAGE.MENU.NOTIFICATION',
-    },
+
     {
       icon: 'fas fa-cog',
       label: 'Setting',
@@ -145,13 +159,16 @@ export class AdminPageComponent implements OnInit {
     5: 'assets/images/desserticon.png',
     6: 'assets/images/quickbiteicon.png',
   };
+  filteredCookingTip: any[] = [];
+  filteredComment: any[] = [];
 
   constructor(
     private homepageService: HomepageService,
     private adminService: AdminService,
     private authService: AuthService,
     private translate: TranslateService,
-    private visitService: VisitServiceService
+    private visitService: VisitServiceService,
+    private cookingTipService: CookingTipService
   ) {
     this.currentLang = this.translate.currentLang || 'en';
 
@@ -165,6 +182,7 @@ export class AdminPageComponent implements OnInit {
     this.onGetReport(this.selectedYear);
     this.onGetAllRecipe();
     this.onGetComment();
+    this.onGetCookingTip();
     this.email = localStorage.getItem('email') || '';
     this.avatar = localStorage.getItem('avt') || 'assets/default-avatar.png'; // fallback avatar
     this.onGet();
@@ -188,12 +206,16 @@ export class AdminPageComponent implements OnInit {
   setActive(label: string) {
     this.activeItem = label;
     this.currentPage = 1;
+
     if (label === 'Recipe') {
       this.filterRecipesByStatus();
+    } else if (label === 'CookingTip') {
+      this.filterCookingTipsByStatus(); // 👈 Gọi lọc cho CookingTip
     } else {
       this.updatePagination();
     }
   }
+
   // recipe-list.component.ts
   language: '' | undefined; // hoặc 'en' nếu mặc định là tiếng Anh
 
@@ -244,6 +266,24 @@ export class AdminPageComponent implements OnInit {
     );
   }
 
+  onGetCookingTip(): void {
+    this.cookingTipService.getAllCookingTips().subscribe(
+      (data) => {
+        this.CookingTip = data.map((tip: any) => ({
+          ...tip,
+          dateCreated:
+            this.currentLang === 'vi'
+              ? DateUtils.formatDateVI(tip.dateCreated)
+              : DateUtils.formatDate(tip.dateCreated),
+        }));
+        if (this.activeItem === 'CookingTip') {
+          this.updatePagination();
+        }
+      },
+      (error) => console.error('Error fetching cooking tips:', error)
+    );
+  }
+
   updatePagination(): void {
     let dataSource: any[] = [];
 
@@ -252,7 +292,13 @@ export class AdminPageComponent implements OnInit {
         ? this.filteredRecipes
         : this.Recipe;
     } else if (this.activeItem === 'Comment') {
-      dataSource = this.Comment;
+      dataSource = this.filteredComment.length
+        ? this.filteredComment
+        : this.Comment;
+    } else if (this.activeItem === 'CookingTip') {
+      dataSource = this.filteredCookingTip.length
+        ? this.filteredCookingTip
+        : this.CookingTip;
     }
 
     const totalPages = Math.ceil(dataSource.length / this.itemsPerPage);
@@ -265,6 +311,8 @@ export class AdminPageComponent implements OnInit {
       this.paginatedRecipe = dataSource.slice(start, end);
     } else if (this.activeItem === 'Comment') {
       this.paginatedComment = dataSource.slice(start, end);
+    } else if (this.activeItem === 'CookingTip') {
+      this.paginatedTip = dataSource.slice(start, end);
     }
   }
 
@@ -285,6 +333,32 @@ export class AdminPageComponent implements OnInit {
     this.currentPage = 1;
     this.updatePagination();
   }
+
+  filterCookingTipsByStatus(): void {
+    this.isFilteringTip = !!this.selectedStatusTipFilter;
+    if (this.selectedStatusTipFilter) {
+      this.filteredCookingTip = this.CookingTip.filter(
+        (tip) => tip.status === this.selectedStatusTipFilter
+      );
+    } else {
+      this.filteredCookingTip = [...this.CookingTip];
+    }
+    this.currentPage = 1;
+    this.updatePagination();
+  }
+
+  filterCommentsByStatus(): void {
+    if (this.selectedStatusCommentFilter) {
+      this.filteredComment = this.Comment.filter(
+        (tip) => tip.status === this.selectedStatusCommentFilter
+      );
+    } else {
+      this.filteredComment = [...this.Comment];
+    }
+    this.currentPage = 1;
+    this.updatePagination();
+  }
+
   getStatusText(status: string): string {
     if (this.currentLang === 'vi') {
       switch (status) {
@@ -368,6 +442,7 @@ export class AdminPageComponent implements OnInit {
     if (this.userChart) this.userChart.destroy();
     if (this.recipeChart) this.recipeChart.destroy();
     if (this.commentChart) this.commentChart.destroy();
+    if (this.cookingTipChart) this.cookingTipChart.destroy();
     if (this.visitChart) this.visitChart.destroy();
 
     this.translate
@@ -375,6 +450,7 @@ export class AdminPageComponent implements OnInit {
         'ADMIN_PAGE.REPORT.USER',
         'ADMIN_PAGE.REPORT.RECIPE',
         'ADMIN_PAGE.REPORT.COMMENT',
+        'ADMIN_PAGE.REPORT.COOKING_TIP',
         'ADMIN_PAGE.REPORT.VISIT',
       ])
       .subscribe((translations) => {
@@ -397,6 +473,13 @@ export class AdminPageComponent implements OnInit {
           translations['ADMIN_PAGE.REPORT.COMMENT'],
           this.report.commentCreated,
           '#AE00FF'
+        );
+
+        this.cookingTipChart = this.createChart(
+          this.cookingTipChartRef,
+          translations['ADMIN_PAGE.REPORT.COOKING_TIP'],
+          this.report.cookingTipCreated,
+          '#EE6352'
         );
 
         this.visitChart = this.createChart(

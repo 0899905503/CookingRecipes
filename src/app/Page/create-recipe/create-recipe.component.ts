@@ -43,8 +43,13 @@ export class CreateRecipeComponent {
 
   Description = 'Description';
   DescriptionVI = 'DescriptionVI';
-  TitleENG = 'Title';
-  TitleVIE = 'TitleVI';
+  Title = 'Title';
+  TitleVI = 'TitleVI';
+
+  selectedImageFile: File | null = null;
+
+  imageFile: File | null = null;
+  previewImageUrl: string | null = null;
 
   userRole: string = '';
 
@@ -61,9 +66,22 @@ export class CreateRecipeComponent {
     console.table({ tools, ingredients, nutrients, instructions, tips });
 
     try {
+      const formData = new FormData();
+
+      for (const key in recipeData) {
+        if (recipeData.hasOwnProperty(key)) {
+          formData.append(key, recipeData[key]);
+        }
+      }
+
+      if (this.selectedImageFile) {
+        formData.append('imagePath', this.selectedImageFile); // Tên này phải đúng theo tên file param server nhận
+      }
+
       const response: any = await this.createRecipeService
-        .createRecipe(recipeData)
+        .createRecipe(formData)
         .toPromise();
+
       console.log('📥 Response từ server:', response);
 
       const recipeId = response?.data?.recipeId;
@@ -211,55 +229,44 @@ export class CreateRecipeComponent {
     }
   }
 
-  private async saveInstructions(
-    recipeId: number,
-    instructions: any[]
-  ): Promise<void> {
+  private async saveInstructions(recipeId: number, instructions: any[]) {
     if (!instructions || instructions.length === 0) {
-      console.warn('⚠️ Không có hướng dẫn để lưu.');
+      console.warn('⚠️ Không có hướng dẫn nấu ăn để lưu.');
       return;
     }
 
-    // Kiểm tra và lọc các giá trị null, undefined hoặc rỗng
     const validInstructions = instructions.filter(
-      (instruction) =>
-        instruction &&
-        instruction.stepNumber &&
-        instruction.instructionText &&
-        instruction.title &&
-        instruction.titleVI &&
-        instruction.instructionTextVI &&
-        instruction.title !== '' &&
-        instruction.stepNumber !== '' &&
-        instruction.instructionText !== '' &&
-        instruction.titleVI !== '' &&
-        instruction.instructionTextVI !== ''
+      (i) =>
+        i &&
+        i.stepNumber != null &&
+        i.instructionText &&
+        i.instructionText.trim() !== ''
     );
 
     if (validInstructions.length === 0) {
-      console.warn('⚠️ Không có hướng dẫn hợp lệ để lưu.');
+      console.warn('Không có hướng dẫn hợp lệ để lưu.');
       return;
     }
 
-    const instructionsData = validInstructions.map((i) => ({
-      recipeId,
+    const instructionData = validInstructions.map((i) => ({
+      recipeId: recipeId,
       stepNumber: i.stepNumber,
       instructionText: i.instructionText,
-      instructionTextVI: i.instructionTextVI,
       cookingToolId: i.cookingToolId,
       title: i.title,
+      instructionTextVI: i.instructionTextVI,
       titleVI: i.titleVI,
     }));
 
-    console.log('📤 Sending Recipe Instructions:', instructionsData);
+    console.log('📤 Sending Instructions:', instructionData);
 
     try {
       await this.createRecipeService
-        .addRecipeInstruction(instructionsData)
+        .addRecipeInstruction(instructionData)
         .toPromise();
       console.log('✅ Recipe instructions đã được lưu.');
     } catch (error) {
-      console.error('❌ Lỗi lưu recipe instructions:', error);
+      console.error('❌ Lỗi lưu hướng dẫn nấu ăn:', error);
     }
   }
 
@@ -307,5 +314,16 @@ export class CreateRecipeComponent {
     } catch (error) {
       console.error('❌ Lỗi lưu recipe tips:', error);
     }
+  }
+
+  onImageSelected(file: File) {
+    this.selectedImageFile = file;
+
+    // Tạo preview ảnh nếu muốn hiển thị lên giao diện
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      this.previewImageUrl = e.target.result;
+    };
+    reader.readAsDataURL(file);
   }
 }

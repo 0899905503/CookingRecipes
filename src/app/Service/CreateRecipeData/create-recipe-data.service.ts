@@ -9,9 +9,9 @@ export class CreateRecipeDataService {
     ImagePath: null,
     UserId: 1,
     Description: '',
-    Servings: '',
+    Servings: null,
     PrepTime: '',
-    CookTime: '',
+    CookTime: null,
     CategoryId: '',
     DateCreated: '2025-1-1',
     Vegan: '',
@@ -118,7 +118,15 @@ export class CreateRecipeDataService {
         instruction.stepNumber &&
         instruction.instructionText &&
         instruction.stepNumber !== '' &&
-        instruction.instructionText !== ''
+        instruction.instructionText !== '' &&
+        instruction.title &&
+        instruction.title !== '' &&
+        instruction.titleVI &&
+        instruction.titleVI !== '' &&
+        instruction.instructionTextVI &&
+        instruction.instructionTextVI !== '' &&
+        instruction.cookingToolId !== null &&
+        instruction.cookingToolId !== ''
     );
 
     // In log dữ liệu sau khi lọc

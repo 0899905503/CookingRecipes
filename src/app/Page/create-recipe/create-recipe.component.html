@@ -1,16 +1,29 @@
 <div class="wrapper">
   <div class="create-recipe">
     <app-create-save (saveClicked)="saveRecipe()"></app-create-save>
-    <app-create-name [titleName]="TitleENG"></app-create-name>
-    <app-create-name [titleName]="TitleVIE"></app-create-name>
-    <app-create-uploadimage></app-create-uploadimage>
+    <!-- null -->
+    <app-create-name [titleName]="Title"></app-create-name>
+    <!-- null -->
+    <app-create-name [titleName]="TitleVI"></app-create-name>
+    <!-- null -->
+    <app-create-uploadimage [imageUrl]="previewImageUrl" (imageChange)="onImageSelected($event)">
+    </app-create-uploadimage>
+    <!-- ok -->
     <app-create-description [DescriptionName]="Description"></app-create-description>
+    <!-- ok -->
     <app-create-description [DescriptionName]="DescriptionVI"></app-create-description>
+    <!-- ok -->
     <app-create-ingredient></app-create-ingredient>
+
+    <!-- ok -->
     <app-create-cookingtool></app-create-cookingtool>
+    <!-- ok -->
     <app-create-nutrient></app-create-nutrient>
+    <!-- ok -->
     <app-create-details></app-create-details>
+    <!-- RecipeToolID null last -->
     <app-create-instruction></app-create-instruction>
+    <!-- -1 -->
     <app-create-recipetip></app-create-recipetip>
   </div>
 </div>

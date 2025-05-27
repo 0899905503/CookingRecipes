@@ -59,24 +59,32 @@
 
     </form>
     <form (ngSubmit)="onGuestLogin()" #loginForm="ngForm">
-      <!-- Nút GUEST ban đầu -->
+      <!-- Nút hiện form Guest -->
       <button class="guest-login-btn" type="button" (click)="showGuestForm = true" *ngIf="!showGuestForm">
-        {{'GUEST'|translate}}
+        {{ 'GUEST' | translate }}
       </button>
 
-      <!-- Form nhập tên hiển thị sau khi bấm -->
+      <!-- Form nhập tên và captcha -->
       <div *ngIf="showGuestForm" class="guest-form">
-        <input type="text" [(ngModel)]="guestName" placeholder="{{'ENTER_NAME'|translate}}" class="form-control"
-          name="guestName" />
+        <input type="text" [(ngModel)]="guestName" name="guestName" placeholder="{{ 'ENTER_NAME' | translate }}"
+          class="form-control" required />
 
+        <!-- reCAPTCHA -->
+        <re-captcha (resolved)="onCaptchaResolved($event)"
+          siteKey="6LfXi0krAAAAABY4u3m85YC1twtuegxMQRI7MKua"></re-captcha>
 
-        <div *ngIf="errorMessage" class="text-danger mt-2">{{ errorMessage }}</div>
+        <div *ngIf="errorMessage" class="text-danger mt-2">
+          {{ errorMessage }}
+        </div>
 
-        <button class="login-btn" type="submit">
-          {{'GUEST_LOGIN'|translate}}
+        <button class="login-btn" type="submit"
+          [disabled]="!guestCaptchaToken || !guestName || guestName.trim() === ''">
+          {{ 'GUEST_LOGIN' | translate }}
         </button>
       </div>
     </form>
+
+
 
     <!-- Forgot Password Modal -->
     <div class="modal" *ngIf="showForgotPasswordModal">

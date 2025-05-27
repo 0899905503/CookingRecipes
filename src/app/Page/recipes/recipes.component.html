@@ -1,96 +1,97 @@
 <ng-container *ngIf="!notFound; else notFoundTemplate">
   <div class="Recipe">
     <div class="Recipe-info" *ngIf="RecipesById">
+      <div #recipeContent>
+        <!-- HTML: Hiển thị số sao dựa trên averageRating -->
+        <div class="star-rating">
+          <!-- Sao đầy -->
+          <ng-container *ngFor="let star of fullStars">
+            <i class="fas fa-star" style="color: #EE6352;"></i>
+          </ng-container>
 
-      <!-- HTML: Hiển thị số sao dựa trên averageRating -->
-      <div class="star-rating">
-        <!-- Sao đầy -->
-        <ng-container *ngFor="let star of fullStars">
-          <i class="fas fa-star" style="color: #EE6352;"></i>
-        </ng-container>
+          <!-- Nửa sao -->
+          <i *ngIf="hasHalfStar" class="fas fa-star-half-alt" style="color: #EE6352;"></i>
 
-        <!-- Nửa sao -->
-        <i *ngIf="hasHalfStar" class="fas fa-star-half-alt" style="color: #EE6352;"></i>
+          <!-- Sao rỗng -->
+          <ng-container *ngFor="let star of emptyStars">
+            <i class="far fa-star" style="color: #EE6352;"></i>
+          </ng-container>
 
-        <!-- Sao rỗng -->
-        <ng-container *ngFor="let star of emptyStars">
-          <i class="far fa-star" style="color: #EE6352;"></i>
-        </ng-container>
-
-      </div>
+        </div>
 
 
 
-      <app-recipe-main *ngIf="'RECIPE_DETAILS.RECIPE_DETAILS_DESCRIPTION' | translate as additionalText"
-        [title]="currentLang === 'vi' ? RecipesById.titleVI || RecipesById.title : RecipesById.title"
-        [additionalText]="additionalText"
-        [description]="currentLang === 'vi' ? RecipesById.descriptionVI || RecipesById.description : RecipesById.description"
-        [cookTime]="RecipesById.cookTime" [prepTime]="getTranslatedPrepTime(RecipesById.prepTime) | translate"
-        [serves]="RecipesById.servings" [imageUrl]="RecipesById.imagePath">
-      </app-recipe-main>
+        <app-recipe-main *ngIf="'RECIPE_DETAILS.RECIPE_DETAILS_DESCRIPTION' | translate as additionalText"
+          [title]="currentLang === 'vi' ? RecipesById.titleVI || RecipesById.title : RecipesById.title"
+          [additionalText]="additionalText"
+          [description]="currentLang === 'vi' ? RecipesById.descriptionVI || RecipesById.description : RecipesById.description"
+          [cookTime]="RecipesById.cookTime" [prepTime]="getTranslatedPrepTime(RecipesById.prepTime) | translate"
+          [serves]="RecipesById.servings" [imageUrl]="RecipesById.imagePath">
+        </app-recipe-main>
 
-      <div class="Recipe-detail">
-        <div class="note">
-          <p>
-            {{'RECIPE_DETAILS.DESCRIPTION'| translate}}
-          </p>
-          <ng-container *ngIf="'RECIPE_DETAILS.TIPS_DO' | translate as doText">
-            <ng-container *ngIf="'RECIPE_DETAILS.TIPS_DONOT' | translate as dontText">
-              <app-recipe-tip [actionType]="doText" [actionType1]="dontText" [description]="doTips"
-                [description1]="dontTips" [title]="titleTipDo" [title1]="titleTipDont">
-              </app-recipe-tip>
+        <div class="Recipe-detail">
+          <div class="note">
+            <p>
+              {{'RECIPE_DETAILS.DESCRIPTION'| translate}}
+            </p>
+            <ng-container *ngIf="'RECIPE_DETAILS.TIPS_DO' | translate as doText">
+              <ng-container *ngIf="'RECIPE_DETAILS.TIPS_DONOT' | translate as dontText">
+                <app-recipe-tip [actionType]="doText" [actionType1]="dontText" [description]="doTips"
+                  [description1]="dontTips" [title]="titleTipDo" [title1]="titleTipDont">
+                </app-recipe-tip>
+              </ng-container>
             </ng-container>
-          </ng-container>
 
-          <ng-container *ngIf="'RECIPE_DETAILS.INSTRUCTION_TITLE' | translate as instructions">
-            <app-recipe-instruction [title]="instructions" [steps]="steps" [stepTitle]="stepTitle">
-            </app-recipe-instruction>
-          </ng-container>
-        </div>
-
-        <div class="ingredients">
-          <ng-container *ngIf="'RECIPE_DETAILS.INGREDIENT_TITLE' | translate as ingredients">
-            <app-recipe-ingredient [title]="ingredients"
-              [ingredientName]="getIngredientDetails(RecipesById.recipeIngredients)">
-            </app-recipe-ingredient>
-          </ng-container>
-          <ng-container *ngIf="'RECIPE_DETAILS.COOKING_TOOL_TITLE' | translate as cookingtool">
-            <app-recipe-ingredient [title]="cookingtool"
-              [ingredientName]="getCookingToolDetails(RecipesById.recipeTools)">
-            </app-recipe-ingredient>
-          </ng-container>
-          <ng-container *ngIf="'RECIPE_DETAILS.NUTRIENT_TITLE' | translate as nutrients">
-            <app-recipe-ingredient [title]="nutrients"
-              [ingredientName]="getNutrientDetails(RecipesById.recipeNutrient)">
-            </app-recipe-ingredient>
-          </ng-container>
-          <p> {{'RECIPE_DETAILS.NOTE'| translate}}
-          </p>
-          <button (click)="goBack()">{{'RECIPE_DETAILS.BACK'| translate}}</button>
-          <div class="favorite-button" *ngIf="this.roleGuest !== 'guest'">
-            <button (click)="toggleFavorite(RecipesById.recipeId, userId)" [class.favorited]="isFavorite"
-              class="heart-button">
-              ❤
-            </button>
+            <ng-container *ngIf="'RECIPE_DETAILS.INSTRUCTION_TITLE' | translate as instructions">
+              <app-recipe-instruction [title]="instructions" [steps]="steps" [stepTitle]="stepTitle">
+              </app-recipe-instruction>
+            </ng-container>
           </div>
-          <ng-container *ngIf="(RecipesById.status === 'Pending' || RecipesById.status === 'Rejected') && isAdmin">
 
-            <button (click)="checkRecipe(RecipesById.recipeId,RecipesById,true)" class="btn btn-success">
-              {{'RECIPE_DETAILS.APPROVE'|translate}}
-            </button>
-            <button (click)="checkRecipe(RecipesById.recipeId,RecipesById,false)" class="btn btn-danger">
-              {{'RECIPE_DETAILS.REJECT'|translate}}
-            </button>
-            <button (click)="removeRecipe(RecipesById.recipeId)" class="btn btn-danger">
-              {{'RECIPE_DETAILS.REMOVE'|translate}}
-            </button>
+          <div class="ingredients">
+            <ng-container *ngIf="'RECIPE_DETAILS.INGREDIENT_TITLE' | translate as ingredients">
+              <app-recipe-ingredient [title]="ingredients"
+                [ingredientName]="getIngredientDetails(RecipesById.recipeIngredients)">
+              </app-recipe-ingredient>
+            </ng-container>
+            <ng-container *ngIf="'RECIPE_DETAILS.COOKING_TOOL_TITLE' | translate as cookingtool">
+              <app-recipe-ingredient [title]="cookingtool"
+                [ingredientName]="getCookingToolDetails(RecipesById.recipeTools)">
+              </app-recipe-ingredient>
+            </ng-container>
+            <ng-container *ngIf="'RECIPE_DETAILS.NUTRIENT_TITLE' | translate as nutrients">
+              <app-recipe-ingredient [title]="nutrients"
+                [ingredientName]="getNutrientDetails(RecipesById.recipeNutrient)">
+              </app-recipe-ingredient>
+            </ng-container>
+            <p> {{'RECIPE_DETAILS.NOTE'| translate}}
+            </p>
+            <button (click)="goBack()">{{'RECIPE_DETAILS.BACK'| translate}}</button>
+            <button (click)="capture()">Chụp recipe thành ảnh</button>
+            <div class="favorite-button" *ngIf="this.roleGuest !== 'guest'">
+              <button (click)="toggleFavorite(RecipesById.recipeId, userId)" [class.favorited]="isFavorite"
+                class="heart-button">
+                ❤
+              </button>
+            </div>
+            <ng-container *ngIf="(RecipesById.status === 'Pending' || RecipesById.status === 'Rejected') && isAdmin">
 
-          </ng-container>
+              <button (click)="checkRecipe(RecipesById.recipeId,RecipesById,true)" class="btn btn-success">
+                {{'RECIPE_DETAILS.APPROVE'|translate}}
+              </button>
+              <button (click)="checkRecipe(RecipesById.recipeId,RecipesById,false)" class="btn btn-danger">
+                {{'RECIPE_DETAILS.REJECT'|translate}}
+              </button>
+              <button (click)="removeRecipe(RecipesById.recipeId)" class="btn btn-danger">
+                {{'RECIPE_DETAILS.REMOVE'|translate}}
+              </button>
+
+            </ng-container>
+          </div>
+
         </div>
-
       </div>
     </div>
-
     <div class="carousel">
       <h2>{{'RECIPE_DETAILS.SIMILAR_RECIPE'|translate}}</h2>
 
@@ -153,6 +154,7 @@
 
 
   </div>
+
 </ng-container>
 
 <ng-template #notFoundTemplate>

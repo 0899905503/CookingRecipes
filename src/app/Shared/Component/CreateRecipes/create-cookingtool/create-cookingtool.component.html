@@ -1,11 +1,11 @@
 <div class="cookingtool-container">
-  <h2>{{'CREATE_RECIPE.COOKING_TOOL.COOKING_TOOLS'| translate}}</h2>
+  <h2>{{'CREATE_RECIPE.COOKING_TOOL.COOKING_TOOLS' | translate}}</h2>
   <table>
     <tbody>
       <tr *ngFor="let cookingtool of cookingtools; let i = index">
         <td>
-          <select [(ngModel)]="cookingtool.cookingToolId" (ngModelChange)="updateTool()">
-            <option value="">{{'CREATE_RECIPE.COOKING_TOOL.TOOL_NAME'| translate}}</option>
+          <select [(ngModel)]="cookingtools[i].cookingToolId" (ngModelChange)="updateTool()">
+            <option value="">{{'CREATE_RECIPE.COOKING_TOOL.TOOL_NAME' | translate}}</option>
             <option *ngFor="let item of Cookingtool" [value]="item.cookingToolId">
               {{ currentLang === 'vi' ? item.cookingToolNameVI : item.cookingToolName }}
             </option>
@@ -14,5 +14,5 @@
       </tr>
     </tbody>
   </table>
-  <button (click)="addCookingTool()">{{'CREATE_RECIPE.COOKING_TOOL.ADD_TOOL'| translate}}</button>
+  <button (click)="addCookingTool()">{{'CREATE_RECIPE.COOKING_TOOL.ADD_TOOL' | translate}}</button>
 </div>

@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ApiPaths } from '../../Shared/Value/Constant/apiConstant';
 import { log } from 'console';
+import { Form } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root',
@@ -17,20 +18,13 @@ export class CreateRecipeService {
 
   constructor(private http: HttpClient) {}
 
-  createRecipe(data: any) {
+  createRecipe(data: FormData) {
     const token = localStorage.getItem('authToken');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
 
-    const formData = new FormData();
-    for (const key in data) {
-      if (data.hasOwnProperty(key)) {
-        formData.append(key, data[key]);
-      }
-    }
-
-    return this.http.post(`${this.baseUrl + this.createRecipes}`, formData, {
+    return this.http.post(`${this.baseUrl + this.createRecipes}`, data, {
       headers,
     });
   }

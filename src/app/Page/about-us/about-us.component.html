@@ -1,1 +1,41 @@
-<h2> hello world</h2>
+<!-- Recipe Categories -->
+<div class="select-food">
+  <div class="content">
+    <h4>{{'HOMEPAGE.SELECT_TITLE' | translate}}</h4>
+    <!-- <h2>{{'HOMEPAGE.SELECT_HEADER_1' | translate}} <br />{{'HOMEPAGE.SELECT_HEADER_2' | translate}}</h2> -->
+    <h2> MY RECIPES </h2>
+    <p>{{'HOMEPAGE.SELECT_DESCRIPTION_1' | translate}} <br />{{'HOMEPAGE.SELECT_DESCRIPTION_2' | translate}}</p>
+  </div>
+  <div class="menu">
+    <ul>
+      <li><a (click)="selectedMenu = 'ALL'" [class.active]="selectedMenu === 'ALL'">{{'FAVORITE.ALL'| translate}}</a>
+      </li>
+      <li><a (click)="selectedMenu = 'Vegan'" [class.active]="selectedMenu === 'Vegan'">{{'FAVORITE.VEGAN'|
+          translate}}</a></li>
+      <li><a (click)="selectedMenu = 'Breakfast'" [class.active]="selectedMenu === 'Breakfast'">{{'FAVORITE.BREAKFAST'|
+          translate}}</a></li>
+      <li><a (click)="selectedMenu = 'Lunch'" [class.active]="selectedMenu === 'Lunch'">{{'FAVORITE.LUNCH'|
+          translate}}</a></li>
+      <li><a (click)="selectedMenu = 'Dinner'" [class.active]="selectedMenu === 'Dinner'">{{'FAVORITE.DINNER'|
+          translate}}</a></li>
+      <li><a (click)="selectedMenu = 'Dessert'" [class.active]="selectedMenu === 'Dessert'">{{'FAVORITE.DESSERT'|
+          translate}}</a></li>
+      <li><a (click)="selectedMenu = 'QuickBite'" [class.active]="selectedMenu === 'QuickBite'">{{'FAVORITE.QUICK_BITE'|
+          translate}}</a></li>
+    </ul>
+  </div>
+
+  <!-- Recipe Grid -->
+  <div class="grid-content" *ngIf="Recipe?.length">
+    <div *ngFor="let item of filteredRecipes()">
+      <app-recipe-card [imageUrl]="item.imagePath"
+        [title]="currentLang === 'vi' ? item.titleVI || item.title : item.title"
+        [description]="currentLang === 'vi' ? item.descriptionVI || item.description : item.description"
+        [cookTime]="item.cookTime" [prepTime]="getTranslatedPrepTime(item.prepTime) | translate"
+        [serves]="item.servings" [isVegan]="item.vegan" [unit1]="'HOMEPAGE.MIN' | translate"
+        [unit2]="'HOMEPAGE.SERVES' | translate" [recipeId]="item.recipeId" (recipeSelected)="onRecipeSelected($event)"
+        [averageRating]="item.averageRating">
+      </app-recipe-card>
+    </div>
+  </div>
+</div>

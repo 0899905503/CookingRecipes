@@ -1,0 +1,45 @@
+<div class="wrapper">
+  <div class="create-recipe">
+    <app-create-save [isUpdateMode]="true" (saveClicked)="updateRecipe(recipeIds)"></app-create-save>
+
+    <app-create-name [titleName]="'Title'" [recipeTitle]="recipeDetails.title" (titleChange)="onTitleChange($event)">
+    </app-create-name>
+
+    <app-create-name [titleName]="'TitleVI'" [recipeTitle]="recipeDetails.titleVI"
+      (titleChange)="onTitleVIChange($event)">
+    </app-create-name>
+
+    <app-create-uploadimage [imageUrl]="imagePreviewUrl" (imageChange)="onImageChange($event)">
+    </app-create-uploadimage>
+
+
+    <app-create-description [DescriptionName]="'Description'" [descriptionText]="recipeDetails.description"
+      (descriptionChange)="onDescriptionChange($event)">
+    </app-create-description>
+
+    <app-create-description [DescriptionName]="'DescriptionVI'" [descriptionText]="recipeDetails.descriptionVI"
+      (descriptionChange)="onDescriptionVIChange($event)">
+    </app-create-description>
+
+    <app-create-ingredient [ingredientsInput]="recipeIngredients" (ingredientsChange)="onIngredientsChange($event)">
+    </app-create-ingredient>
+
+
+    <app-create-cookingtool [cookingtools]="recipeCookingTools"
+      (cookingtoolsChange)="recipeCookingTools = $event"></app-create-cookingtool>
+
+    <app-create-nutrient [nutrientsInput]="recipeNutrients"
+      (nutrientsChange)="onNutrientsChange($event)"></app-create-nutrient>
+
+    <app-create-details [detailsData]="recipeDetails" (detailsChange)="onDetailsChange($event)"></app-create-details>
+
+
+    <app-create-instruction [instructions]="recipeInstructions" (instructionsChange)="onInstructionsChange($event)">
+    </app-create-instruction>
+
+
+    <app-create-recipetip [recipetipsInput]="recipeTips" (recipetipsChange)="onRecipeTipsChange($event)">
+    </app-create-recipetip>
+
+  </div>
+</div>

@@ -18,13 +18,15 @@
           </a>
         </li>
         <li>|</li>
+        <li><a routerLink="/createCookingTip" routerLinkActive="active">{{'COOKING_TIP.CREATE_TIP'| translate}}</a></li>
+        <li>|</li>
         <li>
           <a href="#" (click)="checkAccessAndNavigate('favorite', $event)">
             {{ 'MENU.FAVORITE' | translate }}
           </a>
         </li>
         <li>|</li>
-        <li><a routerLink="/about" routerLinkActive="active">{{'MENU.ABOUT_US'| translate}}</a></li>
+        <li><a routerLink="/about" routerLinkActive="active">{{'MENU.MY_RECIPES'| translate}}</a></li>
         <li>|</li>
         <li><a routerLink="/setting" routerLinkActive="active">{{'MENU.PROFILE'| translate}}</a></li>
       </ul>

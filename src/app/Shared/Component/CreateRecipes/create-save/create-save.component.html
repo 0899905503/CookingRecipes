@@ -1,6 +1,10 @@
 <div class="save-container">
   <div class="header">
-    <h2>{{'CREATE_RECIPE.CREATE_RECIPE'| translate}}</h2>
-    <button (click)="onSave()">{{'CREATE_RECIPE.SAVE'| translate}}</button>
+    <h2>
+      {{ isUpdateMode ? ('UPDATE_RECIPE.UPDATE_RECIPE' | translate) : ('CREATE_RECIPE.CREATE_RECIPE' | translate) }}
+    </h2>
+    <button (click)="onSave()">
+      {{ isUpdateMode ? ('UPDATE_RECIPE.UPDATE' | translate) : ('CREATE_RECIPE.SAVE' | translate) }}
+    </button>
   </div>
 </div>

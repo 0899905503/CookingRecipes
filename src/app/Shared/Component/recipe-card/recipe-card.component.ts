@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { AuthService } from '../../../Service/Auth/Login/login.service';
+import { RecipeService } from '../../../Service/Recipe/recipe-service.service';
 
 @Component({
   selector: 'app-recipe-card',
@@ -25,14 +27,26 @@ export class RecipeCardComponent {
   @Output() recipeSelected = new EventEmitter<number>();
   @Input() averageRating: number = 0;
 
+  @Input() createdByUserId!: number;
+  @Input() currentUserId!: number;
+
   fullStars: number[] = [];
   hasHalfStar: boolean = false;
   emptyStars: number[] = [];
 
-  constructor(private router: Router) {}
+  isOnAboutUsPage: boolean = false;
+
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private recipeService: RecipeService
+  ) {}
+
   ngOnInit(): void {
     this.setupStars(this.averageRating);
+    this.isOnAboutUsPage = this.router.url.includes('about');
   }
+
   onSelectRecipe(): void {
     if (this.recipeId) {
       this.recipeSelected.emit(this.recipeId);
@@ -50,5 +64,13 @@ export class RecipeCardComponent {
     this.fullStars = Array(full).fill(0);
     this.hasHalfStar = hasHalf;
     this.emptyStars = Array(empty).fill(0);
+  }
+
+  onEditRecipe(event: Event): void {
+    const token = this.authService.getToken();
+    event.stopPropagation(); // để không bị gọi cả hàm `onSelectRecipe`
+    if (this.recipeId && token) {
+      this.router.navigate(['/updateRecipe', this.recipeId]);
+    }
   }
 }

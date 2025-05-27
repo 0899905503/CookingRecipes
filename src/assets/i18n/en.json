@@ -34,6 +34,7 @@
     "ADD_RECIPE_IAMGE": "ADD RECIPE IMAGE",
     "DESCRIPTION": "DESCRIPTION (ENG)",
     "DESCRIPTION_VI": "DESCRIPTION (VIE)",
+    "ADD_RECIPE_IMAGE": "ADD RECIPE IMAGE",
     "INGREDIENT": {
               "INGREDIENTS": "INGREDIENTS",
               "INGREDIENT_NAME": "INGREDIENT NAME",
@@ -99,7 +100,8 @@
     "ABOUT_US": "ABOUT US",
     "SETTING": "SETTING",
     "PROFILE": "PROFILE ",
-    "SUBSCRIBE": "SUBSCRIBE"
+    "SUBSCRIBE": "SUBSCRIBE",
+    "MY_RECIPES": "MY RECIPES"
   },
 
   "TIP":{
@@ -201,7 +203,7 @@
     "HARD_PREP":"HARD PREP"
   },
 
-  "COOKING_TIP":{
+  "COOKING_TIP_DETAILS":{
     "COOKING_TIP_TITLE":"Cooking tip",
     "COOKING_TIP_DESCRIPTION":"DESCRIPTION",
     "COOKING_TIP_CATEGORY":"CATEGORY",
@@ -239,7 +241,8 @@
       "NOTIFICATION":"Nofitication",
       "SETTING":"Settings",
       "SUPPORT":"Support",
-      "WELCOME_BACK":"Welcome back "
+      "WELCOME_BACK":"Welcome back ",
+      "COOKINGTIP":"Cooking Tips"
     },
     "DASHBOARD": {
       "TOTAL_RECIPES":"Total Recipes",
@@ -271,6 +274,7 @@
         "VIEWS":"Views",
         "STATUS":"Status"
       }
+
     },
     "SEARCH": "Search",
     "SORT_BY": "Sort by",
@@ -279,6 +283,7 @@
     "PENDING": "Pending",
     "REJECTED": "Rejected",
     "RECIPE_NAME": "Recipe Name",
+    "TIP_NAME": "Tip Name",
     "CATEGORY": "Category",
     "USER_CREATED": "User Created",
     "DATE_CREATED": "Date Created",
@@ -295,9 +300,27 @@
       "USER":"User Created",
       "RECIPE": "Recipe Created",
       "COMMENT": "Comment Created",
-      "VISIT": "Visit"
+      "VISIT": "Visit",
+      "COOKING_TIP": "Cooking Tip Created"
     }
-  }
+  },
+  "COOKING_TIP": {
+  "TITLE_EN": "Title (English)",
+  "TITLE_VI": "Title (Vietnamese)",
+  "DESCRIPTION_EN": "Description (English)",
+  "DESCRIPTION_VI": "Description (Vietnamese)",
+  "CATEGORY": "Category",
+  "IMAGE": "Recipe Image",
+  "UPLOAD_IMAGE": "Upload Image",
+  "CREATE": "Create Tip",
+  "BACK": "Back",
+  "TIME": "Time",
+  "CREATE_TIP": "CREATE COOKING TIP"
+},
+"UPDATE_RECIPE":{
+  "UPDATE_RECIPE": "UPDATE RECIPE"
+}
+
 
 }
 

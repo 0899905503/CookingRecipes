@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CookingtoolService } from '../../../../Service/CookingTool/cookingtool.service';
 import { CreateRecipeDataService } from '../../../../Service/CreateRecipeData/create-recipe-data.service';
@@ -14,17 +14,11 @@ import { title } from 'process';
   styleUrl: './create-instruction.component.scss',
 })
 export class CreateInstructionComponent {
-  instructions = [
-    {
-      title: '',
-      stepNumber: 1,
-      instructionText: '',
-      cookingToolId: '',
-      titleVI: '',
-      instructionTextVI: '',
-    },
-  ];
-  currentStep = 2;
+  @Input() instructions: any[] = [];
+
+  @Output() instructionsChange = new EventEmitter<any[]>();
+
+  currentStep = 1;
 
   addInstruction() {
     this.instructions.push({
@@ -84,6 +78,7 @@ export class CreateInstructionComponent {
 
     // Update via service
     this.createRecipeDataService.updateInstructions(instructionData);
+    this.instructionsChange.emit(this.instructions);
   }
   logInstructions() {
     console.log('Current instructions:', this.instructions);

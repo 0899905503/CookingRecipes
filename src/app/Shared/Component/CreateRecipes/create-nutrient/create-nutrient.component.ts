@@ -1,6 +1,14 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  SimpleChanges,
+  OnChanges,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { NutrientService } from '../../../../Service/Nutrient/nutrient.service';
 import { CreateRecipeDataService } from '../../../../Service/CreateRecipeData/create-recipe-data.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
@@ -10,31 +18,24 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
   standalone: true,
   imports: [FormsModule, CommonModule, TranslateModule],
   templateUrl: './create-nutrient.component.html',
-  styleUrl: './create-nutrient.component.scss',
+  styleUrls: ['./create-nutrient.component.scss'],
 })
-export class CreateNutrientComponent {
+export class CreateNutrientComponent implements OnInit, OnChanges {
+  @Input() nutrientsInput: any[] = [];
+
+  @Output() nutrientsChange = new EventEmitter<any[]>();
+
   Nutrient: any[] = [];
-  nutrients = [
-    { nutrientTypeName: '', quantity: '', unit: '', nutrientTypeId: '' },
-  ];
+  nutrients = [{ nutrientTypeId: null, quantity: null, unit: null }];
+
   currentLang: string = 'en';
 
-  addIngredient() {
-    this.nutrients.push({
-      nutrientTypeName: '',
-      quantity: '',
-      unit: '',
-      nutrientTypeId: '',
-    });
-    this.updateRecipeNutrients();
-  }
   constructor(
     private nutrientService: NutrientService,
     private createRecipeDataService: CreateRecipeDataService,
     private translate: TranslateService
   ) {
     this.currentLang = this.translate.currentLang || 'en';
-
     this.translate.onLangChange.subscribe((event) => {
       this.currentLang = event.lang;
     });
@@ -42,47 +43,71 @@ export class CreateNutrientComponent {
 
   ngOnInit(): void {
     this.onGetAllNutrient();
+    if (this.nutrientsInput && this.nutrientsInput.length > 0) {
+      this.nutrients = JSON.parse(JSON.stringify(this.nutrientsInput)); // Deep copy
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['nutrientsInput'] && changes['nutrientsInput'].currentValue) {
+      this.nutrients = JSON.parse(JSON.stringify(this.nutrientsInput));
+    }
   }
 
   onGetAllNutrient(): void {
     this.nutrientService.getAllNuntrients().subscribe(
       (data) => {
-        this.Nutrient = data;
+        if (Array.isArray(data)) {
+          this.Nutrient = data;
+        } else {
+          console.error('API did not return array:', data);
+          this.Nutrient = [];
+        }
       },
       (error) => {
-        console.error('Error fetching ingredients:', error);
+        console.error('Error fetching nutrients:', error);
       }
     );
   }
 
-  onNutrientChange(nutrient: any): void {
-    const selectedNutrient = this.Nutrient.find(
-      (item) => item.nutrientTypeName === nutrient.nutrientTypeName
-    );
-    if (selectedNutrient) {
-      nutrient.nutrientTypeId = selectedNutrient.nutrientTypeId;
-      nutrient.unit = selectedNutrient.unit;
-    } else {
-      nutrient.nutrientTypeId = '';
-      nutrient.unit = '';
-    }
-    this.logNutrients();
+  addNutrient() {
+    this.nutrients.push({ nutrientTypeId: null, quantity: null, unit: null });
+    this.updateRecipeNutrients();
   }
 
-  logNutrients(): void {
-    console.log('Current nutrients:', this.nutrients);
+  onNutrientChange(nutrient: any): void {
+    // Cập nhật đơn vị khi thay đổi nutrient
+    const selected = this.Nutrient.find(
+      (item) => item.nutrientTypeId === nutrient.nutrientTypeId
+    );
+    if (selected) {
+      // Gán unit tự động theo nutrient chọn
+      nutrient.unit = selected.unit;
+    } else {
+      nutrient.unit = '';
+    }
+    this.updateRecipeNutrients();
+  }
+
+  getUnit(nutrient: any): string {
+    const selected = this.Nutrient.find(
+      (item) => item.nutrientTypeId === nutrient.nutrientTypeId
+    );
+    if (!selected) return '';
+    return selected.unit;
   }
 
   updateRecipeNutrients() {
-    const nutrientData = this.nutrients.map((nutrient) => ({
-      nutrientTypeName: nutrient.nutrientTypeName,
+    const result = this.nutrients.map((nutrient) => ({
       nutrientTypeId: nutrient.nutrientTypeId,
       quantity: nutrient.quantity,
+      unit: nutrient.unit,
     }));
 
-    console.log('Updating recipe nutrients:', nutrientData);
+    this.createRecipeDataService.updateRecipeNutrient(result);
+  }
 
-    // Update via service
-    this.createRecipeDataService.updateRecipeNutrient(nutrientData);
+  onUserInputChange(updatedNutrients: any[]) {
+    this.nutrientsChange.emit(updatedNutrients);
   }
 }

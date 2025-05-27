@@ -1,18 +1,15 @@
 <div class="description-container">
-  <h2>{{'CREATE_RECIPE.RECIPE_IMAGE'| translate}}</h2>
-  <table>
-    <tbody>
-      <tr *ngFor="let description of descriptions; let i = index">
-        <td>
-          <ng-container *ngIf="description.image">
-            <img [src]="description.image" alt="Uploaded Image" class="uploaded-image" />
-          </ng-container>
+  <h2>{{ 'CREATE_RECIPE.RECIPE_IMAGE' | translate }}</h2>
+  <div>
+    <img *ngIf="imageUrl" [src]="imageUrl" alt="Uploaded Image" class="uploaded-image" />
 
-          <button class="upload-btn" (click)="triggerFileInput(i)">{{'CREATE_RECIPE.ADD_RECIPE_IAMGE'|
-            translate}}</button>
-          <input type="file" accept="image/*" #fileInput style="display: none" (change)="uploadImage($event, i)" />
-        </td>
-      </tr>
-    </tbody>
-  </table>
+
+    <!-- Button to trigger file input -->
+    <button class="upload-btn" (click)="triggerFileInput()">
+      {{ 'CREATE_RECIPE.ADD_RECIPE_IMAGE' | translate }}
+    </button>
+
+    <!-- File input with #fileInput reference -->
+    <input #fileInput type="file" accept="image/*" style="display: none" (change)="uploadImage($event)" />
+  </div>
 </div>

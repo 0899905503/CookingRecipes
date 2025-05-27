@@ -11,6 +11,15 @@ export const ApiPaths = {
   GetSimilar: 'Recipe/Get-similar-recipe/',
   UpdateRecipe: 'Recipe/Update/',
   DeleteRecipe: 'Recipe/Delete/',
+  GetByUserId: 'Recipe/Get-recipe-by-userId/',
+
+  //Update Recipe
+  UpdateRecipeById: 'Recipe/Update/',
+  UpdateRecipeTool: 'RecipeTool/update-recipe-tool/',
+  UpdateInstuction: 'Instruction/Update-instruction/',
+  UpdateRecipeIngredient: 'RecipeIngredient/Update-recipe-ingredient/',
+  UpdateRecipeNutrient: 'RecipeNutrient/update-recipe-nutrient/',
+  UpdateRecipeTip: 'RecipeTip/Update-recipe-tip/',
 
   //Recipe Ingredient
 
@@ -25,6 +34,8 @@ export const ApiPaths = {
 
   //Cooking Tip
   GetByIdCookingTip: 'CookingTip/Get-cookingtip-by-id/',
+  GetAllCookingTip: 'CookingTip/Get-all-cookingtip',
+  CreateCookingTip: 'CookingTip/Create-cookingtip',
 
   //Cooking Tool
   GetAllCookingTool: 'CookingTool/Get-all-cookingtool',

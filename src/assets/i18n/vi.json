@@ -36,6 +36,7 @@
     "ADD_RECIPE_IAMGE": "Thêm hình ảnh công thức",
     "DESCRIPTION": "Mô tả (tiếng Anh)",
     "DESCRIPTION_VI": "Mô tả (tiếng Việt)",
+     "ADD_RECIPE_IMAGE": "+ Thêm hình ảnh công thức",
     "INGREDIENT": {
               "INGREDIENTS": "NGUYÊN LIỆU",
               "INGREDIENT_NAME": "TÊN NGUYÊN LIỆU",
@@ -102,7 +103,8 @@
     "ABOUT_US": "Giới Thiệu",
     "SETTING": "Cài Đặt",
     "PROFILE": "Hồ Sơ",
-    "SUBSCRIBE": "Đăng ký"
+    "SUBSCRIBE": "Đăng ký",
+    "MY_RECIPES": "Công Thức Của Tôi"
   },
 
   "TIP":{
@@ -204,7 +206,7 @@
     "HARD_PREP":"Khó"
   },
 
-  "COOKING_TIP":{
+  "COOKING_TIP_DETAILS":{
     "COOKING_TIP_TITLE":"Mẹo nấu ăn",
     "COOKING_TIP_DESCRIPTION":"MIÊU TẢ",
     "COOKING_TIP_CATEGORY":"LOẠI",
@@ -241,7 +243,8 @@
       "NOTIFICATION":"Thông Báo",
       "SETTING":"Cài Đặt",
       "SUPPORT":"Hỗ Trợ",
-      "WELCOME_BACK":"Chào mừng trở lại "
+      "WELCOME_BACK":"Chào mừng trở lại ",
+      "COOKINGTIP": "Mẹo Nấu Ăn"
     },
     "DASHBOARD": {
       "TOTAL_RECIPES":"Công Thức",
@@ -281,6 +284,7 @@
     "PENDING": "Đang Chờ Xử Lí",
     "REJECTED": "Từ Chối",
     "RECIPE_NAME": "Tên Công Thức",
+    "TIP_NAME": "Tên Mẹo",
     "CATEGORY": "Phân Loại",
     "USER_CREATED": "Người Tạo",
     "DATE_CREATED": "Ngày Tạo",
@@ -297,8 +301,26 @@
       "USER":"Người Dùng Được Tạo",
       "RECIPE": "Công Thức Được Tạo",
       "COMMENT": "Bình Luận Được Tạo",
-      "VISIT": "Lượng Truy Cập"
+      "VISIT": "Lượng Truy Cập",
+      "COOKING_TIP": "Mẹo Nấu Ăn Được Tạo"
     }
-  }
+  },
+  "COOKING_TIP": {
+  "TITLE_EN": "Tên mẹo (tiếng Anh)",
+  "TITLE_VI": "Tên mẹo (tiếng Việt)",
+  "DESCRIPTION_EN": "Mô tả (tiếng Anh)",
+  "DESCRIPTION_VI": "Mô tả (tiếng Việt)",
+  "CATEGORY": "Loại",
+  "IMAGE": "Hình ảnh mẹo",
+  "UPLOAD_IMAGE": "Tải lên hình ảnh",
+  "CREATE": "Tạo mẹo nấu ăn",
+  "BACK": "Quay lại",
+  "TIME": "Thời gian",
+   "CREATE_TIP": "Tạo Mẹo Nấu Ăn"
+},
+"UPDATE_RECIPE":{
+  "UPDATE_RECIPE": "Cập nhật công thức"
+}
+
 
 }

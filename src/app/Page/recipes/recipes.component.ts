@@ -1,5 +1,5 @@
 import { NotFoundPageComponent } from './../../Shared/not-found-page/not-found-page.component';
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { RecipeService } from '../../Service/Recipe/recipe-service.service';
 import { RecipeMainComponent } from '../../Shared/Component/recipe-main/recipe-main.component';
 import { CommonModule } from '@angular/common';
@@ -16,6 +16,7 @@ import e from 'express';
 import { stat } from 'node:fs';
 import { DateUtils } from '../../Util/date-format-util';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import html2canvas from 'html2canvas';
 
 @Component({
   standalone: true,
@@ -36,6 +37,8 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
   ],
 })
 export class RecipesComponent {
+  @ViewChild('recipeContent', { static: false }) recipeContent!: ElementRef;
+
   RecipesById: any = {};
   doTips: string[] = [];
   dontTips: string[] = [];
@@ -416,6 +419,7 @@ export class RecipesComponent {
       imageUrl: recipe.imageUrl,
       vegan: !!recipe.vegan, // đảm bảo là boolean chứ không phải chuỗi
       status: this.statusButton,
+      categoryId: recipe.categoryId,
     };
 
     this.recipeService.updateRecipeById(recipeId, updatedRecipe).subscribe({
@@ -447,4 +451,46 @@ export class RecipesComponent {
         return prepTime; // fallback nếu không khớp
     }
   }
+
+  capture() {
+    const element = document.querySelector('.Recipe-info') as HTMLElement;
+    const img = element?.querySelector('img');
+
+    if (!element || !this.RecipesById) {
+      console.error('Không tìm thấy phần tử hoặc dữ liệu công thức');
+      return;
+    }
+
+    let fileName =
+      this.currentLang === 'vi'
+        ? this.RecipesById.titleVI || this.RecipesById.title
+        : this.RecipesById.title;
+
+    fileName = fileName.replace(/[\\/:*?"<>|]/g, '');
+
+    const doCapture = () => {
+      html2canvas(element, {
+        useCORS: true, // hỗ trợ ảnh từ nguồn khác
+        allowTaint: false,
+      })
+        .then((canvas) => {
+          const image = canvas.toDataURL('image/png');
+          const link = document.createElement('a');
+          link.href = image;
+          link.download = `${fileName}.png`;
+          link.click();
+        })
+        .catch((error) => {
+          console.error('Lỗi khi chụp ảnh:', error);
+        });
+    };
+
+    if (img && !img.complete) {
+      img.onload = doCapture;
+      img.onerror = () => console.error('Không tải được ảnh');
+    } else {
+      doCapture();
+    }
+  }
 }
+// Removed the stub for html2canvas since we are now importing the actual library.

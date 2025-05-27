@@ -1,5 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  SimpleChanges,
+  OnChanges,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IngredientService } from '../../../../Service/Ingredient/ingredient.service';
 import { CreateRecipeDataService } from '../../../../Service/CreateRecipeData/create-recipe-data.service';
@@ -12,21 +20,19 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
   templateUrl: './create-ingredient.component.html',
   styleUrls: ['./create-ingredient.component.scss'],
 })
-export class CreateIngredientComponent implements OnInit {
+export class CreateIngredientComponent implements OnInit, OnChanges {
+  @Input() ingredientsInput: any[] = [];
+
+  @Output() ingredientsChange = new EventEmitter<any[]>();
+
   ingredients = [
     {
-      ingredientName: '',
-      quantity: 1,
-      unit: '',
-      type: '',
       ingredientId: null,
-      ingredientNameVI: '',
-      unitVI: '',
-      typeVI: '',
+      quantity: 1,
     },
   ];
   Ingredient: any[] = [];
-  //translate
+
   currentLang: string = 'en';
 
   constructor(
@@ -35,7 +41,6 @@ export class CreateIngredientComponent implements OnInit {
     private translate: TranslateService
   ) {
     this.currentLang = this.translate.currentLang || 'en';
-
     this.translate.onLangChange.subscribe((event) => {
       this.currentLang = event.lang;
     });
@@ -45,18 +50,16 @@ export class CreateIngredientComponent implements OnInit {
     this.onGetAllIngredient();
   }
 
-  addIngredient() {
-    this.ingredients.push({
-      ingredientName: '',
-      quantity: 1,
-      unit: '',
-      type: '',
-      ingredientId: null,
-      ingredientNameVI: '',
-      unitVI: '',
-      typeVI: '',
-    });
-    this.updateRecipeIngredients();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (
+      changes['ingredientsInput'] &&
+      changes['ingredientsInput'].currentValue !== undefined
+    ) {
+      this.ingredients = JSON.parse(
+        JSON.stringify(changes['ingredientsInput'].currentValue)
+      );
+      this.updateRecipeIngredients();
+    }
   }
 
   onGetAllIngredient(): void {
@@ -75,58 +78,49 @@ export class CreateIngredientComponent implements OnInit {
     );
   }
 
-  onIngredientChange(ingredient: any): void {
-    const selectedIngredient = this.Ingredient.find(
-      (item) => item.ingredientName === ingredient.ingredientName
-    );
-    if (selectedIngredient) {
-      ingredient.ingredientId = selectedIngredient.ingredientId;
-      if (this.currentLang === 'vi') {
-        ingredient.unit = selectedIngredient.unitVI;
-        ingredient.type = selectedIngredient.typeVI;
-      } else {
-        ingredient.unit = selectedIngredient.unit;
-        ingredient.type = selectedIngredient.type;
-      }
-    } else {
-      ingredient.ingredientId = '';
-      ingredient.unit = '';
-      ingredient.type = '';
-    }
+  addIngredient() {
+    this.ingredients.push({
+      ingredientId: null,
+      quantity: 1,
+    });
+    this.updateRecipeIngredients();
+  }
 
-    // Log dữ liệu sau khi thay đổi
-    console.log('Ingredient updated:', ingredient);
-    this.logIngredients();
+  onIngredientChange(ingredient: any): void {
+    this.updateRecipeIngredients();
   }
 
   updateQuantity(index: number): void {
-    console.log(
-      `Ingredient ${index + 1} quantity updated:`,
-      this.ingredients[index].quantity
-    );
-    this.logIngredients();
+    this.updateRecipeIngredients();
   }
 
-  logIngredients(): void {
-    console.log('Current ingredients:', this.ingredients);
+  getUnit(ingredient: any): string {
+    const found = this.Ingredient.find(
+      (item) => item.ingredientId === ingredient.ingredientId
+    );
+    if (!found) return '';
+    return this.currentLang === 'vi' ? found.unitVI : found.unit;
+  }
+
+  getType(ingredient: any): string {
+    const found = this.Ingredient.find(
+      (item) => item.ingredientId === ingredient.ingredientId
+    );
+    if (!found) return '';
+    return this.currentLang === 'vi' ? found.typeVI : found.type;
   }
 
   updateRecipeIngredients(): void {
     if (Array.isArray(this.ingredients)) {
-      console.log('Ingredients before update:', this.ingredients);
-
       const ingredientDatas = this.ingredients.map((ingredient) => ({
         ingredientId: ingredient.ingredientId || null,
         quantity: ingredient.quantity || null,
       }));
-
-      console.log('Mapped ingredients for update:', ingredientDatas);
-
       this.createRecipeDataService.updateRecipeIngredient(ingredientDatas);
-
-      console.log('Recipe ingredients have been updated in the service.');
-    } else {
-      console.error('Ingredients is not an array:', this.ingredients);
     }
+  }
+
+  onUserInputChange(updatedIngredients: any[]) {
+    this.ingredientsChange.emit(updatedIngredients);
   }
 }

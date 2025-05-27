@@ -1,0 +1,68 @@
+<div class="create-cooking-tip-container">
+  <!-- Title -->
+  <div class="form-section">
+    <h2>{{ 'COOKING_TIP.TITLE_EN' | translate }}</h2>
+    <input type="text" [(ngModel)]="title" (ngModelChange)="onTitleChange($event)"
+      [placeholder]="'COOKING_TIP.TITLE_EN' | translate" />
+  </div>
+
+  <!-- Title VI -->
+  <div class="form-section">
+    <h2>{{ 'COOKING_TIP.TITLE_VI' | translate }}</h2>
+    <input type="text" [(ngModel)]="titleVI" (ngModelChange)="onTitleVIChange($event)"
+      [placeholder]="'COOKING_TIP.TITLE_VI' | translate" />
+  </div>
+
+  <!-- Description EN -->
+  <div class="form-section">
+    <h2>{{ 'COOKING_TIP.DESCRIPTION_EN' | translate }}</h2>
+    <textarea [(ngModel)]="description" (ngModelChange)="onDescriptionChange('en')"
+      [ngClass]="{'error': description.length > maxDescriptionLength}" rows="5" [attr.maxLength]="maxDescriptionLength"
+      [placeholder]="'COOKING_TIP.DESCRIPTION_EN' | translate"></textarea>
+    <div class="char-count">{{ description.length }}/{{ maxDescriptionLength }}</div>
+  </div>
+
+  <!-- Description VI -->
+  <div class="form-section">
+    <h2>{{ 'COOKING_TIP.DESCRIPTION_VI' | translate }}</h2>
+    <textarea [(ngModel)]="descriptionVI" (ngModelChange)="onDescriptionChange('vi')"
+      [ngClass]="{'error': descriptionVI.length > maxDescriptionLength}" rows="5"
+      [attr.maxLength]="maxDescriptionLength" [placeholder]="'COOKING_TIP.DESCRIPTION_VI' | translate"></textarea>
+    <div class="char-count">{{ descriptionVI.length }}/{{ maxDescriptionLength }}</div>
+  </div>
+
+  <!-- Category -->
+  <div class="form-group">
+    <label for="category">{{ 'CREATE_RECIPE.DETAILS.CATEGORY' | translate }}</label>
+    <select id="category" [(ngModel)]="CategoryId">
+      <option *ngFor="let category of categoriesList" [ngValue]="category.value">
+        {{ currentLang === 'vi' ? category.labelVI : category.labelEN }}
+      </option>
+    </select>
+  </div>
+
+
+  <!-- Time -->
+  <div class="form-section">
+    <h2>{{ 'COOKING_TIP.TIME' | translate }}</h2>
+    <input type="number" [(ngModel)]="time" placeholder="Time (minutes)" />
+  </div>
+
+  <!-- Image Upload -->
+  <div class="form-section">
+    <h2>{{ 'COOKING_TIP.IMAGE' | translate }}</h2>
+    <div class="image-upload-section">
+      <img *ngIf="imageUrl" [src]="imageUrl" alt="Uploaded Image" class="uploaded-image" />
+      <button class="upload-btn" (click)="triggerFileInput()">
+        {{ 'COOKING_TIP.UPLOAD_IMAGE' | translate }}
+      </button>
+      <input #fileInput type="file" accept="image/*" style="display: none" (change)="uploadImage($event)" />
+    </div>
+  </div>
+
+  <!-- Submit Buttons -->
+  <div class="form-actions">
+    <button (click)="createCookingTip()">{{ 'COOKING_TIP.CREATE' | translate }}</button>
+    <button (click)="goBack()">{{ 'COOKING_TIP.BACK' | translate }}</button>
+  </div>
+</div>
