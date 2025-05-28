@@ -134,13 +134,22 @@ export class CreateCookingTipComponent {
       return;
     }
 
+    // Kiểm tra có file ảnh được chọn chưa
+    const fileInput = this.fileInput.nativeElement;
+    if (!fileInput.files || fileInput.files.length === 0) {
+      alert('Please select an image file.');
+      return;
+    }
+
+    const file = fileInput.files[0];
+
     const formData = new FormData();
-    formData.append('imagePath', this.fileInput.nativeElement.files[0]);
+    formData.append('imagePath', file); // 'imagePath' là tên field server mong đợi
     formData.append('title', this.title);
     formData.append('titleVI', this.titleVI);
     formData.append('description', this.description);
     formData.append('descriptionVI', this.descriptionVI);
-    formData.append('categoryId', this.selectedCategory.toString());
+    formData.append('categoryId', this.CategoryId.toString());
     formData.append('time', this.time.toString());
     formData.append('userId', this.currentUserId.toString());
 

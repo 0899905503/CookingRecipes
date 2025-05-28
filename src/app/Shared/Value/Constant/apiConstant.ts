@@ -36,6 +36,8 @@ export const ApiPaths = {
   GetByIdCookingTip: 'CookingTip/Get-cookingtip-by-id/',
   GetAllCookingTip: 'CookingTip/Get-all-cookingtip',
   CreateCookingTip: 'CookingTip/Create-cookingtip',
+  UpdateCookingTip: 'CookingTip/Update-cookingtip/',
+  DeleteCookingTip: 'CookingTip/Delete-cookingtip/',
 
   //Cooking Tool
   GetAllCookingTool: 'CookingTool/Get-all-cookingtool',

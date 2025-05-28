@@ -1,0 +1,36 @@
+.CookingTip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2vw;
+
+  .Details {
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 30px;
+  }
+
+  .Check {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+
+    button {
+      border: 0.1vw solid rgb(124, 124, 124);
+      background-color: #F0EBE1;
+      color: #262522;
+      padding: 10px 20px;
+      border-radius: 32px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        color: white;
+        background-color: #EE6352;
+      }
+    }
+  }
+}
