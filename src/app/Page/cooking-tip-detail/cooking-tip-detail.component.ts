@@ -1,6 +1,6 @@
 import { Component, EventEmitter, NgModule, Output } from '@angular/core';
 import { CookingTipService } from '../../Service/CookingTip/cooking-tip.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DateUtils } from '../../Util/date-format-util';
 import { CookingTipComponent } from '../../Shared/Component/cooking-tip/cooking-tip.component';
 import { NotFoundPageComponent } from '../../Shared/not-found-page/not-found-page.component';
@@ -34,12 +34,14 @@ export class CookingTipDetailComponent {
   //check role
   isAdmin: boolean = false;
   role: any;
+  fromAdmin: boolean = false;
 
   constructor(
     private cookingTipService: CookingTipService,
     private route: ActivatedRoute,
     private translate: TranslateService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.currentLang = this.translate.currentLang || 'en';
 
@@ -67,6 +69,9 @@ export class CookingTipDetailComponent {
       this.isAdmin = false;
     }
     console.log('ROLE: ' + this.role);
+
+    this.fromAdmin = history.state?.fromAdmin === true;
+    console.log(this.fromAdmin);
   }
   onGetId(id: number): void {
     this.cookingTipService.getCookingTip(id).subscribe(
@@ -106,16 +111,28 @@ export class CookingTipDetailComponent {
       .updateCookingTip(cookingTipId, updateCookingTip)
       .subscribe({
         next: (response) => {
-          console.log('Recipe' + this.statusButton + ' successfully', response);
+          if (this.statusButton === 'Approved') {
+            alert('Mẹo đã được chấp nhận');
+          } else if (this.statusButton === 'Rejected') {
+            alert('Mẹo đã bị từ chối');
+          } else {
+            alert('Đã xóa mẹo');
+          }
+          this.router.navigate(['home']);
         },
         error: (error) => {
-          console.error('Error updating recipe', error);
+          alert('Chưa cập nhật được');
         },
       });
   }
 
   removeCookingTip(cookingTipId: number) {
-    this.cookingTipService.deleteCookingTip(cookingTipId).subscribe(() => {});
+    this.cookingTipService.deleteCookingTip(cookingTipId).subscribe({
+      next: (response) => {
+        alert('Đã xóa mẹo');
+        this.router.navigate(['home']);
+      },
+    });
     console.log('Cookingtip remove successfully');
   }
 }

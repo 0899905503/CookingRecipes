@@ -67,14 +67,18 @@
             <p> {{'RECIPE_DETAILS.NOTE'| translate}}
             </p>
             <button (click)="goBack()">{{'RECIPE_DETAILS.BACK'| translate}}</button>
-            <button (click)="capture()">Chụp recipe thành ảnh</button>
+            <button (click)="capture()" title="Chụp recipe thành ảnh">
+              <i class="fas fa-camera"></i>
+            </button>
+
             <div class="favorite-button" *ngIf="this.roleGuest !== 'guest'">
               <button (click)="toggleFavorite(RecipesById.recipeId, userId)" [class.favorited]="isFavorite"
                 class="heart-button">
                 ❤
               </button>
             </div>
-            <ng-container *ngIf="(RecipesById.status === 'Pending' || RecipesById.status === 'Rejected') && isAdmin">
+            <ng-container
+              *ngIf="(RecipesById.status === 'Pending' || RecipesById.status === 'Rejected') && isAdmin && fromAdmin">
 
               <button (click)="checkRecipe(RecipesById.recipeId,RecipesById,true)" class="btn btn-success">
                 {{'RECIPE_DETAILS.APPROVE'|translate}}
@@ -86,6 +90,15 @@
                 {{'RECIPE_DETAILS.REMOVE'|translate}}
               </button>
 
+            </ng-container>
+
+            <ng-container *ngIf="RecipesById.status === 'Approved' && isAdmin && fromAdmin">
+              <button (click)="checkRecipe(RecipesById.recipeId, RecipesById, false)" class="btn btn-danger">
+                {{ 'RECIPE_DETAILS.REJECT' | translate }}
+              </button>
+              <button (click)="removeRecipe(RecipesById.recipeId)" class="btn btn-danger">
+                {{ 'RECIPE_DETAILS.REMOVE' | translate }}
+              </button>
             </ng-container>
           </div>
 
@@ -109,15 +122,19 @@
     </div>
     <!-- Comment Section -->
     <div class="comment-section-wrapper" *ngIf="Comment.length > 0">
-      <h2 class="comment-title">{{'RECIPE_DETAILS.COMMENT'|translate}}</h2>
+      <h2 class="comment-title">{{'RECIPE_DETAILS.COMMENT' | translate}}</h2>
       <div class="comment-section">
         <div class="comment-list">
-          <app-comment *ngFor="let comment of Comment" [email]="comment.user.email" [commentText]="comment.commentText"
-            [rating]="comment.rating" [datePosted]="comment.datePosted" [avatarUrl]="comment.user.avatar">
-          </app-comment>
+          <ng-container *ngFor="let comment of Comment">
+            <app-comment *ngIf="comment.status == 'Approved'" [email]="comment.user.email"
+              [commentText]="comment.commentText" [rating]="comment.rating" [datePosted]="comment.datePosted"
+              [avatarUrl]="comment.user.avatar">
+            </app-comment>
+          </ng-container>
         </div>
       </div>
     </div>
+
     <!-- New comment input -->
     <div class="comment-form" *ngIf="this.roleGuest !== 'guest'">
       <h3 class="comment-form-title">{{'RECIPE_DETAILS.LEAVE_A_COMMENT'|translate}}</h3>

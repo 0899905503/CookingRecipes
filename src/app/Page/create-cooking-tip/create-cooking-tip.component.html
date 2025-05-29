@@ -33,7 +33,7 @@
 
   <!-- Category -->
   <div class="form-group">
-    <label for="category">{{ 'CREATE_RECIPE.DETAILS.CATEGORY' | translate }}</label>
+    <h2 for="category">{{ 'CREATE_RECIPE.DETAILS.CATEGORY' | translate }}</h2>
     <select id="category" [(ngModel)]="CategoryId">
       <option *ngFor="let category of categoriesList" [ngValue]="category.value">
         {{ currentLang === 'vi' ? category.labelVI : category.labelEN }}

@@ -341,4 +341,70 @@ canvas {
   height: 400px !important;
 }
 
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #F0EBE1;
+  border: 1px solid #ccc;
+  color: #EE6352;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  z-index: 1000;
+  max-width: 500px;
+  width: 90%;
+}
+
+.popup-buttons {
+  margin-bottom: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.popup-buttons button {
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: #F0EBE1;
+  color: #EE6352;
+  border: 1px solid #EE6352;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.popup-buttons button.approve-btn:hover,
+.popup-buttons button.reject-btn:hover,
+.popup-buttons button.remove-btn:hover {
+  background-color: #EE6352;
+  color: #F0EBE1;
+}
+
+.close-btn {
+  background-color: #F0EBE1;
+  color: #EE6352;
+  border: 1px solid #EE6352;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.close-btn:hover {
+  background-color: #EE6352;
+  color: #F0EBE1;
+}
+
 }

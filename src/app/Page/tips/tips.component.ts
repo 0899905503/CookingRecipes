@@ -88,12 +88,15 @@ export class TipsComponent {
   filteredRecipes(): any[] {
     if (!this.Tip) return [];
 
-    if (this.selectedMenu === 'ALL') {
-      return this.Tip;
-    }
+    const visibleRecipes = this.Tip.filter(
+      (item) => item.status !== 'Pending' && item.status !== 'Rejected'
+    );
+
+    if (this.selectedMenu === 'ALL') return visibleRecipes;
 
     // Sửa điều kiện ở đây: dùng categoryName thay vì item.vegan
-    return this.Tip.filter(
+    // Các danh mục còn lại
+    return visibleRecipes.filter(
       (item) => item.category?.categoryName === this.selectedMenu
     );
   }

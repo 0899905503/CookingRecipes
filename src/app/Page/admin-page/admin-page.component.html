@@ -307,8 +307,8 @@
             <td>{{ recipe.user.email }}</td>
             <td>{{ recipe.dateCreated }}</td>
             <td>
-              <a class="details-btn" [routerLink]="['/recipes', recipe.recipeId]">
-                <img [src]="IcSearch" alt="search" />
+              <a class="details-btn" [routerLink]="['/recipes', recipe.recipeId]" [state]="{ fromAdmin: true }">
+                <img [src]=" IcSearch" alt="search" />
               </a>
             </td>
             <td>
@@ -370,7 +370,8 @@
             <td>{{ comment.commentText }}</td>
             <td>{{ comment.rating }}</td>
             <td>{{ comment.datePosted }}</td>
-            <td><button class="details-btn"><i class="fas fa-search"></i></button></td>
+            <td><button class="details-btn" (click)="openPopup(comment)"><i class="fas fa-search"></i></button>
+            </td>
             <td>
               <span class="status" [ngClass]="{
           'status-approved': comment.status === 'Approved',
@@ -396,7 +397,29 @@
         </button>
         <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === pages.length">&gt;</button>
       </div>
+      <!-- Popup -->
+      <div class="overlay" *ngIf="isPopupOpen" (click)="closePopup()"></div>
+      <div class="popup" *ngIf="isPopupOpen">
+        <h3>Chi tiết bình luận</h3>
+        <p><strong>Tên Công Thức:</strong> {{ selectedComment.recipe.title }}</p>
+        <p><strong>Người Đăng:</strong> {{ selectedComment.user?.email }}</p>
+        <p><strong>Đánh Giá:</strong> {{ selectedComment.rating }} <i class="fas fa-star" style="color: #EE6352;"></i>
+        </p>
+        <p><strong>Bình Luận:</strong> {{ selectedComment.commentText }}</p>
+        <div class="popup-buttons">
+          <button class="approve-btn" (click)="checkComment( selectedComment.commentId,selectedComment, true)">✅
+            Duyệt</button>
+          <button class="reject-btn" (click)="checkComment(selectedComment.commentId,selectedComment, false)">❌ Từ
+            chối</button>
+          <button class="remove-btn" (click)="removeComment(selectedComment.commentId)">🗑️ Xóa</button>
+        </div>
+
+        <button class="close-btn" (click)="closePopup()">Đóng</button>
+      </div>
     </ng-container>
+
+
+
 
     <ng-container *ngIf="activeItem === 'CookingTip'">
       <div class="controls">
@@ -431,7 +454,7 @@
             <td>{{ tip.user.email }}</td>
             <td>{{ tip.dateCreated }}</td>
             <td>
-              <a class="details-btn" [routerLink]="['/cookingTip', tip.cookingTipId]">
+              <a class="details-btn" [routerLink]="['/cookingTip', tip.cookingTipId]" [state]="{ fromAdmin: true }">
                 <img [src]="IcSearch" alt="search" />
               </a>
             </td>

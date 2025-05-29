@@ -70,6 +70,8 @@ export const ApiPaths = {
   GetAllComment: 'Comment/get-all-comments',
   GetCommentByRecipeId: 'Comment/get-comments-by-recipe-id/',
   CreateComment: 'Comment/create-comment',
+  UpdateComment: 'Comment/update-comment/',
+  DeleteComment: 'Comment/delete-comment/',
 
   //Auth
   SendOtp: 'send-otp-email',

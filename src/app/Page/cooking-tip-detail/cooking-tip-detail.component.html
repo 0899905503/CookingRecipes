@@ -11,19 +11,27 @@
   </div>
 
   <div class="Check">
-    <ng-container *ngIf="(cookingTip.status === 'Pending' || cookingTip.status === 'Rejected') && isAdmin">
-
-      <button (click)="checkCookingTip(cookingTip.cookingTipId,cookingTip,true)" class="btn btn-success">
-        {{'RECIPE_DETAILS.APPROVE'|translate}}
+    <ng-container *ngIf="(cookingTip.status === 'Pending' || cookingTip.status === 'Rejected') && isAdmin && fromAdmin">
+      <button (click)="checkCookingTip(cookingTip.cookingTipId, cookingTip, true)" class="btn btn-success">
+        {{ 'RECIPE_DETAILS.APPROVE' | translate }}
       </button>
-      <button (click)="checkCookingTip(cookingTip.cookingTipId,cookingTip,false)" class="btn btn-danger">
-        {{'RECIPE_DETAILS.REJECT'|translate}}
+      <button (click)="checkCookingTip(cookingTip.cookingTipId, cookingTip, false)" class="btn btn-danger">
+        {{ 'RECIPE_DETAILS.REJECT' | translate }}
       </button>
       <button (click)="removeCookingTip(cookingTip.cookingTipId)" class="btn btn-danger">
-        {{'RECIPE_DETAILS.REMOVE'|translate}}
+        {{ 'RECIPE_DETAILS.REMOVE' | translate }}
       </button>
-
     </ng-container>
+
+    <ng-container *ngIf="cookingTip.status === 'Approved' && isAdmin && fromAdmin">
+      <button (click)="checkCookingTip(cookingTip.cookingTipId, cookingTip, false)" class="btn btn-danger">
+        {{ 'RECIPE_DETAILS.REJECT' | translate }}
+      </button>
+      <button (click)="removeCookingTip(cookingTip.cookingTipId)" class="btn btn-danger">
+        {{ 'RECIPE_DETAILS.REMOVE' | translate }}
+      </button>
+    </ng-container>
+
   </div>
 </div>
 

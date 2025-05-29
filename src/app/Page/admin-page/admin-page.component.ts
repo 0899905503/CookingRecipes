@@ -9,7 +9,7 @@ import {
   ElementRef,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
@@ -79,6 +79,11 @@ export class AdminPageComponent implements OnInit {
 
   //REPORT
   report: any = {};
+
+  //COMMENT
+  isPopupOpen = false;
+  selectedComment: any;
+  commentStatus: string = '';
 
   //CHART
   userChart?: Chart;
@@ -168,7 +173,8 @@ export class AdminPageComponent implements OnInit {
     private authService: AuthService,
     private translate: TranslateService,
     private visitService: VisitServiceService,
-    private cookingTipService: CookingTipService
+    private cookingTipService: CookingTipService,
+    private router: Router
   ) {
     this.currentLang = this.translate.currentLang || 'en';
 
@@ -716,5 +722,63 @@ export class AdminPageComponent implements OnInit {
     d.setUTCDate(d.getUTCDate() + 4 - dayNum);
     const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
     return Math.ceil(((d.getTime() - yearStart.getTime()) / 86400000 + 1) / 7);
+  }
+
+  goToCookingTipDetail(cookingTipId: number) {
+    this.router.navigate(['/cookingTip', cookingTipId], {
+      state: { fromAdmin: true },
+    });
+  }
+
+  //COMMENT
+  openPopup(comment: any) {
+    this.selectedComment = comment;
+    this.isPopupOpen = true;
+  }
+
+  closePopup() {
+    this.isPopupOpen = false;
+  }
+
+  checkComment(commentId: number, comment: any, checkStatus: boolean) {
+    if (checkStatus) {
+      this.commentStatus = 'Approved';
+    } else {
+      this.commentStatus = 'Rejected';
+    }
+    const updateComment = {
+      commentText: comment.commentText,
+      userId: comment.userId,
+      recipeId: comment.recipeId,
+      rating: comment.rating,
+      datePosted: comment.datePosted,
+      status: this.commentStatus,
+    };
+
+    this.adminService.updateComment(commentId, updateComment).subscribe({
+      next: (response) => {
+        if (this.commentStatus === 'Approved') {
+          alert('Bình luận đã được chấp nhận');
+        } else if (this.commentStatus === 'Rejected') {
+          alert('Bình luận đã bị từ chối');
+        } else {
+          alert('Đã xóa bình luận');
+        }
+        this.router.navigate(['home']);
+      },
+      error: (error) => {
+        alert('Chưa cập nhật được');
+      },
+    });
+  }
+
+  removeComment(commentId: number) {
+    this.adminService.deleteComment(commentId).subscribe({
+      next: (response) => {
+        alert('Đã xóa bình luận');
+        this.router.navigate(['home']);
+      },
+    });
+    console.log('Recipe rejected successfully');
   }
 }

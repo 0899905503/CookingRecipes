@@ -6,27 +6,37 @@
   border: 0.1vw solid #616161;
   margin: 20px;
   border-radius: 32px;
+  max-width: 100%;
+  overflow: hidden;
 
   .top-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    flex-wrap: wrap; // 👈 Cho phép xuống dòng nếu không đủ chỗ
+    min-width: 0;
   }
 
   .logo {
     display: flex;
     align-items: center;
+    min-width: 0;
 
     img {
       height: 3.5vh;
       width: auto;
       margin-right: 1vw;
+      margin-bottom: 20px;
     }
 
     span {
+      margin-bottom: 20px;
       font-size: 2vw;
       color: #F0EBE1;
+      white-space: nowrap; // 👈 Không cho xuống dòng chữ
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 
@@ -35,6 +45,8 @@
     list-style: none;
     margin: 0;
     padding: 0;
+    flex-wrap: wrap; // 👈 Xuống dòng nếu quá dài
+    min-width: 0;
 
     li {
       margin: 0 1.5vw;
@@ -42,7 +54,7 @@
 
       a {
         text-decoration: none;
-        font-size: 20px;
+        font-size: 1vw; // 👈 dùng vw để scale theo width
         color: #616161;
         transition: color 0.3s;
 
@@ -67,6 +79,8 @@
     padding-inline: 1.5vw;
     margin-right: 1.5vw;
     justify-content: flex-end;
+    flex-wrap: wrap; // 👈 hỗ trợ co giãn
+    min-width: 0;
 
     button {
       background: none;
@@ -75,8 +89,9 @@
       cursor: pointer;
 
       img {
-        width: 24px;
-        height: 24px;
+        width: 2vw;
+        height: auto;
+        max-width: 100%;
       }
     }
   }

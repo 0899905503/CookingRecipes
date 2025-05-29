@@ -12,11 +12,13 @@ import { Location } from '@angular/common';
 import { CommentComponent } from '../../Shared/Component/comment/comment.component';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../Service/Auth/Login/login.service';
-import e from 'express';
+// import e, { Router } from 'express';
+import { Router } from '@angular/router';
 import { stat } from 'node:fs';
 import { DateUtils } from '../../Util/date-format-util';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import html2canvas from 'html2canvas';
+import { response } from 'express';
 
 @Component({
   standalone: true,
@@ -66,6 +68,7 @@ export class RecipesComponent {
   //check role
   isAdmin: boolean = false;
   role: any;
+  fromAdmin: boolean = false;
 
   //status button check
   statusButton: string = '';
@@ -80,7 +83,8 @@ export class RecipesComponent {
     private route: ActivatedRoute,
     private location: Location,
     private authService: AuthService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private router: Router
   ) {
     this.currentLang = this.translate.currentLang || 'en';
 
@@ -129,6 +133,9 @@ export class RecipesComponent {
       this.notFound = true;
       console.log('recipeId null');
     }
+
+    this.fromAdmin = history.state?.fromAdmin === true;
+    console.log(this.fromAdmin);
   }
 
   onRecipeSelected(id: number): void {
@@ -424,18 +431,28 @@ export class RecipesComponent {
 
     this.recipeService.updateRecipeById(recipeId, updatedRecipe).subscribe({
       next: (response) => {
-        console.log('Recipe updated successfully', response);
-        // Có thể update UI hoặc báo thành công tại đây
+        if (this.statusButton === 'Approved') {
+          alert('Công thức đã được chấp nhận');
+        } else if (this.statusButton === 'Rejected') {
+          alert('Công thức đã bị từ chối');
+        } else {
+          alert('Đã xóa công thức');
+        }
+        this.router.navigate(['home']);
       },
       error: (error) => {
-        console.error('Error updating recipe', error);
-        // Báo lỗi tại đây nếu cần
+        alert('Chưa cập nhật được');
       },
     });
   }
 
   removeRecipe(recipeId: number) {
-    this.recipeService.deleteRecipes(recipeId).subscribe(() => {});
+    this.recipeService.deleteRecipes(recipeId).subscribe({
+      next: (response) => {
+        alert('Đã xóa công thức');
+        this.router.navigate(['home']);
+      },
+    });
     console.log('Recipe rejected successfully');
   }
 
