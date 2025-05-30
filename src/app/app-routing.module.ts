@@ -34,6 +34,7 @@ import { CommentComponent } from './Shared/Component/comment/comment.component';
 import { AdminPageComponent } from './Page/admin-page/admin-page.component';
 import { UpdateRecipeComponent } from './Page/update-recipe/update-recipe.component';
 import { CreateCookingTipComponent } from './Page/create-cooking-tip/create-cooking-tip.component';
+import { RankingComponent } from './Page/ranking/ranking.component';
 
 export const routes: Routes = [
   {
@@ -68,6 +69,8 @@ export const routes: Routes = [
   },
   { path: 'favorite', component: FavoriteComponent, canActivate: [AuthGuard] },
   { path: 'admin', component: AdminPageComponent, canActivate: [AuthGuard] },
+
+  { path: 'ranking', component: RankingComponent },
 ];
 
 @NgModule({
@@ -97,6 +100,7 @@ export const routes: Routes = [
     AdminPageComponent,
     HomepageComponent,
     UpdateRecipeComponent,
+    RankingComponent,
   ],
   exports: [RouterModule],
   providers: [AuthService, AuthGuard],

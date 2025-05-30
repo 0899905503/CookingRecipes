@@ -62,6 +62,10 @@ export class AdminPageComponent implements OnInit {
 
   paginatedComment: any[] = [];
 
+  //user
+  paginatedUser: any[] = [];
+  UserData: any[] = [];
+
   paginatedTip: any[] = [];
   isFilteringTip = false;
 
@@ -133,8 +137,8 @@ export class AdminPageComponent implements OnInit {
 
     {
       icon: 'fas fa-cog',
-      label: 'Setting',
-      labelKey: 'ADMIN_PAGE.MENU.SETTING',
+      label: 'User',
+      labelKey: 'ADMIN_PAGE.MENU.USER',
     },
     {
       icon: 'fas fa-question-circle',
@@ -189,6 +193,7 @@ export class AdminPageComponent implements OnInit {
     this.onGetAllRecipe();
     this.onGetComment();
     this.onGetCookingTip();
+    this.onGetUser();
     this.email = localStorage.getItem('email') || '';
     this.avatar = localStorage.getItem('avt') || 'assets/default-avatar.png'; // fallback avatar
     this.onGet();
@@ -290,6 +295,24 @@ export class AdminPageComponent implements OnInit {
     );
   }
 
+  onGetUser(): void {
+    this.adminService.getAllUsers().subscribe(
+      (data) => {
+        this.UserData = data.map((tip: any) => ({
+          ...tip,
+          dateCreated:
+            this.currentLang === 'vi'
+              ? DateUtils.formatDateVI(tip.dateCreated)
+              : DateUtils.formatDate(tip.dateCreated),
+        }));
+        if (this.activeItem === 'User') {
+          this.updatePagination();
+        }
+      },
+      (error) => console.error('Error fetching cooking tips:', error)
+    );
+  }
+
   updatePagination(): void {
     let dataSource: any[] = [];
 
@@ -319,6 +342,8 @@ export class AdminPageComponent implements OnInit {
       this.paginatedComment = dataSource.slice(start, end);
     } else if (this.activeItem === 'CookingTip') {
       this.paginatedTip = dataSource.slice(start, end);
+    } else if (this.activeItem === 'User') {
+      this.paginatedUser = dataSource.slice(start, end);
     }
   }
 

@@ -7,7 +7,7 @@ import { ApiPaths } from '../../../Shared/Value/Constant/apiConstant';
   providedIn: 'root',
 })
 export class RegisterService {
-  private baseUrl = ApiPaths.baseUrl;
+  private baseUrl = ApiPaths.baseAuthUrl;
   private createUser = ApiPaths.Register;
 
   constructor(private http: HttpClient) {}

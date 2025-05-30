@@ -21,32 +21,34 @@
   </div>
   <div class="select-food">
     <div class="content">
-      <h4>{{'COOKING_TIP.TIP_TITLE' | translate}}</h4>
+      <h4>{{'COOKING_TIP_DETAILS.TIP_TITLE' | translate}}</h4>
       <h2>{{'TIP.TIPS_TRICK'| translate}}</h2>
-      <p>{{'COOKING_TIP.DESCRIPTION' | translate}}</p>
+      <p>{{'COOKING_TIP_DETAILS.DESCRIPTION' | translate}}</p>
     </div>
     <div class="menu">
       <ul>
         <li><a (click)="selectedMenu = 'ALL'" [class.active]="selectedMenu === 'ALL'">{{'FAVORITE.ALL' | translate}}</a>
         </li>
-        <li><a (click)="selectedMenu = 'Meat Tips'" [class.active]="selectedMenu === 'Meat Tips'">{{'COOKING_TIP.MEAT' |
+        <li><a (click)="selectedMenu = 'Meat Tips'"
+            [class.active]="selectedMenu === 'Meat Tips'">{{'COOKING_TIP_DETAILS.MEAT' |
             translate}}</a></li>
         <li><a (click)="selectedMenu = 'Vegetable Tips'"
-            [class.active]="selectedMenu === 'Vegetable Tips'">{{'COOKING_TIP.VEGETABLE' | translate}}</a></li>
+            [class.active]="selectedMenu === 'Vegetable Tips'">{{'COOKING_TIP_DETAILS.VEGETABLE' | translate}}</a></li>
         <li><a (click)="selectedMenu = 'Sauce Tips'"
-            [class.active]="selectedMenu === 'Sauce Tips'">{{'COOKING_TIP.SAUCE' | translate}}</a></li>
+            [class.active]="selectedMenu === 'Sauce Tips'">{{'COOKING_TIP_DETAILS.SAUCE' | translate}}</a></li>
         <li><a (click)="selectedMenu = 'Pasta Tips'"
-            [class.active]="selectedMenu === 'Pasta Tips'">{{'COOKING_TIP.PASTA' | translate}}</a></li>
+            [class.active]="selectedMenu === 'Pasta Tips'">{{'COOKING_TIP_DETAILS.PASTA' | translate}}</a></li>
         <li><a (click)="selectedMenu = 'Dessert Tips'"
-            [class.active]="selectedMenu === 'Dessert Tips'">{{'COOKING_TIP.DESSERT' | translate}}</a></li>
+            [class.active]="selectedMenu === 'Dessert Tips'">{{'COOKING_TIP_DETAILS.DESSERT' | translate}}</a></li>
         <li><a (click)="selectedMenu = 'Time-Saving Tips'"
-            [class.active]="selectedMenu === 'Time-Saving Tips'">{{'COOKING_TIP.TIME' | translate}}</a></li>
+            [class.active]="selectedMenu === 'Time-Saving Tips'">{{'COOKING_TIP_DETAILS.TIME' | translate}}</a></li>
         <li><a (click)="selectedMenu = 'Spice Tips'"
-            [class.active]="selectedMenu === 'Spice Tips'">{{'COOKING_TIP.SPICE' | translate}}</a></li>
+            [class.active]="selectedMenu === 'Spice Tips'">{{'COOKING_TIP_DETAILS.SPICE' | translate}}</a></li>
         <li><a (click)="selectedMenu = 'Vegetarian Tips'"
-            [class.active]="selectedMenu === 'Vegetarian Tips'">{{'COOKING_TIP.VEGETARIAN' | translate}}</a></li>
+            [class.active]="selectedMenu === 'Vegetarian Tips'">{{'COOKING_TIP_DETAILS.VEGETARIAN' | translate}}</a>
+        </li>
         <li><a (click)="selectedMenu = 'Beverage Tips'"
-            [class.active]="selectedMenu === 'Beverage Tips'">{{'COOKING_TIP.BEVERAGE' | translate}}</a>
+            [class.active]="selectedMenu === 'Beverage Tips'">{{'COOKING_TIP_DETAILS.BEVERAGE' | translate}}</a>
         </li>
       </ul>
       <div class="tips">

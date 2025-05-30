@@ -104,7 +104,8 @@
     "SETTING": "Cài Đặt",
     "PROFILE": "Hồ Sơ",
     "SUBSCRIBE": "Đăng ký",
-    "MY_RECIPES": "Công Thức Của Tôi"
+    "MY_RECIPES": "Công Thức Của Tôi",
+    "RANKING": "Xếp Hạng"
   },
 
   "TIP":{
@@ -244,7 +245,8 @@
       "SETTING":"Cài Đặt",
       "SUPPORT":"Hỗ Trợ",
       "WELCOME_BACK":"Chào mừng trở lại ",
-      "COOKINGTIP": "Mẹo Nấu Ăn"
+      "COOKINGTIP": "Mẹo Nấu Ăn",
+      "USER": "Người Dùng"
     },
     "DASHBOARD": {
       "TOTAL_RECIPES":"Công Thức",
@@ -296,6 +298,13 @@
     "RATING": "Đánh Giá",
     "DATE_POSTED": "Ngày Đăng",
     "NO_COMMENTS": "Không Có Bình Luận",
+
+    "USER" :{
+      "EMAIL" : "Email",
+      "ROLE" : "Role",
+      "DATE_CREATED": "Date Created"
+    },
+
     "REPORT":{
        "SELECT_YEAR": "Chọn Năm",
       "USER":"Người Dùng Được Tạo",
@@ -319,8 +328,20 @@
    "CREATE_TIP": "Tạo Mẹo Nấu Ăn"
 },
 "UPDATE_RECIPE":{
-  "UPDATE_RECIPE": "Cập nhật công thức"
-}
+  "UPDATE_RECIPE": "Cập nhật công thức",
+  "UPDATE": "Cập Nhật"
+},
+
+    "RANK" : {
+    "SELECT_TIME":"Chọn mốc thời gian",
+    "TOP1":"Hạng 1",
+    "TOP2": "Hạng 2",
+    "TOP3": "Hạng 3",
+    "WEEK": "Tuần",
+    "MONTH":"Tháng",
+    "YEAR":"Năm",
+    "RECIPE": " Công Thức"
+  }
 
 
 }

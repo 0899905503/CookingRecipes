@@ -39,6 +39,7 @@ import { AdminPageComponent } from './Page/admin-page/admin-page.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CapchaComponent } from './Shared/Component/capcha/capcha.component';
+import { RankingComponent } from './Page/ranking/ranking.component';
 // For ng2-charts v4 and above, use NgChartsModule; for older versions, use ChartsModule
 // If you get an error, try: import { ChartsModule } from 'ng2-charts';
 
@@ -75,6 +76,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AdminPageComponent,
     HomepageComponent,
     CapchaComponent,
+    RankingComponent,
   ],
   imports: [
     CookingTipComponent,
@@ -112,6 +114,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
     }),
     CapchaComponent,
+    RankingComponent,
   ],
   exports: [RecipeMainComponent, RegisterComponent, AuthComponent],
   providers: [

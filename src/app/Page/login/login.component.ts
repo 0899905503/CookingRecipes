@@ -153,20 +153,24 @@ export class LoginComponent {
     this.guestCaptchaToken = token ?? '';
   }
   onGuestLogin() {
+    this.errorMessage = '';
+
     if (!this.guestCaptchaToken || !this.guestName.trim()) {
-      this.errorMessage = 'Vui lòng điền đầy đủ thông tin và xác thực Captcha';
+      this.errorMessage = 'Vui lòng điền đầy đủ thông tin và xác thực.';
       return;
     }
 
     this.authService
       .loginGuest(this.guestName, this.guestCaptchaToken)
       .subscribe({
-        next: (res) => {
-          // Xử lý thành công
-          console.log('Đăng nhập guest thành công');
+        next: (res: any) => {
+          this.router.navigate(['/home']);
+          console.log('Guest login successful:', res);
         },
         error: (err) => {
-          this.errorMessage = err?.error?.message || 'Đăng nhập thất bại';
+          this.errorMessage =
+            'Xác thực reCAPTCHA không hợp lệ hoặc lỗi máy chủ.';
+          console.error(err);
         },
       });
   }

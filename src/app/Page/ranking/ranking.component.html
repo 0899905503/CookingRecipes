@@ -1,0 +1,43 @@
+<div class="ranking-container">
+  <div class="period-selector">
+    <label for="period">{{'RANK.SELECT_TIME' | translate}}</label>
+    <select [(ngModel)]="selectedPeriod" (change)="onRankingData()" id="period">
+      <option value="week">{{'RANK.WEEK' | translate}}</option>
+      <option value="month">{{'RANK.MONTH' | translate}}</option>
+      <option value="year">{{'RANK.YEAR' | translate}}</option>
+    </select>
+  </div>
+
+  <div class="podium" *ngIf="top3.length > 0">
+    <div class="podium-place second" *ngIf="top3[1]">
+      <div class="podium-rank">{{'RANK.TOP2' | translate}}</div>
+      <img [src]="top3[1].avatar" alt="Avatar" />
+      <!-- <img class="frame" src="assets/images/icTop2.png" alt="Frame" /> -->
+      <div class="name">{{ top3[1].email }}</div>
+      <div class="medal silver">🥈</div>
+    </div>
+    <div class="podium-place first" *ngIf="top3[0]">
+      <div class="podium-rank">{{'RANK.TOP1' | translate}}</div>
+      <img [src]="top3[0].avatar" alt="Avatar" />
+      <!-- <img class="frame" src="assets/images/icTop1.png" alt="Frame" /> -->
+      <div class="name">{{ top3[0].email }}</div>
+      <div class="medal gold">🥇</div>
+    </div>
+    <div class="podium-place third" *ngIf="top3[2]">
+      <div class="podium-rank">{{'RANK.TOP3' | translate}}</div>
+      <img [src]="top3[2].avatar" alt="Avatar" />
+      <!-- <img class="frame" src="assets/images/icTop3.png" alt="Frame" /> -->
+      <div class="name">{{ top3[2].email }}</div>
+      <div class="medal bronze">🥉</div>
+    </div>
+  </div>
+
+  <ul class="other-users" *ngIf="others.length > 0">
+    <li *ngFor="let user of others; let i = index">
+      <span class="rank-number">{{ i + 4 }}</span>
+      <img [src]="user.avatar" alt="Avatar" />
+      <span class="email">{{ user.email }}</span>
+      <span class="total">{{ user.totalRecipes }}{{'RANK.RECIPE' | translate}}</span>
+    </li>
+  </ul>
+</div>

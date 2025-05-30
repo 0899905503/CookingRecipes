@@ -101,7 +101,8 @@
     "SETTING": "SETTING",
     "PROFILE": "PROFILE ",
     "SUBSCRIBE": "SUBSCRIBE",
-    "MY_RECIPES": "MY RECIPES"
+    "MY_RECIPES": "MY RECIPES",
+    "RANKING":"RANKING"
   },
 
   "TIP":{
@@ -242,7 +243,8 @@
       "SETTING":"Settings",
       "SUPPORT":"Support",
       "WELCOME_BACK":"Welcome back ",
-      "COOKINGTIP":"Cooking Tips"
+      "COOKINGTIP":"Cooking Tips",
+      "USER": "User"
     },
     "DASHBOARD": {
       "TOTAL_RECIPES":"Total Recipes",
@@ -295,6 +297,13 @@
     "RATING": "Rating",
     "DATE_POSTED": "Date Posted",
     "NO_COMMENTS": "No comments found.",
+
+    "USER" :{
+      "EMAIL" : "Email",
+      "ROLE" : "Role",
+      "DATE_CREATED": "Date Created"
+    },
+
     "REPORT": {
       "SELECT_YEAR": "Select Year",
       "USER":"User Created",
@@ -318,8 +327,21 @@
   "CREATE_TIP": "CREATE COOKING TIP"
 },
 "UPDATE_RECIPE":{
-  "UPDATE_RECIPE": "UPDATE RECIPE"
-}
+  "UPDATE_RECIPE": "UPDATE RECIPE",
+   "UPDATE": "UPDATE"
+},
+
+  "RANK" : {
+    "SELECT_TIME":"Select Time",
+    "TOP1":"Top 1",
+    "TOP2": "Top 2",
+    "TOP3": "Top 3",
+    "WEEK": "Week",
+    "MONTH":"Month",
+    "YEAR":"Year",
+    "RECIPE": " Recipe"
+  }
+
 
 
 }

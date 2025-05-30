@@ -192,8 +192,8 @@ export class AuthService {
   loginGuest(name: string, recaptchaToken: string) {
     return this.http
       .post<any>(`${this.baseAuthsUrl}${this.guest}`, {
-        name,
-        recaptchaToken,
+        name: name,
+        recaptchaToken: recaptchaToken,
       })
       .pipe(
         tap((response) => {

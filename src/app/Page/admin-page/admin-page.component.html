@@ -508,8 +508,36 @@
     </ng-container>
 
 
-    <ng-container *ngIf="activeItem === 'Setting'">
-      <p>HELLO Setting</p>
+    <ng-container *ngIf="activeItem === 'User'">
+      <table>
+        <thead>
+          <tr>
+            <th>{{ 'ADMIN_PAGE.USER.EMAIL' | translate }}</th>
+            <th>{{ 'ADMIN_PAGE.USER.ROLE' | translate }}</th>
+            <th>{{ 'ADMIN_PAGE.USER.DATE_CREATED' | translate }}</th>
+            <th>{{ 'ADMIN_PAGE.DETAILS' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of UserData">
+            <td>{{ user.email }}</td>
+            <td>{{ user.role }}</td>
+            <td>{{ user.dateCreated }}</td>
+            <td><button class="details-btn" (click)="openPopup(user)"><i class="fas fa-search"></i></button>
+            </td>
+            <td>
+              <!-- <span class="status" [ngClass]="{
+          'status-approved': comment.status === 'Approved',
+          'status-pending': comment.status === 'Pending',
+          'status-rejected': comment.status === 'Rejected'
+        }">
+                {{ getStatusText(comment.status)}}
+              </span> -->
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
     </ng-container>
     <ng-container *ngIf="activeItem === 'Support'">
       <p>HELLO Support</p>

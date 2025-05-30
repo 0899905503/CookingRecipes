@@ -29,6 +29,9 @@ export class RecipeService {
   private UpdateRecipeNutrient = ApiPaths.UpdateRecipeNutrient;
   private UpdateRecipeTip = ApiPaths.UpdateRecipeTip;
 
+  //RANKING
+  private GetTopRank = ApiPaths.GetTopRank;
+
   constructor(private http: HttpClient) {}
 
   getAllRecipes(): Observable<any[]> {
@@ -219,5 +222,14 @@ export class RecipeService {
     const url = `${this.baseUrl}${this.UpdateInstuction}${recipeId}`;
     console.log('Sending updateRecipe request to:', url); // Log kiểm tra
     return this.http.put(url, instructions, { headers });
+  }
+
+  //Ranking
+  getRanks(): Observable<any[]> {
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.get<any[]>(this.baseUrl + this.GetTopRank, { headers });
   }
 }

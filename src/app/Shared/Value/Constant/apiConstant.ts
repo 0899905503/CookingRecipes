@@ -21,6 +21,9 @@ export const ApiPaths = {
   UpdateRecipeNutrient: 'RecipeNutrient/update-recipe-nutrient/',
   UpdateRecipeTip: 'RecipeTip/Update-recipe-tip/',
 
+  //RANKING
+  GetTopRank: 'Recipe/get-top-creators',
+
   //Recipe Ingredient
 
   GetAllIngredient: 'Ingredient/Get-all-ingredient',
@@ -72,6 +75,13 @@ export const ApiPaths = {
   CreateComment: 'Comment/create-comment',
   UpdateComment: 'Comment/update-comment/',
   DeleteComment: 'Comment/delete-comment/',
+
+  //USER
+  GetAllUser: 'User/Get-all-user',
+  GetUserById: 'User/Get-user-by-id/',
+  UpdateUser: 'User/Update-user/',
+  DeleteUser: 'User/Delete-user/',
+  UpdateAvatar: 'User/update-avatar/',
 
   //Auth
   SendOtp: 'send-otp-email',
